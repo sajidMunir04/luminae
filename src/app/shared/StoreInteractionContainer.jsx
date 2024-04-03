@@ -3,21 +3,23 @@ import styles from './StoreInteractionContainer.module.css';
 function StoreInteractionContainer(props)
 {
     return (<div className={styles.container}>
-        <div>
-            <img src={'/Iconcategories.png'}/>
-            <p>Categories</p>
+        <div className={styles.catergoriesSection}>
+            <div className={styles.categoriesButton}>
+                <img src={'/Iconcategories.png'}/>
+                <p>Categories</p>
+            </div>
+            <div>
+                <select>
+                    <option>USD</option>
+                </select>
+            </div>
+            <div>
+                <select>
+                    <option>English</option>
+                </select>
+            </div>
         </div>
-        <div>
-            <select>
-                <option>USD</option>
-            </select>
-        </div>
-        <div>
-            <select>
-                <option>English</option>
-            </select>
-        </div>
-        <div>
+        <div className={styles.promotionSection}>
             <div>
                 <img src={'/Men cosmetic.png'}/>
             </div>
@@ -26,31 +28,21 @@ function StoreInteractionContainer(props)
                 <p>We extend exclusive discounts to our male clientele</p>
             </div>
         </div>
-        <div>
-            <div>
-                <div>
+        <div className={styles.buttons}>
+                <div className={styles.button}>
                     <img src="/IconSign in.png"/>
-                </div>
-                <div>
                     <p>Sign in</p>
                 </div>
-                <div>
+                <div className={styles.button}>
                     <img src="/IconSign in.png"/>
-                </div>
-                <div>
                     <p>Favorites</p>
                 </div>
-                <div>
+                <div className={styles.button}>
                     <img src="/IconSign in.png"/>
-                </div>
-                <div>
                     <p>Cart</p>
-                </div>
-                <div>
                     <p>{props.cartItemsCount}3</p>
                 </div>
             </div>
-        </div>
     </div>);
 }
 

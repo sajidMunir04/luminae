@@ -1,15 +1,37 @@
 .container{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
+    width: 100%;
+    height: 500px;
+    background-color: #22b2f5;
 }
 
 .imageContainer{
     width: 40%;
     align-self: flex-start;
     margin-left: 0%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.image{
+    width: 100%;
+    height: auto;
 }
 
 .textContainer{
-    width: 40%;
+    width: 60%;
+
+}
+
+.textContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 80%;
+    margin: auto;
+    text-align: center;
 }

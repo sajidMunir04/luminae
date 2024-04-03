@@ -4,16 +4,30 @@ import styles from './HeaderTemplate.module.css';
 function HeaderTemplate()
 {
     return (<div className={styles.container}>
-        <div>
-
+        <div className={styles.logoContainer}>
+            <img src={'/Group1.png'}/>
         </div>
-        <div>
-            <form>
-                <input type="search"/>
-                <button type="submit"></button>
+        <form className={styles.form}>
+                <input className={styles.searchInput} type="search" placeholder='Search Products'/>
+                <select className={styles.categorySelector}>
+                    <option>
+                        All Categories
+                    </option>
+                    <option>
+                        Men
+                    </option>
+                    <option>
+                        Woman
+                    </option>
+                    <option>
+                        Kids
+                    </option>
+                    <option>
+                        Home Decor
+                    </option>
+                </select>
+                <button className={styles.searchButton} type="submit"><img src={'/search.png'}/></button>
             </form>
-        </div>
-        <div>
             <nav className={styles.navArea}>
                 <div>
                     <a>About Us</a>
@@ -27,8 +41,7 @@ function HeaderTemplate()
                 <div>
                     <a>Help & Support</a>
                 </div>
-            </nav>
-        </div>
+        </nav>
         <div>
             <div className={styles.socialLinkSection}>
                 <img src={'/Instagram.png'}/>
