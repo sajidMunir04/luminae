@@ -1,7 +1,9 @@
+import styles from './ProductDisplayLayoutHeader.module.css';
+
 
 function ProductDisplayLayoutHeader(props)
 {
-    return (<div>
+    return (<div className={styles.container}>
         <div>
             <h3>{props.heading}</h3>
         </div>

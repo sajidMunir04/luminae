@@ -1,7 +1,9 @@
+import styles from './SaleProductDisplayCard.module.css';
+
 
 function SaleProductDisplayCard(props)
 {
-    return (<div>
+    return (<div className={styles.container}>
         <div>
             <p>{props.saleTimeSpan}</p>
             <p>{props.saleTimeRemaining}</p>
