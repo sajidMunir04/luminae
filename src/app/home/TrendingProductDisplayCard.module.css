@@ -1,0 +1,83 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 30%;
+}
+
+.imageSection{
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.mainImage{
+    width: 100%;
+    height: 100%;
+}
+
+.tagSection {
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 3% 4%; 
+    color: white;
+}
+
+.tagArea{
+    width: 36%;
+    background-color: #00A95D;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+    border-radius: 4px;
+}
+
+.tagSectionImageContainer{
+    height: 90%;
+    width: 30%;
+}
+
+.tagSectionImage{
+    width: 68%;
+    height: auto;
+}
+
+.tagText{
+    color: white;
+    font-size: 12px;
+}
+
+.imageContainer{
+    display: grid;
+}
+
+.textContainer{
+    background-color: #262626;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1% 4%;
+}
+
+.infoText{
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+
+.linkContainer{
+    color: white;
+    padding: 2% 4%;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+.externalLink{
+
+}
