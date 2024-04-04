@@ -1,8 +1,8 @@
-
+import styles from './ProductCategoryCard.module.css';
 
 function ProductCategoryCard(props)
 {
-    return (<div>
+    return (<div className={styles.container}>
         <div>
             <div>
             <p>

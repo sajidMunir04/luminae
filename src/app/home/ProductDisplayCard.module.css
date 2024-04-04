@@ -1,0 +1,25 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 24%;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
+}
+
+.productRatingSection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.priceSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.textContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

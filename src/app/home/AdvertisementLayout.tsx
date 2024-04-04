@@ -5,7 +5,8 @@ function AdvertisementLayout()
 {
     return (<div>
         <div>
-            <BrandAdvertCard/>
+            <BrandAdvertCard brandName="MagSafe" text="Snap on a magnetic case, wallet, 
+            or both. And get faster wireless charging."/>
         </div>
         <div>
 
