@@ -30,7 +30,7 @@ function HeaderTemplate()
             </form>
             <nav className={styles.navArea}>
                 <div>
-                    <a>About Us</a>
+                    <a href='/cart'>About Us</a>
                 </div>
                 <div>
                     <a>Blog</a>

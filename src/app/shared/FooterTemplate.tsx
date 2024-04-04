@@ -4,21 +4,6 @@ import styles from './FooterTemplate.module.css';
 function FooterTemplate()
 {
     return (<div className={styles.container}>
-        <div className={styles.emailSection}>
-            <div className={styles.form}>
-                <h2>Luminae Store</h2>
-                <p>Register your email not to miss the last minutes off+ Free delivery</p>
-                <form>
-                    <input type="email"/>
-                    <button><img src='/Vector 42 (Stroke).png'/></button>
-                </form>
-            </div>
-            <div className={styles.formBackBackground}>
-                <div className={styles.emailBackground}>
-                
-                </div>
-            </div>
-        </div>
         <div className={styles.footerContentSection}>
             <div className={styles.linksSection}>
                 <p className={styles.linkText}>Company</p>
