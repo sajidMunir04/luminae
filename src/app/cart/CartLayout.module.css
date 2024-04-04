@@ -1,0 +1,8 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: 0% var(--horizontal-padding);
+    margin-top: 4%; 
+    justify-content: space-between;
+}
