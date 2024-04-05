@@ -1,5 +1,5 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import '../src/app/globals.css';
+import '../src/app/fonts.css';
 import HeaderTemplate from "../src/app/shared/HeaderTemplate";
 import StoreInteractionContainer from "../src/app/shared/StoreInteractionContainer";
 import ProductsCategoryBrowser from "../src/app/shared/ProductsCategoryBrowser";

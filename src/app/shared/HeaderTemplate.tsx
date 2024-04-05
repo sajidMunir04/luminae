@@ -10,19 +10,19 @@ function HeaderTemplate()
         <form className={styles.form}>
                 <input className={styles.searchInput} type="search" placeholder='Search Products'/>
                 <select className={styles.categorySelector}>
-                    <option>
+                    <option className={styles.categoriesTextOption}>
                         All Categories
                     </option>
-                    <option>
+                    <option className={styles.categoriesTextOption}>
                         Men
                     </option>
-                    <option>
+                    <option className={styles.categoriesTextOption}>
                         Woman
                     </option>
-                    <option>
+                    <option className={styles.categoriesTextOption}>
                         Kids
                     </option>
-                    <option>
+                    <option className={styles.categoriesTextOption}>
                         Home Decor
                     </option>
                 </select>

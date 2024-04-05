@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './StoreInteractionContainer.module.css';
 
 function StoreInteractionContainer(props)
@@ -30,8 +31,10 @@ function StoreInteractionContainer(props)
         </div>
         <div className={styles.buttons}>
                 <div className={styles.button}>
+                    <Link href={'/account'}>
                     <img src="/IconSign in.png"/>
                     <p>Sign in</p>
+                    </Link>
                 </div>
                 <div className={styles.button}>
                     <img src="/IconSign in.png"/>
