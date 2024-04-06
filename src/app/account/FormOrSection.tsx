@@ -1,11 +1,11 @@
-
+import styles from './FormOrSection.module.css';
 
 function FormOrSection()
 {
-    return (<div>
-        <div></div>
+    return (<div className={styles.container}>
+        <div className={styles.empty}></div>
         <p>OR</p>
-        <div></div>
+        <div className={styles.empty}></div>
     </div>);
 }
 

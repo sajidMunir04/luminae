@@ -1,11 +1,15 @@
-import SignInForm from "./SigninForm";
-
+import SignInForm from "./SignInForm";
+import styles from './AccountFormsLayout.module.css';
+import SignUpForm from "./SignUpForm";
 
 function AccountFormsLayout()
 {
-    return (<div>
-        <div>
+    return (<div className={styles.container}>
+        <div className={styles.section}>
             <SignInForm/>
+        </div>
+        <div className={styles.section}>
+            <SignUpForm/>
         </div>
     </div>);
 }

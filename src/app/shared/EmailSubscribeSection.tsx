@@ -3,7 +3,7 @@ import styles from './EmailSubscribeSection.module.css';
 
 function EmailSubscribeSection()
 {
-    return (<div>
+    return (<div className={styles.container}>
             <div className={styles.form}>
                 <h2>Luminae Store</h2>
                 <p>Register your email not to miss the last minutes off+ Free delivery</p>

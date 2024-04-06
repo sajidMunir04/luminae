@@ -2,52 +2,20 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    height: 600px;
-}
-
-.emailSection{
-    background-color: white;
-    width: 100%;
-    height: 40%;
-    display: grid;
-    grid-template-columns: repeat(12,minmax(0,1fr));
-} 
-
-.form{
-    grid-area: 1 / 4 / 2 / 10;
-    width: 100%;
-    z-index: 1;
-    background-color: #7296AB;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-}
-
-.formBackBackground{
-    grid-area: 1 / 1 / 2 / 13;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.emailBackground{
-    background-color: #D1E2EB;
-    width: 100%;
-    height: 50%;
+    height: 400px;
 }
 
 .footerContentSection{
     display: flex;
     flex-direction: row;
+    box-sizing: border-box;
     width: 100%;
-    height: 30%;
+    height: 80%;
     justify-content: space-evenly;
     background-color: #D1E2EB;
+    padding-top: 2%;
 }
 
 .linksSection{
@@ -61,6 +29,11 @@
     font-size: 14px;
     font-weight: bold;
 }
+
+.infoContent{
+        
+}
+
 
 .linksContainer{
     display: flex;

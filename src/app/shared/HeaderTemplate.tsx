@@ -3,9 +3,15 @@ import styles from './HeaderTemplate.module.css';
 
 function HeaderTemplate()
 {
+    function onLogoClick()
+    {
+        
+    }
+
     return (<div className={styles.container}>
         <div className={styles.logoContainer}>
-            <img src={'/Group1.png'}/>
+            <a href='/'><img src={'/Group1.png'}/>
+            </a>
         </div>
         <form className={styles.form}>
                 <input className={styles.searchInput} type="search" placeholder='Search Products'/>

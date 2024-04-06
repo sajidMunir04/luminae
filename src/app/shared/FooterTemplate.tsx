@@ -39,8 +39,8 @@ function FooterTemplate()
                 </div>
             </div>
         </div>
-        <div>
-
+        <div className={styles.infoContent}>
+            <p>Anything informational goes here</p>
         </div>
     </div>);
 }

@@ -3,6 +3,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(12,minmax(0,1fr));
+    height: 200px;
 } 
 
 .form{
