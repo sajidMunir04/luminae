@@ -6,45 +6,45 @@ function StoreInteractionContainer(props)
     return (<div className={styles.container}>
         <div className={styles.catergoriesSection}>
             <div className={styles.categoriesButton}>
-                <img src={'/Iconcategories.png'}/>
+                <div>
+                    <img src={'/Iconcategories.png'}/>
+                </div>
                 <p>Categories</p>
             </div>
             <div>
-                <select>
+                <select className={styles.selectOption}>
                     <option>USD</option>
                 </select>
             </div>
             <div>
-                <select>
+                <select className={styles.selectOption}>
                     <option>English</option>
                 </select>
             </div>
         </div>
         <div className={styles.promotionSection}>
-            <div>
+            <div className={styles.promotionImageContainer}>
                 <img src={'/Men cosmetic.png'}/>
             </div>
-            <div>
-                <p>Weekly Men's Toiletries Coupons.</p>
-                <p>We extend exclusive discounts to our male clientele</p>
+            <div className={styles.promotionTextContainer}>
+                <p className={styles.promotionText}>Weekly Men's Toiletries Coupons.</p>
+                <p className={styles.promotionTextTwo}>We extend exclusive discounts to our male clientele</p>
             </div>
         </div>
         <div className={styles.buttons}>
-                <div className={styles.button}>
-                    <Link href={'/account'}>
-                    <img src="/IconSign in.png"/>
-                    <p>Sign in</p>
-                    </Link>
-                </div>
-                <div className={styles.button}>
-                    <img src="/IconSign in.png"/>
+                <a className={styles.button} href={'/account'}>
+                <img src="/IconSign in.png"/>
+                <p>Sign in</p>
+                </a>
+                <a className={styles.button}>
+                    <img src="/Favorides.png"/>
                     <p>Favorites</p>
-                </div>
-                <div className={styles.button}>
-                    <img src="/IconSign in.png"/>
+                </a>
+                <a className={styles.button}>
+                    <img src="/card.png"/>
                     <p>Cart</p>
                     <p>{props.cartItemsCount}3</p>
-                </div>
+                </a>
             </div>
     </div>);
 }

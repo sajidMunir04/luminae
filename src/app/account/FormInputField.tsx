@@ -13,7 +13,7 @@ function FormInputField(props)
     return (<div className={styles.container}>
     <label>{props.fieldName}{props.isRequired && <span className={styles.redText}>*</span>}
     </label>
-    <input className={styles.inputField} type={props.inputType} placeholder={props.placeholder}/>
+    <input required={props.isRequired} className={styles.inputField} type={props.inputType} placeholder={props.placeholder}/>
     <img className={styles.imgIcon} src='/aticon.png'/>
     </div>)
 }

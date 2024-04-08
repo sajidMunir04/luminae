@@ -30,8 +30,36 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 70%;
     height: 80%;
     margin: auto;
-    text-align: center;
+}
+
+.heading{
+    font-family: Lato-Bold;
+    font-size: 32px;
+    color: white;
+    text-transform: uppercase;
+}
+
+.headingContent{
+    font-family: Lato-Regular;
+    font-size: 28px;  
+    color: white;
+}
+
+.button{
+    height: 14%;
+    width: 40%;
+    background-color: #4172DC;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonText{
+    text-decoration: none;
+    color: white;
+    margin-inline: 2%;
 }

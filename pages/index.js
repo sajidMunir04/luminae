@@ -12,9 +12,11 @@ import AdvertisementLayout from "../src/app/home/AdvertisementLayout";
 import FeaturedCategoriesLayout from "../src/app/home/FeaturedCategoriesLayout";
 import FooterTemplate from "../src/app/shared/FooterTemplate";
 import EmailSubscribeSection from '../src/app/shared/EmailSubscribeSection';
+import ProductsContext from '../src/app/shared/ProductsContext';
 
 function Home() {
   return (<>
+      <ProductsContext>
       <HeaderTemplate/>
       <StoreInteractionContainer/>
       <ProductsCategoryBrowser/>
@@ -27,6 +29,7 @@ function Home() {
       <FeaturedCategoriesLayout/>
       <EmailSubscribeSection/>
       <FooterTemplate/>
+      </ProductsContext>
   </>
   );
 }
