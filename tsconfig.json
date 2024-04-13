@@ -29,7 +29,7 @@
     "**/*.ts",
     "**/*.tsx",
     "pages/index.js"
-  ],
+, "pages/api/fetchProducts.ts", "pages/api/storeProduct.ts", "src/utilities/databasePopulator.mjs", "src/model/productModel.mjs"  ],
   "exclude": [
     "node_modules"
   ]

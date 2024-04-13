@@ -39,7 +39,7 @@ function HeaderTemplate()
                     <a href='/admin'>Admin</a>
                 </div>
                 <div>
-                    <a>Blog</a>
+                    <a href='api/server'>Blog</a>
                 </div>
                 <div>
                     <a>Contact Us</a>

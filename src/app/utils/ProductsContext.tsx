@@ -7,12 +7,12 @@ export type Product = {
     description: string,
     price: number,
     images: string[],
-    discount: number,// In percentage
-    inventoryCount: number,
-    brandName: string,
-    category: string,
-    rating: number,
-    reviews: ConsumerReview[]
+    discount?: number,// In percentage
+    inventoryCount?: number,
+    brandName?: string,
+    category?: string,
+    rating?: number,
+    reviews?: ConsumerReview[]
 }
 
 export interface ConsumerReview {
@@ -29,15 +29,22 @@ type ProductContextType = {
 export const ProductsContext = createContext<ProductContextType>({products: []});
 
 const ProductsManager = ({children}) => {
-    const [allProducts,setProducts] = useState<ProductContextType>({products : []});
+    const [allProducts,setProducts] = useState({products : []});
     useEffect(() => {
-        async function fetchData(){
-            await fetch('https://fakestoreapi.com/products').
-            then(response => console.log(response.json)).catch(() => console.log("Failed"));
-        }
+        const fetchData = async () => {
+            try {
+              const response = await fetch('/api/fetchProducts');
+              const data : Product[] = await response.json();
+              console.log(data);
+              console.log('Data Fetched Successfully!');
+            } catch (error) {
+              console.error('Error fetching data:', error);
+            }
+          };
 
-        fetchData();
-    });
+          fetchData();
+    })
+      
     return (<ProductsContext.Provider value={allProducts}>
         {children}
     </ProductsContext.Provider>);
