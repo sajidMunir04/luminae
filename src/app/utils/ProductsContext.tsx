@@ -26,24 +26,48 @@ type ProductContextType = {
     products : Product[];
 }
 
-export const ProductsContext = createContext<ProductContextType>({products: []});
+// Create a default object based on the interface
+const defaultProduct: Product = {
+    id: 1,
+    name: '',
+    description: '',
+    price: 0,
+    images: [''],
+    discount: 0,
+    inventoryCount: 0,
+    brandName: '',
+    category: '',
+    rating: 0,
+    reviews: [{
+        userName: '',
+        rating: 0,
+        comment: '',
+    },{
+        userName: '',
+        rating: 0,
+        comment: '',
+    }]
+  };
+  
+
+export const ProductsContext = createContext<ProductContextType>({products : []});
 
 const ProductsManager = ({children}) => {
-    const [allProducts,setProducts] = useState({products : []});
+    const [allProducts,setProducts] = useState({products : [defaultProduct]});
     useEffect(() => {
         const fetchData = async () => {
             try {
               const response = await fetch('/api/fetchProducts');
               const data : Product[] = await response.json();
-              console.log(data);
               console.log('Data Fetched Successfully!');
+              setProducts({products : data});
             } catch (error) {
               console.error('Error fetching data:', error);
             }
           };
 
           fetchData();
-    })
+    },[])
       
     return (<ProductsContext.Provider value={allProducts}>
         {children}

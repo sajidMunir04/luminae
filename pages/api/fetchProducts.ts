@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         discount: item.discount
       };
     });
-    console.log("Products Fetched");
+    console.log("Products Fetched From Database");
     res.status(200).json(data);
   } catch (error) {
     console.error('Error fetching data from MongoDB:', error);
