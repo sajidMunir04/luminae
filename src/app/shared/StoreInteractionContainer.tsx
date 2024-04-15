@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import styles from './StoreInteractionContainer.module.css';
+import { useContext } from 'react';
+import { ProductsContext } from '../utils/ProductsContext';
 
 function StoreInteractionContainer(props)
 {

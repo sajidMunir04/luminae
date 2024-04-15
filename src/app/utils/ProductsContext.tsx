@@ -1,72 +1,78 @@
 import { createContext, useEffect, useState } from 'react';
-
-
-export type Product = {
-    id: number,
-    name: string,
-    description: string,
-    price: number,
-    images: string[],
-    discount?: number,// In percentage
-    inventoryCount?: number,
-    brandName?: string,
-    category?: string,
-    rating?: number,
-    reviews?: ConsumerReview[]
-}
-
-export interface ConsumerReview {
-    userName: string,
-    rating: number,
-    comment: string
-}
+import { Product } from './Product';
 
 
 type ProductContextType = {
     products : Product[];
+    productSections: ProductSection[]
+}
+
+type ProductSection = {
+    productSection : string,
+    subCategories: string[]
 }
 
 // Create a default object based on the interface
 const defaultProduct: Product = {
-    id: 1,
+    _id: '',
     name: '',
     description: '',
     price: 0,
     images: [''],
+    section: '',
     discount: 0,
     inventoryCount: 0,
     brandName: '',
     category: '',
-    rating: 0,
-    reviews: [{
-        userName: '',
-        rating: 0,
-        comment: '',
-    },{
-        userName: '',
-        rating: 0,
-        comment: '',
-    }]
+    reviews: ['']
   };
   
+const defaultSection: ProductSection = {
+    productSection : '',
+    subCategories : ['']
+}
 
-export const ProductsContext = createContext<ProductContextType>({products : []});
+export const ProductsContext = createContext<ProductContextType>({products: [],productSections : []});
 
 const ProductsManager = ({children}) => {
-    const [allProducts,setProducts] = useState({products : [defaultProduct]});
-    useEffect(() => {
+    const [allProducts,setProducts] = useState<ProductContextType>({products : [],productSections : []});
+    let allProductSections : ProductSection[] = [];
+    useEffect(
+        () => {
         const fetchData = async () => {
             try {
               const response = await fetch('/api/fetchProducts');
               const data : Product[] = await response.json();
-              console.log('Data Fetched Successfully!');
-              setProducts({products : data});
+              console.log(allProducts.products.length);
+              allProducts.products.map((item) => {
+                        let containsSection = false;
+                        allProductSections.forEach((prodSec,index) => {
+                            if (prodSec.productSection == item.section)
+                                {
+                                    containsSection = true;
+
+                                    if (!prodSec.subCategories.includes(item.category))
+                                        prodSec.subCategories.push(item.category as string)    
+                                }
+                        })
+                        if (!containsSection)
+                        {
+                                let newProductSection : ProductSection = {
+                                    productSection : item.section as string,
+                                    subCategories: [item.category as string]
+                                }
+                                allProductSections.push(newProductSection);
+                        }
+              })
+              console.log(allProductSections);
+              setProducts({products : data, productSections : allProductSections});
             } catch (error) {
               console.error('Error fetching data:', error);
             }
           };
 
           fetchData();
+          
     },[])
       
     return (<ProductsContext.Provider value={allProducts}>

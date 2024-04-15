@@ -4,8 +4,6 @@ import { useContext } from 'react';
 
 function MainBanner()
 {
-    const {products} = useContext(ProductsContext);
-    console.log(products);
     return (<div className={styles.container}>
         <div className={styles.imageContainer}>
             <img className={styles.image} src='/frmtopleft.png'/>

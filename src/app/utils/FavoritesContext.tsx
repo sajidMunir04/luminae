@@ -1,5 +1,6 @@
 import { createContext } from "react";
-import { Product } from "./ProductsContext";
+import { Product } from "./Product";
+
 
 
 interface FavoriteContextType {
