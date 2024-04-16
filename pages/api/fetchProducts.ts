@@ -8,7 +8,6 @@ export default async function handler(req, res) {
     const db : Db = client.db('Products');
     const collection = db.collection('products');
     const data = await collection.find().toArray();
-    console.log("Products Fetched From Database");
     res.status(200).json(data);
   } catch (error) {
     console.error('Error fetching data from MongoDB:', error);

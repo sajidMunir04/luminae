@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { Product } from './Product';
+import { error, time } from 'console';
 
 
 type ProductContextType = {
@@ -41,10 +42,23 @@ const ProductsManager = ({children}) => {
         () => {
         const fetchData = async () => {
             try {
-              const response = await fetch('/api/fetchProducts');
-              const data : Product[] = await response.json();
-              console.log(allProducts.products.length);
-              allProducts.products.map((item) => {
+                const response = await fetch('/api/fetchProducts');
+                const data = await response.json();
+                const products: Product[] = data.map((item: any) => ({
+                    _id: item._id,
+                    name: item.name,
+                    description: item.description,
+                    price: item.price,
+                    images: item.images,
+                    discount: item.discount,
+                    inventoryCount: item.inventoryCount,
+                    brandName: item.brandName,
+                    category: item.category,
+                    section: item.section,
+                    reviews: item.reviews
+                }));
+              console.log(products);
+              products.map((item) => {
                         let containsSection = false;
                         allProductSections.forEach((prodSec,index) => {
                             if (prodSec.productSection == item.section)
@@ -65,7 +79,7 @@ const ProductsManager = ({children}) => {
                         }
               })
               console.log(allProductSections);
-              setProducts({products : data, productSections : allProductSections});
+              setProducts({products : products, productSections : allProductSections});
             } catch (error) {
               console.error('Error fetching data:', error);
             }

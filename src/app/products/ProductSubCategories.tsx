@@ -1,16 +1,27 @@
+import { useHover } from "react-use";
 import styles from "./ProductSubCategories.module.css";
+import { useRef } from "react";
+import router from "next/router";
 
 
 interface Props{
-    categories : string[]
+    mainCategory: string,
+    categories : string[],
+    onMouseLeave: () => void
 }
 
 
 function ProductSubCatrgories(props : Props)
 { 
+    const handleCategoryClick = (category) => {
+        router.push(category);
+      };
+    
+
     return (<div className={styles.container}>
         {props.categories.map((item) => (
-            <p key={item}>{item}</p>
+            <a onClick={()=>{handleCategoryClick(props.mainCategory + '/' + item)}} 
+            key={item} href={props.mainCategory + '/' + item}>{item}</a>
         ))}
     </div>);
 }
