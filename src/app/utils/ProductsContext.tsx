@@ -57,7 +57,7 @@ const ProductsManager = ({children}) => {
                     section: item.section,
                     reviews: item.reviews
                 }));
-              console.log(products);
+
               products.map((item) => {
                         let containsSection = false;
                         allProductSections.forEach((prodSec,index) => {
@@ -78,7 +78,6 @@ const ProductsManager = ({children}) => {
                                 allProductSections.push(newProductSection);
                         }
               })
-              console.log(allProductSections);
               setProducts({products : products, productSections : allProductSections});
             } catch (error) {
               console.error('Error fetching data:', error);

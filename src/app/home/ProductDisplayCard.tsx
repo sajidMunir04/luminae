@@ -1,43 +1,53 @@
+import Image from 'next/image';
+import { Product } from '../utils/Product';
 import styles from './ProductDisplayCard.module.css';
 
-function ProductDisplayCard(props)
+interface Props extends Product{
+    imageLink: string,
+    reviewRating: number,
+    currentPrice: number
+}
+
+function ProductDisplayCard(props : Props)
 {
+    const imgLink = props.imageLink.substring(2,props.imageLink.length - 1);
+    console.log(imgLink);
     return (<div className={styles.container}>
         <div>
-            <img src='/photo.png'/>
+            <img src={imgLink} alt='product image'/>
         </div>
         <div className={styles.textContainer}>
             <div>
                     <div>
                         <p>{props.brandName}</p>
                         <div>
-                            <p>{props.productName}</p>
+                            <p>{props.name}</p>
                         </div>
                     </div>
                     <div className={styles.productRatingSection}>
                         <div>
-                            {props.productRating >= 1 && <img src="/star(1).png"/>}
-                            {props.productRating >= 2 && <img src="/star(1).png"/>}
-                            {props.productRating >= 3 && <img src="/star(1).png"/>}
-                            {props.productRating >= 4 && <img src="/star(1).png"/>}
-                            {props.productRating >= 5 && <img src="/star(1).png"/>}
+                            {props.reviewRating >= 1 && <img src="/star(1).png"/>}
+                            {props.reviewRating >= 2 && <img src="/star(1).png"/>}
+                            {props.reviewRating >= 3 && <img src="/star(1).png"/>}
+                            {props.reviewRating >= 4 && <img src="/star(1).png"/>}
+                            {props.reviewRating >= 5 && <img src="/star(1).png"/>}
                         </div>
                         <div>
-                           <p>({props.reviewCount})</p>
+                           <p>({props.reviews?.length})</p>
                         </div>
                     </div>
                     <div className={styles.priceSection}>
                         <div>
-                            <p>{props.currentPrice}</p>
+                            <p>{props.price}</p>
                         </div>
-                        {props.originalPrice != 0 && <div>
-                            <p>{props.originalPrice}</p>
+                        {props.currentPrice != 0 && <div>
+                            <p>{props.currentPrice}</p>
                         </div>}
-                        {props.currentPrice < props.originalPrice && 
+                        {props.currentPrice < props.price && 
                         <div>
                             <p>{Math.round(
-                                (props.originalPrice -  props.currentPrice) 
-                                / props.originalPrice) 
+                                (props.price -  props.currentPrice) 
+                                / props.price) 
                                 * 100}%</p>
                         </div>
                         }

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext, useRef, useState } from 'react';
 import styles from './ProductsCategoryBrowser.module.css';
 import { ProductsContext } from '../utils/ProductsContext';
