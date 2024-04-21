@@ -44,7 +44,7 @@ const ProductsManager = ({children}) => {
             try {
                 const response = await fetch('/api/fetchProducts');
                 const data = await response.json();
-                const products: Product[] = data.map((item: any) => ({
+                const products: Product[] = data.map((item: Product) => ({
                     _id: item._id,
                     name: item.name,
                     description: item.description,
@@ -59,6 +59,13 @@ const ProductsManager = ({children}) => {
                 }));
 
               products.map((item) => {
+                        const modifiedImages = item.images.map((imgLink,index) => {
+                            const lastIndex = index == item.images.length - 1 ? 2 : 1;
+                            const final = imgLink.substring(2, imgLink.length - lastIndex);
+                            return final;
+                        });
+                        item.images = modifiedImages;
+                        
                         let containsSection = false;
                         allProductSections.forEach((prodSec,index) => {
                             if (prodSec.productSection == item.section)

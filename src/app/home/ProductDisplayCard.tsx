@@ -5,25 +5,20 @@ import styles from './ProductDisplayCard.module.css';
 interface Props extends Product{
     imageLink: string,
     reviewRating: number,
-    currentPrice: number
+    currentPrice: number,
+    onClick?: (arg0 : any) => void
 }
 
 function ProductDisplayCard(props : Props)
 {
-    const imgLink = props.imageLink.substring(2,props.imageLink.length - 1);
-    console.log(imgLink);
-    return (<div className={styles.container}>
-        <div>
-            <img src={imgLink} alt='product image'/>
+    return (<div onClick={props.onClick} className={styles.container}>
+        <div className={styles.imageContainer}>
+            <img className={styles.image} src={props.images[0]} alt='product image'/>
         </div>
         <div className={styles.textContainer}>
-            <div>
-                    <div>
-                        <p>{props.brandName}</p>
-                        <div>
-                            <p>{props.name}</p>
-                        </div>
-                    </div>
+            <div className={styles.contentSection}>
+                        <p className={styles.brandName}>{props.brandName}</p>
+                        <p className={styles.productName}>{props.name}</p>
                     <div className={styles.productRatingSection}>
                         <div>
                             {props.reviewRating >= 1 && <img src="/star(1).png"/>}
@@ -38,25 +33,21 @@ function ProductDisplayCard(props : Props)
                     </div>
                     <div className={styles.priceSection}>
                         <div>
-                            <p>{props.price}</p>
+                            <p className={styles.price}>${Math.round(props.currentPrice)}</p>
                         </div>
                         {props.currentPrice != 0 && <div>
-                            <p>{props.currentPrice}</p>
+                            <p className={styles.previousPrice}>${props.price}</p>
                         </div>}
                         {props.currentPrice < props.price && 
                         <div>
-                            <p>{Math.round(
-                                (props.price -  props.currentPrice) 
-                                / props.price) 
-                                * 100}%</p>
+                            <p className={styles.discountText}>-{Math.ceil(Math.abs((props.price -  props.currentPrice) / props.price) * 100)}%</p>
                         </div>
                         }
                     </div>
             </div>
-            <div>
+            <div  className={styles.favButtonSection}>
                 <div>
-                    <img src="/Vector.png"/>
-                        
+                    <img src="/Vector.png"/>                     
                 </div>
             </div>
         </div>

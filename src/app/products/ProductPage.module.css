@@ -1,0 +1,134 @@
+.container{
+    width: 100%;
+    height: 2000px;
+    padding: 0% 4%;
+    box-sizing: border-box;
+    font-family: Lato-Regular;
+    font-size: 16px;
+}
+
+.imagesContainer{
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow:scroll;
+}
+
+.productInfo{
+    width: 100%;
+    height: 36%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 3%;
+}
+
+.imageSection{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    overflow: hidden;
+}
+
+.smallImageParent{
+    width: 100%;
+    height: 20%;
+}
+
+.smallImage{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.mainImageContainer{
+    width: 80%;
+    height: 90%;
+    margin: auto;
+}
+
+.mainImage{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.productDetails{
+    width: 48%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start
+}
+
+
+.productName{
+    font-family: Lato-ExtraBold;
+    font-size: 22px;
+}
+
+.productPrice{
+    font-family: Lato-Medium;
+    font-size: 20px;
+}
+
+.infoText{
+
+}
+
+.buttonContainer{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    width: 38%;
+}
+
+.detailSectionButton{
+    border: none;
+    background: none;
+    font-family: Lato-Bold;
+    font-size: 14px;
+}
+
+.productInfoSection{
+    width: 100%;
+    margin-top: 6%;
+    height: 50%;
+}
+
+.productDetailSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.detailSectionHalf{
+    width: 48%;
+    height: 100%;
+}
+
+.descriptionHeading{
+    font-family: Lato-Bold;
+    font-size: 16px;
+}
+
+.descriptionText{
+    font-family: Lato-Regular;
+    font-size: 16px;
+}
+
+.careInfoPoint{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}

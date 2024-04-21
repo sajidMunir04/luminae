@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { Product } from "../model/productModel.mjs";
+import { Product } from "../src/model/productModel.mjs";
 import fs from 'fs';
 import csvParser from 'csv-parser';
 
@@ -13,7 +13,7 @@ async function handler() {
         console.log('Client Connected');
         let data = [];
         // Read the CSV file
-        fs.createReadStream('src\\databaseutilities\\store_zara.csv')
+        fs.createReadStream('databaseutilities\\store_mango.csv')
         .pipe(csvParser())
         .on('start', () => {
             console.log('started parsing');
@@ -24,18 +24,19 @@ async function handler() {
                 name: item.name,
                 description: item.description,
                 price: item.price,
-                images: item.images.split(','),
+                images: item.images,
                 discount: Math.random() * 50,
                 inventoryCount: 50,
                 brandName: item.brand,
-                category: item.terms,
+                category: item.category,
                 section: item.section
             });
             data.push(article);
+            console.log(item,typeof(item.images));
         })
         .on('end', () => {
             console.log('CSV file successfully processed');
-            putTheData();
+            //putTheData();
         });
 
         const putTheData = async() => {

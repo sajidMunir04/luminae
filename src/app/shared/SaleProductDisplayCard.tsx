@@ -3,17 +3,21 @@ import styles from './SaleProductDisplayCard.module.css';
 import { CountdownTimer } from '../utils/CountdownTimer';
 
 
+interface Props{
+    timeRemaining: number,
+}
+
 function SaleProductDisplayCard(props)
 {
     const timer = new CountdownTimer(props.saleTimeRemaining);
     const [timeRemaining,setTime] = useState([0,0,0]);
     const updateTimer = (time : number[]) =>{
-        //setTime([time[0],time[1],time[2]]);
+        setTime([time[0],time[1],time[2]]);
     }
     timer.start(updateTimer);
 
     return (<div className={styles.container}>
-        <div>
+        <div className={styles.textContainer}>
             <p className={styles.dealPeriodText}>{props.saleTimeSpan}</p>
             <p className={styles.saleTimeRemaining}>{timeRemaining[0]} : {timeRemaining[1]} : {timeRemaining[2]}</p>
             <p>hour : min : sec</p>

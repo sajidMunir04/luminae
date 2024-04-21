@@ -35,19 +35,11 @@ function HeaderTemplate()
                 <button className={styles.searchButton} type="submit"><img src={'/search.png'}/></button>
             </form>
             <nav className={styles.navArea}>
-                <div>
-                    <a href='/admin'>Admin</a>
-                </div>
-                <div>
-                    <a href='api/server'>Blog</a>
-                </div>
-                <div>
-                    <a>Contact Us</a>
-                </div>
-                <div>
-                    <a>Help & Support</a>
-                </div>
-        </nav>
+                    <a className={styles.link} href='/admin'>Admin</a>
+                    <a className={styles.link} href='api/server'>Blog</a>
+                    <a className={styles.link} >Contact Us</a>
+                    <a className={styles.link} >Help & Support</a>
+            </nav>
         <div>
             <div className={styles.socialLinkSection}>
                 <img src={'/Instagram.png'}/>

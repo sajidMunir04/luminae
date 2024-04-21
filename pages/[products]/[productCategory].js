@@ -1,20 +1,14 @@
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../../src/app/utils/ProductsContext";
 import ContextData from "../ContextData";
-import AdvertisementLayout from "../../src/app/home/AdvertisementLayout";
-import CategoryCardsLayout from "../../src/app/home/CategoryCardsLayout";
-import FeaturedCategoriesLayout from "../../src/app/home/FeaturedCategoriesLayout";
-import FlashSaleLayout from "../../src/app/home/FlashSaleLayout";
-import MainBanner from "../../src/app/home/MainBanner";
-import ProductsDisplayLayout from "../../src/app/home/ProductsDisplayLayout";
-import TrendingProductsLayout from "../../src/app/home/TrendingProductsLayout";
-import EmailSubscribeSection from "../../src/app/shared/EmailSubscribeSection";
 import FooterTemplate from "../../src/app/shared/FooterTemplate";
 import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
 import ProductsCategoryBrowser from "../../src/app/shared/ProductsCategoryBrowser";
 import StoreInteractionContainer from "../../src/app/shared/StoreInteractionContainer";
 import ProductsBrowser from "../../src/app/products/ProductsBrowser";
+import ProductPage from "../../src/app/products/ProductPage";
+import '../../src/app/fonts.css';
 
 function productCategory(){
     const router = useRouter();
@@ -24,12 +18,32 @@ function productCategory(){
     const filteredProducts = products.filter((item) => item.category == 
     productCategory);
 
-    console.log("filtered Products",filteredProducts);
+    useEffect (() => {
+      if (typeof window !== 'undefined') {
+        window.history.pushState({ page: 'products' }, section, productCategory);
+        window.addEventListener('popstate', function(event) {
+          handleBack();
+        });
+      }
+    },[]);
+    const [selectedProduct,setSelectedProduct] = useState(filteredProducts[0]);
+    const [isProductSelected,setProductSelectStatus] = useState(false);
+
+    const handleClick = (product = filteredProducts[0]) => {
+      setSelectedProduct(product);
+      setProductSelectStatus(true);
+    }
+
+    const handleBack = () => {
+      setSelectedProduct(null);
+      setProductSelectStatus(false);
+    }
+
     return (<>
       <HeaderTemplate/>
       <StoreInteractionContainer/>
-      <ProductsBrowser products={filteredProducts}/>
-
+      {!isProductSelected && <ProductsBrowser onClick={handleClick} products={filteredProducts}/>}
+      {isProductSelected && <ProductPage product={selectedProduct}/>}
       <FooterTemplate/>
     </>);
 }
