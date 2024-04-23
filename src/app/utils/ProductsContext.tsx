@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useEffect, useState } from 'react';
 import { Product } from './Product';
 import { error, time } from 'console';
@@ -35,6 +37,7 @@ const defaultSection: ProductSection = {
 
 export const ProductsContext = createContext<ProductContextType>({products: [],productSections : []});
 
+
 const ProductsManager = ({children}) => {
     const [allProducts,setProducts] = useState<ProductContextType>({products : [],productSections : []});
     let allProductSections : ProductSection[] = [];
@@ -42,8 +45,10 @@ const ProductsManager = ({children}) => {
         () => {
         const fetchData = async () => {
             try {
+                const retrievedData = JSON.parse(localStorage.getItem('myData'));
                 const response = await fetch('/api/fetchProducts');
                 const data = await response.json();
+                localStorage.setItem('myData', JSON.stringify(data));
                 const products: Product[] = data.map((item: Product) => ({
                     _id: item._id,
                     name: item.name,
@@ -99,5 +104,6 @@ const ProductsManager = ({children}) => {
         {children}
     </ProductsContext.Provider>);
 }
+
 
 export default ProductsManager;

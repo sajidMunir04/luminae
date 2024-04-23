@@ -13,3 +13,7 @@ body
 {
   margin: 0%;
 }
+
+a:hover{
+  color: #FF7A00;
+}

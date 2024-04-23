@@ -22,7 +22,7 @@ function ProductSubCatrgories(props : Props)
 
     return (<div className={styles.container}>
         {props.categories.map((item) => (
-            <a onClick={()=>{handleCategoryClick(props.mainCategory + '/' + item)}} 
+            <a className={styles.categoryLink} onClick={()=>{handleCategoryClick(props.mainCategory + '/' + item)}} 
             key={item} href={props.mainCategory + '/' + item}>{item}</a>
         ))}
     </div>);

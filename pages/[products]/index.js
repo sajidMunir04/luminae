@@ -1,31 +1,25 @@
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
-import { ProductsContext } from "../../src/app/utils/ProductsContext";
+import { useContext, useEffect, useState } from "react";
+import ProductPage from "../../src/app/products/ProductPage";
+import ProductsBrowser from "../../src/app/products/ProductsBrowser";
 import FooterTemplate from "../../src/app/shared/FooterTemplate";
 import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
-import ProductsCategoryBrowser from "../../src/app/shared/ProductsCategoryBrowser";
 import StoreInteractionContainer from "../../src/app/shared/StoreInteractionContainer";
-import ProductsBrowser from "../../src/app/products/ProductsBrowser";
-import ProductPage from "../../src/app/products/ProductPage";
-import '../../src/app/fonts.css';
-import CartContext, { CartContextType } from "../../src/app/utils/CartContext";
+import { ProductsContext} from "../../src/app/utils/ProductsContext";
+import NoProductFound from "../../src/app/products/NoProductFound";
 
-function productCategory(){
+
+
+function Index() {
     const router = useRouter();
-    const { section , productCategory } = router.query;
+    const { searchQuery } = router.query;
     const { products , productSections } = useContext(ProductsContext);
 
-    const filteredProducts = products.filter((item) => item.category == 
-    productCategory);
+    const filteredProducts = products.filter((item) => item.brandName == searchQuery || 
+    item.name == searchQuery || item.category == searchQuery);
 
-    useEffect (() => {
-      if (typeof(window) !== 'undefined') {
-        window.history.pushState({ page: 'products' }, section, productCategory);
-        window.addEventListener('popstate', function(event) {
-          handleBack();
-        });
-      }
-    },[]);
+    console.log(products.length);
+
     const [selectedProduct,setSelectedProduct] = useState(filteredProducts[0]);
     const [isProductSelected,setProductSelectStatus] = useState(false);
 
@@ -42,10 +36,15 @@ function productCategory(){
     return (<>
       <HeaderTemplate/>
       <StoreInteractionContainer/>
+      {filteredProducts.length > 0 && <>
       {!isProductSelected && <ProductsBrowser onClick={handleClick} products={filteredProducts} onBack={() => {}}/>}
       {isProductSelected && <ProductPage product={selectedProduct}/>}
+      </>
+      }
+      {filteredProducts.length == 0 && <NoProductFound searchTerm={searchQuery}/>}
       <FooterTemplate/>
     </>);
 }
 
-export default productCategory;
+
+export default Index;

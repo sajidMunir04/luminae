@@ -1,12 +1,28 @@
+import { useContext, useState } from 'react';
 import styles from './HeaderTemplate.module.css';
+import { ProductsContext } from '../utils/ProductsContext';
+import ProductsBrowser from '../products/ProductsBrowser';
+import router from 'next/router';
+
 
 
 function HeaderTemplate()
 {
-    function onLogoClick()
-    {
-        
+    const {products, productSections } = useContext(ProductsContext);
+    const [inputValue, setInputValue] = useState<string>('');
+
+    const onSearchButtonClick = () => {
+        router.push(inputValue);
+        const filteredProducts = products.filter((product) => {
+            product.brandName.includes(inputValue) || product.name.includes(inputValue) || product.category.includes(inputValue)
+        });
+
+        <ProductsBrowser products={filteredProducts} onClick={() => {}} onBack={() => {}}/>   
     }
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value);
+    };
 
     return (<div className={styles.container}>
         <div className={styles.logoContainer}>
@@ -14,7 +30,7 @@ function HeaderTemplate()
             </a>
         </div>
         <form className={styles.form}>
-                <input className={styles.searchInput} type="search" placeholder='Search Products'/>
+                <input className={styles.searchInput} type="search" placeholder='Search Products' onChange={handleInputChange}/>
                 <select className={styles.categorySelector}>
                     <option className={styles.categoriesTextOption}>
                         All Categories
@@ -32,7 +48,7 @@ function HeaderTemplate()
                         Home Decor
                     </option>
                 </select>
-                <button className={styles.searchButton} type="submit"><img src={'/search.png'}/></button>
+                <button onClick={onSearchButtonClick}  className={styles.searchButton} type="submit"><img src={'/search.png'}/></button>
             </form>
             <nav className={styles.navArea}>
                     <a className={styles.link} href='/admin'>Admin</a>

@@ -2,6 +2,7 @@ import { Db, MongoClient } from 'mongodb';
 import { Product } from '../../src/app/utils/Product';
 
 export default async function handler(req, res) {
+
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {
     await client.connect();

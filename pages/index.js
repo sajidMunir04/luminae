@@ -19,9 +19,6 @@ import FavoritesManager from '../src/app/utils/FavoritesContext';
 
 function Home() {
   return (<>
-      <UserManager>
-      <ProductsManager>
-      <CartManager>
       <HeaderTemplate/>
       <StoreInteractionContainer/>
       <ProductsCategoryBrowser/>
@@ -34,9 +31,6 @@ function Home() {
       <FeaturedCategoriesLayout/>
       <EmailSubscribeSection/>
       <FooterTemplate/>
-      </CartManager>
-      </ProductsManager>
-      </UserManager>
   </>
   );
 }
