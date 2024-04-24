@@ -1,53 +1,37 @@
 'use client';
 
-import { createContext, useEffect, useState } from 'react';
-import { Product } from './Product';
-import { error, time } from 'console';
+import { useRouter } from "next/router";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
+import ProductsManager, { ProductSection, ProductsContext } from "../../src/app/utils/ProductsContext";
+import FooterTemplate from "../../src/app/shared/FooterTemplate";
+import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
+import ProductsCategoryBrowser from "../../src/app/shared/ProductsCategoryBrowser";
+import StoreInteractionContainer from "../../src/app/shared/StoreInteractionContainer";
+import ProductsBrowser from "../../src/app/products/ProductsBrowser";
+import ProductPage from "../../src/app/products/ProductPage";
+import '../../src/app/fonts.css';
+import CartContext, { CartContextType } from "../../src/app/utils/CartContext";
+import { Product } from "../../src/app/utils/Product";
 
+function productCategory(){
+    const router = useRouter();
+    const { products , productCategory } = router.query;
+    console.log("Section",products,productCategory);
+    let filteredProducts : Product[] = [];
+    const [selectedProduct,setSelectedProduct] = useState(filteredProducts[0]);
+    const [isProductSelected,setProductSelectStatus] = useState(false);
 
-type ProductContextType = {
-    products : Product[];
-    productSections: ProductSection[]
-}
-
-export type ProductSection = {
-    productSection : string,
-    subCategories: string[]
-}
-
-// Create a default object based on the interface
-const defaultProduct: Product = {
-    _id: '',
-    name: '',
-    description: '',
-    price: 0,
-    images: [''],
-    section: '',
-    discount: 0,
-    inventoryCount: 0,
-    brandName: '',
-    category: '',
-    reviews: ['']
-  };
-  
-const defaultSection: ProductSection = {
-    productSection : '',
-    subCategories : ['']
-}
-
-export const ProductsContext = createContext<ProductContextType>({products: [],productSections : []});
-
-
-const ProductsManager = ({children}) => {
-    const [allProducts,setProducts] = useState<ProductContextType>({products : [],productSections : []});
     let allProductSections : ProductSection[] = [];
     useEffect(
         () => {
         const fetchData = async () => {
             try {
-                const response = await fetch('/api/fetchProducts');
+
+                const fetchQuery = '/api/fetchProducts' + `/MAN` + `/shorts`;
+                console.log("Query is", fetchQuery)
+                const response = await fetch(fetchQuery);
                 const data = await response.json();
-                const products: Product[] = data.map((item: Product) => ({
+                filteredProducts = data.map((item: Product) => ({
                     _id: item._id,
                     name: item.name,
                     description: item.description,
@@ -61,7 +45,7 @@ const ProductsManager = ({children}) => {
                     reviews: item.reviews
                 }));
 
-              products.map((item) => {
+              filteredProducts.map((item) => {
                         const modifiedImages = item.images.map((imgLink,index) => {
                             const lastIndex = index == item.images.length - 1 ? 2 : 1;
                             const final = imgLink.substring(2, imgLink.length - lastIndex);
@@ -88,7 +72,6 @@ const ProductsManager = ({children}) => {
                                 allProductSections.push(newProductSection);
                         }
               })
-              setProducts({products : products, productSections : allProductSections});
             } catch (error) {
               console.error('Error fetching data:', error);
             }
@@ -97,11 +80,20 @@ const ProductsManager = ({children}) => {
           fetchData();
           
     },[])
-      
-    return (<ProductsContext.Provider value={allProducts}>
-        {children}
-    </ProductsContext.Provider>);
+
+
+    const handleClick = (product = filteredProducts[0]) => {
+      setSelectedProduct(product);
+      setProductSelectStatus(true);
+    }
+
+    return (<>
+      <HeaderTemplate/>
+      <StoreInteractionContainer/>
+      {!isProductSelected && <ProductsBrowser onClick={handleClick} products={filteredProducts} onBack={() => {}}/>}
+      {isProductSelected && <ProductPage product={selectedProduct}/>}
+      <FooterTemplate/>
+    </>);
 }
 
-
-export default ProductsManager;
+export default productCategory;

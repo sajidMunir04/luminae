@@ -1,14 +1,15 @@
 import { Db, MongoClient } from 'mongodb';
-import { Product } from '../../src/app/utils/Product';
+import { Product } from '../../../src/app/utils/Product';
 
 export default async function handler(req, res) {
-
+  const { slug } = req.query;
+  const [product, productCategory] = slug;
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {
     await client.connect();
     const db : Db = client.db('Products');
     const collection = db.collection('products');
-    const data = await collection.find().toArray();
+    const data = await collection.find( { section: { $eq: product } }).toArray();
     res.status(200).json(data);
   } catch (error) {
     console.error('Error fetching data from MongoDB:', error);
