@@ -1,29 +1,31 @@
-
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
-import ProductsManager, { ProductSection, ProductsContext } from "../../src/app/utils/ProductsContext";
+import { useContext, useEffect, useState } from "react";
+import ProductPage from "../../src/app/products/ProductPage";
+import ProductsBrowser from "../../src/app/products/ProductsBrowser";
 import FooterTemplate from "../../src/app/shared/FooterTemplate";
 import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
-import ProductsCategoryBrowser from "../../src/app/shared/ProductsCategoryBrowser";
 import StoreInteractionContainer from "../../src/app/shared/StoreInteractionContainer";
-import ProductsBrowser from "../../src/app/products/ProductsBrowser";
-import ProductPage from "../../src/app/products/ProductPage";
-import '../../src/app/fonts.css';
+import { ProductSection, ProductsContext} from "../../src/app/utils/ProductsContext";
+import NoProductFound from "../../src/app/products/NoProductFound";
 import { Product } from "../../src/app/utils/Product";
+import productCategory from "./[productCategory]";
 
-function productCategory(){
+
+
+function Index() {
     const router = useRouter();
-    const { products , productCategory } = router.query;
+    const { products } = router.query;
     let filteredProducts : Product[] = [];
     const [allProducts,setProducts] = useState(filteredProducts);
     const [selectedProduct,setSelectedProduct] = useState(filteredProducts[0]);
     const [isProductSelected,setProductSelectStatus] = useState(false);
     let allProductSections : ProductSection[] = [];
+    let resultFinalized : boolean = false;
     useEffect(
         () => {
         const fetchData = async () => {
             try {
-                const fetchQuery = `/api/fetchProducts/${products}/${productCategory}`;
+                const fetchQuery = `/api/searchProducts/${products}`;
                 console.log("Query is", fetchQuery)
                 const response = await fetch(fetchQuery);
                 const data = await response.json();
@@ -73,13 +75,14 @@ function productCategory(){
             } catch (error) {
               console.error('Error fetching data:', error);
             }
+
+            resultFinalized = true;
           };
 
-          setTimeout(fetchData,250);       
-    },[products, productCategory])
+          setTimeout(fetchData,1);       
+    },[products])
 
-
-    const handleClick = (product) => {
+    const handleClick = (product = filteredProducts[0]) => {
       setSelectedProduct(product);
       setProductSelectStatus(true);
     }
@@ -89,8 +92,10 @@ function productCategory(){
       <StoreInteractionContainer/>
       {!isProductSelected && <ProductsBrowser onClick={handleClick} products={allProducts} onBack={() => {}}/>}
       {isProductSelected && <ProductPage product={selectedProduct}/>}
+      {(resultFinalized  && filteredProducts.length == 0) && <NoProductFound searchTerm={products as string} />}
       <FooterTemplate/>
     </>);
 }
 
-export default productCategory;
+
+export default Index;

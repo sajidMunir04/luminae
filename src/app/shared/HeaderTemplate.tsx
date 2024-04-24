@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import styles from './HeaderTemplate.module.css';
 import { ProductsContext } from '../utils/ProductsContext';
 import ProductsBrowser from '../products/ProductsBrowser';
@@ -21,6 +21,7 @@ function HeaderTemplate()
     }
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(event.target.value,inputValue);
         setInputValue(event.target.value);
     };
 
