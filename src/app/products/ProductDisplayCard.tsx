@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Product } from '../utils/Product';
 import styles from './ProductDisplayCard.module.css';
+import useFavorites from '../lib/hooks/useFavorites';
 
 interface Props extends Product{
     imageLink: string,
@@ -11,12 +12,18 @@ interface Props extends Product{
 
 function ProductDisplayCard(props : Props)
 {
-    return (<div onClick={props.onClick} className={styles.container}>
-        <div className={styles.imageContainer}>
+    const { favorites, toggleFavorite } = useFavorites();
+
+    const handleToggleFavorite = (productId: string) => {
+        toggleFavorite(productId);
+      };
+
+    return (<div className={styles.container}>
+        <div onClick={props.onClick} className={styles.imageContainer}>
             <img className={styles.image} src={props.images[0]} alt='product image'/>
         </div>
         <div className={styles.textContainer}>
-            <div className={styles.contentSection}>
+            <div onClick={props.onClick} className={styles.contentSection}>
                         <p className={styles.brandName}>{props.brandName}</p>
                         <p className={styles.productName}>{props.name}</p>
                     <div className={styles.productRatingSection}>
@@ -45,7 +52,7 @@ function ProductDisplayCard(props : Props)
                         }
                     </div>
             </div>
-            <div  className={styles.favButtonSection}>
+            <div onClick={() => handleToggleFavorite(props._id)}  className={styles.favButtonSection}>
                 <div>
                     <img src="/Vector.png"/>                     
                 </div>

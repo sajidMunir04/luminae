@@ -10,6 +10,7 @@ import ProductsBrowser from "../../src/app/products/ProductsBrowser";
 import ProductPage from "../../src/app/products/ProductPage";
 import '../../src/app/fonts.css';
 import { Product } from "../../src/app/utils/Product";
+import '../../src/app/globals.css';
 
 function productCategory(){
     const router = useRouter();
@@ -79,7 +80,7 @@ function productCategory(){
     },[products, productCategory])
 
 
-    const handleClick = (product) => {
+    const handleClick = (product : Product) => {
       setSelectedProduct(product);
       setProductSelectStatus(true);
     }

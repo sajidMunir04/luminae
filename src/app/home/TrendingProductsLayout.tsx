@@ -1,5 +1,5 @@
-const { default: ProductDisplayLayoutHeader } = require("./ProductDisplayLayoutHeader");
-const { default: TrendingProductDisplayCard } = require("./TrendingProductDisplayCard");
+import ProductDisplayLayoutHeader from './ProductDisplayLayoutHeader';
+import TrendingProductDisplayCard from '../products/TrendingProductDisplayCard';
 import styles from './TrendingProductsLayout.module.css';
 
 function TrendingProductsLayout()

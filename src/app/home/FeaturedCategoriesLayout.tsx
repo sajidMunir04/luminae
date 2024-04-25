@@ -1,4 +1,4 @@
-import ProductCategoryCard from "./ProductCategoryCard";
+import ProductCategoryCard from "../products/ProductCategoryCard";
 import styles from './FeaturedCategoriesLayout.module.css';
 
 function FeaturedCategoriesLayout()

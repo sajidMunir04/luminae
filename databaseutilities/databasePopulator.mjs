@@ -13,7 +13,7 @@ async function handler() {
         console.log('Client Connected');
         let data = [];
         // Read the CSV file
-        fs.createReadStream('databaseutilities\\store_mango.csv')
+        fs.createReadStream('databaseutilities\\store_zara.csv')
         .pipe(csvParser())
         .on('start', () => {
             console.log('started parsing');

@@ -1,4 +1,4 @@
-import ProductDisplayCard from "./ProductDisplayCard";
+import ProductDisplayCard from "../products/ProductDisplayCard";
 import ProductDisplayLayoutHeader from "./ProductDisplayLayoutHeader";
 import styles from './ProductDisplayLayout.module.css';
 

@@ -1,4 +1,4 @@
-import ProductDisplayCard from "../home/ProductDisplayCard";
+import ProductDisplayCard from "./ProductDisplayCard";
 import { Product } from "../utils/Product";
 import styles from "./Pagination.module.css";
 
@@ -6,7 +6,7 @@ interface Props {
     itemsPerPage: number,
     products: Product[],
     currentPage: number
-    onClick:(arg0 : any) => void
+    onClick:(product : Product) => void
 }
 
 
