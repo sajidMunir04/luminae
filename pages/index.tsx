@@ -12,10 +12,6 @@ import AdvertisementLayout from "../src/app/home/AdvertisementLayout";
 import FeaturedCategoriesLayout from "../src/app/home/FeaturedCategoriesLayout";
 import FooterTemplate from "../src/app/shared/FooterTemplate";
 import EmailSubscribeSection from '../src/app/shared/EmailSubscribeSection';
-import ProductsManager from '../src/app/utils/ProductsContext';
-import UserManager from '../src/app/utils/UserContext';
-import CartManager from '../src/app/utils/CartContext';
-import FavoritesManager from '../src/app/utils/FavoritesContext';
 
 function Home() {
   return (<>

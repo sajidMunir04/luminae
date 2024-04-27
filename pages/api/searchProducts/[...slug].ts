@@ -10,7 +10,9 @@ export default async function handler(req, res) {
     const db : Db = client.db('Products');
     const collection = db.collection('products');
     const data = await collection.aggregate(
-        [ { $match : { brandName : query } }]
+        [ 
+          { $match : { 'category' : query , 'brandName' : query , 'name' : query } }
+        ]
     ).toArray();
     res.status(200).json(data);
   } catch (error) {

@@ -27,8 +27,12 @@ const defaultProduct: Product = {
     inventoryCount: 0,
     brandName: '',
     category: '',
-    reviews: ['']
-  };
+    reviews: [''],
+    sizes: [],
+    color: '',
+    style: '',
+    model: ''
+};
   
 const defaultSection: ProductSection = {
     productSection : '',

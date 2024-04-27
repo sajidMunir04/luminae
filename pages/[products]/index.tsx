@@ -26,7 +26,6 @@ function Index() {
         const fetchData = async () => {
             try {
                 const fetchQuery = `/api/searchProducts/${products}`;
-                console.log("Query is", fetchQuery)
                 const response = await fetch(fetchQuery);
                 const data = await response.json();
                 filteredProducts = data.map((item: Product) => ({
@@ -40,6 +39,10 @@ function Index() {
                     brandName: item.brandName,
                     category: item.category,
                     section: item.section,
+                    sizes: item.sizes,
+                    style: item.style,
+                    color: item.color,
+                    model: item.model,
                     reviews: item.reviews
                 }));
 

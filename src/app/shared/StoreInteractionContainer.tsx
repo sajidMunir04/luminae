@@ -2,9 +2,13 @@ import Link from 'next/link';
 import styles from './StoreInteractionContainer.module.css';
 import { useContext } from 'react';
 import { ProductsContext } from '../utils/ProductsContext';
+import { useStore } from 'zustand';
+import { useCartStore } from '../lib/store/useCartStore';
 
 function StoreInteractionContainer(props)
 {
+    const cartItemsCount = useStore(useCartStore,state => state.totalItems)
+
     return (<div className={styles.container}>
         <div className={styles.catergoriesSection}>
             <div className={styles.categoriesButton}>
@@ -42,10 +46,10 @@ function StoreInteractionContainer(props)
                     <img src="/Favorides.png"/>
                     <p>Favorites</p>
                 </a>
-                <a className={styles.button}>
+                <a className={styles.button} href='/cart'>
                     <img src="/card.png"/>
                     <p>Cart</p>
-                    <p>{props.cartItemsCount}3</p>
+                    <p>{cartItemsCount}</p>
                 </a>
             </div>
     </div>);

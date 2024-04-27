@@ -1,31 +1,33 @@
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
+
+const cookieName : string = 'favorites';
+
 const useFavorites = (): { favorites: string[]; toggleFavorite: (productId: string) => void } => {
   const [favorites, setFavorites] = useState<string[]>([]);
-
+  let modifiedData : string[] = [];
   useEffect(() => {
-    const favoritesFromCookies = Cookies.get('favorites');
+    const favoritesFromCookies = Cookies.get(cookieName);
     if (favoritesFromCookies) {
-      setFavorites(JSON.parse(favoritesFromCookies));
+      modifiedData = JSON.parse(favoritesFromCookies);
     }
   }, []);
 
   const toggleFavorite = (productId: string) => {
-    setFavorites((prevFavorites) => {
-      const index = prevFavorites.indexOf(productId);
-      if (index !== -1) {
-        return prevFavorites.filter((id) => id !== productId);
-      } else {
-        return [...prevFavorites, productId];
-      }
-    });
-
-    console.log(favorites);
+    if (modifiedData.includes(productId))
+    {
+        modifiedData =  modifiedData.filter((product) => product != productId);
+        setFavorites(modifiedData);
+    }
+    else{
+      modifiedData.push(productId);
+        setFavorites(modifiedData);
+    }
   };
 
   useEffect(() => {
-    Cookies.set('favorites', JSON.stringify(favorites), { expires: 365 });
+    Cookies.set(cookieName, JSON.stringify(favorites), { expires: 365 });
   }, [favorites]);
 
   return { favorites, toggleFavorite };

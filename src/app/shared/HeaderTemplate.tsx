@@ -13,15 +13,9 @@ function HeaderTemplate()
 
     const onSearchButtonClick = () => {
         router.push(inputValue);
-        const filteredProducts = products.filter((product) => {
-            product.brandName.includes(inputValue) || product.name.includes(inputValue) || product.category.includes(inputValue)
-        });
-
-        <ProductsBrowser products={filteredProducts} onClick={() => {}} onBack={() => {}}/>   
     }
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.value,inputValue);
         setInputValue(event.target.value);
     };
 
@@ -49,11 +43,11 @@ function HeaderTemplate()
                         Home Decor
                     </option>
                 </select>
-                <button onClick={onSearchButtonClick}  className={styles.searchButton} type="submit"><img src={'/search.png'}/></button>
+                <button onClick={onSearchButtonClick}  className={styles.searchButton} type="submit"><img src={'/images/magnifier.svg'}/></button>
             </form>
             <nav className={styles.navArea}>
                     <a className={styles.link} href='/admin'>Admin</a>
-                    <a className={styles.link} href='api/server'>Blog</a>
+                    <a className={styles.link} href='#'>Blog</a>
                     <a className={styles.link} >Contact Us</a>
                     <a className={styles.link} >Help & Support</a>
             </nav>

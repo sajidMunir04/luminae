@@ -89,7 +89,7 @@ function ProductsBrowser(props : Props)
                 <a className="page-link" href="#" tabIndex={-1}>Previous</a>
                 </li>
                 {props.products.map((item,index) => (
-                    index % itemsPerPage === 0 && ((index / itemsPerPage) + 1) < 5 && <li className="page-item"><a className="page-link" onClick={() => setCurrentPage((index / itemsPerPage) + 1)} aria-disabled={true} href="#">{(index / itemsPerPage) + 1}</a></li>
+                    index % itemsPerPage === 0 && ((index / itemsPerPage) + 1) < 5 && <li key={(index / itemsPerPage) + 1} className="page-item"><a className="page-link" onClick={() => setCurrentPage((index / itemsPerPage) + 1)} aria-disabled={true} href="#">{(index / itemsPerPage) + 1}</a></li>
                 )) }
                 <li className="page-item">
                 <a className="page-link" href="#">Next</a>

@@ -11,5 +11,9 @@ export type Product = {
     brandName:      string;
     category:       string;
     section:        string;
+    sizes:          string[],
+    color:          string,
+    style:          string,
+    model:          string,    
     reviews?:        string[];
 }

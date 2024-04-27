@@ -1,27 +1,37 @@
-import styles from './CartProductCard.module.css';
-function CartProductCard(props)
+import styles from './CartItem.module.css';
+
+interface Props {
+    productName: string,
+    imageLink: string,
+    color: string,
+    price: number,
+    quantity: number,
+    totalPrice: number
+}
+
+function CartItem(props : Props)
 {
     return (<div className={styles.container}>
         <div>
             <div>
-                <img src='/photo(1).png'/>
+                <img src={props.imageLink}/>
             </div>
             <div>
                 <p>{props.productName}</p>
                 <div>
                     <p>Color: </p>
-                    <div className={''} style={{color : props.productColor}}>
+                    <div className={''} style={{color : `${props.color}`}}>
                     </div>
                 </div>
             </div>
         </div>
         <div>
-            <p>{props.unitPrice}</p>
+            <p>{props.price}</p>
         </div>
         <div>
-            <div>
+            <div className={styles.quantityContainer}>
                 <p>-</p>
-                <p>1</p>
+                <p>{props.quantity}</p>
                 <p>+</p>
             </div>
         </div>
@@ -36,4 +46,4 @@ function CartProductCard(props)
     </div>);
 }
 
-export default CartProductCard;
+export default CartItem;

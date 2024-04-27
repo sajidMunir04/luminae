@@ -11,6 +11,10 @@ const productSchema = new Schema({
     category: String,
     section: String,
     rating: Number,
+    sizes: [String],
+    color: String,
+    style: String,
+    model: String,    
     reviews: [{ userName: String,
                 rating: String,
                 comment: String}]

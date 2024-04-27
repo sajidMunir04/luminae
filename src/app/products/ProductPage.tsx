@@ -1,18 +1,28 @@
-import { useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Product } from "../utils/Product";
 import styles from "./ProductPage.module.css";
+import { useDraggable } from "react-use-draggable-scroll";
+import { useCartStore } from "../lib/store/useCartStore";
 
 interface Props {
     product: Product
 }
 
 
-function ProductPage(props : Props) {
-
+function ProductPage(props : Props) : JSX.Element {
     const [activeImageLink,setActiveImageLink] = useState(props.product.images[0]);
     const imageClicked = (imageLink : string) => {
         setActiveImageLink(imageLink);
     }
+
+    const addProductToCart = useCartStore(state => state.addToCart);
+    const removeProductFromCart = useCartStore(state => state.removeFromCart);
+      // We will use React useRef hook to reference the wrapping div:
+    const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
+    const { events } = useDraggable(ref, {
+        applyRubberBandEffect: true
+    }); // Now we pass the reference to the useDraggable hook:
+
 
     return (<div className={styles.container}>
         <div className={styles.linkHierarchyContainer}>
@@ -20,8 +30,8 @@ function ProductPage(props : Props) {
         </div>
         <div className={styles.productInfo}>
             <div className={styles.imageSection}>
-                <div className={styles.imagesContainer}>
-                        {props.product.images.map((image) => (<div className={styles.smallImageParent}>
+                <div className={styles.imagesContainer} {...events} ref={ref}>
+                        {props.product.images.map((image) => (<div draggable={false} className={styles.smallImageParent}>
                             <img className={styles.smallImage} onClick={imageClicked.bind(null,image)} src={image}/>
                         </div>))}
                 </div>
@@ -35,7 +45,7 @@ function ProductPage(props : Props) {
                 <div>
                     <p className={styles.infoText}>Size</p>
                     <div>
-
+                        
                     </div>
                 </div>
                 <div>
@@ -70,7 +80,7 @@ function ProductPage(props : Props) {
                 </div>
                 <div>
                     <button type='button'>Shop Now</button>
-                    <button type='button'>Add to basket</button>
+                    <button onClick={() => addProductToCart(props.product)} type='button'>Add to Cart</button>
                 </div>
             </div>
         </div>

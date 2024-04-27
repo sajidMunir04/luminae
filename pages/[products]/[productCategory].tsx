@@ -25,7 +25,6 @@ function productCategory(){
         const fetchData = async () => {
             try {
                 const fetchQuery = `/api/fetchProducts/${products}/${productCategory}`;
-                console.log("Query is", fetchQuery)
                 const response = await fetch(fetchQuery);
                 const data = await response.json();
                 filteredProducts = data.map((item: Product) => ({
@@ -39,17 +38,14 @@ function productCategory(){
                     brandName: item.brandName,
                     category: item.category,
                     section: item.section,
+                    sizes: item.sizes,
+                    color: item.color,
+                    style: item.style,
+                    model: item.model,
                     reviews: item.reviews
                 }));
 
               filteredProducts.map((item) => {
-                        const modifiedImages = item.images.map((imgLink,index) => {
-                            const lastIndex = index == item.images.length - 1 ? 2 : 1;
-                            const final = imgLink.substring(2, imgLink.length - lastIndex);
-                            return final;
-                        });
-                        item.images = modifiedImages;
-                        
                         let containsSection = false;
                         allProductSections.forEach((prodSec,index) => {
                             if (prodSec.productSection == item.section)
