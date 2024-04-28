@@ -79,6 +79,7 @@ function productCategory(){
     const handleClick = (product : Product) => {
       setSelectedProduct(product);
       setProductSelectStatus(true);
+      console.log("Selected Product",product);
     }
 
     return (<>

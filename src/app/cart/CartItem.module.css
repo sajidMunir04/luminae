@@ -4,38 +4,18 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    height: 120px;
+    height: 100px;
     align-items: center;
+    margin-bottom: 3%;
 }
 
-.quantityContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border: 2px solid #C4C4C4;
-    border-radius: 4px;
-    width: 16%;
-    align-items: center;
-    padding: 2% 4%;
-    height: 24%;
-    box-sizing: border-box;
-}
 
 .productInfoContainer{
     width: 28%;
     display: flex;
     justify-content: flex-start;
-}
-
-.quantityButtons{
-    font-size: 32px;
-    margin: 0%;
-}
-
-.quantityText{
-    font-size: 22px;
-    margin: 0%;
-    text-align: center;
+    align-items: center;
+    height: 100%;
 }
 
 .productSpecificInfo{
@@ -44,6 +24,7 @@
     justify-content: center;
     align-items: flex-start;
     height: 100%;
+    margin-left: 3%;
 }
 
 .priceText{
@@ -53,7 +34,16 @@
 
 .productImageContainer{
     width: 32%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 3px solid #D9D9D9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+
 
 .productNameText{
     text-transform: capitalize;
@@ -76,6 +66,7 @@
 }
 
 .productImage{
-    max-width: 100%;
-    max-height: 100%;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
 }

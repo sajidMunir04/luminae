@@ -40,7 +40,15 @@ function FooterTemplate()
             </div>
         </div>
         <div className={styles.infoContent}>
-            <p>Anything informational goes here</p>
+            <div className={styles.infoSection}>
+                <p>165-179 Forster Road City of Monash, Melbourne, Australia</p>
+                <p className={styles.infoText}>©2023 Copyright in reserved for lumine shop</p>
+                <div className={styles.socialLinksContainer}>
+                    <a className={styles.socialLinkButton} href='#'><img className={styles.socialLinkImage} src='/images/social/instagram.svg'/></a>
+                    <a className={styles.socialLinkButton} href='#'><img className={styles.socialLinkImage} src='/images/social/facebook.svg'/></a>
+                    <a className={styles.socialLinkButton} href='#'><img className={styles.socialLinkImage} src='/images/social/telegram.svg'/></a>
+                </div>
+            </div>
         </div>
     </div>);
 }

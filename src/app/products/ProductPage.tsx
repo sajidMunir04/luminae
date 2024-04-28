@@ -3,6 +3,7 @@ import { Product } from "../utils/Product";
 import styles from "./ProductPage.module.css";
 import { useDraggable } from "react-use-draggable-scroll";
 import { useCartStore } from "../lib/store/useCartStore";
+import QuantityManagingCard from "./QuantityManagingCard";
 
 interface Props {
     product: Product
@@ -60,17 +61,17 @@ function ProductPage(props : Props) : JSX.Element {
 
                     </div>
                 </div>
-                <div>
+                <div className={styles.quantityContainer}>
                     <p className={styles.infoText}>Quantity</p>
                     <div>
-
+                    <QuantityManagingCard quantity={1} setQuantity={function (quantity: number): void {} }/>
                     </div>
                     <div>
 
                     </div>
                 </div>
-                <div>
-                    <p>${props.product.price}</p>
+                <div className={styles.insuranceSection}>
+                    <p className={styles.totalPriceText}>${props.product.price}</p>
                     <div>
                         <div>
 
@@ -78,9 +79,10 @@ function ProductPage(props : Props) : JSX.Element {
                         <p>Add shipping insurance for $9( declared value  only if the package gets lost, stolen or damaged.)</p>
                     </div>
                 </div>
-                <div>
-                    <button type='button'>Shop Now</button>
-                    <button onClick={() => addProductToCart(props.product)} type='button'>Add to Cart</button>
+                <div className={styles.buttonContainer}>
+                    <button className={styles.shopButton} type='button'>Shop Now</button>
+                    <button className={styles.addToCartButton} onClick={() => addProductToCart(props.product)} type='button'>
+                        <img className={styles.cartBtnImage} src="/images/product/tocart.svg"/> Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -161,6 +163,37 @@ function ProductPage(props : Props) : JSX.Element {
                         </div>
                     </div>
                 </div>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            <p>Total Reviews</p>
+                            <p>{props.product.reviews?.length}</p>
+                            {}
+                        </div>
+                        <div>
+                            <div>
+                                <p>5 stars</p>
+                                <div></div>
+                            </div>
+                            <div>
+                                <p>4 stars</p>
+                                <div></div>
+                            </div>
+                            <div>
+                                <p>3 stars</p>
+                                <div></div>
+                            </div>
+                            <div>
+                                <p>2 stars</p>
+                                <div></div>
+                            </div>
+                            <div>
+                                <p>1 stars</p>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

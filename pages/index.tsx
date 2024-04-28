@@ -25,7 +25,6 @@ function Home() {
       <CategoryCardsLayout/>
       <AdvertisementLayout/>
       <FeaturedCategoriesLayout/>
-      <EmailSubscribeSection/>
       <FooterTemplate/>
   </>
   );

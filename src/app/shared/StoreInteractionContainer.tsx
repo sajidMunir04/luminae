@@ -1,13 +1,18 @@
 import Link from 'next/link';
 import styles from './StoreInteractionContainer.module.css';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ProductsContext } from '../utils/ProductsContext';
 import { useStore } from 'zustand';
 import { useCartStore } from '../lib/store/useCartStore';
 
-function StoreInteractionContainer(props)
+function StoreInteractionContainer()
 {
-    const cartItemsCount = useStore(useCartStore,state => state.totalItems)
+    const [cartItemsCount,setCartItemCount] = useState(useStore(useCartStore,state => state.totalItems));4
+    const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.totalItems)}
+    ); 
+
+
+    subscribe();    
 
     return (<div className={styles.container}>
         <div className={styles.catergoriesSection}>

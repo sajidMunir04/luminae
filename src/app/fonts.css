@@ -22,3 +22,8 @@
     font-family: Lato-ExtraBold;
     src: url(../../public/fonts/Lato/Lato-Black.ttf);
 }
+
+@font-face {
+    font-family: Lato-Medium;
+    src: url(../../public/fonts/Lato/Lato-Light.ttf);
+}

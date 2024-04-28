@@ -15,9 +15,13 @@ const productSchema = new Schema({
     color: String,
     style: String,
     model: String,    
-    reviews: [{ userName: String,
-                rating: String,
-                comment: String}]
+    reviews: [{headingText: String,
+        reviewText: String,
+        reviewLikes: Number,
+        reviewDislikes: Number,
+        reviewerName: String,
+        rating: Number
+    }]
 });
 
 

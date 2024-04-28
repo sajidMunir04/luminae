@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductDisplayCard from "./ProductDisplayCard";
 import SearchBar from "../shared/SearchBar";
 import { Product } from "../utils/Product";
@@ -26,17 +26,48 @@ interface FiltersData {
     styles: string[]
 }
 
+enum ProductSortingAlgorithm {
+    Relevance,
+    PriceAscending,
+    PriceDescending
+}
+
 function ProductsBrowser(props : Props)
 {
     const [itemsPerPage,setItemPerPage] = useState(12);
     const [currentPage,setCurrentPage] = useState(1);
-
+    const [sortingAlgorithm,setSortingAlgorithm] = useState(ProductSortingAlgorithm.Relevance);
+    const [allProducts,setProducts] = useState(props.products);
     const[selectedModel,setSelectedModel] = useState('');
     const[selectedStyle,setSelectedStyle] = useState('');
     const[selectedColor,setSelectedColor] = useState('');
     const[selectedSizes,setSelectedSizes] = useState(['']);
     const[minimumPriceRange,setMinimumPrice] = useState(0);
     const[maximumPriceRange,setMaximumPrice] = useState(0);
+
+    useEffect(() => {
+        setProducts(props.products);
+    }, allProducts);
+
+    const setNewSortingAlgorithm = (algorithmType : ProductSortingAlgorithm) => {
+        setSortingAlgorithm(algorithmType);
+        if (sortingAlgorithm === ProductSortingAlgorithm.Relevance || true)
+        {
+            setProducts(props.products);   
+        }
+        else if (sortingAlgorithm === ProductSortingAlgorithm.PriceAscending)
+        {
+            setProducts(allProducts.sort((a,b) => (
+                a.price - b.price
+            )))   
+        }
+        else if (sortingAlgorithm === ProductSortingAlgorithm.PriceDescending)
+        {
+            setProducts(allProducts.sort((a,b) => (
+                b.price - a.price
+            )))   
+        }
+    }
 
     let filtersData : FiltersData = {
         minPrice: Number.MAX_VALUE,
@@ -47,7 +78,7 @@ function ProductsBrowser(props : Props)
         styles: []
     }
 
-    props.products.map((item) => {
+    allProducts.map((item) => {
         if (item.price < filtersData.minPrice)
             filtersData.minPrice = item.price;
 
@@ -92,9 +123,9 @@ function ProductsBrowser(props : Props)
         </div>
         <div>
             <select>
-                <option>Sort By Revelance</option>
-                <option>Sort By Price - Ascending</option>
-                <option>Sort By Price - Descending</option>
+                <option onSelect={() => setNewSortingAlgorithm(ProductSortingAlgorithm.Relevance)}>Sort By Revelance</option>
+                <option onSelect={() => setNewSortingAlgorithm(ProductSortingAlgorithm.PriceAscending)}>Sort By Price - Ascending</option>
+                <option onSelect={() => setNewSortingAlgorithm(ProductSortingAlgorithm.PriceDescending)}>Sort By Price - Descending</option>
             </select>
             <label>Items Per Page
             <select>
@@ -110,7 +141,7 @@ function ProductsBrowser(props : Props)
     <div className={styles.mainSection}>
         <div className={styles.filtersContainer}>
             <ModelFilter onModelSelect={setSelectedModel} modelDetails={filtersData.modelDetails} />
-            <StyleFilter styles={filtersData.styles}/>
+            <StyleFilter styles={filtersData.styles} />
             <ColorFilter colors={filtersData.colors} />
             <SizeFilter sizes={filtersData.productSizes}/>
             <PriceFilter minimumPrice={filtersData.minPrice} maximumPrice={filtersData.maxPrice} />

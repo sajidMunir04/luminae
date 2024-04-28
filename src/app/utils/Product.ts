@@ -1,5 +1,3 @@
-import { CustomerReview } from "./CustomerReview"
-
 export type Product = {
     _id:            string;
     name:           string;
@@ -15,5 +13,14 @@ export type Product = {
     color:          string,
     style:          string,
     model:          string,    
-    reviews?:        string[];
+    reviews?:       ProductReview[];
 }
+
+interface ProductReview {
+    headingText: string,
+    reviewText: string,
+    reviewLikes: number,
+    reviewDislikes: number,
+    reviewerName: string,
+    rating: number
+} 

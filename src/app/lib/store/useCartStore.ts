@@ -88,9 +88,9 @@ export const useCartStore = create<State & Actions>((set,get) => ({
         }
         
         set(state => ({
-            cartProducts: state.cartProducts.filter((item) => item.product._id !== product._id),
+            cartProducts: state.cartProducts.filter((item) => item.product !== product),
             totalItems: state.totalItems - 1,
-            totalPrice: state.totalPrice - 1,
+            totalPrice: state.totalPrice - product.price,
         }));
         setCookie(dataStoreKey, JSON.stringify(get().cartProducts));
     },
