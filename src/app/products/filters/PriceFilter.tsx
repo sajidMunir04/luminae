@@ -1,3 +1,7 @@
+import FilterHeading from "./FilterHeading";
+import styles from "./PriceFilter.module.css";
+import ReactSlider from "react-slider";
+
 
 interface Props {
     minimumPrice: number,
@@ -5,22 +9,23 @@ interface Props {
 }
 
 function PriceFilter(props : Props) {
-    return (<div>
 
-        <div>
-            <div>
-                <div>
-                    <input type='number' placeholder={`$${props.minimumPrice}`} />
-                </div>
+    const handleInput = (e) => {
+
+    };    
+
+    return (<div className={styles.container}>
+        <FilterHeading headingText="PRICE"/>
+        <div className={styles.contentContainer}>
+            <div className={styles.pricefieldsContainer}>
+                <input className={styles.inputField} type='number' placeholder={`$ ${props.minimumPrice}`} />
                 <div>
 
                 </div>
-                <div>
-                    <input type='number' placeholder={`$${props.maximumPrice}`} />
-                </div>
+                <input className={styles.inputField} type='number' placeholder={`$ ${props.maximumPrice}`} />
             </div>
             <div>
-
+                
             </div>
             <div>
                 <p>Minimum:${props.minimumPrice}</p>
@@ -29,3 +34,5 @@ function PriceFilter(props : Props) {
         </div>
     </div>);
 }
+
+export default PriceFilter;

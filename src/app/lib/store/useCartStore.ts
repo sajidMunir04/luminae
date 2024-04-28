@@ -2,6 +2,7 @@ import { create } from "zustand"
 import { CartProduct } from "../../utils/CartProduct"
 import { Product } from "../../utils/Product"
 import { useState } from "react"
+import { getCookie, setCookie } from "cookies-next";
 
 interface State {
     cartProducts : CartProduct[]
@@ -10,7 +11,7 @@ interface State {
 }
 
 interface Actions {
-    fetchData: () => void
+    fetchData: () => CartProduct[]
     addToCart: (product : Product) => void
     removeFromCart: (product : Product) => void
 }
@@ -26,17 +27,24 @@ const dataStoreKey : string = 'asdavbeq2123123123123';
 export const useCartStore = create<State & Actions>((set,get) => ({
 
     fetchData: () => {
+        console.log("this is also executed");
+        const storedProductData = getCookie(dataStoreKey);
+        if (storedProductData) {
+            const cartProducts : CartProduct[] = JSON.parse(storedProductData);
+            if (cartProducts)
+                return cartProducts;
+        }
 
+        return [];
     },
 
-    cartProducts: initialState.cartProducts,
+    cartProducts: initialState.cartProducts ,
     totalItems: initialState.totalItems,
     totalPrice: initialState.totalPrice,
 
     addToCart : (product: Product) => {
-        console.log("Worked");
         let products : CartProduct[] = get().cartProducts;
-        const storedProductData = localStorage.getItem(dataStoreKey);
+        const storedProductData = getCookie(dataStoreKey);
         if (storedProductData) {
             const cartProducts : CartProduct[] = JSON.parse(storedProductData);
             if (cartProducts)
@@ -67,10 +75,8 @@ export const useCartStore = create<State & Actions>((set,get) => ({
                 totalItems: updatedProducts.length,
                 totalPrice: state.totalPrice + newProduct.totalPrice
             }))
-            localStorage.setItem(dataStoreKey, JSON.stringify(get().cartProducts));
+            setCookie(dataStoreKey, JSON.stringify(get().cartProducts));
         }
-
-        console.log("Adding Product");
     },
 
     removeFromCart: (product: Product) => {
@@ -86,6 +92,6 @@ export const useCartStore = create<State & Actions>((set,get) => ({
             totalItems: state.totalItems - 1,
             totalPrice: state.totalPrice - 1,
         }));
-        localStorage.setItem(dataStoreKey, JSON.stringify(get().cartProducts));
+        setCookie(dataStoreKey, JSON.stringify(get().cartProducts));
     },
 }))

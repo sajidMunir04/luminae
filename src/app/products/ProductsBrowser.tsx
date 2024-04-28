@@ -4,6 +4,12 @@ import SearchBar from "../shared/SearchBar";
 import { Product } from "../utils/Product";
 import Pagination from "./Pagination";
 import styles from "./ProductsBrowser.module.css";
+import ModelFilter from "./filters/ModelFilter";
+import StyleFilter from "./filters/StyleFilter";
+import SizeFilter from "./filters/SizeFilter";
+import ColorFilter from "./filters/ColorFilter";
+import PriceFilter from "./filters/PriceFilter";
+import { ModelDetail } from "./filters/ModelFilter";
 
 interface Props {
     products : Product[],
@@ -16,7 +22,7 @@ interface FiltersData {
     maxPrice: number,
     colors: string[],
     productSizes: string[],
-    models: string[],
+    modelDetails: ModelDetail[],
     styles: string[]
 }
 
@@ -25,33 +31,58 @@ function ProductsBrowser(props : Props)
     const [itemsPerPage,setItemPerPage] = useState(12);
     const [currentPage,setCurrentPage] = useState(1);
 
-    const filtersData : FiltersData = {
+    const[selectedModel,setSelectedModel] = useState('');
+    const[selectedStyle,setSelectedStyle] = useState('');
+    const[selectedColor,setSelectedColor] = useState('');
+    const[selectedSizes,setSelectedSizes] = useState(['']);
+    const[minimumPriceRange,setMinimumPrice] = useState(0);
+    const[maximumPriceRange,setMaximumPrice] = useState(0);
+
+    let filtersData : FiltersData = {
         minPrice: Number.MAX_VALUE,
         maxPrice: Number.MIN_VALUE,
         colors: [],
         productSizes: [],
-        models: [],
+        modelDetails: [],
         styles: []
     }
-    console.log(props.products.length);
+
     props.products.map((item) => {
         if (item.price < filtersData.minPrice)
             filtersData.minPrice = item.price;
 
-        if (item.price < filtersData.maxPrice)
+        if (item.price > filtersData.maxPrice)
             filtersData.maxPrice = item.price;
 
-        if (!filtersData.colors.includes('a'))
-            filtersData.colors.push('');
+        if (!filtersData.colors.includes(item.color))
+            filtersData.colors.push(item.color);
 
-        if (!filtersData.productSizes.includes('a'))
-            filtersData.colors.push('');
+        item.sizes.map(function tagChecker(tag){
+            if (!filtersData.productSizes.includes(tag)){
+                filtersData.productSizes.push(tag);
+            }
+        })
 
-        if (!filtersData.models.includes('a'))
-            filtersData.models.push('');
+        let modelAdded = false;
 
-        if (!filtersData.styles.includes('a'))
-            filtersData.styles.push('');
+        filtersData.modelDetails.forEach(function adder(model) {
+            if (model.type == item.model)
+            {
+                model.quantity++;
+                modelAdded = true;
+            }
+        })
+
+        if (!modelAdded) {
+            const modelDetail : ModelDetail = {
+                type: item.model,
+                quantity: 1
+            }
+            filtersData.modelDetails.push(modelDetail);
+        }
+
+        if (!filtersData.styles.includes(item.style))
+            filtersData.styles.push(item.style);
     })
 
     return (<div className={styles.container}>
@@ -78,7 +109,11 @@ function ProductsBrowser(props : Props)
     </div>
     <div className={styles.mainSection}>
         <div className={styles.filtersContainer}>
-            
+            <ModelFilter onModelSelect={setSelectedModel} modelDetails={filtersData.modelDetails} />
+            <StyleFilter styles={filtersData.styles}/>
+            <ColorFilter colors={filtersData.colors} />
+            <SizeFilter sizes={filtersData.productSizes}/>
+            <PriceFilter minimumPrice={filtersData.minPrice} maximumPrice={filtersData.maxPrice} />
         </div>
         <div className={styles.productsContainer}>
             <div>

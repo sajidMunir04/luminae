@@ -12,35 +12,33 @@ interface Props {
 function CartItem(props : Props)
 {
     return (<div className={styles.container}>
-        <div>
-            <div>
-                <img src={props.imageLink}/>
+        <div className={styles.productInfoContainer}>
+            <div className={styles.productImageContainer}>
+                <img className={styles.productImage} src={props.imageLink}/>
             </div>
-            <div>
-                <p>{props.productName}</p>
-                <div>
+            <div className={styles.productSpecificInfo}>
+                <p className={styles.productNameText}>{props.productName}</p>
+                <div className={styles.colorContainer}>
                     <p>Color: </p>
-                    <div className={''} style={{color : `${props.color}`}}>
+                    <div className={styles.colorMarker} style={{color : `${props.color}`}}>
                     </div>
                 </div>
             </div>
         </div>
         <div>
-            <p>{props.price}</p>
+            <p className={styles.priceText}>${props.price}</p>
+        </div>
+        <div className={styles.quantityContainer}>
+                <p className={styles.quantityButtons}>-</p>
+                <p className={styles.quantityText}>{props.quantity}</p>
+                <p className={styles.quantityButtons}>+</p>
         </div>
         <div>
-            <div className={styles.quantityContainer}>
-                <p>-</p>
-                <p>{props.quantity}</p>
-                <p>+</p>
-            </div>
-        </div>
-        <div>
-            <p>{props.totalPrice}</p>
+            <p className={styles.priceText}>${props.totalPrice}</p>
         </div>
         <div>
             <div>
-                <img src="/trash.png"/>
+                <img src="/images/product/delete.svg"/>
             </div>
         </div>
     </div>);

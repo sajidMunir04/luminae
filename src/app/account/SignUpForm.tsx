@@ -5,7 +5,11 @@ import FormInputField from "./FormInputField";
 import FormOrSection from "./FormOrSection";
 import styles from './SignUpForm.module.css';
 
-function SignUpForm()
+interface Props {
+    onAccountExists: () => void
+}
+
+function SignUpForm(props : Props)
 {
     return (<form className={styles.container}>
         <FormHeading heading="Sign Up"/>
@@ -21,6 +25,10 @@ function SignUpForm()
         </div>
         <div className={styles.formButton}>
             <FormButton text="SIGN UP"/>
+        </div>
+        <div>
+            <p>Account already exits</p>
+            <button>Sign In</button>
         </div>
     </form>);
 }

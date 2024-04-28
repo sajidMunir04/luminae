@@ -2,7 +2,15 @@
 .container{
     display: flex;
     flex-direction: column;
-    padding: 0% var(--horizontal-padding);
+    padding: 4% var(--horizontal-padding);
     margin-top: 4%; 
     justify-content: space-between;
+}
+
+.productsContainer{
+    width: 70%;
+}
+
+.orderInfoContainer{
+    
 }

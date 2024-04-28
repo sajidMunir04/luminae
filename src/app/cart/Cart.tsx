@@ -1,16 +1,19 @@
+"use client";
+
 import { useState } from "react";
 import { useCartStore } from "../lib/store/useCartStore";
 import CartItem from "./CartItem";
+import styles from "./Cart.module.css";
 
 
 function Cart() {
-    const cartProducts = useCartStore(state => state.cartProducts);
+    const cartProducts = useCartStore(state => state.fetchData());
     console.log("Products are",cartProducts);
     //const total = cartProducts.reduce((acc,product) => (acc+product.product.price * product.quantity),0);
     const [totalAmount,setTotalAmount] = useState(0);
-    return (<div>
+    return (<div className={styles.container}>
         <div>
-            <div>
+            <div className={styles.productsContainer}>
                 <p>
                     Cart
                 </p>
@@ -20,7 +23,7 @@ function Cart() {
                     }
                 </div>
             </div>
-            <div>
+            <div className={styles.orderInfoContainer}>
 
             </div>
         </div>

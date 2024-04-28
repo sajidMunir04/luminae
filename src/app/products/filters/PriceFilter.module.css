@@ -1,0 +1,28 @@
+.container{
+    width: 90%;
+    height: 200px;
+}
+
+.contentContainer{
+    width: 100%;
+    height: 90%;
+}
+
+.inputField{
+    appearance: textfield;
+    width: 42%;
+    height: 100%;
+    text-align: center;
+}
+
+.inputField::before{
+    content: '$';
+}
+
+.pricefieldsContainer{
+    height: 28%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

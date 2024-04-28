@@ -1,18 +1,18 @@
 import { Db, MongoClient } from 'mongodb';
-import { Product } from '../../../src/app/utils/Product';
 
 export default async function handler(req, res) {
+  res.setHeader('Cache-Control', 'no-store');
   const { slug } = req.query;
-  const [product, productCategory] = slug;
+  const [query] = slug;
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {
     await client.connect();
     const db : Db = client.db('Products');
     const collection = db.collection('products');
     const data = await collection.aggregate(
-      [ 
-        { $match : { 'section' : product,  'category' : productCategory } }
-      ]
+        [ 
+          { $match : { 'category' : query , 'brandName' : query , 'name' : query } }
+        ]
     ).toArray();
     res.status(200).json(data);
   } catch (error) {
@@ -22,3 +22,4 @@ export default async function handler(req, res) {
     await client.close();
   }
 }
+

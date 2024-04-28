@@ -2,10 +2,80 @@
 .container{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 120px;
+    align-items: center;
 }
 
 .quantityContainer{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border: 2px solid #C4C4C4;
+    border-radius: 4px;
+    width: 16%;
+    align-items: center;
+    padding: 2% 4%;
+    height: 24%;
+    box-sizing: border-box;
+}
+
+.productInfoContainer{
+    width: 28%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.quantityButtons{
+    font-size: 32px;
+    margin: 0%;
+}
+
+.quantityText{
+    font-size: 22px;
+    margin: 0%;
+    text-align: center;
+}
+
+.productSpecificInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.priceText{
+    font-family: Lato-Regular;
+    font-size: 14px;
+}
+
+.productImageContainer{
+    width: 32%;
+}
+
+.productNameText{
+    text-transform: capitalize;
+    margin-bottom: 0%;
+}
+
+.colorContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    line-height: 14px;
+}
+
+.colorMarker{
+    width: 18px;
+    height: 18px;
+    background-color: brown;
+    border-radius: 50px;
+}
+
+.productImage{
+    max-width: 100%;
+    max-height: 100%;
 }
