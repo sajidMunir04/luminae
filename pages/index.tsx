@@ -1,8 +1,7 @@
 import '../src/app/globals.css';
 import '../src/app/fonts.css';
 import HeaderTemplate from "../src/app/shared/HeaderTemplate";
-import StoreInteractionContainer from "../src/app/shared/StoreInteractionContainer";
-import ProductsCategoryBrowser from "../src/app/shared/ProductsCategoryBrowser";
+import StoreInteractionContainer from "../src/app/shared/ProductCategoriesManager";
 import MainBanner from "../src/app/home/MainBanner";
 import FlashSaleLayout from "../src/app/home/FlashSaleLayout";
 import TrendingProductsLayout from "../src/app/home/TrendingProductsLayout";
@@ -17,7 +16,6 @@ function Home() {
   return (<>
       <HeaderTemplate/>
       <StoreInteractionContainer/>
-      <ProductsCategoryBrowser/>
       <MainBanner/>
       <FlashSaleLayout/>
       <TrendingProductsLayout/>

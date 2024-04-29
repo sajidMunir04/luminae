@@ -1,17 +1,17 @@
-"use client";
-
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import styles from './ProductsCategoryBrowser.module.css';
+import Link from 'next/link';
+import styles from './ProductCategoriesManager.module.css';
+import { useContext, useEffect, useState } from 'react';
 import { ProductSection, ProductsContext } from '../utils/ProductsContext';
+import { useStore } from 'zustand';
+import { useCartStore } from '../lib/store/useCartStore';
 import ProductSubCatrgories from '../products/ProductSubCategories';
-
 
 interface ProductClassifcation {
     section: string,
     category: string
 }
 
-function ProductsCategoryBrowser()
+function ProductCategoriesManager()
 {
     const [isHovered,setHoverState] = useState(false);
     let allProductSections : ProductSection[] = [];
@@ -25,9 +25,7 @@ function ProductsCategoryBrowser()
         const fetchData = async () => {
             try {
                 const response = await fetch('/api/fetchProductsClassifcation');
-                console.log(response);
                 const data = await response.json();
-                console.log(data);
                 const products: ProductClassifcation[] = data.map((item: ProductClassifcation) => ({
                     category: item.category,
                     section: item.section
@@ -62,13 +60,22 @@ function ProductsCategoryBrowser()
           fetchData();
           
     },[])
+
     return (<div className={styles.container}>
-        {productSections.map((item) => (
-         <div key={item.productSection}>
-            <div onMouseOver={() =>setHoverState(true)}><p key={item.productSection + 'as'}>{item.productSection}</p></div>
-            {isHovered && <ProductSubCatrgories mainCategory={item.productSection} onMouseLeave={() =>setHoverState(false)}  categories={item.subCategories} />}</div>
-        ))}
+            <div className={styles.categoriesButton}>
+                <div>
+                    
+                </div>
+                <p>All Categories</p>
+            </div>
+            <div className={styles.catergoriesSection}>
+            {productSections.map((item) => (
+                <div key={item.productSection}>
+                    <div onMouseEnter={() =>setHoverState(true)} onMouseUp={() => setHoverState(false)}><p key={item.productSection + 'as'}>{item.productSection}</p></div>
+                    {isHovered && <ProductSubCatrgories mainCategory={item.productSection} onMouseLeave={() =>setHoverState(false)}  categories={item.subCategories} />}</div>
+                ))}
+            </div>
     </div>);
 }
 
-export default ProductsCategoryBrowser;
+export default ProductCategoriesManager;

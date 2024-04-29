@@ -5,13 +5,16 @@
     background-color: black;
     color: white;
     padding: 0% var(--horizontal-padding) 0% var(--horizontal-padding);
-    height: 100px;
+    height: 36px;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .categoriesButton{
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 18%;
 }
 
 .catergoriesSection{
@@ -19,15 +22,9 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    width: 30%;
+    width: 80%;
 }
 
-.buttons{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 30%;
-}
 
 .selectOption{
     border: none;
@@ -38,16 +35,7 @@
     font-size: 14px;
 }
 
-.button{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    font-family: Lato-Regular;
-    font-size: 16px;
-}
+
 
 .promotionSection{
     display: flex;

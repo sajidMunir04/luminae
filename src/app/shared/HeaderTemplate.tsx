@@ -3,6 +3,8 @@ import styles from './HeaderTemplate.module.css';
 import { ProductsContext } from '../utils/ProductsContext';
 import ProductsBrowser from '../products/ProductsBrowser';
 import router from 'next/router';
+import { useStore } from 'zustand';
+import { useCartStore } from '../lib/store/useCartStore';
 
 
 
@@ -10,6 +12,12 @@ function HeaderTemplate()
 {
     const {products, productSections } = useContext(ProductsContext);
     const [inputValue, setInputValue] = useState<string>('');
+    const [cartItemsCount,setCartItemCount] = useState(useStore(useCartStore,state => state.totalItems));4
+    const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.totalItems)}
+    ); 
+
+
+    subscribe();    
 
     const onSearchButtonClick = () => {
         router.push(inputValue);
@@ -45,12 +53,21 @@ function HeaderTemplate()
                 </select>
                 <button onClick={onSearchButtonClick}  className={styles.searchButton} type="submit"><img src={'/images/magnifier.svg'}/></button>
             </form>
-            <nav className={styles.navArea}>
-                    <a className={styles.link} href='/admin'>Admin</a>
-                    <a className={styles.link} href='#'>Blog</a>
-                    <a className={styles.link} >Contact Us</a>
-                    <a className={styles.link} >Help & Support</a>
-            </nav>
+            <div className={styles.buttons}>
+                <a className={styles.button} href={'/account'}>
+                <img className={styles.btnImage} src="/IconSign in.png"/>
+                <p>Sign in</p>
+                </a>
+                <a className={styles.button}>
+                    <img className={styles.btnImage} src="/Favorides.png"/>
+                    <p>Favorites</p>
+                </a>
+                <a className={styles.button} href='/cart'>
+                    <img className={styles.btnImage} src="/card.png"/>
+                    <p>Cart</p>
+                    <p>{cartItemsCount}</p>
+                </a>
+            </div>
         <div>
             <div className={styles.socialLinkSection}>
                 <img src={'/Instagram.png'}/>

@@ -1,4 +1,4 @@
-import ProductDisplayLayoutHeader from './ProductDisplayLayoutHeader';
+import ProductDisplayLayoutHeader from "./ProductDisplayLayoutHeader";
 import TrendingProductDisplayCard from '../products/TrendingProductDisplayCard';
 import styles from './TrendingProductsLayout.module.css';
 

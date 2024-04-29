@@ -21,9 +21,28 @@ function ProductPage(props : Props) : JSX.Element {
       // We will use React useRef hook to reference the wrapping div:
     const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
     const { events } = useDraggable(ref, {
-        applyRubberBandEffect: true
+        applyRubberBandEffect: false
     }); // Now we pass the reference to the useDraggable hook:
-
+    const [isDragging, setIsDragging] = useState(false);
+    const [startY, setStartY] = useState(0);
+    const [scrollTop, setScrollTop] = useState(0);
+  
+    const handleMouseDown = (e) => {
+      setIsDragging(true);
+      setStartY(e.pageY - e.currentTarget.offsetTop);
+      setScrollTop(e.currentTarget.scrollTop);
+    };
+  
+    const handleMouseMove = (e) => {
+      if (!isDragging) return;
+      const y = e.pageY - e.currentTarget.offsetTop;
+      const walk = (y - startY) * 2; // Adjust the speed of scrolling
+      e.currentTarget.scrollTop = scrollTop - walk;
+    };
+  
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
 
     return (<div className={styles.container}>
         <div className={styles.linkHierarchyContainer}>
@@ -41,42 +60,38 @@ function ProductPage(props : Props) : JSX.Element {
                 </div>
             </div>
             <div className={styles.productDetails}>
-                <h2 className={styles.productName}>{props.product.name}</h2>
-                <p className={styles.productPrice}>${props.product.price}</p>
-                <div>
+                <div className={styles.productDetailHeader}>
+                     <div className={styles.productHeadInfoContainer}>
+                        <h2 className={styles.productName}>{props.product.name}</h2>
+                        <p className={styles.productPrice}>${props.product.price}</p>
+                     </div>
+                     <div className={styles.productFavoriteButton}>
+                        <img src="/images/product/emptyHeart.svg"/>
+                     </div>
+                </div>
+                <div className={styles.detailContainer}>
                     <p className={styles.infoText}>Size</p>
-                    <div>
-                        
+                    <div className={styles.sizesContainer}>
+                        {props.product.sizes.map((item) => (
+                            <p className={styles.sizeTag}>{item}</p>
+                        ))}
                     </div>
                 </div>
-                <div>
+                <div className={styles.detailContainer}>
                     <p className={styles.infoText}>Color</p>
                     <div>
-
+                        {<div className={styles.colorMarker} style={{backgroundColor: `${props.product.color}`}}></div>}
                     </div>
                 </div>
-                <div>
-                    <p className={styles.infoText}>Shipping</p>
-                    <div>
-
-                    </div>
-                </div>
-                <div className={styles.quantityContainer}>
+                <div className={styles.detailContainer}>
                     <p className={styles.infoText}>Quantity</p>
-                    <div>
-                    <QuantityManagingCard quantity={1} setQuantity={function (quantity: number): void {} }/>
-                    </div>
-                    <div>
-
-                    </div>
-                </div>
-                <div className={styles.insuranceSection}>
-                    <p className={styles.totalPriceText}>${props.product.price}</p>
-                    <div>
+                    <div className={styles.detailContainerContent}>
+                        <div className={styles.quantityContainer}>
+                            <QuantityManagingCard quantity={1} setQuantity={function (quantity: number): void {} }/>
+                        </div>
                         <div>
 
                         </div>
-                        <p>Add shipping insurance for $9( declared value  only if the package gets lost, stolen or damaged.)</p>
                     </div>
                 </div>
                 <div className={styles.buttonContainer}>
@@ -87,10 +102,9 @@ function ProductPage(props : Props) : JSX.Element {
             </div>
         </div>
         <div className={styles.productInfoSection}>
-            <div className={styles.buttonContainer}>
+            <div className={styles.detailButtonContainer}>
                 <button className={styles.detailSectionButton} type='button'>PRODUCT DETAILS</button>
                 <button className={styles.detailSectionButton} type='button'>REVIEWS</button>
-                <button className={styles.detailSectionButton} type='button'>SHIPPING & PAYMENT</button>
             </div>
             <div>
                 <div className={styles.productDetailSection}>

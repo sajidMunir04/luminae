@@ -3,18 +3,14 @@ import styles from './ProductCategoryCard.module.css';
 function ProductCategoryCard(props)
 {
     return (<div className={styles.container}>
-        <div>
-            <div>
-            <p>
+        <div className={styles.contentSection}>
+            <p className={styles.headingText}>
                 {props.categoryInfo}
             </p>
-            <p>
+            <p className={styles.detailText}>
                 {props.itemsDetail}
             </p>
-            </div>
-            <div>
-                <a href={props.link}>Explore All Category</a>
-            </div>
+            <a className={styles.link} href={props.link}>Explore All Category</a>
         </div>
         <div>
             <img src='/Rectangle 1078.png'/>

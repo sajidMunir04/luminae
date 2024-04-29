@@ -20,10 +20,10 @@ function ProductSubCatrgories(props : Props)
       };
     
 
-    return (<div className={styles.container}>
+    return (<div onMouseLeave={props.onMouseLeave} className={styles.container}>
         {props.categories.map((item) => (
-            <a className={styles.categoryLink} onClick={()=>{handleCategoryClick(props.mainCategory + '/' + item)}} 
-            key={item} href={props.mainCategory + '/' + item}>{item}</a>
+            <a className={styles.categoryLink} onClick={()=>{handleCategoryClick('http://localhost:3000/' + props.mainCategory + '/' + item)}} 
+            key={item} href={'http://localhost:3000/' + props.mainCategory + '/' + item}>{item}</a>
         ))}
     </div>);
 }

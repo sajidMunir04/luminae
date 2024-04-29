@@ -41,6 +41,29 @@
     font-size: 14px;
 }
 
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 30%;
+}
+
+.button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-family: Lato-Regular;
+    font-size: 16px;
+}
+
+.btnImage{
+    color: black;
+    filter: invert();
+}
+
 .searchInput{
     text-decoration: none;
     border: none;

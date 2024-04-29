@@ -4,7 +4,7 @@ import ProductPage from "../../src/app/products/ProductPage";
 import ProductsBrowser from "../../src/app/products/ProductsBrowser";
 import FooterTemplate from "../../src/app/shared/FooterTemplate";
 import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
-import StoreInteractionContainer from "../../src/app/shared/StoreInteractionContainer";
+import StoreInteractionContainer from "../../src/app/shared/ProductCategoriesManager";
 import { ProductSection, ProductsContext} from "../../src/app/utils/ProductsContext";
 import NoProductFound from "../../src/app/products/NoProductFound";
 import { Product } from "../../src/app/utils/Product";

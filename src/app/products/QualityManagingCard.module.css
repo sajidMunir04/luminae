@@ -5,10 +5,10 @@
     justify-content: space-between;
     border: 2px solid #C4C4C4;
     border-radius: 4px;
-    width: 12%;
+    width: 100%;
     align-items: center;
     padding: 1% 2%;
-    height: 40%;
+    height: 100%;
     box-sizing: border-box;
     align-items: center;
 }

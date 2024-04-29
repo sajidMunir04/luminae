@@ -1,4 +1,34 @@
 .container{
     display: flex;
     flex-direction: row;
+    color: white;
+}
+
+.contentSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: start;
+    background-color:blueviolet;
+    padding-left: 3%;
+}
+
+.headingText{
+    font-family: Lato-ExtraBold;
+    font-size: 36px;
+    margin-bottom: 0%;
+}
+
+.detailText{
+    margin-top: 4%;
+    font-family: Lato-Regular;
+    font-size: 28px;
+}
+
+.link{
+    font-family: Lato-Regular;
+    font-size: 20px;
+    line-height: 22px;  
+    border-bottom: 2px solid white;
 }
