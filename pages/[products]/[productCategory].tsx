@@ -4,7 +4,6 @@ import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import ProductsManager, { ProductSection, ProductsContext } from "../../src/app/utils/ProductsContext";
 import FooterTemplate from "../../src/app/shared/FooterTemplate";
 import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
-import ProductsCategoryBrowser from "../../src/app/shared/ProductsCategoryBrowser";
 import StoreInteractionContainer from "../../src/app/shared/ProductCategoriesManager";
 import ProductsBrowser from "../../src/app/products/ProductsBrowser";
 import ProductPage from "../../src/app/products/ProductPage";

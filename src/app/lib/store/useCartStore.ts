@@ -5,93 +5,112 @@ import { useState } from "react"
 import { getCookie, setCookie } from "cookies-next";
 
 interface State {
-    cartProducts : CartProduct[]
-    totalItems: number,
-    totalPrice: number
+    cartData : CartData
 }
 
 interface Actions {
-    fetchData: () => CartProduct[]
+    fetchData: () => CartData
     addToCart: (product : Product) => void
     removeFromCart: (product : Product) => void
 }
 
+interface CartData {
+    productsInfo: ProductInfo[],
+    totalItems: number,
+    totalPrice: number
+}
+
+interface ProductInfo{
+    id: string,
+    quantity: number
+}
+
 const initialState : State = {
-    cartProducts: [],
+    cartData: {
+        productsInfo: [],
+        totalItems: 0,
+        totalPrice: 0
+    }
+}
+
+const defaultData : CartData ={
+    productsInfo: [],
     totalItems: 0,
     totalPrice: 0
 }
 
-const dataStoreKey : string = 'asdavbeq2123123123123';
+const dataStoreKey : string = 'cart_products_ids';
 
 export const useCartStore = create<State & Actions>((set,get) => ({
+    cartData: initialState.cartData,
 
     fetchData: () => {
-        console.log("this is also executed");
         const storedProductData = getCookie(dataStoreKey);
         if (storedProductData) {
-            const cartProducts : CartProduct[] = JSON.parse(storedProductData);
+            const cartProducts : CartData = JSON.parse(storedProductData);
             if (cartProducts)
+            {
                 return cartProducts;
+            }
         }
 
-        return [];
+        return defaultData;
     },
 
-    cartProducts: initialState.cartProducts ,
-    totalItems: initialState.totalItems,
-    totalPrice: initialState.totalPrice,
-
     addToCart : (product: Product) => {
-        let products : CartProduct[] = get().cartProducts;
+        let storedProducts : CartData = {
+            productsInfo: [],
+            totalItems: 0,
+            totalPrice: 0
+        };
         const storedProductData = getCookie(dataStoreKey);
         if (storedProductData) {
-            const cartProducts : CartProduct[] = JSON.parse(storedProductData);
-            if (cartProducts)
-                products = cartProducts;
+            const cartData : CartData = JSON.parse(storedProductData);
+            if (cartData)
+                storedProducts = cartData;
         }
-        const cartProduct = products.find((item) => item.product._id === product._id);
 
-        if (cartProduct)
+        const productInCart = storedProducts.productsInfo.find((item) => item.id  === product._id);
+
+        if (productInCart)
         {
-            const updatedProducts : CartProduct[] = products.map((item) => 
-                (item.product._id == product._id ? item : item));
-            
-            set(state => ({
-                cartProducts: updatedProducts,
-                totalItems: state.totalItems + 1,
-                totalPrice: state.totalPrice + product.price
-            }))
+            productInCart.quantity = productInCart.quantity + 1;
+            storedProducts.totalItems++;
+            storedProducts.totalPrice += product.price;
         }
         else{
-            const newProduct : CartProduct = {
-                product: product,
-                quantity: 1,
-                totalPrice: product.price
+            const newProduct : ProductInfo = {
+                id: product._id,
+                quantity: 1
             }
-            const updatedProducts = [...products,newProduct];
-            set (state => ({
-                cartProducts: updatedProducts,
-                totalItems: updatedProducts.length,
-                totalPrice: state.totalPrice + newProduct.totalPrice
-            }))
-            setCookie(dataStoreKey, JSON.stringify(get().cartProducts));
+
+            storedProducts.productsInfo.push(newProduct);
         }
+
+        set(state => ({
+            cartData: storedProducts
+        }))
+
+        setCookie(dataStoreKey, JSON.stringify(storedProducts));
     },
 
     removeFromCart: (product: Product) => {
-        let products : CartProduct[] = get().cartProducts;
-        const storedProductData = localStorage.getItem(dataStoreKey);
+        let products : CartData = {
+            productsInfo: [],
+            totalItems: 0,
+            totalPrice: 0
+        };
+        const storedProductData = getCookie(dataStoreKey);
         if (storedProductData) {
-            const cartProducts : CartProduct[] = JSON.parse(storedProductData);
+            const cartProducts : CartData = JSON.parse(storedProductData);
             products = cartProducts;
         }
-        
+
+        const filteredProductsData : ProductInfo[] = products.productsInfo.filter((item) => item.id !== product._id);
+        products.productsInfo = filteredProductsData;
         set(state => ({
-            cartProducts: state.cartProducts.filter((item) => item.product !== product),
-            totalItems: state.totalItems - 1,
-            totalPrice: state.totalPrice - product.price,
+            cartData: products
         }));
-        setCookie(dataStoreKey, JSON.stringify(get().cartProducts));
+        setCookie(dataStoreKey, JSON.stringify(products));
     },
 }))
