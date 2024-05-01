@@ -5,23 +5,45 @@ import { useState } from "react"
 import { getCookie, setCookie } from "cookies-next";
 
 interface State {
-    products : Product[]
+    products : FavoritesProductData[]
+}
+
+interface FavoritesProductData{
+    productId: string
 }
 
 interface Actions {
-    fetchData: () => Product[]
+    fetchData: () => FavoritesProductData[]
     addToFavorites: (product : Product) => void
     removeFromFavorites: (product : Product) => void
+    isAddedToFavorites: (productId: string ) => boolean
 }
-const dataStoreKey : string = 'asdavbeq2123123123123';
+const dataStoreKey : string = 'favorite_product_data';
 
 export const useFavoritesStore = create<State & Actions>((set,get) => ({
 
-    fetchData: () => {
-        console.log("this is also executed");
+    isAddedToFavorites : (productId:string) => {
         const storedProductData = getCookie(dataStoreKey);
         if (storedProductData) {
-            const products : Product[] = JSON.parse(storedProductData);
+            const products : FavoritesProductData[] = JSON.parse(storedProductData);
+            if (products)
+            {
+                for (let i = 0; i < products.length; i++)
+                {
+                    if (products[i].productId === productId)
+                        {
+                            return true;
+                        }
+                }
+            }
+        }
+        return false;
+    },
+
+    fetchData: () => {
+        const storedProductData = getCookie(dataStoreKey);
+        if (storedProductData) {
+            const products : FavoritesProductData[] = JSON.parse(storedProductData);
             if (products)
                 return products;
         }
@@ -32,21 +54,23 @@ export const useFavoritesStore = create<State & Actions>((set,get) => ({
     products: [],
 
     addToFavorites : (product: Product) => {
-        let products : Product[] = get().products;
+        let storedProducts : FavoritesProductData[] = [];
         const storedProductData = getCookie(dataStoreKey);
         if (storedProductData) {
-            const cartProducts : Product[] = JSON.parse(storedProductData);
+            const cartProducts : FavoritesProductData[] = JSON.parse(storedProductData);
             if (cartProducts)
-                products = cartProducts;
+                storedProducts = cartProducts;
         }
-        const cartProduct = products.find((item) => item._id === product._id);
+        const cartProduct = storedProducts.find((item) => item.productId === product._id);
 
         if (!cartProduct)
         {
-            const updatedProducts : Product[] = [...products,product];
+            storedProducts.push({
+                productId: product._id
+            })
             
             set(state => ({
-                products: updatedProducts
+                products: storedProducts
             }))
 
             setCookie(dataStoreKey, JSON.stringify(get().products));
@@ -54,16 +78,16 @@ export const useFavoritesStore = create<State & Actions>((set,get) => ({
     },
 
     removeFromFavorites: (product: Product) => {
-        let existingProducts : Product[] = get().products;
+        let existingProducts : FavoritesProductData[] = [];
         const storedProductData = localStorage.getItem(dataStoreKey);
         if (storedProductData) {
-            const cartProducts : Product[] = JSON.parse(storedProductData);
+            const cartProducts : FavoritesProductData[] = JSON.parse(storedProductData);
             existingProducts = cartProducts;
         }
 
         if (existingProducts.length > 0)
         {
-            existingProducts = existingProducts.filter((item) => item._id !== product._id);
+            existingProducts = existingProducts.filter((item) => item.productId !== product._id);
             set(state => ({
                 products: existingProducts
             }));

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Product } from '../utils/Product';
 import styles from './ProductDisplayCard.module.css';
 import { useFavoritesStore } from '../lib/store/useFavoritesStore';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Props{
     product: Product,
@@ -13,8 +13,15 @@ function ProductDisplayCard(props : Props)
 {
     const addToFavorites = useFavoritesStore(state => state.addToFavorites);
     const removeFromFavorites = useFavoritesStore(state => state.removeFromFavorites);
+    const isAddedToFavorites = useFavoritesStore(state => state.isAddedToFavorites);
 
     const[favoriteStatus,setFavoriteStatus] = useState(false);
+
+    useEffect (() => {
+        if (isAddedToFavorites(props.product._id)){
+            setFavoriteStatus(true);
+        }
+    },[])
 
     const handleProductFavorite = () => {
         if (favoriteStatus === false)
