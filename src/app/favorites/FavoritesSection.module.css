@@ -1,0 +1,19 @@
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 4%;
+}
+
+.contentContainer{
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.filtersContainer{
+    width: 28%;
+}

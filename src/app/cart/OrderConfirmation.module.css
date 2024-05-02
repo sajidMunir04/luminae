@@ -1,0 +1,25 @@
+.container{
+
+}
+
+.shoppingItemSection{
+    border-bottom: 2px solid #D9D9D9;
+}
+
+.serviceSection{
+    border-bottom: 2px solid #D9D9D9;
+}
+
+.infoContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.serviceDetailContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

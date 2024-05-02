@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 
 interface Props{
     product: Product,
-    onClick: (product : Product) => void
+    onClick: (product : Product) => void,
+    onRemoveFromFavorites?: (product: Product) => void
 }
 
 function ProductDisplayCard(props : Props)
@@ -30,8 +31,9 @@ function ProductDisplayCard(props : Props)
             setFavoriteStatus(true);
         }
         else{
-            removeFromFavorites(props.product);
             setFavoriteStatus(false);
+            props.onRemoveFromFavorites?.(props.product);
+            removeFromFavorites(props.product);
         }
     }
 
@@ -72,8 +74,8 @@ function ProductDisplayCard(props : Props)
             </div>
             <div onClick={handleProductFavorite}  className={styles.favButtonSection}>
                 <div>
-                    {!favoriteStatus && <img src="images/product/error.svg"/>}
-                    {favoriteStatus && <img src="images/product/redHeart.svg"/>}                     
+                    {!favoriteStatus && <img src="/images/product/emptyHeart.svg"/>}
+                    {favoriteStatus && <img src="/images/product/redHeart.svg"/>}                     
                 </div>
             </div>
         </div>

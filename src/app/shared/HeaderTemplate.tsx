@@ -1,6 +1,5 @@
 import { useContext, useRef, useState } from 'react';
 import styles from './HeaderTemplate.module.css';
-import { ProductsContext } from '../utils/ProductsContext';
 import ProductsBrowser from '../products/ProductsBrowser';
 import router from 'next/router';
 import { useStore } from 'zustand';
@@ -10,10 +9,9 @@ import { useCartStore } from '../lib/store/useCartStore';
 
 function HeaderTemplate()
 {
-    const {products, productSections } = useContext(ProductsContext);
     const [inputValue, setInputValue] = useState<string>('');
-    const [cartItemsCount,setCartItemCount] = useState(useStore(useCartStore,state => state.totalItems));4
-    const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.totalItems)}
+    const [cartItemsCount,setCartItemCount] = useState(useStore(useCartStore,state => state.cartData.totalItems));
+    const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.cartData.totalPrice)}
     ); 
 
 
@@ -58,7 +56,7 @@ function HeaderTemplate()
                 <img className={styles.btnImage} src="/IconSign in.png"/>
                 <p>Sign in</p>
                 </a>
-                <a className={styles.button}>
+                <a className={styles.button} href={'/favorites'}>
                     <img className={styles.btnImage} src="/Favorides.png"/>
                     <p>Favorites</p>
                 </a>

@@ -20,6 +20,8 @@
     "pg": "^8.11.5",
     "react": "^18",
     "react-dom": "^18",
+    "react-flag-kit": "^1.1.1",
+    "react-select": "^5.8.0",
     "react-slider": "^2.0.6",
     "react-use": "^17.5.0",
     "react-use-draggable-scroll": "^0.4.7",

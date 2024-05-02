@@ -1,0 +1,14 @@
+.container{
+    width: 100%;
+}
+
+.nameFieldsContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nameField{
+    width: 48%;
+}

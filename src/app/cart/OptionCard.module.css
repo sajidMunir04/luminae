@@ -1,0 +1,23 @@
+.container{
+    background-color: #F5F5F5;
+    border-radius: 6px;
+
+}
+
+.containerSelected{
+    background-color: #E9E9E9;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkBox{
+    position: absolute;
+    top: 0%;
+    left: 10%;
+    border: 2px solid #D9D9D9;
+}
