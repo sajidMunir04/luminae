@@ -1,11 +1,10 @@
 .container{
     background-color: #F5F5F5;
     border-radius: 6px;
-    padding: 2% 6%;
+    padding: 2% 7%;
     box-sizing: border-box;
     margin-bottom: 4%;
-    height: max-content;
-    position: relative;
+    height: 150px;
 }
 
 .containerSelected{
@@ -17,14 +16,16 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    height: 30%;
 }
 
 .checkBox{
     width: 18px;
     height: 18px;
     position: absolute;
-    top: 35%;
-    left: 0%;
+    top: 32%;
+    left: -7%;
     border: 2px solid #D9D9D9;
     border-radius: 50px;
     box-sizing: border-box;
@@ -32,4 +33,9 @@
 
 .checkBoxSelected{
     border: 6px solid #4172DC;
+}
+
+.infoText{
+    white-space: pre-wrap;
+    height: 62%;
 }

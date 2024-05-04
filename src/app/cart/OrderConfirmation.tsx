@@ -7,9 +7,11 @@ import styles from "./OrderConfirmation.module.css";
 function OrderConfirmation(props: Props) {
     return (<div className={styles.container}>
         <div className={styles.shoppingItemSection}>
-            <p>Shopping Items</p>
-            <div>
-                {props.orderData.cartProducts.length > 0 && props.orderData.cartProducts.map((product) => <OrderItem cartProduct={product}/>)}
+            <p>Cart Items</p>
+            <div className={styles.orderProductsContainerParent}>
+                <div className={styles.orderProductsContainer}>
+                    {props.orderData.cartProducts.map((product) => <OrderItem cartProduct={product}/>)}
+                </div>
             </div>
         </div>
         <div className={styles.serviceSection}>

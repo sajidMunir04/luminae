@@ -7,8 +7,8 @@ interface Props {
 
 function QuantityManagingCard(props : Props) {
 
-    return (<div onClick={() => {}} className={styles.quantityContainer}>
-        <button className={styles.quantityButtons} onClick={() => {props.quantity > 1 && props.setQuantity(props.quantity - 1)}}>-</button>
+    return (<div className={styles.quantityContainer}>
+        <button className={styles.quantityButtons} onClick={() => {props.setQuantity(props.quantity - 1)}}>-</button>
         <p className={styles.quantityText}>{props.quantity}</p>
         <button className={styles.quantityButtons} onClick={() => props.setQuantity(props.quantity + 1)}>+</button>
             </div>);

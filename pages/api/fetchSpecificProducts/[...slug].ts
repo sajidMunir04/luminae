@@ -6,8 +6,7 @@ export default async function handler(req, res) {
   const { slug } = req.query;
   const [productsId] = slug;
   let allProductsId : ObjectId[] = productsId.split(',');
-  allProductsId = allProductsId.map((el) => {return new mongoose.Types.ObjectId(el)._id })
-  console.log(allProductsId);
+  allProductsId = allProductsId.map((el) => {return new mongoose.Types.ObjectId(el)._id });
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {
     await client.connect();

@@ -6,45 +6,46 @@ import styles from './CartItem.module.css';
 import { CartProduct } from './CartProduct';
 
 interface Props {
-    cartProduct: CartProduct
+    product: Product,
+    quantity: number,
+    onProductQuantityChange: (product: Product,quantity: number) => void,
     onProductRemove: (product: Product) => void
 }
 
 function CartItem(props : Props)
 {
     const removeCartProduct = useCartStore(state => state.removeFromCart);
-    const [quantity,setQuantity] = useState(props.cartProduct.quantity);
+    const [quantity,setQuantity] = useState(props.quantity);
 
     const setTheQuantity = (quantity : number) => {
         setQuantity(quantity);
-        props.cartProduct.quantity = quantity;
-        console.log("Worked");
+        props.onProductQuantityChange(props.product,quantity);
     }
 
     const removeProduct =() => {
-        removeCartProduct(props.cartProduct.product);
-        props.onProductRemove(props.cartProduct.product);
+        removeCartProduct(props.product);
+        props.onProductRemove(props.product);
     }
 
     return (<div className={styles.container}>
         <div className={styles.productInfoContainer}>
             <div className={styles.productImageContainer}>
-                <img className={styles.productImage} src={props.cartProduct.product.images[0]}/>
+                <img className={styles.productImage} src={props.product.images[0]}/>
             </div>
             <div className={styles.productSpecificInfo}>
-                <p className={styles.productNameText}>{props.cartProduct.product.name}</p>
+                <p className={styles.productNameText}>{props.product.name}</p>
                 <div className={styles.colorContainer}>
                     <p>Color: </p>
-                    <div className={styles.colorMarker} style={{color : `${props.cartProduct.product.color}`}}>
+                    <div className={styles.colorMarker} style={{color : `${props.product.color}`}}>
                     </div>
                 </div>
             </div>
         </div>
-        <p className={styles.priceText}>${props.cartProduct.product.price}</p>
+        <p className={styles.priceText}>${props.product.price}</p>
         <div className={styles.quantityContainer}>
-            <QuantityManagingCard quantity={quantity} setQuantity={() => {setTheQuantity}}/>
+            <QuantityManagingCard quantity={quantity} setQuantity={setTheQuantity}/>
         </div>
-        <p className={styles.priceText}>${props.cartProduct.product.price * quantity}</p>
+        <p className={styles.priceText}>${props.product.price * quantity}</p>
         <div>
             <div onClick={removeProduct}>
                 <img src="/images/product/delete.svg"/>

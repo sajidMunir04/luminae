@@ -13,5 +13,5 @@ export interface OrderData{
     country: string;
     region: string;
     address: string;
-    phoneNumber: number;
+    phoneNumber: string;
 }
