@@ -9,7 +9,7 @@ function OrderConfirmation(props: Props) {
         <div className={styles.shoppingItemSection}>
             <p>Shopping Items</p>
             <div>
-                {props.orderData.cartProducts.map((product) => <OrderItem cartProduct={product}/>)}
+                {props.orderData.cartProducts.length > 0 && props.orderData.cartProducts.map((product) => <OrderItem cartProduct={product}/>)}
             </div>
         </div>
         <div className={styles.serviceSection}>

@@ -6,10 +6,11 @@ interface Props {
 }
 
 function QuantityManagingCard(props : Props) {
-    return (<div className={styles.quantityContainer}>
-        <p className={styles.quantityButtons}>-</p>
+
+    return (<div onClick={() => {}} className={styles.quantityContainer}>
+        <button className={styles.quantityButtons} onClick={() => {props.quantity > 1 && props.setQuantity(props.quantity - 1)}}>-</button>
         <p className={styles.quantityText}>{props.quantity}</p>
-        <p className={styles.quantityButtons}>+</p>
+        <button className={styles.quantityButtons} onClick={() => props.setQuantity(props.quantity + 1)}>+</button>
             </div>);
 }
 

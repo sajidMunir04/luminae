@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { useCartStore } from "../lib/store/useCartStore";
 import CartItem from "./CartItem";
@@ -14,20 +12,26 @@ import OrderConfirmation from "./OrderConfirmation";
 
 function Cart() {
     const cartData = useCartStore(state => state.fetchData());
-    const totalPrice = cartData.totalPrice;
-    const [totalAmount,setTotalAmount] = useState(0);
-    const [products,setProducts] = useState<CartProduct[]>();
+    const [totalAmount,setTotalAmount] = useState(cartData.totalPrice);
+    const [totalItems,setTotalItems] = useState(cartData.totalItems);
+    const [products,setProducts] = useState<CartProduct[]>([]);
     const [cartState,setCartState] = useState(CartState.Cart);
+    const [shippingCharges,setShippingCharges] = useState<number>();
+    const [taxes,setTaxes] = useState<number>();
 
     const defaultOrderData : OrderData = {
-        cartProducts: products as CartProduct[],
+        cartProducts: products,
         paymentServiceInfo: {
             paymentService: "",
-            paymentServiceImageLink: ""
+            paymentServiceImageLink: "",
+            info: ""
         },
         shippingServiceInfo: {
             shippingService: "",
-            shippingServiceImageLink: ""
+            shippingServiceImageLink: "",
+            deliveryTime: "",
+            shippingCost: 0,
+            hasInsurancePolicy: false
         },
         email: "",
         firstName: "",
@@ -116,7 +120,7 @@ function Cart() {
                 <PaymentAndShipping orderData={orderData} setOrderData={() => {setOrderData}}/>
             </>}
             {cartState === CartState.OrderConfirmation && <>
-                <OrderConfirmation orderData={orderData} setOrderData={() => {setOrderData}} products={products as CartProduct[]}/>
+                <OrderConfirmation orderData={orderData} setOrderData={() => {setOrderData}}/>
             </>}
             </div>
             <div className={styles.orderInfoContainer}>
@@ -124,7 +128,7 @@ function Cart() {
                     <p className={styles.orderBoxHeading}>Order Summary</p>
                     <div className={styles.orderFigureInfoContainer}>
                         <p className={styles.orderInfoText}>Price</p>
-                        <p className={styles.orderFigureText}>${totalPrice}</p>
+                        <p className={styles.orderFigureText}>${totalAmount}</p>
                     </div>
                     <div className={styles.orderFigureInfoContainer}>
                         <p className={styles.orderInfoText}>Shipping</p>
@@ -137,7 +141,7 @@ function Cart() {
                 </div>
                 <div className={styles.totalSection}>
                     <p>Total Price: </p>
-                    <p>${totalPrice}</p>
+                    <p>${totalAmount}</p>
                 </div>
                 <button className={styles.checkoutButton}><img className={styles.btnImage} src="/images/product/checkOut.svg"/>CHECKOUT</button>
             </div>

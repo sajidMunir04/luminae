@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import styles from './ProductCategoriesManager.module.css';
 import { useContext, useEffect, useState } from 'react';
-import { ProductSection, ProductsContext } from '../utils/ProductsContext';
 import { useStore } from 'zustand';
 import { useCartStore } from '../lib/store/useCartStore';
 import ProductSubCatrgories from '../products/ProductSubCategories';
@@ -9,6 +8,11 @@ import ProductSubCatrgories from '../products/ProductSubCategories';
 interface ProductClassifcation {
     section: string,
     category: string
+}
+
+type ProductSection = {
+    productSection : string,
+    subCategories: string[]
 }
 
 function ProductCategoriesManager()

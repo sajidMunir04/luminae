@@ -1,5 +1,11 @@
+import { Product } from "../utils/Product";
 
-function ProductSuggestCard(props)
+interface Props {
+    product : Product
+}
+
+
+function ProductSuggestCard(props : Props)
 {
     return (<div>
         <div>
@@ -7,14 +13,14 @@ function ProductSuggestCard(props)
         </div>
         <div>
             <div>
-                <p>{props.productName}</p>
+                <p>{props.product.name}</p>
             </div>
             <div>
-
+                
             </div>
-            <div>
-                <p>Add to Cart</p>
-            </div>
+            <button>
+                Add to Cart
+            </button>
         </div>
     </div>);
 }

@@ -6,7 +6,6 @@
     border: 2px solid #C4C4C4;
     border-radius: 4px;
     width: 100%;
-    align-items: center;
     padding: 1% 2%;
     height: 100%;
     box-sizing: border-box;
@@ -15,10 +14,10 @@
 
 .quantityButtons{
     font-size: 32px;
-    height: 50px;
+    border: none;
+    background: none;
 }
 
 .quantityText{
     font-size: 20px;
-    height: 30px;
 }

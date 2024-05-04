@@ -15,6 +15,12 @@ function CartItem(props : Props)
     const removeCartProduct = useCartStore(state => state.removeFromCart);
     const [quantity,setQuantity] = useState(props.cartProduct.quantity);
 
+    const setTheQuantity = (quantity : number) => {
+        setQuantity(quantity);
+        props.cartProduct.quantity = quantity;
+        console.log("Worked");
+    }
+
     const removeProduct =() => {
         removeCartProduct(props.cartProduct.product);
         props.onProductRemove(props.cartProduct.product);
@@ -36,9 +42,9 @@ function CartItem(props : Props)
         </div>
         <p className={styles.priceText}>${props.cartProduct.product.price}</p>
         <div className={styles.quantityContainer}>
-            <QuantityManagingCard quantity={props.cartProduct.quantity} setQuantity={() => {setQuantity}}/>
+            <QuantityManagingCard quantity={quantity} setQuantity={() => {setTheQuantity}}/>
         </div>
-        <p className={styles.priceText}>${props.cartProduct.product.price * props.cartProduct.quantity}</p>
+        <p className={styles.priceText}>${props.cartProduct.product.price * quantity}</p>
         <div>
             <div onClick={removeProduct}>
                 <img src="/images/product/delete.svg"/>

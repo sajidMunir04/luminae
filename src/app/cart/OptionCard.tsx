@@ -5,7 +5,9 @@ import styles from "./OptionCard.module.css";
 interface Props {
     heading: string,
     logoLink: string,
-    info: string
+    info: string,
+    onClick: (arg : any) => void,
+    selected: boolean
 }
 
 
@@ -13,9 +15,9 @@ function OptionCard(props : Props) {
 
     const [isSelected,setSelected] = useState(false);
 
-    return (<div className={styles.container}>
+    return (<div onClick={() => props.onClick} className={`${styles.container} ${props.selected && styles.containerSelected}`}>
         <div className={styles.header}>
-            <div className={styles.checkBox}>
+            <div className={`${styles.checkBox} ${props.selected && styles.checkBoxSelected}`}>
 
             </div>
             <h5>{props.heading}</h5>

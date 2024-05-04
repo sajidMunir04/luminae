@@ -1,5 +1,4 @@
 import { create } from "zustand"
-import { CartProduct } from "../../utils/CartProduct"
 import { Product } from "../../utils/Product"
 import { useState } from "react"
 import { getCookie, setCookie } from "cookies-next";
@@ -14,7 +13,7 @@ interface Actions {
     removeFromCart: (product : Product) => void
 }
 
-interface CartData {
+export interface CartData {
     productsInfo: ProductInfo[],
     totalItems: number,
     totalPrice: number
