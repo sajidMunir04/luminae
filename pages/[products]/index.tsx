@@ -4,8 +4,7 @@ import ProductPage from "../../src/app/products/ProductPage";
 import ProductsBrowser from "../../src/app/products/ProductsBrowser";
 import FooterTemplate from "../../src/app/shared/FooterTemplate";
 import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
-import StoreInteractionContainer from "../../src/app/shared/ProductCategoriesManager";
-import { ProductSection, ProductsContext} from "../../src/app/utils/ProductsContext";
+import StoreInteractionContainer, { ProductSection } from "../../src/app/shared/ProductCategoriesManager";
 import NoProductFound from "../../src/app/products/NoProductFound";
 import { Product } from "../../src/app/utils/Product";
 import productCategory from "./[productCategory]";
@@ -25,7 +24,7 @@ function Index() {
         () => {
         const fetchData = async () => {
             try {
-                const fetchQuery = `/api/searchProducts/${products}`;
+                const fetchQuery = `/api/searchProducts/` + products;
                 const response = await fetch(fetchQuery);
                 const data = await response.json();
                 filteredProducts = data.map((item: Product) => ({

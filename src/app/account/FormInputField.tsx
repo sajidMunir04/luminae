@@ -10,6 +10,7 @@ interface Props {
     handleChange: (e: any) => void,
     imageLink?: string,
     value?: any
+    name?: string
 }
 
 function FormInputField(props : Props)
@@ -17,7 +18,7 @@ function FormInputField(props : Props)
     return (<div className={styles.container}>
     <label>{props.fieldName}{props.isRequired && <span className={styles.redText}>*</span>}
     </label>
-    <input defaultValue={props.value} required={props.isRequired} className={styles.inputField} type={props.type} onChange={props.handleChange} placeholder={props.placeholder}/>
+    <input defaultValue={props.value} name={props.name} required={props.isRequired} className={styles.inputField} type={props.type} onChange={props.handleChange} placeholder={props.placeholder}/>
     {props.imageLink && <img className={styles.imgIcon} src='/aticon.png'/>}
     </div>)
 }

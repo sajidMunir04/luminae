@@ -3,21 +3,21 @@ import styles from './ProductCategoriesManager.module.css';
 import { useContext, useEffect, useState } from 'react';
 import { useStore } from 'zustand';
 import { useCartStore } from '../lib/store/useCartStore';
-import ProductSubCatrgories from '../products/ProductSubCategories';
+import ProductSubCatergories from '../products/ProductSubCategories';
+import router from 'next/router';
 
 interface ProductClassifcation {
     section: string,
     category: string
 }
 
-type ProductSection = {
+export type ProductSection = {
     productSection : string,
     subCategories: string[]
 }
 
 function ProductCategoriesManager()
 {
-    const [isHovered,setHoverState] = useState(false);
     let allProductSections : ProductSection[] = [];
     const empty : ProductSection[] = [{
         productSection: '',
@@ -65,6 +65,11 @@ function ProductCategoriesManager()
           
     },[])
 
+    const handleCategoryClick = (category) => {
+        router.push(category);
+      };
+    
+
     return (<div className={styles.container}>
             <div className={styles.categoriesButton}>
                 <div>
@@ -73,13 +78,10 @@ function ProductCategoriesManager()
                 <p>All Categories</p>
             </div>
             <div className={styles.catergoriesSection}>
-            {productSections.map((item) => (
-                <div key={item.productSection}>
-                    <div onMouseEnter={() =>setHoverState(true)} onMouseUp={() => setHoverState(false)}><p key={item.productSection + 'as'}>{item.productSection}</p></div>
-                    {isHovered && <ProductSubCatrgories mainCategory={item.productSection} onMouseLeave={() =>setHoverState(false)}  categories={item.subCategories} />}</div>
-                ))}
+                {productSections.map((categorySection) => (
+                <ProductSubCatergories mainCategory={categorySection.productSection} categories={categorySection.subCategories}/>))}
             </div>
-    </div>);
+        </div>);
 }
 
 export default ProductCategoriesManager;

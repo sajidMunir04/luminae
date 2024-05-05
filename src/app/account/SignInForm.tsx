@@ -5,8 +5,12 @@ import FormHeading from "./FormHeading";
 import FormInputField from "./FormInputField";
 import FormOrSection from "./FormOrSection";
 import styles from './SignInForm.module.css';
+import type {GetServerSidePropsContext,InferGetServerSidePropsType,} from "next"
+import { getCsrfToken } from "next-auth/react"
 
-function SignInForm()
+function SignInForm({
+    csrfToken,
+  }: InferGetServerSidePropsType<typeof getServerSideProps>)
 {
     const [email,setEmail] = useState<string>();
     const [password,setPassword] = useState<string>();
@@ -43,10 +47,11 @@ function SignInForm()
         const response = await fetch('api/')
     }
 
-    return (<form className={styles.container} onSubmit={loginUser}>
+    return (<form method="post" className={styles.container} action={"/api/auth/callback/credentials"}>
+        <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <FormHeading heading="Sign In"/>
-        <FormInputField fieldName="Email" isRequired={true} placeholder="Email Address" type="email" handleChange={handleEmailInput}/>
-        <FormInputField fieldName="Password" isRequired={true} placeholder="password" type="password" handleChange={handlePasswordInput}/>
+        <FormInputField name="username" fieldName="Email" isRequired={true} placeholder="Email Address" type="email" handleChange={handleEmailInput}/>
+        <FormInputField name="password" fieldName="Password" isRequired={true} placeholder="password" type="password" handleChange={handlePasswordInput}/>
         <div className={styles.checkBoxAndLinkContainer}>
             <div className={styles.checkboxWithText}>
                 <input className={styles.checkBox} type="checkbox"/>
@@ -64,6 +69,13 @@ function SignInForm()
             <a className={styles.signUpButton} href="/signup">Sign Up</a>
         </div>
     </form>);
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const csrfToken = await getCsrfToken()
+    return {
+      props: { csrfToken },
+    }
 }
 
 export default SignInForm;

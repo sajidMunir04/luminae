@@ -3,16 +3,42 @@ import { Db, MongoClient } from 'mongodb';
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   const { slug } = req.query;
-  const [query] = slug;
+  const { query } = slug;
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {
     await client.connect();
     const db : Db = client.db('Products');
     const collection = db.collection('products');
     const data = await collection.aggregate(
-        [ 
-          { $match : { 'category' : query , 'brandName' : query , 'name' : query } }
-        ]
+      [
+        {
+          $addFields: {
+            documentArray: { $objectToArray: "$$ROOT" }
+          }
+        },
+        {
+          $match: {
+            $expr: {
+              $gt: [
+                { $size: {
+                  $filter: {
+                    input: "$documentArray",
+                    cond: {
+                      $regexMatch: { input: "$$this.v", regex: new RegExp(query,'i') }
+                    }
+                  }
+                }},
+                0
+              ]
+            }
+          }
+        },
+        {
+          $project: {
+            documentArray: 0
+          }
+        }
+      ]
     ).toArray();
     res.status(200).json(data);
   } catch (error) {
