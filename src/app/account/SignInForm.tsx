@@ -6,36 +6,20 @@ import FormInputField from "./FormInputField";
 import FormOrSection from "./FormOrSection";
 import styles from './SignInForm.module.css';
 import type {GetServerSidePropsContext,InferGetServerSidePropsType,} from "next"
-import { getCsrfToken } from "next-auth/react"
+import { authenticate } from "../lib/actions";
+import { signIn } from "next-auth/react";
+import { useFormState, useFormStatus } from 'react-dom';
 
-function SignInForm({
-    csrfToken,
-  }: InferGetServerSidePropsType<typeof getServerSideProps>)
+function SignInForm({credentials})
 {
     const [email,setEmail] = useState<string>();
     const [password,setPassword] = useState<string>();
 
     const regex : RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
-    let emailValue : string = '';
-
     const handleEmailInput = (e : ChangeEvent<HTMLInputElement>) => {
         if (regex.test(e.target.value)) {
-            const checkIfUserExists = async() => {
-                const response = await fetch('api/doesUserExists/' + e.target.value);
-                const data = await response.json()
-                const result : boolean = JSON.parse(data);
-
-                if (!result)
-                {
-                    setEmail(e.target.value);
-                }
-                else {
-                    setEmail('');
-                }
-            } 
-
-            checkIfUserExists();
+            setEmail(e.target.value);
         }
     }
 
@@ -43,12 +27,23 @@ function SignInForm({
         setPassword(e.target.value);
     }
 
-    const loginUser = async() => {
-        const response = await fetch('api/')
-    }
+    async function handleSubmit(e) {
+        e.preventDefault()
+        const result = await signIn('credentials', {
+          redirect: false,
+          email,
+          password,
+        })
+    
+        if (!result?.error) {
+          // Redirect user to dashboard or any other page
+          window.location.href = '/'
+        }
+      }
 
-    return (<form method="post" className={styles.container} action={"/api/auth/callback/credentials"}>
-        <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+    const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+
+    return (<form action={dispatch} method="post" onSubmit={handleSubmit} className={styles.container}>
         <FormHeading heading="Sign In"/>
         <FormInputField name="username" fieldName="Email" isRequired={true} placeholder="Email Address" type="email" handleChange={handleEmailInput}/>
         <FormInputField name="password" fieldName="Password" isRequired={true} placeholder="password" type="password" handleChange={handlePasswordInput}/>
@@ -69,13 +64,6 @@ function SignInForm({
             <a className={styles.signUpButton} href="/signup">Sign Up</a>
         </div>
     </form>);
-}
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-    const csrfToken = await getCsrfToken()
-    return {
-      props: { csrfToken },
-    }
 }
 
 export default SignInForm;

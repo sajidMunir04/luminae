@@ -5,13 +5,13 @@ import StoreInteractionContainer from "../../src/app/shared/ProductCategoriesMan
 import SignInForm from '../../src/app/account/SignInForm';
 
 
-function account()
+function login()
 {
     return (<>
         <HeaderTemplate/>
-        <SignInForm csrfToken={''} />
+        <SignInForm credentials={undefined} />
         <FooterTemplate/>
     </>);
 }
 
-export default account;
+export default login;
