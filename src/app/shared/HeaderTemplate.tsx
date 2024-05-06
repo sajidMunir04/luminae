@@ -52,7 +52,7 @@ function HeaderTemplate()
                 <button onClick={onSearchButtonClick}  className={styles.searchButton} type="submit"><img src={'/images/magnifier.svg'}/></button>
             </form>
             <div className={styles.buttons}>
-                <a className={styles.button} href={'/login'}>
+                <a className={styles.button} href={'auth/signIn'}>
                 <img className={styles.btnImage} src="/IconSign in.png"/>
                 <p>Sign in</p>
                 </a>

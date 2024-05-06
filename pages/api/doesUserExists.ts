@@ -8,12 +8,8 @@ export default async function handler(req, res) {
     await client.connect();
     const db : Db = client.db('users');
     const collection = db.collection('users');
-    const data = await collection.aggregate(
-      [ 
-        { $match : { 'section' : email } }
-      ]
-    ).toArray();
-    if (data.length > 0)
+    const data = await collection.findOne({ 'email' : email});
+    if (data != null)
         res.status(200).json(true);
     else
         res.status(200).json(false);

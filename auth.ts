@@ -1,11 +1,10 @@
-import NextAuth, { CredentialsSignin } from "next-auth"
+import NextAuth, { CredentialsSignin, User } from "next-auth"
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import clientPromise from "./src/app/lib/db";
 import adapter from "next-auth/adapters";
 import Credentials from "next-auth/providers/credentials";
 import {z} from "zod";
 import bcrypt from "bcrypt";
-import {User} from "@/app/lib/definitions";
 
 async function getUser(email: string) : Promise<User | undefined> {
   try {
@@ -31,10 +30,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             const {email, password} = parsedCredentials.data;
             const user = await getUser(email) as User;
             if (!user) {
+              console.log("User does not exists");
               return null;
             }
 
-            const passwordMatched = await bcrypt.compare(password,user.password); 
+            const passwordMatched = await bcrypt.compare(password,user.id); 
             if (passwordMatched)
               return user;
 

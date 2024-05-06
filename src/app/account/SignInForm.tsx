@@ -5,22 +5,19 @@ import FormHeading from "./FormHeading";
 import FormInputField from "./FormInputField";
 import FormOrSection from "./FormOrSection";
 import styles from './SignInForm.module.css';
-import type {GetServerSidePropsContext,InferGetServerSidePropsType,} from "next"
-import { authenticate } from "../lib/actions";
 import { signIn } from "next-auth/react";
-import { useFormState, useFormStatus } from 'react-dom';
+import { emailRegex } from "../lib/definitions";
 
-function SignInForm({credentials})
+function SignInForm()
 {
     const [email,setEmail] = useState<string>();
     const [password,setPassword] = useState<string>();
 
-    const regex : RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
     const handleEmailInput = (e : ChangeEvent<HTMLInputElement>) => {
-        if (regex.test(e.target.value)) {
+        if (emailRegex.test(e.target.value)) {
             setEmail(e.target.value);
-        }
+        }     
     }
 
     const handlePasswordInput = (e : ChangeEvent<HTMLInputElement>) => {
@@ -29,21 +26,14 @@ function SignInForm({credentials})
 
     async function handleSubmit(e) {
         e.preventDefault()
-        const result = await signIn('credentials', {
-          redirect: false,
-          email,
-          password,
-        })
-    
-        if (!result?.error) {
-          // Redirect user to dashboard or any other page
-          window.location.href = '/'
-        }
+        await signIn('credentials', {
+          redirect: true,
+          email: email,
+          password: password,
+        }).then((response) => console.log(response));
       }
 
-    const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-
-    return (<form action={dispatch} method="post" onSubmit={handleSubmit} className={styles.container}>
+    return (<form method="post" onSubmit={handleSubmit} className={styles.container}>
         <FormHeading heading="Sign In"/>
         <FormInputField name="username" fieldName="Email" isRequired={true} placeholder="Email Address" type="email" handleChange={handleEmailInput}/>
         <FormInputField name="password" fieldName="Password" isRequired={true} placeholder="password" type="password" handleChange={handlePasswordInput}/>
@@ -53,7 +43,7 @@ function SignInForm({credentials})
                 <label>Remember for 30 days</label>
             </div>
             <div>
-                <a className={styles.forgotPasswordLink} href="/account">Forgot password?</a>
+                <a className={styles.forgotPasswordLink} href="auth/account">Forgot password?</a>
             </div>
         </div>
         <div className={styles.formButton}>
@@ -61,7 +51,7 @@ function SignInForm({credentials})
         </div>
         <div className={styles.noAccountContainer}>
             <p>Don't have an account?</p>
-            <a className={styles.signUpButton} href="/signup">Sign Up</a>
+            <a className={styles.signUpButton} href="signup">Sign Up</a>
         </div>
     </form>);
 }
