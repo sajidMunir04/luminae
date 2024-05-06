@@ -1,14 +1,15 @@
-import NextAuth, { CredentialsSignin, User } from "next-auth"
-import { MongoDBAdapter } from "@auth/mongodb-adapter"
+import { User } from "next-auth"
 import clientPromise from "./src/app/lib/db";
-import adapter from "next-auth/adapters";
-import Credentials from "next-auth/providers/credentials";
-import {z} from "zod";
-import bcrypt from "bcrypt";
+import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials"
+import type { Provider } from "next-auth/providers"
+import { signInSchema } from "./lib/zod";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 
 async function getUser(email: string) : Promise<User | undefined> {
   try {
-    const response = await fetch('api/doesUserExits', {
+    console.log(email);
+    const response = await fetch('api/doesUserExists', {
       method: "POST",
       body: email
     })
@@ -20,28 +21,49 @@ async function getUser(email: string) : Promise<User | undefined> {
 
   }
 }
+
+const providers : Provider[] = [Credentials({
+  credentials: {
+    email: {},
+    password: {}
+  },
+
+  authorize : async (credentials) => {
+    let user : User = {};
+    
+    const { email, password } = await signInSchema.parseAsync(credentials)
+
+    // logic to salt and hash password
+    const pwHash = credentials.password;
+
+    // logic to verify if user exists
+    user = await getUser(credentials.email as string) as User;
+
+    if (!user) {
+      // No user found, so this is their first attempt to login
+      // meaning this is also the place you could do registration
+      throw new Error("User not found.");
+    }
+
+    // return user object with the their profile data
+    return user;
+  }
+})]
+
+
+export const providerMap = providers.map((provider) => {
+  if (typeof provider === "function") {
+    const providerData = provider()
+    return { id: providerData.id, name: providerData.name }
+  } else {
+    return { id: provider.id, name: provider.name }
+  }
+})
  
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: MongoDBAdapter(clientPromise),
-  providers: [Credentials({
-      async authorize(credentials) {
-          const parsedCredentials = z.object({email: z.string().email(),password: z.string().min(6)}).safeParse(credentials);
-          if (parsedCredentials.success) {
-            const {email, password} = parsedCredentials.data;
-            const user = await getUser(email) as User;
-            if (!user) {
-              console.log("User does not exists");
-              return null;
-            }
-
-            const passwordMatched = await bcrypt.compare(password,user.id); 
-            if (passwordMatched)
-              return user;
-
-          }
-
-          return null;
-      }
-  })]
-
+  providers,
+  pages: {
+    signIn: 'auth/signIn'
+  }
 });
