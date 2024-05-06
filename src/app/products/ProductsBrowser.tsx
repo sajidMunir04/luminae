@@ -78,43 +78,46 @@ function ProductsBrowser(props : Props)
         styles: []
     }
 
-    allProducts.map((item) => {
-        if (item.price < filtersData.minPrice)
-            filtersData.minPrice = item.price;
-
-        if (item.price > filtersData.maxPrice)
-            filtersData.maxPrice = item.price;
-
-        if (!filtersData.colors.includes(item.color))
-            filtersData.colors.push(item.color);
-
-        item.sizes.map(function tagChecker(tag){
-            if (!filtersData.productSizes.includes(tag)){
-                filtersData.productSizes.push(tag);
+    useEffect(() => {
+        allProducts.map((item) => {
+            if (item.price < filtersData.minPrice)
+                filtersData.minPrice = item.price;
+    
+            if (item.price > filtersData.maxPrice)
+                filtersData.maxPrice = item.price;
+    
+            if (!filtersData.colors.includes(item.color))
+                filtersData.colors.push(item.color);
+    
+            item.sizes.map(function tagChecker(tag){
+                if (!filtersData.productSizes.includes(tag)){
+                    filtersData.productSizes.push(tag);
+                }
+            })
+    
+            let modelAdded = false;
+    
+            filtersData.modelDetails.forEach(function adder(model) {
+                if (model.type == item.model)
+                {
+                    model.quantity++;
+                    modelAdded = true;
+                }
+            })
+    
+            if (!modelAdded) {
+                const modelDetail : ModelDetail = {
+                    type: item.model,
+                    quantity: 1
+                }
+                filtersData.modelDetails.push(modelDetail);
             }
-        })
+    
+            if (!filtersData.styles.includes(item.style))
+                filtersData.styles.push(item.style);
+        })    
+    },props.products);
 
-        let modelAdded = false;
-
-        filtersData.modelDetails.forEach(function adder(model) {
-            if (model.type == item.model)
-            {
-                model.quantity++;
-                modelAdded = true;
-            }
-        })
-
-        if (!modelAdded) {
-            const modelDetail : ModelDetail = {
-                type: item.model,
-                quantity: 1
-            }
-            filtersData.modelDetails.push(modelDetail);
-        }
-
-        if (!filtersData.styles.includes(item.style))
-            filtersData.styles.push(item.style);
-    })
 
     return (<div className={styles.container}>
         <div className={styles.controllerContainer}>
@@ -141,9 +144,9 @@ function ProductsBrowser(props : Props)
     <div className={styles.mainSection}>
         <div className={styles.filtersContainer}>
             <ModelFilter onModelSelect={setSelectedModel} modelDetails={filtersData.modelDetails} />
-            <StyleFilter styles={filtersData.styles} />
-            <ColorFilter colors={filtersData.colors} />
-            <SizeFilter sizes={filtersData.productSizes}/>
+            <StyleFilter styles={filtersData.styles} onStyleSelect={setSelectedStyle} />
+            <ColorFilter colors={filtersData.colors} onColorSelect={setSelectedColor} />
+            <SizeFilter sizes={filtersData.productSizes} onSizeSelect={setSelectedSizes} selectedSizes={selectedSizes}/>
             <PriceFilter minimumPrice={filtersData.minPrice} maximumPrice={filtersData.maxPrice} />
         </div>
         <div className={styles.productsContainer}>

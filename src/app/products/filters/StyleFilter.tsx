@@ -2,7 +2,8 @@ import styles from "./StyleFilter.module.css";
 
 
 interface Props {
-    styles : string[]
+    styles : string[],
+    onStyleSelect: (arg: string) => void
 }
 
 function StyleFilter(props : Props) {
@@ -11,7 +12,7 @@ function StyleFilter(props : Props) {
             
         </div>
         <div className={styles.contentContainer}>
-            {props.styles.map((item) => (<label>
+            {props.styles.map((item) => (<label onClick={() => props.onStyleSelect(item)}> 
                 <input type='checkbox'/>
                 {item}
             </label>))}
