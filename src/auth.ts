@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from "http";
-import {adapter as mongoDBadapter}  from "./db";
+import {adapter as mongoDBadapter}  from "../lib/db";
 import { DatabaseUser, Lucia, TimeSpan } from "lucia";
 
 const adapter = mongoDBadapter;
@@ -26,9 +26,14 @@ export const lucia = new Lucia(adapter, {
 declare module "lucia" {
 	interface Register {
 		Lucia: typeof lucia;
-        DatabaseUserAttributes: Omit<DatabaseUser,"id">
+        DatabaseUserAttributes: DatabaseUserAttributes;
 	}
 }
+
+interface DatabaseUserAttributes {
+	username: string;
+}
+
 
 export async function validateRequest(req: IncomingMessage,res : ServerResponse) {
     const sessionId = lucia.readSessionCookie(req.headers.cookie ?? "");

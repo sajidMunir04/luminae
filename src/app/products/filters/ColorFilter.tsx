@@ -1,5 +1,6 @@
 import FilterHeading from "./FilterHeading";
 import styles from "./ColorFilter.module.css";
+import { useState } from "react";
 
 interface Props {
     colors: string[]
@@ -7,12 +8,16 @@ interface Props {
 }
 
 function ColorFilter(props : Props) {
+
+    const [selectedColors,setSelectedColors] = useState<string[]>([]);
+
     return (<div>
-        <div>
-            <FilterHeading headingText={"COLOR"}/>
-        </div>
+        <FilterHeading headingText={"COLOR"}/>
         <div className={styles.contentContainer}>
-        {props.colors.map((item) => (<div onClick={() => props.onColorSelect(item)} className={styles.colorSelector} style={{backgroundColor: `${item}`}}>
+        {props.colors.map((item) => (<div onClick={() => props.onColorSelect(item)} className={styles.colorSelector} 
+        style={{backgroundColor: `${item}`,
+                padding: `${selectedColors.includes(item)} && 2%`,
+                border: `${selectedColors.includes(item)} && 2px solid black`}}>
         </div>))}
         </div>
     </div>);

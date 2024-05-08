@@ -1,3 +1,4 @@
+import FilterHeading from "./FilterHeading";
 import styles from "./StyleFilter.module.css";
 
 
@@ -7,13 +8,12 @@ interface Props {
 }
 
 function StyleFilter(props : Props) {
+
     return (<div className={styles.container}>
-        <div>
-            
-        </div>
+        <FilterHeading headingText={"STYLE"}/>
         <div className={styles.contentContainer}>
-            {props.styles.map((item) => (<label onClick={() => props.onStyleSelect(item)}> 
-                <input type='checkbox'/>
+            {props.styles.map((item) => (<label htmlFor="stylebox" onClick={() => props.onStyleSelect(item)}> 
+                <input name="stylebox" type='checkbox'/>
                 {item}
             </label>))}
         </div>

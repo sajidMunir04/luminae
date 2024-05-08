@@ -1,10 +1,12 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import FormButton from "./FormButton";
 import FormExternalServiceButton from "./FormExternalServiceButton";
 import FormHeading from "./FormHeading";
 import FormInputField from "./FormInputField";
 import FormOrSection from "./FormOrSection";
 import styles from './SignUpForm.module.css';
+import router from "next/router";
+import { SignUpCredentials } from "../lib/definitions";
 
 
 function SignUpForm()
@@ -25,7 +27,27 @@ function SignUpForm()
         setPassword(e.target.value);
     }
 
-    return (<form className={styles.container}>
+    async function onSubmit(e: FormEvent<HTMLFormElement>) {
+        const signUpData : SignUpCredentials ={
+            name: name,
+            email: email,
+            password: password
+        }
+		e.preventDefault();
+		const formElement = e.target as HTMLFormElement;
+		const response = await fetch(formElement.action, {
+			method: formElement.method,
+			body: JSON.stringify(signUpData),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+		if (response.ok) {
+			router.push("/");
+		}
+	}
+
+    return (<form className={styles.container} action={"/api/auth/signUp"} method={"POST"} onSubmit={onSubmit}>
         <FormHeading heading="Sign Up"/>
         <FormInputField fieldName="Name" isRequired={true} placeholder="Full Name" type="text" handleChange={handleName}/>
         <FormInputField fieldName="Email" isRequired={true} placeholder="Email Address" type="email" handleChange={handleEmail}/>

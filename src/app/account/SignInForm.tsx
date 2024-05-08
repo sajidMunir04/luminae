@@ -66,7 +66,7 @@ function SignInForm()
 		}
 	}
 
-      return (<form method="post" action={'api/auth/signIn'} onSubmit={onSubmit} className={styles.container}>
+      return (<form method="post" action={'/api/auth/signIn'} onSubmit={onSubmit} className={styles.container}>
       <FormHeading heading="Sign In"/>
       <FormInputField name="username" fieldName="Email" isRequired={true} placeholder="Email Address" type="email" handleChange={handleEmailInput}/>
       <FormInputField name="password" fieldName="Password" isRequired={true} placeholder="password" type="password" handleChange={handlePasswordInput}/>

@@ -4,7 +4,6 @@ import { useContext, useEffect, useState } from 'react';
 import { useStore } from 'zustand';
 import { useCartStore } from '../lib/store/useCartStore';
 import ProductSubCatergories from '../products/ProductSubCategories';
-import router from 'next/router';
 
 interface ProductClassifcation {
     section: string,
@@ -65,11 +64,6 @@ function ProductCategoriesManager()
           
     },[])
 
-    const handleCategoryClick = (category) => {
-        router.push(category);
-      };
-    
-
     return (<div className={styles.container}>
             <div className={styles.categoriesButton}>
                 <div>
@@ -79,7 +73,7 @@ function ProductCategoriesManager()
             </div>
             <div className={styles.catergoriesSection}>
                 {productSections.map((categorySection) => (
-                <ProductSubCatergories mainCategory={categorySection.productSection} categories={categorySection.subCategories}/>))}
+                <ProductSubCatergories key={categorySection.productSection} mainCategory={categorySection.productSection} categories={categorySection.subCategories}/>))}
             </div>
         </div>);
 }
