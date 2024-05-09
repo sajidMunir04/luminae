@@ -12,12 +12,13 @@ import { headers } from "next/headers";
 
 function SignInForm()
 {
-    const [email,setEmail] = useState<string>();
-    const [password,setPassword] = useState<string>();
+    const [email,setEmail] = useState<string>('');
+    const [password,setPassword] = useState<string>('');
     const [isUserValid,setUserStatus] = useState<boolean>(false);
 
     const handleEmailInput = (e : ChangeEvent<HTMLInputElement>) => {
-        if (emailRegex.test(e.target.value)) {
+        if (emailRegex.test(e.target.value) || true) {
+            setEmail(e.target.value);
             async function checkUserExists() {
                 const response  = await fetch('api/doesUserExists',{
                                                 method: "POST",
@@ -30,8 +31,6 @@ function SignInForm()
 
                 }
             }
-
-            checkUserExists();
         }     
     }
 
@@ -41,14 +40,9 @@ function SignInForm()
 
     async function onSubmit(e: FormEvent<HTMLFormElement>) {
 
-        if (!isUserValid)
-        {
-            return;
-        }
-
         const credentials : SignInCredentials ={
-            email: email as string,
-            password: password as string
+            email: email,
+            password: password
         }
 		e.preventDefault();
 		const formElement = e.target as HTMLFormElement;

@@ -4,6 +4,7 @@ import ProductsBrowser from '../products/ProductsBrowser';
 import router from 'next/router';
 import { useStore } from 'zustand';
 import { useCartStore } from '../lib/store/useCartStore';
+import { SessionProvider, useSession } from '../components/SessionProvider';
 
 
 
@@ -14,8 +15,9 @@ function HeaderTemplate()
     const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.cartData.totalPrice)}
     ); 
 
+    const {user}  = useSession();
 
-    subscribe();    
+    subscribe();   
 
     const onSearchButtonClick = () => {
         router.push(inputValue);
@@ -52,7 +54,7 @@ function HeaderTemplate()
                 <button onClick={onSearchButtonClick}  className={styles.searchButton} type="submit"><img src={'/images/magnifier.svg'}/></button>
             </form>
             <div className={styles.buttons}>
-                <a className={styles.button} href={'auth/signIn'}>
+                <a className={styles.button} href={'http://localhost:3000/auth/signIn'}>
                 <img className={styles.btnImage} src="/IconSign in.png"/>
                 <p>Sign in</p>
                 </a>
@@ -67,10 +69,10 @@ function HeaderTemplate()
                 </a>
             </div>
         <div>
-            <div className={styles.socialLinkSection}>
-                <img src={'/Instagram.png'}/>
-                <img src={'/FB.png'}/>
-                <img src={'/TG.png'}/>
+            <div className={styles.avatarContainer}>
+                {user?.imageLink === undefined && <a href='http://localhost:3000/auth/signIn'><img className={styles.avatarImage} 
+                src='/images/account/profile-user.svg'/></a>}
+                {user?.imageLink !== undefined && <a href={`http://localhost:3000/user/ + ${user.id}`}><img className={styles.avatarImage} src={user.imageLink}/></a>}
             </div>
         </div>
     </div>);
