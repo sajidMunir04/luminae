@@ -5,8 +5,8 @@ import {Order} from "@/model/orderModel.mjs";
 
 
 export default async function handler(req : NextApiRequest,res) {
-    const { slug } = req.query;
-    const data : OrderFormData = JSON.parse(slug as string);
+    console.log(req.body);
+    const data : OrderFormData = req.body;
     const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {
     await client.connect();

@@ -122,3 +122,9 @@
     width: 100%;
     height: 100%;
 }
+
+.cartItemsText{
+    background-color: greenyellow;
+    padding: 1%;
+    border-radius: 50px;
+}

@@ -13,8 +13,6 @@ export interface ModelDetail  {
 }
 
 function ModelFilter(props : Props) {
-    console.log(props.modelDetails.length);
-
     return (<div className={styles.container}>
         <div>
             <FilterHeading headingText={"MODEL"}/>

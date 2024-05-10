@@ -11,12 +11,12 @@ interface Actions {
     fetchData: () => CartData
     addToCart: (product : Product) => void
     removeFromCart: (product : Product) => void
+    getProductCount: () => number
 }
 
 export interface CartData {
     productsInfo: ProductInfo[],
-    totalItems: number,
-    totalPrice: number
+    totalItems: number
 }
 
 interface ProductInfo{
@@ -27,15 +27,13 @@ interface ProductInfo{
 const initialState : State = {
     cartData: {
         productsInfo: [],
-        totalItems: 0,
-        totalPrice: 0
+        totalItems: 0
     }
 }
 
 const defaultData : CartData ={
     productsInfo: [],
-    totalItems: 0,
-    totalPrice: 0
+    totalItems: 0
 }
 
 const dataStoreKey : string = 'cart_products_ids';
@@ -56,11 +54,23 @@ export const useCartStore = create<State & Actions>((set,get) => ({
         return defaultData;
     },
 
+    getProductCount: () => {
+        const storedProductData = getCookie(dataStoreKey);
+        if (storedProductData) {
+            const cartProducts : CartData = JSON.parse(storedProductData);
+            if (cartProducts)
+            {
+                return cartProducts.totalItems;
+            }
+        }
+
+        return 0;
+    },
+
     addToCart : (product: Product) => {
         let storedProducts : CartData = {
             productsInfo: [],
-            totalItems: 0,
-            totalPrice: 0
+            totalItems: 0
         };
         const storedProductData = getCookie(dataStoreKey);
         if (storedProductData) {
@@ -74,8 +84,6 @@ export const useCartStore = create<State & Actions>((set,get) => ({
         if (productInCart)
         {
             productInCart.quantity = productInCart.quantity + 1;
-            storedProducts.totalItems++;
-            storedProducts.totalPrice += product.price;
         }
         else{
             const newProduct : ProductInfo = {
@@ -85,7 +93,7 @@ export const useCartStore = create<State & Actions>((set,get) => ({
 
             storedProducts.productsInfo.push(newProduct);
         }
-
+        storedProducts.totalItems = storedProducts.productsInfo.length;
         set(state => ({
             cartData: storedProducts
         }))
@@ -96,8 +104,7 @@ export const useCartStore = create<State & Actions>((set,get) => ({
     removeFromCart: (product: Product) => {
         let products : CartData = {
             productsInfo: [],
-            totalItems: 0,
-            totalPrice: 0
+            totalItems: 0
         };
         const storedProductData = getCookie(dataStoreKey);
         if (storedProductData) {
@@ -106,9 +113,10 @@ export const useCartStore = create<State & Actions>((set,get) => ({
         }
 
         const filteredProductsData : ProductInfo[] = products.productsInfo.filter((item) => item.id !== product._id);
+        products.totalItems = filteredProductsData.length;
         products.productsInfo = filteredProductsData;
         set(state => ({
-            cartData: products
+            cartData: products,        
         }));
         setCookie(dataStoreKey, JSON.stringify(products));
     },

@@ -1,23 +1,31 @@
-import { useContext, useRef, useState } from 'react';
+"use client";
+
+import { useContext, useEffect, useRef, useState } from 'react';
 import styles from './HeaderTemplate.module.css';
 import ProductsBrowser from '../products/ProductsBrowser';
 import router from 'next/router';
 import { useStore } from 'zustand';
 import { useCartStore } from '../lib/store/useCartStore';
 import { SessionProvider, useSession } from '../components/SessionProvider';
+import { Console } from 'console';
 
 
 
 function HeaderTemplate()
 {
     const [inputValue, setInputValue] = useState<string>('');
-    const [cartItemsCount,setCartItemCount] = useState(useStore(useCartStore,state => state.cartData.totalItems));
-    const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.cartData.totalPrice)}
-    ); 
+    const [cartItemsCount,setCartItemCount] = useState<number>(0);
+    let totalItems : number = 0;
+    const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.getProductCount)});
 
-    const {user}  = useSession();
+    const {user}  = useSession();   
 
     subscribe();   
+
+    useEffect(() => {
+        setCartItemCount(useCartStore.getState().getProductCount);
+        console.log(totalItems);
+    },[cartItemsCount]);
 
     const onSearchButtonClick = () => {
         router.push(inputValue);
@@ -65,7 +73,7 @@ function HeaderTemplate()
                 <a className={styles.button} href='/cart'>
                     <img className={styles.btnImage} src="/card.png"/>
                     <p>Cart</p>
-                    <p>{cartItemsCount}</p>
+                    {cartItemsCount > 0 && <p className={styles.cartItemsText}>{cartItemsCount}</p>}
                 </a>
             </div>
         <div>

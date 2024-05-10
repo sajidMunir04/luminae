@@ -15,7 +15,7 @@ import { error } from "console";
 
 function Cart() {
     const cartData = useCartStore(state => state.fetchData());
-    const [totalAmount,setTotalAmount] = useState(cartData.totalPrice);
+    const [totalAmount,setTotalAmount] = useState(0);
     const [orderComplete,setOrderStatus] = useState(false);
     const [shippingCharges,setShippingCharges] = useState<number>(0);   
     const [taxes,setTaxes] = useState<number>(0);
@@ -61,7 +61,7 @@ function Cart() {
             orderTaxes: taxes
         }
 
-        axios.post('api/postOrder/' + JSON.stringify(orderFormData)).then().catch((error)=> console.log(error));
+        axios.post('api/postOrder',{orderFormData});
     }
 
     const calculatePricing = (cartProducts : CartProduct[]) => {
@@ -71,8 +71,7 @@ function Cart() {
 
         async function getShippingChargesAndTaxes() {
             try {
-                const response = await axios.get('api/getShippingCharges/' + totalPrice);
-                console.log(response);
+                const response = await axios.post('api/getShippingCharges',{totalPrice});
                 const data = await response.data;
                 setShippingCharges(data);
             } catch (error) {
@@ -80,7 +79,7 @@ function Cart() {
             }
 
             try {
-                const response = await axios.get('api/getTaxes/' + totalPrice);
+                const response = await axios.post('api/getTaxes',{totalPrice});
                 const data = await response.data;
                 setTaxes(data);
             }
@@ -126,7 +125,6 @@ function Cart() {
 
     useEffect(()=> {
         checkOrderForm();
-        console.log("Executed");
     },[orderData])
 
     const removeProductFromCart = (product: Product) => {
