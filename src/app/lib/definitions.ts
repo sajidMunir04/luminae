@@ -9,5 +9,14 @@ export interface SignUpCredentials {
     password: string
 }
 
+export interface UserProfileData {
+    name: string,
+    email: string,
+    password: string,
+    address: string,
+    region: string,
+    number: string,
+    avatarLink: string
+}
 
-export const emailRegex : RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+export const emailRegex : RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{3,4}$/g;

@@ -9,28 +9,38 @@ import { SignInCredentials, emailRegex } from "../lib/definitions";
 import router from "next/router";
 import { headers } from "next/headers";
 
+enum EmailState {
+    Unchecked,
+    Invalid,
+    Valid
+}
+
 
 function SignInForm()
 {
     const [email,setEmail] = useState<string>('');
     const [password,setPassword] = useState<string>('');
-    const [isUserValid,setUserStatus] = useState<boolean>(false);
+    const [userStatus,setUserStatus] = useState<EmailState>(EmailState.Unchecked);
 
     const handleEmailInput = (e : ChangeEvent<HTMLInputElement>) => {
-        if (emailRegex.test(e.target.value) || true) {
+        if (emailRegex.test(e.target.value)) {
             setEmail(e.target.value);
             async function checkUserExists() {
-                const response  = await fetch('api/doesUserExists',{
+                const response  = await fetch('/api/auth/doesUserExists',{
                                                 method: "POST",
-                                                headers: {
-                                                    "Content-Type": "application/json"
-                                                }
+                                                headers: {"Content-Type": "application/json"},
+                                                body: e.target.value as string,
                                                 });
-
+                console.log(response);
                 if (response.ok) {
-
+                    setUserStatus(EmailState.Valid);
+                }
+                else {
+                    setUserStatus(EmailState.Invalid);
                 }
             }
+
+            checkUserExists();
         }     
     }
 
@@ -40,6 +50,10 @@ function SignInForm()
 
     async function onSubmit(e: FormEvent<HTMLFormElement>) {
 
+        /*
+        if (userStatus === EmailState.Invalid)
+            return null;
+        */
         const credentials : SignInCredentials ={
             email: email,
             password: password
@@ -63,6 +77,7 @@ function SignInForm()
       return (<form method="post" action={'/api/auth/signIn'} onSubmit={onSubmit} className={styles.container}>
       <FormHeading heading="Sign In"/>
       <FormInputField name="username" fieldName="Email" isRequired={true} placeholder="Email Address" type="email" handleChange={handleEmailInput}/>
+      {userStatus === EmailState.Invalid && <p>User does not exists</p>}
       <FormInputField name="password" fieldName="Password" isRequired={true} placeholder="password" type="password" handleChange={handlePasswordInput}/>
       <div className={styles.checkBoxAndLinkContainer}>
           <div className={styles.checkboxWithText}>

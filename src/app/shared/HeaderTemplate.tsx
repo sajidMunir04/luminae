@@ -1,24 +1,18 @@
 "use client";
 
-import { useContext, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import styles from './HeaderTemplate.module.css';
 import ProductsBrowser from '../products/ProductsBrowser';
 import router from 'next/router';
 import { useStore } from 'zustand';
 import { useCartStore } from '../lib/store/useCartStore';
-import { SessionProvider, useSession } from '../components/SessionProvider';
-import { Console } from 'console';
-
-
 
 function HeaderTemplate()
 {
-    const [inputValue, setInputValue] = useState<string>('');
+    const [searchQuery, setSearchQuery] = useState<string>('');
     const [cartItemsCount,setCartItemCount] = useState<number>(0);
     let totalItems : number = 0;
     const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.getProductCount)});
-
-    const {user}  = useSession();   
 
     subscribe();   
 
@@ -27,20 +21,21 @@ function HeaderTemplate()
         console.log(totalItems);
     },[cartItemsCount]);
 
-    const onSearchButtonClick = () => {
-        router.push(inputValue);
-    }
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(event.target.value);
+        setSearchQuery(event.target.value);
     };
+    
+    const onSeachButtonClick = () => {
+        router.push('/search' + searchQuery);
+    }
 
     return (<div className={styles.container}>
         <div className={styles.logoContainer}>
             <a href='/'><img src={'/Group1.png'}/>
             </a>
         </div>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={onSeachButtonClick}>
                 <input className={styles.searchInput} type="search" placeholder='Search Products' onChange={handleInputChange}/>
                 <select className={styles.categorySelector}>
                     <option className={styles.categoriesTextOption}>
@@ -59,7 +54,7 @@ function HeaderTemplate()
                         Home Decor
                     </option>
                 </select>
-                <button onClick={onSearchButtonClick}  className={styles.searchButton} type="submit"><img src={'/images/magnifier.svg'}/></button>
+                <button onClick={onSeachButtonClick} className={styles.searchButton} type="submit"><img src={'/images/magnifier.svg'}/></button>
             </form>
             <div className={styles.buttons}>
                 <a className={styles.button} href={'http://localhost:3000/auth/signIn'}>
@@ -78,9 +73,8 @@ function HeaderTemplate()
             </div>
         <div>
             <div className={styles.avatarContainer}>
-                {user?.imageLink === undefined && <a href='http://localhost:3000/auth/signIn'><img className={styles.avatarImage} 
+                {true && <a href='http://localhost:3000/auth/signIn'><img className={styles.avatarImage} 
                 src='/images/account/profile-user.svg'/></a>}
-                {user?.imageLink !== undefined && <a href={`http://localhost:3000/user/ + ${user.id}`}><img className={styles.avatarImage} src={user.imageLink}/></a>}
             </div>
         </div>
     </div>);

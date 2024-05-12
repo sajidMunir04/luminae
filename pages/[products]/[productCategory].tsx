@@ -15,8 +15,6 @@ function productCategory(){
     const { products , productCategory } = router.query;
     let filteredProducts : Product[] = [];
     const [allProducts,setProducts] = useState(filteredProducts);
-    const [selectedProduct,setSelectedProduct] = useState(filteredProducts[0]);
-    const [isProductSelected,setProductSelectStatus] = useState(false);
     let allProductSections : ProductSection[] = [];
     useEffect(
         () => {
@@ -75,16 +73,14 @@ function productCategory(){
 
 
     const handleClick = (product : Product) => {
-      setSelectedProduct(product);
-      setProductSelectStatus(true);
-      console.log("Selected Product",product);
+      const productId = product._id;
+        router.replace('http://localhost:3000' + '/item/' + productId);
     }
 
     return (<>
       <HeaderTemplate/>
       <StoreInteractionContainer/>
-      {!isProductSelected && <ProductsBrowser onClick={handleClick} products={allProducts} onBack={() => {}}/>}
-      {isProductSelected && <ProductPage product={selectedProduct}/>}
+      <ProductsBrowser onClick={handleClick} products={allProducts} onBack={() => {}}/>
       <FooterTemplate/>
     </>);
 }

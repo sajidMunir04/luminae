@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Product } from "../utils/Product";
 import styles from "./ProductPage.module.css";
 import { useDraggable } from "react-use-draggable-scroll";
@@ -9,8 +9,7 @@ interface Props {
     product: Product
 }
 
-
-function ProductPage(props : Props) : JSX.Element {
+function ProductPage(props : Props) {
     const [activeImageLink,setActiveImageLink] = useState(props.product.images[0]);
     const imageClicked = (imageLink : string) => {
         setActiveImageLink(imageLink);
@@ -23,26 +22,15 @@ function ProductPage(props : Props) : JSX.Element {
     const { events } = useDraggable(ref, {
         applyRubberBandEffect: false
     }); // Now we pass the reference to the useDraggable hook:
-    const [isDragging, setIsDragging] = useState(false);
-    const [startY, setStartY] = useState(0);
-    const [scrollTop, setScrollTop] = useState(0);
-  
-    const handleMouseDown = (e) => {
-      setIsDragging(true);
-      setStartY(e.pageY - e.currentTarget.offsetTop);
-      setScrollTop(e.currentTarget.scrollTop);
-    };
-  
-    const handleMouseMove = (e) => {
-      if (!isDragging) return;
-      const y = e.pageY - e.currentTarget.offsetTop;
-      const walk = (y - startY) * 2; // Adjust the speed of scrolling
-      e.currentTarget.scrollTop = scrollTop - walk;
-    };
-  
-    const handleMouseUp = () => {
-      setIsDragging(false);
-    };
+
+    useEffect(() => {
+        console.log(activeImageLink);
+        const setMainImage = () => {
+            setActiveImageLink(props.product.images[0]);
+        }
+
+        setTimeout(setMainImage,10000);
+    },[])
 
     return (<div className={styles.container}>
         <div className={styles.linkHierarchyContainer}>
