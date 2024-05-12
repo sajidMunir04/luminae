@@ -4,9 +4,25 @@ import styles from "./ProductPage.module.css";
 import { useDraggable } from "react-use-draggable-scroll";
 import { useCartStore } from "../lib/store/useCartStore";
 import QuantityManagingCard from "./QuantityManagingCard";
+import ProductReviewCard from "./ProductReviewCard";
 
 interface Props {
     product: Product
+}
+
+enum InfoSection {
+    Description,
+    Reviews
+}
+
+interface ReviewData {
+    totalReviews : number,
+    fiveStarReviews: number,
+    fourStarReviews: number,
+    threeStarReviews: number,
+    twoStarReviews: number,
+    oneStarReviews: number,
+    totalRating: number
 }
 
 function ProductPage(props : Props) {
@@ -14,10 +30,50 @@ function ProductPage(props : Props) {
     const imageClicked = (imageLink : string) => {
         setActiveImageLink(imageLink);
     }
+    const [infoSection,setInfoSection] = useState<InfoSection>(InfoSection.Description);
+
+    const reviewData : ReviewData = {
+        totalReviews: 0,
+        fiveStarReviews: 0,
+        fourStarReviews: 0,
+        threeStarReviews: 0,
+        twoStarReviews: 0,
+        oneStarReviews: 0,
+        totalRating: 0
+    }
+
+    const setDescriptionSectionInfo = () => {
+        setInfoSection(InfoSection.Description);
+    }
+
+    const setReviewsSectionInfo = () => {
+        setInfoSection(InfoSection.Reviews);
+    }
+
+    props.product.reviews?.forEach((item) => {
+        if (item.rating === 5){
+            reviewData.fiveStarReviews++;
+        }
+        else if (item.rating === 4){
+            reviewData.fourStarReviews++;
+        }
+        else if (item.rating === 3){
+            reviewData.threeStarReviews++;
+        }
+        else if (item.rating === 2){
+            reviewData.twoStarReviews++;
+        }
+        else if (item.rating === 1){
+            reviewData.oneStarReviews++;
+        }
+    })
+
+    reviewData.totalRating = reviewData.fiveStarReviews + reviewData.fourStarReviews + reviewData.threeStarReviews 
+    + reviewData.twoStarReviews + reviewData.oneStarReviews;
+    reviewData.totalRating /= 5;
 
     const addProductToCart = useCartStore(state => state.addToCart);
-    const removeProductFromCart = useCartStore(state => state.removeFromCart);
-      // We will use React useRef hook to reference the wrapping div:
+
     const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
     const { events } = useDraggable(ref, {
         applyRubberBandEffect: false
@@ -29,13 +85,10 @@ function ProductPage(props : Props) {
             setActiveImageLink(props.product.images[0]);
         }
 
-        setTimeout(setMainImage,10000);
+        setTimeout(setMainImage,100);
     },[])
 
     return (<div className={styles.container}>
-        <div className={styles.linkHierarchyContainer}>
-
-        </div>
         <div className={styles.productInfo}>
             <div className={styles.imageSection}>
                 <div className={styles.imagesContainer} {...events} ref={ref}>
@@ -91,10 +144,10 @@ function ProductPage(props : Props) {
         </div>
         <div className={styles.productInfoSection}>
             <div className={styles.detailButtonContainer}>
-                <button className={styles.detailSectionButton} type='button'>PRODUCT DETAILS</button>
-                <button className={styles.detailSectionButton} type='button'>REVIEWS</button>
+                <button className={`${styles.detailSectionButton} ${infoSection === InfoSection.Description && styles.detailSectionButtonActive}`} onClick={setDescriptionSectionInfo} type='button'>PRODUCT DETAILS</button>
+                <button className={`${styles.detailSectionButton} ${infoSection === InfoSection.Reviews && styles.detailSectionButtonActive}`} onClick={setReviewsSectionInfo} type='button'>REVIEWS</button>
             </div>
-            <div>
+            {infoSection === InfoSection.Description && <div>
                 <div className={styles.productDetailSection}>
                 <div className={styles.detailSectionHalf}>
                     <div>
@@ -130,74 +183,86 @@ function ProductPage(props : Props) {
                                 <div>
                                     <img src="/laundryIcon.svg"/>
                                 </div>
-                                <p>Machine wash at max. 30ºC/86ºF with short spin cycle</p>
+                                <p className={styles.washInfoText}>Machine wash at max. 30ºC/86ºF with short spin cycle</p>
                             </div>
                             <div className={styles.careInfoPoint}>
                             <div>
                                 <img src="/laundryIcon.svg"/>
                             </div>
-                            <p>Iron at a maximum of 110ºC/230ºF</p>
+                            <p className={styles.washInfoText}>Iron at a maximum of 110ºC/230ºF</p>
                         </div>
                         <div className={styles.careInfoPoint}>
                             <div>
                                 <img src="/laundryIcon.svg"/>
                             </div>
-                            <p>Do not dry clean</p>
+                            <p className={styles.washInfoText}>Do not dry clean</p>
                         </div>
                         <div className={styles.careInfoPoint}>
                             <div>
                                 <img src="/laundryIcon.svg"/>
                             </div>
-                            <p>Do not tumble dry</p>
+                            <p className={styles.washInfoText}>Do not tumble dry</p>
                         </div>
                         <div className={styles.careInfoPoint}>
                             <div>
                                 <img src="/laundryIcon.svg"/>
                             </div>
-                            <p>Wash inside out</p>
+                            <p className={styles.washInfoText}>Wash inside out</p>
                         </div>
                         <div className={styles.careInfoPoint}>
                             <div>
                                 <img src="/laundryIcon.svg"/>
                             </div>
-                            <p>Wash separately</p>
+                            <p className={styles.washInfoText}>Wash separately</p>
                         </div>
                         </div>
                     </div>
                 </div>
                 </div>
-                <div>
-                    <div>
-                        <div>
+            </div>}
+            {infoSection === InfoSection.Reviews && <div>
+                    <div className={styles.reviewStatsContainer}>
+                        <div className={styles.reviewMajorInfoContainer}>
                             <p>Total Reviews</p>
-                            <p>{props.product.reviews?.length}</p>
-                            {}
+                            <p>{reviewData.totalRating}</p>
+                            <button>Write a Review</button>
                         </div>
-                        <div>
-                            <div>
+                        <div className={styles.reviewInfoContainer}>
+                            <div className={styles.reviewRatingStat}>
                                 <p>5 stars</p>
-                                <div></div>
+                                <div className={styles.ratingStatBar}></div>
+                                <div>{reviewData.fiveStarReviews}</div>
                             </div>
-                            <div>
+                            <div className={styles.reviewRatingStat}>
                                 <p>4 stars</p>
-                                <div></div>
+                                <div className={styles.ratingStatBar}></div>
+                                <div>{reviewData.fourStarReviews}</div>
                             </div>
-                            <div>
+                            <div className={styles.reviewRatingStat}>
                                 <p>3 stars</p>
-                                <div></div>
+                                <div className={styles.ratingStatBar}></div>
+                                <div>{reviewData.threeStarReviews}</div>
                             </div>
-                            <div>
+                            <div className={styles.reviewRatingStat}>
                                 <p>2 stars</p>
-                                <div></div>
+                                <div className={styles.ratingStatBar}></div>
+                                <div>{reviewData.twoStarReviews}</div>
                             </div>
-                            <div>
+                            <div className={styles.reviewRatingStat}>
                                 <p>1 stars</p>
-                                <div></div>
+                                <div className={styles.ratingStatBar}></div>
+                                <div>{reviewData.oneStarReviews}</div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <div className={styles.reviewCardSection}>
+                        <div className={styles.reviewCardsContainer}>
+                            {props.product.reviews?.map((review) => <ProductReviewCard reviewHeading={review.headingText} 
+                            reviewText={review.reviewText} reviewerName={review.reviewerName} likeCount={review.reviewLikes} 
+                            dislikeCount={review.reviewDislikes} rating={review.rating}/>)}
+                        </div>
+                    </div>
+            </div>}
         </div>
     </div>);
 }

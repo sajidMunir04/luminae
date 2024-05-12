@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ProductPage from "@/app/products/ProductPage";
 import HeaderTemplate from "@/app/shared/HeaderTemplate";
 import FooterTemplate from "@/app/shared/FooterTemplate";
+import ProductCategoriesManager from "@/app/shared/ProductCategoriesManager";
 
 
 export default function productPage() {
@@ -68,6 +69,7 @@ export default function productPage() {
 
     return (<>
     <HeaderTemplate/>
+    <ProductCategoriesManager/>
     {product !== null && <ProductPage product={product}/>}
     <FooterTemplate/>
     </>);
