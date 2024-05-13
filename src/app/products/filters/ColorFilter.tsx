@@ -14,7 +14,7 @@ function ColorFilter(props : Props) {
     return (<div>
         <FilterHeading headingText={"COLOR"}/>
         <div className={styles.contentContainer}>
-        {props.colors.map((item) => (<div onClick={() => props.onColorSelect(item)} className={styles.colorSelector} 
+        {props.colors.map((item) => (<div onClick={() => props.onColorSelect(item)} key={item} className={styles.colorSelector} 
         style={{backgroundColor: `${item}`,
                 padding: `${selectedColors.includes(item)} && 2%`,
                 border: `${selectedColors.includes(item)} && 2px solid black`}}>

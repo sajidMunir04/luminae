@@ -16,7 +16,7 @@ function SizeFilter(props : Props) {
     return (<div className={styles.container}>
         <FilterHeading headingText={"SIZES"}/>
         <div className={styles.contentContainer}>
-            {props.sizes.map((item) => (<div onClick={() => {
+            {props.sizes.map((item) => (<div key={item} onClick={() => {
                 let sizes = props.selectedSizes;
                 if (sizes.includes(item))
                     sizes = sizes.filter((size) => size !== item);

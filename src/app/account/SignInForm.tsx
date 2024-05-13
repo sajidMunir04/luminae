@@ -25,14 +25,14 @@ function SignInForm()
     const handleEmailInput = (e : ChangeEvent<HTMLInputElement>) => {
         if (emailRegex.test(e.target.value)) {
             setEmail(e.target.value);
+            const email = e.target.value;
             async function checkUserExists() {
                 const response  = await fetch('/api/auth/doesUserExists',{
                                                 method: "POST",
                                                 headers: {"Content-Type": "application/json"},
-                                                body: e.target.value as string,
+                                                body: email,
                                                 });
-                console.log(response);
-                if (response.ok) {
+                if (response.ok) {  
                     setUserStatus(EmailState.Valid);
                 }
                 else {

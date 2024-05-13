@@ -46,4 +46,23 @@
     align-items: center;
     list-style: none;
     text-decoration: none;
+    width: 40%;
+    margin: auto;
+}
+
+.paginationMainButton{
+    border: none;
+    background: none;
+    color: black;
+}
+
+.paginationButton {
+    list-style: none;
+    text-decoration: none;
+}
+
+.btnImage{
+    width: 28px;
+    height: 28px;
+    filter: invert();
 }

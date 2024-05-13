@@ -1,9 +1,8 @@
-import { DatabaseUser } from 'lucia';
 import { Db, MongoClient } from 'mongodb';
 import { lucia } from '../../../src/auth';
 import { SignInCredentials } from '@/app/lib/definitions';
 
-export default async function handler(req, res) {	
+export default async function handler(req , res) {	
 	const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
 	await client.connect();
 	console.log(req.body);
@@ -17,15 +16,15 @@ export default async function handler(req, res) {
 
 	if (!validPassword) {
 		res.status(400).json({
-			error: "Invalid password"
+			result: "Invalid password"
 		});
 	}
 	else {
-		const session = await lucia.createSession(data.id, {});
+		const session = await lucia.createSession(data._id.toString(), {});
 		res
 			.appendHeader("Set-Cookie", lucia.createSessionCookie(session.id).serialize())
 			.status(200)
-			.end();	
+			.json({result : "success"});	
 	}
 }
 

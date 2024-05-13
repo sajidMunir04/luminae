@@ -18,7 +18,7 @@ function ModelFilter(props : Props) {
             <FilterHeading headingText={"MODEL"}/>
         </div>
         <div className={styles.contentContainer}>
-            {props.modelDetails.map((item) => (<div onClick={() => props.onModelSelect(item.type)} className={styles.buttonContainer}>
+            {props.modelDetails.map((item) => (<div onClick={() => props.onModelSelect(item.type)} key={item.type} className={styles.buttonContainer}>
                 <p>{item.type}</p>
                 <p>{item.quantity}</p>
             </div>))}

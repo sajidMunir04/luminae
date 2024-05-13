@@ -1,20 +1,28 @@
 "use client";
 
-import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import styles from './HeaderTemplate.module.css';
 import ProductsBrowser from '../products/ProductsBrowser';
 import router from 'next/router';
 import { useStore } from 'zustand';
 import { useCartStore } from '../lib/store/useCartStore';
+import { lucia } from '@/auth';
+import { User } from 'lucia';
+import { UserContext } from '../utils/UserContext';
 
 function HeaderTemplate()
 {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [cartItemsCount,setCartItemCount] = useState<number>(0);
+
+    const {user} = useContext(UserContext);
+    console.log(user);
+
     let totalItems : number = 0;
     const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.getProductCount)});
 
     subscribe();   
+
 
     useEffect(() => {
         setCartItemCount(useCartStore.getState().getProductCount);
@@ -26,8 +34,9 @@ function HeaderTemplate()
         setSearchQuery(event.target.value);
     };
     
-    const onSeachButtonClick = () => {
-        router.push('/search' + searchQuery);
+    const onSeachButtonClick = (event : React.ChangeEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        router.replace('http://localhost:3000/search/' + searchQuery);
     }
 
     return (<div className={styles.container}>
@@ -54,7 +63,7 @@ function HeaderTemplate()
                         Home Decor
                     </option>
                 </select>
-                <button onClick={onSeachButtonClick} className={styles.searchButton} type="submit"><img src={'/images/magnifier.svg'}/></button>
+                <button className={styles.searchButton} type="submit"><img src={'/images/magnifier.svg'}/></button>
             </form>
             <div className={styles.buttons}>
                 <a className={styles.button} href={'http://localhost:3000/auth/signIn'}>

@@ -11,8 +11,9 @@ import productCategory from "./[productCategory]";
 
 
 
-function Index() {
+function index() {
     const router = useRouter();
+    console.log(router.query);
     const { products } = router.query;
     let filteredProducts : Product[] = [];
     const [allProducts,setProducts] = useState(filteredProducts);
@@ -100,4 +101,4 @@ function Index() {
 }
 
 
-export default Index;
+export default index;

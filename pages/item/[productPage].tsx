@@ -8,12 +8,8 @@ import ProductCategoriesManager from "@/app/shared/ProductCategoriesManager";
 
 
 export default function productPage() {
-
-    console.log("Correct page is rendering!");
-
     const router = useRouter();
     const { productPage } = router.query;
-    console.log(productPage);
     const defaultProduct : Product = {
         _id: "",
         name: "",
@@ -55,7 +51,6 @@ export default function productPage() {
                     model: data.model,
                     reviews: data.reviews
                 };
-                console.log(data);
                 setProduct(product);
             }
             catch (error) {
@@ -70,7 +65,7 @@ export default function productPage() {
     return (<>
     <HeaderTemplate/>
     <ProductCategoriesManager/>
-    {product !== null && <ProductPage product={product}/>}
+    <ProductPage product={product}/>
     <FooterTemplate/>
     </>);
 }

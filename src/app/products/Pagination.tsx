@@ -11,8 +11,10 @@ interface Props {
 
 
 function Pagination(props : Props) {
-    const startIndex =  ((props.currentPage - 1) * props.itemsPerPage);
+    const startIndex =  ((props.currentPage - 1) + props.itemsPerPage);
     const endIndex = startIndex + props.itemsPerPage;
+
+    console.log("Pagination",startIndex,endIndex);
 
     return (<div className={styles.container}>
             {props.products.map((product,index) => ((index >= startIndex && index < endIndex) && 

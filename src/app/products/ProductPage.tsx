@@ -26,11 +26,17 @@ interface ReviewData {
 }
 
 function ProductPage(props : Props) {
-    const [activeImageLink,setActiveImageLink] = useState(props.product.images[0]);
+    const [activeImageLink,setActiveImageLink] = useState<string>(props.product.images[0]);
+
     const imageClicked = (imageLink : string) => {
         setActiveImageLink(imageLink);
     }
     const [infoSection,setInfoSection] = useState<InfoSection>(InfoSection.Description);
+
+    useEffect(() => {
+        setActiveImageLink(props.product.images[0]);
+    },[props.product.images.length]);
+
 
     const reviewData : ReviewData = {
         totalReviews: 0,
@@ -77,16 +83,7 @@ function ProductPage(props : Props) {
     const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
     const { events } = useDraggable(ref, {
         applyRubberBandEffect: false
-    }); // Now we pass the reference to the useDraggable hook:
-
-    useEffect(() => {
-        console.log(activeImageLink);
-        const setMainImage = () => {
-            setActiveImageLink(props.product.images[0]);
-        }
-
-        setTimeout(setMainImage,100);
-    },[])
+    }); 
 
     return (<div className={styles.container}>
         <div className={styles.productInfo}>

@@ -157,6 +157,8 @@ function ProductsBrowser(props : Props)
         }
     }
 
+    console.log(products.length,products.length / itemsPerPage);
+
     return (<div className={styles.container}>
         <div className={styles.controllerContainer}>
         <div>
@@ -191,17 +193,24 @@ function ProductsBrowser(props : Props)
             <div>
                 <Pagination onClick={() => props.onClick(props.products[0])} products={products} itemsPerPage={itemsPerPage} currentPage={currentPage}/>
             </div>
-            <ul className={styles.paginationControlContainer}>
-                <li className="page-item disabled">
-                <a className="page-link" href="#" tabIndex={-1}>Previous</a>
-                </li>
+            <div className={styles.paginationControlContainer}>
+                <button className={styles.paginationMainButton} onClick={() => {
+                    const newPageIndex = Math.min(currentPage + 1,Math.floor(products.length / itemsPerPage) );
+                    setCurrentPage(newPageIndex);
+                }}>
+                <img className={styles.btnImage} src="/images/product/left-arrow.png"/>
+                </button>
                 {props.products.map((item,index) => (
-                    index % itemsPerPage === 0 && ((index / itemsPerPage) + 1) < 5 && <li key={(index / itemsPerPage) + 1} className="page-item"><a className="page-link" onClick={() => setCurrentPage((index / itemsPerPage) + 1)} aria-disabled={true} href="#">{(index / itemsPerPage) + 1}</a></li>
+                    (index % itemsPerPage === 0) && <button key={'aasd'+index} 
+                    className={styles.paginationButton} onClick={() => setCurrentPage(index + 1)}>{(index / itemsPerPage) + 1}</button>
                 )) }
-                <li className="page-item">
-                <a className="page-link" href="#">Next</a>
-                </li>
-            </ul>
+                <button className={styles.paginationMainButton} onClick={() => {
+                    const newPageIndex = Math.max(currentPage - 1,1 );
+                    setCurrentPage(newPageIndex);
+                }}>
+                <img className={styles.btnImage} src="/images/product/right-arrow.png"/>
+                </button>
+            </div>
         </div>
     </div>
     </div>);

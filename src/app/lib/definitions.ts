@@ -19,4 +19,4 @@ export interface UserProfileData {
     avatarLink: string
 }
 
-export const emailRegex : RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{3,4}$/g;
+export const emailRegex : RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{3}$/g;
