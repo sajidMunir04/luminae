@@ -5,7 +5,9 @@ import router from 'next/router';
 import { useStore } from 'zustand';
 import { useCartStore } from '../lib/store/useCartStore';
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser, getAuth } from "@clerk/nextjs/server";
+import { request } from 'https';
+import { RequestLike } from '@clerk/nextjs/dist/types/server/types';
 
 
 
@@ -13,11 +15,10 @@ function HeaderTemplate()
 {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [cartItemsCount,setCartItemCount] = useState<number>(0);
-    const [isUserAuthorized,setUserAuthorization] = useState(false);
-    const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.getProductCount())});
+
+    const subscribe = () => useCartStore.subscribe(state => {setTimeout(() => {setCartItemCount(state.getProductCount())},400)});
 
     subscribe();   
-
 
     useEffect(() => {
         setCartItemCount(useCartStore.getState().getProductCount());
@@ -75,19 +76,25 @@ function HeaderTemplate()
                     {cartItemsCount > 0 && <p className={styles.cartItemsText}>{cartItemsCount}</p>}
                 </a>
             </div>
-        <div>{/*
-            <div className={styles.avatarContainer}>
-                {true && <a href='http://localhost:3000/auth/signIn'><img className={styles.avatarImage} 
-                src='/images/account/profile-user.svg'/></a>}
-            </div>*/}
+        <div>
         <SignedOut>
           <SignInButton />
         </SignedOut>
         <SignedIn>
-          <UserButton userProfileMode="navigation"/>
+          <UserButton/>
         </SignedIn>
         </div>
     </div>);
+}
+
+export function getServerSideProps({ req }) {
+    const { userId } = getAuth(req);
+  
+    return {
+      props: {
+        properties: { userId },
+      },
+    };
 }
 
 export default HeaderTemplate;

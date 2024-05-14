@@ -1,10 +1,12 @@
-import DashboardSidePanel from '../src/app/account/admin/DashboardSidePanel';
+import Dashboard from '@/app/dashboard/Dashboard';
+import { auth } from '@clerk/nextjs/dist/types/server';
+import { redirect } from 'next/navigation';
 
-function admin()
+function dashboard()
 {
     return (<>
-        <DashboardSidePanel/>
-    </>);
+        <Dashboard/>
+    </>);   
 }
 
-export default admin;
+export default dashboard;

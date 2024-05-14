@@ -22,14 +22,14 @@ function PriceFilter(props : Props) {
                 <div>
 
                 </div>
-                <input className={styles.inputField} type='number' placeholder={`$ ${props.maximumPrice}`} />
+                <input className={styles.inputField} type='number' placeholder={`$ ${props.maximumPrice}`} value={'$'} />
             </div>
-            <div>
-                
+            <div className={styles.rangeContainer}>
+                <ReactSlider/>
             </div>
-            <div>
-                <p>Minimum:${props.minimumPrice}</p>
-                <p>Maximum:${props.maximumPrice}</p>
+            <div className={styles.priceInfoContainer}>
+                <p className={styles.priceInfo}>Minimum:${props.minimumPrice}</p>
+                <p className={styles.priceInfo}>Maximum:${props.maximumPrice}</p>
             </div>
         </div>
     </div>);

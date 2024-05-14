@@ -18,6 +18,7 @@ function ColorFilter(props : Props) {
         style={{backgroundColor: `${item}`,
                 padding: `${selectedColors.includes(item)} && 2%`,
                 border: `${selectedColors.includes(item)} && 2px solid black`}}>
+                    <p className={styles.checkMark}>&#x2714;</p>
         </div>))}
         </div>
     </div>);

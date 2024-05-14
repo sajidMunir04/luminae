@@ -43,8 +43,11 @@ function ProductDisplayCard(props : Props)
         </div>
         <div className={styles.textContainer}>
             <div onClick={() => props.onClick(props.product)} className={styles.contentSection}>
+                    <div className={styles.productTextContainer}>
                         <p className={styles.brandName}>{props.product.brandName}</p>
                         <p className={styles.productName}>{props.product.name}</p>
+                    </div>
+                    <div className={styles.productDetailContainer}>
                     <div className={styles.productRatingSection}>
                         <div>
                             {<img src="/star(1).png"/>}
@@ -70,6 +73,7 @@ function ProductDisplayCard(props : Props)
                                 -  props.product.price) / props.product.price) * 100)}%</p>
                         </div>
                         }
+                    </div>
                     </div>
             </div>
             <div onClick={handleProductFavorite}  className={styles.favButtonSection}>

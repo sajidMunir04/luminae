@@ -4,7 +4,7 @@
     justify-content: flex-start;
     width: 32%;
     box-shadow: 0 0 5px 1px rgba(62, 60, 60, 0.3);
-    height: 500px;
+    height: 520px;
     margin-bottom: 2%;
     box-sizing: border-box;
 }
@@ -14,6 +14,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    height: 40%;
 }
 
 .priceSection{
@@ -27,19 +28,34 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: 8% 7%;
+    padding: 6% 7%;
     box-sizing: border-box;
     height: 38%;
     justify-content: space-between;
 }
-.contentSection{
-    width: 70%;
+
+.productTextContainer{
+    height: 48%;
+}
+
+.productDetailContainer{
+    height: 32%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.contentSection{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: flex-start;
     height: 100%;
 }
+
+
 
 .favButtonSection {
     width: 20%;
@@ -55,9 +71,8 @@
     overflow: hidden;
 }
 .image{
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 16 / 5;
+    object-fit: cover;
+    max-width: 100%;
 }
 
 .brandName{
@@ -69,7 +84,6 @@
 .productName{
     font-family: Lato-Regular;
     font-size: 16px;
-    white-space: nowrap;
     width: 100%;
 }
 
