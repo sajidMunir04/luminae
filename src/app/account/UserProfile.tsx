@@ -1,8 +1,20 @@
 import { ChangeEvent } from "react";
 import { CartData } from "../lib/store/useCartStore";
 import FormInputField from "./FormInputField";
+import { useUser } from "@clerk/nextjs";
+import styles from "./UserProfile.module.css";
+import Link from "next/link";
+
 
 function UserProfile() {
+
+    const { isLoaded, isSignedIn, user } = useUser();
+    if (!isLoaded || !isSignedIn) {
+      return null
+    }
+  
+    console.log(user)  
+
     const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
 
     }
@@ -19,17 +31,28 @@ function UserProfile() {
 
     }
 
-    return (<div>
-        <div>
+    return (<div className={styles.container}>
+        <div className={styles.buttonsContainer}>
             <div>
-                <p>Profile</p>
+                <Link href='/'>Homepage</Link>
             </div>
             <div>
-                <p>Orders</p>
+                <div>
+                    <p>Profile</p>
+                </div>
+                <div>
+                    <p>Orders</p>
+                </div>
             </div>
         </div>
-        <div>
+        <div className={styles.contentSection}>
             <div>
+                <div className={styles.contentHeaderSection}>
+                    <p>Edit Profile</p>
+                    <div>
+                    <img src={user.imageUrl}/>
+                    </div>
+                </div>
                 <form>
                     <div>
                         <FormInputField fieldName={"Name"} type={"text"} placeholder={""} handleChange={handleNameChange}/>  

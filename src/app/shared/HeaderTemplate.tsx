@@ -4,13 +4,16 @@ import ProductsBrowser from '../products/ProductsBrowser';
 import router from 'next/router';
 import { useStore } from 'zustand';
 import { useCartStore } from '../lib/store/useCartStore';
-import { User } from 'lucia';
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { auth, currentUser } from "@clerk/nextjs/server";
+
+
 
 function HeaderTemplate()
 {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [cartItemsCount,setCartItemCount] = useState<number>(0);
-
+    const [isUserAuthorized,setUserAuthorization] = useState(false);
     const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.getProductCount())});
 
     subscribe();   
@@ -72,11 +75,17 @@ function HeaderTemplate()
                     {cartItemsCount > 0 && <p className={styles.cartItemsText}>{cartItemsCount}</p>}
                 </a>
             </div>
-        <div>
+        <div>{/*
             <div className={styles.avatarContainer}>
                 {true && <a href='http://localhost:3000/auth/signIn'><img className={styles.avatarImage} 
                 src='/images/account/profile-user.svg'/></a>}
-            </div>
+            </div>*/}
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton userProfileMode="navigation"/>
+        </SignedIn>
         </div>
     </div>);
 }
