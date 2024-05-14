@@ -1,6 +1,6 @@
 import { DatabaseUser } from 'lucia';
 import { Db, MongoClient } from 'mongodb';
-import { lucia } from '../../../src/auth';
+import { lucia } from '../../../lib/auth';
 import { SignUpCredentials } from '@/app/lib/definitions';
 import {SignUp} from "../../../src/model/signUpModel.mjs";
 

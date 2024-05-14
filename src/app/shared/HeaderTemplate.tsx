@@ -1,32 +1,24 @@
-"use client";
-
 import React, { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import styles from './HeaderTemplate.module.css';
 import ProductsBrowser from '../products/ProductsBrowser';
 import router from 'next/router';
 import { useStore } from 'zustand';
 import { useCartStore } from '../lib/store/useCartStore';
-import { lucia } from '@/auth';
 import { User } from 'lucia';
-import { UserContext } from '../utils/UserContext';
 
 function HeaderTemplate()
 {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [cartItemsCount,setCartItemCount] = useState<number>(0);
 
-    const {user} = useContext(UserContext);
-    console.log(user);
-
-    let totalItems : number = 0;
-    const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.getProductCount)});
+    const subscribe = () => useCartStore.subscribe(state => {setCartItemCount(state.getProductCount())});
 
     subscribe();   
 
 
     useEffect(() => {
-        setCartItemCount(useCartStore.getState().getProductCount);
-        console.log(totalItems);
+        setCartItemCount(useCartStore.getState().getProductCount());
+        console.log(useCartStore.getState().getProductCount());
     },[cartItemsCount]);
 
 

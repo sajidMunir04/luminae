@@ -1,5 +1,4 @@
 import { Db, MongoClient } from 'mongodb';
-import { lucia } from '../../../src/auth';
 import { SignInCredentials } from '@/app/lib/definitions';
 
 export default async function handler(req , res) {	
@@ -20,11 +19,7 @@ export default async function handler(req , res) {
 		});
 	}
 	else {
-		const session = await lucia.createSession(data._id.toString(), {});
-		res
-			.appendHeader("Set-Cookie", lucia.createSessionCookie(session.id).serialize())
-			.status(200)
-			.json({result : "success"});	
+		res.status(200).json({result : "success"});	
 	}
 }
 

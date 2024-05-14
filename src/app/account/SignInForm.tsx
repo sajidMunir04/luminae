@@ -8,6 +8,7 @@ import styles from './SignInForm.module.css';
 import { SignInCredentials, emailRegex } from "../lib/definitions";
 import router from "next/router";
 import { headers } from "next/headers";
+import { z } from "zod";
 
 enum EmailState {
     Unchecked,
@@ -21,6 +22,7 @@ function SignInForm()
     const [email,setEmail] = useState<string>('');
     const [password,setPassword] = useState<string>('');
     const [userStatus,setUserStatus] = useState<EmailState>(EmailState.Unchecked);
+    
 
     const handleEmailInput = (e : ChangeEvent<HTMLInputElement>) => {
         if (emailRegex.test(e.target.value)) {

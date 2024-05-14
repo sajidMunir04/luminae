@@ -36,7 +36,7 @@ const defaultData : CartData ={
     totalItems: 0
 }
 
-const dataStoreKey : string = 'cart_products_ids';
+const dataStoreKey : string = 'cartasdas213123';
 
 export const useCartStore = create<State & Actions>((set,get) => ({
     cartData: initialState.cartData,
@@ -98,7 +98,7 @@ export const useCartStore = create<State & Actions>((set,get) => ({
             cartData: storedProducts
         }))
 
-        setCookie(dataStoreKey, JSON.stringify(storedProducts));
+        setCookie(dataStoreKey, JSON.stringify(storedProducts),{sameSite: 'strict'});
     },
 
     removeFromCart: (product: Product) => {
@@ -118,6 +118,6 @@ export const useCartStore = create<State & Actions>((set,get) => ({
         set(state => ({
             cartData: products,        
         }));
-        setCookie(dataStoreKey, JSON.stringify(products));
+        setCookie(dataStoreKey, JSON.stringify(products),{sameSite: 'strict'});
     },
 }))
