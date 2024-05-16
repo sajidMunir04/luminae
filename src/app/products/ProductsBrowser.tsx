@@ -40,7 +40,7 @@ function ProductsBrowser(props : Props)
     const [products,setProducts] = useState(props.products);
     const[selectedModel,setSelectedModel] = useState('');
     const[selectedStyle,setSelectedStyle] = useState('');
-    const[selectedColor,setSelectedColor] = useState('');
+    const[selectedColor,setSelectedColor] = useState(['']);
     const[selectedSizes,setSelectedSizes] = useState(['']);
     const[minimumPriceRange,setMinimumPrice] = useState(0);
     const[maximumPriceRange,setMaximumPrice] = useState(0);
@@ -183,7 +183,7 @@ function ProductsBrowser(props : Props)
     </div>
     <div className={styles.mainSection}>
         <div className={styles.filtersContainer}>
-            <ModelFilter onModelSelect={handleModelSelection} modelDetails={filtersData.modelDetails} />
+            <ModelFilter onModelSelect={handleModelSelection} modelDetails={filtersData.modelDetails} selectedModel={selectedModel}/>
             <StyleFilter styles={filtersData.styles} onStyleSelect={handleStyleSelection} />
             <ColorFilter colors={filtersData.colors} onColorSelect={setSelectedColor} />
             <SizeFilter sizes={filtersData.productSizes} onSizeSelect={setSelectedSizes} selectedSizes={selectedSizes}/>

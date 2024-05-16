@@ -18,6 +18,14 @@
     display: flex;
 }
 
+.selectedColor{
+    border: 2px solid black;
+}
+
+.whiteColor{
+    border: 1px solid grey;
+}
+
 .checkMark{
     margin: auto;
 }

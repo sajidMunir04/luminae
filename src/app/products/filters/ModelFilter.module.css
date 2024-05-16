@@ -11,10 +11,15 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 1% 2%;
+    box-sizing: border-box;
+}
+
+.buttonActive{
+    border: 2px solid grey;
 }
 
 .button{
-    margin-left: 4%;
     color: #555555;
     font-family: Lato-Regular;
     font-size: 16px;
