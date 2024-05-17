@@ -8,7 +8,7 @@ function ProductDisplayLayoutHeader(props)
             <h3>{props.heading}</h3>
         </div>
         <div>
-            <a href={props.link}>{props.linkText}</a>
+            <a className={styles.link} href={props.link}>{props.linkText + ' >'}</a>
         </div>
     </div>);
 }

@@ -3,9 +3,10 @@ export type Product = {
     name:           string;
     description:    string;
     price:          number;
+    previousPrice:  number;
     images:         string[];
-    discount?:       number;
-    inventoryCount?: number;
+    discount:       number;
+    inventoryCount: number[];
     brandName:      string;
     category:       string;
     section:        string;

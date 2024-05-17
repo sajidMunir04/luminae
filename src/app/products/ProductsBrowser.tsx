@@ -1,6 +1,4 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import ProductDisplayCard from "./ProductDisplayCard";
-import SearchBar from "../shared/SearchBar";
 import { Product } from "../utils/Product";
 import Pagination from "./Pagination";
 import styles from "./ProductsBrowser.module.css";
@@ -12,9 +10,7 @@ import PriceFilter from "./filters/PriceFilter";
 import { ModelDetail } from "./filters/ModelFilter";
 
 interface Props {
-    products : Product[],
-    onClick: (product: Product) => void,
-    onBack: () => void
+    products : Product[]
 }
 
 interface FiltersData {
@@ -191,7 +187,7 @@ function ProductsBrowser(props : Props)
         </div>
         <div className={styles.productsContainer}>
             <div>
-                <Pagination onClick={() => props.onClick(props.products[0])} products={products} itemsPerPage={itemsPerPage} currentPage={currentPage}/>
+                <Pagination products={products} itemsPerPage={itemsPerPage} currentPage={currentPage}/>
             </div>
             <div className={styles.paginationControlContainer}>
                 <button className={styles.paginationMainButton} onClick={() => {
@@ -200,9 +196,9 @@ function ProductsBrowser(props : Props)
                 }}>
                 <img className={styles.btnImage} src="/images/product/left-arrow.png"/>
                 </button>
-                {props.products.map((item,index) => (
+                {products.map((item,index) => (
                     (index % itemsPerPage === 0) && <button key={'aasd'+index} 
-                    className={styles.paginationButton} onClick={() => setCurrentPage(index + 1)}>{(index / itemsPerPage) + 1}</button>
+                    className={styles.paginationButton} onClick={() => setCurrentPage(index)}>{(index / itemsPerPage) + 1}</button>
                 )) }
                 <button className={styles.paginationMainButton} onClick={() => {
                     const newPageIndex = Math.max(currentPage - 1,1 );

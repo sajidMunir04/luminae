@@ -51,12 +51,13 @@
 .button{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     text-decoration: none;
     color: black;
     font-family: Lato-Regular;
     font-size: 16px;
+    width: 32%;
 }
 
 .btnImage{
@@ -125,6 +126,9 @@
 
 .cartItemsText{
     background-color: greenyellow;
-    padding: 1%;
     border-radius: 50px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    margin-left: 4%;
 }

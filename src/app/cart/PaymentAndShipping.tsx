@@ -74,11 +74,11 @@ function PaymentAndShipping(props : Props) {
                 <p>Please choose a payment method</p>
             </div>
             <div>
-                <OptionCard selected={selectedPaymentService === paymentServiceOne} heading={paymentServiceOne.paymentService} logoLink={paymentServiceOne.paymentServiceImageLink} onClick={() => handlePaymentServiceSelection(paymentServiceOne)}
+                <OptionCard selected={selectedPaymentService.paymentService === paymentServiceOne.paymentService} heading={paymentServiceOne.paymentService} logoLink={paymentServiceOne.paymentServiceImageLink} onClick={() => handlePaymentServiceSelection(paymentServiceOne)}
                 info={"PayPal is a trusted online payment platform that allows individuals and businesses to securely send and receive money electronically."}/>
-                <OptionCard selected={selectedPaymentService === paymentServiceTwo} heading={paymentServiceTwo.paymentService} logoLink={paymentServiceTwo.paymentServiceImageLink} onClick={() => handlePaymentServiceSelection(paymentServiceTwo)}
+                <OptionCard selected={selectedPaymentService.paymentService === paymentServiceTwo.paymentService} heading={paymentServiceTwo.paymentService} logoLink={paymentServiceTwo.paymentServiceImageLink} onClick={() => handlePaymentServiceSelection(paymentServiceTwo)}
                 info={"PayPal is a trusted online payment platform that allows individuals and businesses to securely send and receive money electronically."}/>
-                <OptionCard selected={selectedPaymentService === paymentServiceThree} heading={paymentServiceThree.paymentService} logoLink={paymentServiceThree.paymentServiceImageLink} onClick={() => handlePaymentServiceSelection(paymentServiceThree)}
+                <OptionCard selected={selectedPaymentService.paymentService === paymentServiceThree.paymentService} heading={paymentServiceThree.paymentService} logoLink={paymentServiceThree.paymentServiceImageLink} onClick={() => handlePaymentServiceSelection(paymentServiceThree)}
                 info={"PayPal is a trusted online payment platform that allows individuals and businesses to securely send and receive money electronically."}/>
             </div>
         </div>
@@ -88,11 +88,11 @@ function PaymentAndShipping(props : Props) {
                 <p>Please choose a shipping service</p>
             </div>
             <div>
-                <OptionCard selected={selectedShippingService === shippingServiceOne} heading={shippingServiceOne.shippingService} logoLink={shippingServiceOne.shippingServiceImageLink} onClick={() => handleShippingServiceSelection(shippingServiceOne)}
+                <OptionCard selected={selectedShippingService.shippingService === shippingServiceOne.shippingService} heading={shippingServiceOne.shippingService} logoLink={shippingServiceOne.shippingServiceImageLink} onClick={() => handleShippingServiceSelection(shippingServiceOne)}
                 info={`Delivery time: ${shippingServiceOne.deliveryTime}\nShippingCost: ${shippingServiceOne.shippingCost === 0 ? 'Free' : `$${shippingServiceOne.shippingCost}`}\nInsurance: ${shippingServiceOne.hasInsurancePolicy ? 'Available' : 'Unavaiable'}`}/>
-                <OptionCard selected={selectedShippingService === shippingServiceTwo} heading={shippingServiceTwo.shippingService} logoLink={shippingServiceTwo.shippingServiceImageLink} onClick={() => handleShippingServiceSelection(shippingServiceTwo)}
+                <OptionCard selected={selectedShippingService.shippingService === shippingServiceTwo.shippingService} heading={shippingServiceTwo.shippingService} logoLink={shippingServiceTwo.shippingServiceImageLink} onClick={() => handleShippingServiceSelection(shippingServiceTwo)}
                 info={`Delivery time: ${shippingServiceTwo.deliveryTime}\nShippingCost: ${shippingServiceTwo.shippingCost === 0 ? 'Free' : `$${shippingServiceTwo.shippingCost}`}\nInsurance: ${shippingServiceTwo.hasInsurancePolicy ? 'Available' : 'Unavaiable'}`}/>
-                <OptionCard selected={selectedShippingService === shippingServiceThree} heading={shippingServiceThree.shippingService} logoLink={shippingServiceThree.shippingServiceImageLink} onClick={() => handleShippingServiceSelection(shippingServiceThree)}
+                <OptionCard selected={selectedShippingService.shippingService === shippingServiceThree.shippingService} heading={shippingServiceThree.shippingService} logoLink={shippingServiceThree.shippingServiceImageLink} onClick={() => handleShippingServiceSelection(shippingServiceThree)}
                 info={`Delivery time: ${shippingServiceThree.deliveryTime}\nShippingCost: ${shippingServiceThree.shippingCost === 0 ? 'Free' : `$${shippingServiceThree.shippingCost}`}\nInsurance: ${shippingServiceThree.hasInsurancePolicy ? 'Available' : 'Unavaiable'}`}/>
             </div>
         </div>

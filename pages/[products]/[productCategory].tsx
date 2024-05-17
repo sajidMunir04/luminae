@@ -71,16 +71,10 @@ function productCategory(){
           setTimeout(fetchData,250);       
     },[products, productCategory])
 
-
-    const handleClick = (product : Product) => {
-      const productId = product._id;
-        router.replace('http://localhost:3000' + '/item/' + productId);
-    }
-
     return (<>
       <HeaderTemplate/>
       <StoreInteractionContainer/>
-      <ProductsBrowser onClick={handleClick} products={allProducts} onBack={() => {}}/>
+      <ProductsBrowser products={allProducts}/>
       <FooterTemplate/>
     </>);
 }

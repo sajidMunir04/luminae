@@ -49,28 +49,27 @@ function ProductDisplayCard(props : Props)
                     </div>
                     <div className={styles.productDetailContainer}>
                     <div className={styles.productRatingSection}>
-                        <div>
+                        <div className={styles.starsContainer}>
                             {<img src="/star(1).png"/>}
                             {<img src="/star(1).png"/>}
                             {<img src="/star(1).png"/>}
                             {<img src="/star(1).png"/>}
                             {<img src="/star(1).png"/>}
                         </div>
-                        <div>
-                           <p>({props.product.reviews?.length})</p>
+                        <div className={styles.reviewCountContainer}>
+                            <p className={styles.reviewCountText}>({props.product.reviews?.length})</p>
                         </div>
                     </div>
                     <div className={styles.priceSection}>
                         <div>
                             <p className={styles.price}>${Math.round(props.product.price)}</p>
                         </div>
-                        {props.product.price != 0 && <div>
-                            <p className={styles.previousPrice}>${props.product.price}</p>
+                        {props.product.previousPrice != 0 && <div>
+                            <p className={styles.previousPrice}>${props.product.previousPrice}</p>
                         </div>}
-                        {props.product.price < props.product.price && 
+                        {(props.product.discount != 0) && 
                         <div>
-                            <p className={styles.discountText}>-{Math.ceil(Math.abs((props.product.price 
-                                -  props.product.price) / props.product.price) * 100)}%</p>
+                            <p className={styles.discountText}>-{props.product.discount.toFixed(0)}%</p>
                         </div>
                         }
                     </div>

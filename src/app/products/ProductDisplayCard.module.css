@@ -14,7 +14,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    height: 40%;
+    height: 50%;
 }
 
 .priceSection{
@@ -39,7 +39,7 @@
 }
 
 .productDetailContainer{
-    height: 32%;
+    height: 34%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -97,6 +97,21 @@
     font-family: Lato-Regular;
     font-size: 14px;
     color: #9D9D9D;
+}
+
+.starsContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.reviewCountContainer{
+    display: flex;
+}
+
+.reviewCountText{
+    margin: auto;
 }
 
 .discountText{

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import styles from './HeaderTemplate.module.css';
 import ProductsBrowser from '../products/ProductsBrowser';
@@ -62,10 +64,11 @@ function HeaderTemplate()
                 <button className={styles.searchButton} type="submit"><img src={'/images/magnifier.svg'}/></button>
             </form>
             <div className={styles.buttons}>
+                {/*
                 <a className={styles.button} href={'http://localhost:3000/auth/signIn'}>
                 <img className={styles.btnImage} src="/IconSign in.png"/>
                 <p>Sign in</p>
-                </a>
+                </a>*/}
                 <a className={styles.button} href={'/favorites'}>
                     <img className={styles.btnImage} src="/Favorides.png"/>
                     <p>Favorites</p>

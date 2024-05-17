@@ -8,11 +8,11 @@ function MainBanner()
         </div>
         <div className={styles.textContainer}>
         <div className={styles.textContent}>
-                <h2 className={styles.heading}>Kimonos, Caftans & Pareos</h2>
-                <p className={styles.headingContent}>Poolside glam included From $4.99</p>
+                <h2 className={styles.heading}>Premium Collections</h2>
+                <p className={styles.headingContent}>Designer wear starting from $100</p>
                 <div className={styles.button}>
                     <img src="/Icon(1).png"/>
-                    <a className={styles.buttonText} href="#">SHOP NOW</a>
+                    <a className={styles.buttonText} href="WOMAN/dresses">SHOP NOW</a>
                 </div>
         </div>
         </div>

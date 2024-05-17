@@ -212,8 +212,8 @@
 }
 
 .quantityContainer{
-    width: 30%;
-    height: 10%;
+    width: 24%;
+    height: 46px;
     display: flex;
     flex-direction: row;
     align-items: center;

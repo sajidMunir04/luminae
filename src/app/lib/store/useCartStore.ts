@@ -11,7 +11,8 @@ interface Actions {
     fetchData: () => CartData
     addToCart: (product : Product) => void
     removeFromCart: (product : Product) => void
-    getProductCount: () => number
+    getProductCount: () => number,
+    clearCart: () => void
 }
 
 export interface CartData {
@@ -52,6 +53,10 @@ export const useCartStore = create<State & Actions>((set,get) => ({
         }
 
         return defaultData;
+    },
+
+    clearCart: () => {
+        setCookie(dataStoreKey, '',{sameSite: 'strict'});
     },
 
     getProductCount: () => {

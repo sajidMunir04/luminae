@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { useCartStore } from "../lib/store/useCartStore";
 import { Product } from "../utils/Product";

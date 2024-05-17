@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     "pages/index.js"
-, "pages/api/fetchProducts.ts", "pages/api/storeProduct.ts", "src/utilities/databasePopulator.mjs", "src/model/productModel.mjs", "pages/[products]/[productCategory].js", "pages/ContextData.js", "pages/[products]/index.js", "pages/layout.js", "pages/_app.js", "databaseutilities/databasePopulator.mjs", "databaseutilities/producttypes.mjs", "src/app/api/auth/[...nextauth].js"  ],
+, "pages/api/fetchProducts.ts", "pages/api/storeProduct.ts", "src/utilities/databasePopulator.mjs", "src/model/Product.mjs", "pages/[products]/[productCategory].js", "pages/ContextData.js", "pages/[products]/index.js", "pages/layout.js", "pages/_app.js", "databaseutilities/databasePopulator.mjs", "databaseutilities/producttypes.mjs", "src/app/api/auth/[...nextauth].js", "app/layout.tsx"  ],
   "exclude": [
     "node_modules"
   ]

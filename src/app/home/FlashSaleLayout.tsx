@@ -26,5 +26,5 @@ function FlashSaleLayout()
 
 export default FlashSaleLayout;
 
-// Normally this would come from other place
-const timeInSeconds = 86400;
+// Normally this would come from database
+const timeInSeconds = 86400;    

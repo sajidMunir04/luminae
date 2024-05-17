@@ -1,6 +1,14 @@
 import styles from './ProductCategoryCard.module.css';
 
-function ProductCategoryCard(props)
+interface Props {
+    categoryInfo: string,
+    itemsDetail: string,
+    link: string,
+    imageLink: string
+}
+
+
+function ProductCategoryCard(props : Props)
 {
     return (<div className={styles.container}>
         <div className={styles.contentSection}>
@@ -12,8 +20,8 @@ function ProductCategoryCard(props)
             </p>
             <a className={styles.link} href={props.link}>Explore All Category</a>
         </div>
-        <div>
-            <img src='/Rectangle 1078.png'/>
+        <div className={styles.imageContainer}>
+            <img className={styles.image} src={props.imageLink}/>
         </div>
     </div>);
 }

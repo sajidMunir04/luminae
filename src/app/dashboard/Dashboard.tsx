@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -28,7 +30,6 @@ import Deposits from './Deposits';
 import Orders from './Orders';
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { checkRole } from "../../../utils/roles";
-import { useRouter } from 'next/router';
 
 
 const drawerWidth: number = 240;
@@ -85,9 +86,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const defaultTheme = createTheme();
 
 export default function Dashboard() {
-
-  const router = useRouter();
-
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);

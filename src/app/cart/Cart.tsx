@@ -16,20 +16,26 @@ import { error } from "console";
 function Cart() {
     const cartData = useCartStore(state => state.fetchData());
     const [totalAmount,setTotalAmount] = useState(0);
-    const [orderComplete,setOrderStatus] = useState(false);
+    const [isOrderInfoComplete,setOrderCompleteStatus] = useState(false);
     const [shippingCharges,setShippingCharges] = useState<number>(0);   
     const [taxes,setTaxes] = useState<number>(0);
-
     const [orderPlaced,setOrderPlaceStatus] = useState(false);
-
     const [totalPrice,setTotalPrice] = useState<number>(0);
-
     const [products,setProducts] = useState<CartProduct[]>([]);
     const [cartState,setCartState] = useState(CartState.Cart);
 
-    function checkOrderForm() {
+    const clearCart = useCartStore(state => state.clearCart);
 
-        setOrderStatus(true);
+    function checkOrderForm() {
+        console.log(orderData);
+        if (orderData.address !== "" && orderData.country !== "" && orderData.region !== ""
+        && orderData.firstName !== "" && orderData.email !== "" && orderData.phoneNumber !== "" &&
+           orderData.cartProducts.length > 0) {
+            setOrderCompleteStatus(true);
+        }
+        else {
+            setOrderCompleteStatus(false);
+        }
     }
 
     function placeOrder() {
@@ -62,6 +68,8 @@ function Cart() {
         }
 
         axios.post('api/postOrder',{orderFormData});
+        setOrderData(defaultOrderData);
+        clearCart();
     }
 
     const calculatePricing = (cartProducts : CartProduct[]) => {
@@ -123,9 +131,10 @@ function Cart() {
 
     const [orderData,setOrderData] = useState(defaultOrderData);
 
-    useEffect(()=> {
+    const setNewOrderData = (orderData : OrderData) => {
         checkOrderForm();
-    },[orderData])
+        setOrderData(orderData);
+    }
 
     const removeProductFromCart = (product: Product) => {
         const filteredProducts = (products as CartProduct[]).filter((item) => item.product._id !== product._id);
@@ -184,6 +193,9 @@ function Cart() {
             });
 
                 setProducts(cartProducts);
+                const newOrderData : OrderData = orderData;
+                newOrderData.cartProducts = cartProducts;
+                setOrderData(newOrderData);
             }
             catch (error) {
                 console.log(error);
@@ -192,7 +204,7 @@ function Cart() {
 
         fetchData();
 
-    },[])
+    },[cartData.productsInfo])
 
     return (<div className={styles.container}>
         <div className={styles.navigationSection}>
@@ -215,13 +227,13 @@ function Cart() {
             </div>
             </>}
             {cartState === CartState.CustomerInfo && <>
-                <CustomerInformation orderData={orderData} setOrderData={() => {setOrderData}}/>
+                <CustomerInformation orderData={orderData} setOrderData={setNewOrderData}/>
             </>}
             {cartState === CartState.ShippingandPayment && <>
-                <PaymentAndShipping orderData={orderData} setOrderData={() => {setOrderData}}/>
+                <PaymentAndShipping orderData={orderData} setOrderData={setNewOrderData}/>
             </>}
             {cartState === CartState.OrderConfirmation && <>
-                <OrderConfirmation orderData={orderData} setOrderData={() => {setOrderData}}/>
+                <OrderConfirmation orderData={orderData} setOrderData={setNewOrderData}/>
             </>}
             </div>
             <div className={styles.orderInfoContainer}>
@@ -244,7 +256,7 @@ function Cart() {
                     <p>Total Price: </p>
                     <p>${parseFloat(totalPrice.toFixed(2))}</p>
                 </div>
-                <button onClick={orderComplete ? placeOrder : () => {}} className={`${styles.checkoutButton} ${orderComplete && styles.checkoutButtonActive}`}><img className={styles.btnImage} src="/images/product/checkOut.svg"/>CHECKOUT</button>
+                <button onClick={isOrderInfoComplete ? placeOrder : () => {}} className={`${styles.checkoutButton} ${isOrderInfoComplete && styles.checkoutButtonActive}`}><img className={styles.btnImage} src="/images/product/checkOut.svg"/>CHECKOUT</button>
             </div>
         </div>
     </div>);

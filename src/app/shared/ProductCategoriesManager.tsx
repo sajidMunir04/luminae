@@ -1,8 +1,8 @@
+"use client";
+
 import Link from 'next/link';
 import styles from './ProductCategoriesManager.module.css';
-import { useContext, useEffect, useState } from 'react';
-import { useStore } from 'zustand';
-import { useCartStore } from '../lib/store/useCartStore';
+import { useEffect, useState } from 'react';
 import ProductSubCatergories from '../products/ProductSubCategories';
 
 interface ProductClassifcation {

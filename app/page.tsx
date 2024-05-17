@@ -1,3 +1,5 @@
+
+
 import '../src/app/globals.css';
 import '../src/app/fonts.css';
 import HeaderTemplate from "../src/app/shared/HeaderTemplate";
@@ -10,20 +12,14 @@ import CategoryCardsLayout from "../src/app/home/CategoryCardsLayout";
 import AdvertisementLayout from "../src/app/home/AdvertisementLayout";
 import FeaturedCategoriesLayout from "../src/app/home/FeaturedCategoriesLayout";
 import FooterTemplate from "../src/app/shared/FooterTemplate";
-import EmailSubscribeSection from '../src/app/shared/EmailSubscribeSection';
 
 function Home() {
   return (<>
-      <HeaderTemplate/>
       <StoreInteractionContainer/>
       <MainBanner/>
-      <FlashSaleLayout/>
+      <FeaturedCategoriesLayout/>
       <TrendingProductsLayout/>
       <ProductsDisplayLayout/>
-      <CategoryCardsLayout/>
-      <AdvertisementLayout/>
-      <FeaturedCategoriesLayout/>
-      <FooterTemplate/>
   </>
   );
 }

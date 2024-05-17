@@ -4,10 +4,11 @@
     border-radius: 10px;
     overflow: hidden;
     width: 30%;
+    height: 420px;
 }
 
 .imageSection{
-    grid-area: 1 / 1 / 2 / 2;
+    
 }
 
 .mainImage{
@@ -16,13 +17,13 @@
 }
 
 .tagSection {
-    grid-area: 1 / 1 / 2 / 2;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     padding: 3% 4%; 
     color: white;
+    position: absolute;
 }
 
 .tagArea{
@@ -52,22 +53,35 @@
 }
 
 .imageContainer{
-    display: grid;
+    position: relative;
+    height: 76%;
 }
 
 .textContainer{
+    height: 24%;
     background-color: #262626;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 1% 4%;
+    z-index: 1;
 }
 
 .infoText{
     display: flex;
     flex-direction: column;
     color: white;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.brandName{
+    color: white;
+    font-family: Lato-Bold;
+    font-size: 14px;
+    text-decoration: none;
+    margin-bottom: 0%;
 }
 
 
@@ -79,5 +93,8 @@
 }
 
 .externalLink{
-
+    color: white;
+    font-family: Lato-Bold;
+    font-size: 14px;
+    text-decoration: none;
 }

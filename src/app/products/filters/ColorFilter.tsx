@@ -8,21 +8,16 @@ interface Props {
 }
 
 function ColorFilter(props : Props) {
-
-    const [selectedColors,setSelectedColors] = useState<string[]>([]);
-
     const handleColorSelect = (color : string) => {
-        if (selectedColors.includes(color))
+        if (props.colors.includes(color))
         {
-            const newColors = selectedColors.filter((item) => {item !== color});
-            setSelectedColors(newColors);   
+            const newColors = props.colors.filter((item) => {item !== color});
             props.onColorSelect(newColors);
         }
         else 
         {
-            const newColors = selectedColors;
+            const newColors = props.colors;
             newColors.push(color);
-            setSelectedColors(newColors);   
             props.onColorSelect(newColors);
         }
     }
@@ -31,10 +26,9 @@ function ColorFilter(props : Props) {
         <FilterHeading headingText={"COLOR"}/>
         <div className={styles.contentContainer}>
         {props.colors.map((item) => (<div onClick={() => handleColorSelect(item)} key={item} 
-        className={`${styles.colorSelector} ${selectedColors.includes(item) && styles.selectedColor} ${item === "#FFFFFF" && styles.whiteColor}`} 
-        style={{backgroundColor: `${item}`,
-                padding: `${selectedColors.includes(item)} && 2%`}}>
-                    {selectedColors.includes(item) && <p className={styles.checkMark}>&#x2714;</p>}
+        className={`${styles.colorSelector} ${props.colors.includes(item) && styles.selectedColor} ${item === "#FFFFFF" && styles.whiteColor}`} 
+        style={{backgroundColor: `${item}`}}>
+                    {props.colors.includes(item) && <p className={styles.checkMark}>&#x2714;</p>}
         </div>))}
         </div>
     </div>);
