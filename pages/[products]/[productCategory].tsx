@@ -28,6 +28,7 @@ function productCategory(){
                     name: item.name,
                     description: item.description,
                     price: item.price,
+                    previousPrice: item.previousPrice,
                     images: item.images,
                     discount: item.discount,
                     inventoryCount: item.inventoryCount,

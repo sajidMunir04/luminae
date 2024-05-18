@@ -22,7 +22,10 @@ export default function productPage() {
         sizes: [],
         color: "",
         style: "",
-        model: ""
+        model: "",
+        previousPrice: 0,
+        discount: 0,
+        inventoryCount: []
     }
     const [product,setProduct] = useState<Product>(defaultProduct);
     
@@ -49,7 +52,8 @@ export default function productPage() {
                     color: data.color,
                     style: data.style,
                     model: data.model,
-                    reviews: data.reviews
+                    reviews: data.reviews,
+                    previousPrice: 0
                 };
                 setProduct(product);
             }

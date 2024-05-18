@@ -14,6 +14,7 @@ export default function index() {
         name: "",
         description: "",
         price: 0,
+        previousPrice: 0,
         images: [],
         brandName: "",
         category: "",
@@ -21,7 +22,9 @@ export default function index() {
         sizes: [],
         color: "",
         style: "",
-        model: ""
+        model: "",
+        discount: 0,
+        inventoryCount: []
     }
     const [product,setProduct] = useState<Product>(defaultProduct);
     

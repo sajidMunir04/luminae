@@ -4,8 +4,6 @@ import { checkRole } from '../../utils/roles';
 
 function dashboard()
 {
-
-    
     if (!checkRole("admin")) {
         redirect("/");
     }

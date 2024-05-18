@@ -13,8 +13,8 @@ export default async function handler(req : NextApiRequest,res) {
     const db : Db = client.db('Orders');
     const collection = db.collection('pendingOrders');
     const result = await collection.insertOne(data);
-    console.log(data);
-    res.status(200).json();
+    console.log(result.insertedId);
+    res.status(200).json(result);
     await client.close();
   } catch (error) {
     console.error('Error fetching data from MongoDB:', error);

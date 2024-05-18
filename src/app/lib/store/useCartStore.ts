@@ -37,7 +37,7 @@ const defaultData : CartData ={
     totalItems: 0
 }
 
-const dataStoreKey : string = 'cartasdas213123';
+const dataStoreKey : string = 'cart_asdlkq123';
 
 export const useCartStore = create<State & Actions>((set,get) => ({
     cartData: initialState.cartData,

@@ -11,6 +11,7 @@ import OrderConfirmation from "./OrderConfirmation";
 import axios from "axios";
 import { OrderFormData, ProductOrderDetail } from "./OrderFormData";
 import { error } from "console";
+import { useRouter } from "next/router";
 
 
 function Cart() {
@@ -23,6 +24,8 @@ function Cart() {
     const [totalPrice,setTotalPrice] = useState<number>(0);
     const [products,setProducts] = useState<CartProduct[]>([]);
     const [cartState,setCartState] = useState(CartState.Cart);
+
+    const router = useRouter();
 
     const clearCart = useCartStore(state => state.clearCart);
 
@@ -38,7 +41,7 @@ function Cart() {
         }
     }
 
-    function placeOrder() {
+    async function placeOrder() {
         setOrderPlaceStatus(true);
 
         const productDetailsForOrder : ProductOrderDetail[] = [];
@@ -67,9 +70,15 @@ function Cart() {
             orderTaxes: taxes
         }
 
-        axios.post('api/postOrder',{orderFormData});
-        setOrderData(defaultOrderData);
-        clearCart();
+        const order = await fetch('api/postOrder',{
+            method: "POST",
+            body: JSON.stringify(orderData)
+        });
+        const data = await order.json();
+        await setOrderData(defaultOrderData);
+        await clearCart();
+        const {_id} = data;
+        router.replace('/orderComplete/' + _id);
     }
 
     const calculatePricing = (cartProducts : CartProduct[]) => {
@@ -159,11 +168,16 @@ function Cart() {
 
 
     useEffect(() => {
-        const productsId : string[] = [];
-        cartData.productsInfo.map((item) => productsId.push(item.id));
+        let productsId : string = '';
+        cartData.productsInfo.forEach((item,index) => 
+        index === cartData.productsInfo.length ? productsId += `${item.id}` : productsId += `${item.id},`
+        );
         const fetchData = async() => {
             try {
-                const response = await fetch('api/fetchSpecificProducts/' + productsId);
+                const response = await fetch('/api/fetchSpecificProducts',{
+                    method: "POST",
+                    body: productsId
+                });
                 const data = await response.json();
                 const products : Product[] = data.map((item: Product) => ({
                     _id: item._id,
