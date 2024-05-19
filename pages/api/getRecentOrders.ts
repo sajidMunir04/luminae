@@ -5,8 +5,9 @@ export default async function handler(req, res) {
     await client.connect();
     const db: Db = client.db('Orders');
     const collection = db.collection('orders');
-    const cursor = collection.aggregate([]);
-    const data = await cursor.toArray(); // Convert cursor to array
+    const data = await collection.aggregate([{$sample: {
+      size: 10
+    }}]).toArray();
     res.status(200).json(data);
   } catch (error) {
     console.error('Error fetching data from MongoDB:', error);

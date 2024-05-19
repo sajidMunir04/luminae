@@ -57,6 +57,13 @@ function Cart() {
             productDetailsForOrder.push(productDetail);
             console.log(productDetail);
         }
+        
+        //To set order date
+
+        let date_time = new Date();
+        let date = ("0" + date_time.getDate()).slice(-2);
+        let month = ("0" + (date_time.getMonth() + 1)).slice(-2);
+        let year = date_time.getFullYear();
 
         const orderFormData : OrderFormData = {
             products: productDetailsForOrder,
@@ -68,12 +75,15 @@ function Cart() {
             customerCountry: orderData.country,
             orderPriceTotal: totalPrice,
             orderShippingCharges: shippingCharges,
-            orderTaxes: taxes
+            orderTaxes: taxes,
+            shippingService: orderData.shippingServiceInfo,
+            paymentMethod: orderData.paymentServiceInfo,
+            orderDate: year + "-" + month + "-" + date
         }
 
         const order = await fetch('api/postOrder',{
             method: "POST",
-            body: JSON.stringify(orderData)
+            body: JSON.stringify(orderFormData)
         });
         const data = await order.json();
         await setOrderData(defaultOrderData);

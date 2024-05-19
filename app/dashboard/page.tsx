@@ -1,6 +1,7 @@
 import Dashboard from '@/app/dashboard/Dashboard';
 import { redirect } from 'next/navigation';
 import { checkRole } from '../../utils/roles';
+import { OrderFormData } from '@/app/cart/OrderFormData';
 
 function dashboard()
 {
@@ -9,8 +10,9 @@ function dashboard()
     }
     
     return (<>
-        <Dashboard/>
+        <Dashboard orders={[]}/>
     </>);   
 }
+
 
 export default dashboard;

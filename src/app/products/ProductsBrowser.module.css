@@ -66,3 +66,28 @@
     height: 28px;
     filter: invert();
 }
+
+.pageControls{
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50%;
+}
+
+.pageItemSelectContainer{
+    width: 50%;
+    height: 100%;
+}
+
+.pageItemSelect{
+    padding: 2% 3%;
+    box-sizing: border-box;
+    margin-left: 2%;
+    height: 100%;
+}
+
+.sortingLogicSelect{
+    padding: 2% 3%;
+    box-sizing: border-box;
+}

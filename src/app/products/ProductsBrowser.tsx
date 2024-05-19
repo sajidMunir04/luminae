@@ -160,14 +160,14 @@ function ProductsBrowser(props : Props)
         <div>
 
         </div>
-        <div>
-            <select value={sortingAlgorithm} onChange={handleSortAlgorithmChange}>
+        <div className={styles.pageControls}>
+            <select className={styles.sortingLogicSelect} value={sortingAlgorithm} onChange={handleSortAlgorithmChange}>
                 <option value={ProductSortingAlgorithm.Relevance}>Sort By Revelance</option>
                 <option value={ProductSortingAlgorithm.PriceAscending}>Sort By Price - Ascending</option>
                 <option value={ProductSortingAlgorithm.PriceDescending}>Sort By Price - Descending</option>
             </select>
-            <label>Items Per Page
-            <select value={itemsPerPage} onChange={handleItemsChange}>
+            <label className={styles.pageItemSelectContainer}>Items Per Page
+            <select className={styles.pageItemSelect} value={itemsPerPage} onChange={handleItemsChange}>
                 <option value={12}>12</option>
                 <option value={24}>24</option>
                 <option value={36}>36</option>

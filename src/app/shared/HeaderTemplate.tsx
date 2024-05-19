@@ -10,6 +10,7 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { auth, currentUser, getAuth } from "@clerk/nextjs/server";
 import { request } from 'https';
 import { RequestLike } from '@clerk/nextjs/dist/types/server/types';
+import Link from 'next/link';
 
 
 
@@ -39,8 +40,8 @@ function HeaderTemplate()
 
     return (<div className={styles.container}>
         <div className={styles.logoContainer}>
-            <a href='/'><img src={'/Group1.png'}/>
-            </a>
+            <Link href='/'><img src={'/Group1.png'}/>
+            </Link>
         </div>
         <form className={styles.form} onSubmit={onSeachButtonClick}>
                 <input className={styles.searchInput} type="search" placeholder='Search Products' onChange={handleInputChange}/>
@@ -62,23 +63,23 @@ function HeaderTemplate()
                     </option>
                 </select>
                 <button className={styles.searchButton} type="submit"><img src={'/images/magnifier.svg'}/></button>
-            </form>
-            <div className={styles.buttons}>
+        </form>
+        <div className={styles.buttons}>
                 {/*
                 <a className={styles.button} href={'http://localhost:3000/auth/signIn'}>
                 <img className={styles.btnImage} src="/IconSign in.png"/>
                 <p>Sign in</p>
                 </a>*/}
-                <a className={styles.button} href={'/favorites'}>
+                <Link className={styles.button} href={'/favorites'}>
                     <img className={styles.btnImage} src="/Favorides.png"/>
                     <p>Favorites</p>
-                </a>
-                <a className={styles.button} href='/cart'>
+                </Link>
+                <Link className={styles.button} href='/cart'>
                     <img className={styles.btnImage} src="/card.png"/>
                     <p>Cart</p>
                     {cartItemsCount > 0 && <p className={styles.cartItemsText}>{cartItemsCount}</p>}
-                </a>
-            </div>
+                </Link>
+        </div>
         <div>
         <SignedOut>
           <SignInButton />
@@ -88,16 +89,6 @@ function HeaderTemplate()
         </SignedIn>
         </div>
     </div>);
-}
-
-export function getServerSideProps({ req }) {
-    const { userId } = getAuth(req);
-  
-    return {
-      props: {
-        properties: { userId },
-      },
-    };
 }
 
 export default HeaderTemplate;
