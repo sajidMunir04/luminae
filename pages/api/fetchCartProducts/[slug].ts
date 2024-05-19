@@ -1,10 +1,11 @@
 import { Db, MongoClient, ObjectId } from 'mongodb';
-import { Product } from '../../src/app/utils/Product';
+import { Product } from '../../../src/app/utils/Product';
 import mongoose from 'mongoose';
 
 export default async function handler(req, res) {
-  console.log(req.body);
-  const productsId = req.body;
+  const { slug } = req.query;
+  console.log(req.query);
+  const productsId = slug;
   let allProductsId : ObjectId[] = productsId.split(',');
   const filteredIds = allProductsId.filter((item) => item !== null);
   allProductsId = filteredIds;
@@ -24,8 +25,7 @@ export default async function handler(req, res) {
     res.status(200).json(data);
     await client.close();
   } catch (error) {
-    console.error('Error fetching data from MongoDB:', error);
-    res.status(500).json({ message: 'Error fetching data', error });
+    res.status(500).send(error);
   } finally {
     //
   }

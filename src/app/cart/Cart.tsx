@@ -28,6 +28,7 @@ function Cart() {
     const router = useRouter();
 
     const clearCart = useCartStore(state => state.clearCart);
+    const removeProduct = useCartStore(state => state.removeFromCart);
 
     function checkOrderForm() {
         console.log(orderData);
@@ -148,6 +149,7 @@ function Cart() {
     const removeProductFromCart = (product: Product) => {
         const filteredProducts = (products as CartProduct[]).filter((item) => item.product._id !== product._id);
         setProducts(filteredProducts);
+        removeProduct(product);
     }
 
     const onProductQuantityChange = (product: Product,quantity: number) => {
@@ -168,16 +170,11 @@ function Cart() {
 
 
     useEffect(() => {
-        let productsId : string = '';
-        cartData.productsInfo.forEach((item,index) => 
-        index === cartData.productsInfo.length ? productsId += `${item.id}` : productsId += `${item.id},`
-        );
+        const productsId : string[] = [];
+        cartData.productsInfo.map((item) => productsId.push(item.id));
         const fetchData = async() => {
             try {
-                const response = await fetch('/api/fetchSpecificProducts',{
-                    method: "POST",
-                    body: productsId
-                });
+                const response = await fetch('/api/fetchCartProducts/'+ productsId);
                 const data = await response.json();
                 const products : Product[] = data.map((item: Product) => ({
                     _id: item._id,
@@ -218,7 +215,7 @@ function Cart() {
 
         fetchData();
 
-    },[cartData.productsInfo])
+    },[orderData.cartProducts.length])
 
     return (<div className={styles.container}>
         <div className={styles.navigationSection}>
