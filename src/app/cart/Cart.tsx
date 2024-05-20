@@ -277,7 +277,7 @@ function Cart() {
                     <p>Total Price: </p>
                     <p>${parseFloat(totalPrice.toFixed(2))}</p>
                 </div>
-                <button onClick={isOrderInfoComplete ? placeOrder : () => {}} className={`${styles.checkoutButton} ${isOrderInfoComplete && styles.checkoutButtonActive}`}><img className={styles.btnImage} src="/images/product/checkOut.svg"/>CHECKOUT</button>
+                <button onClick={isOrderInfoComplete ? placeOrder : () => {}} aria-disabled={orderPlaced} className={`${styles.checkoutButton} ${isOrderInfoComplete && styles.checkoutButtonActive}`}><img className={styles.btnImage} src="/images/product/checkOut.svg"/>CHECKOUT</button>
             </div>
         </div>
     </div>);
