@@ -51,20 +51,30 @@
 }
 
 .paginationMainButton{
-    border: none;
-    background: none;
+    text-decoration: none;
     color: black;
+    display: flex;
+    font-family: Lato-Bold;
+    font-size: 16px;
 }
 
 .paginationButton {
-    list-style: none;
     text-decoration: none;
+    font-family: Lato-Bold;
+    font-size: 18px;
+    color: black;
+}
+
+.extraButtonsArea{
+    font-family: Lato-Bold;
+    font-size: 18px;
 }
 
 .btnImage{
-    width: 28px;
-    height: 28px;
+    width: 18px;
+    height: 18px;
     filter: invert();
+    margin: auto;
 }
 
 .pageControls{

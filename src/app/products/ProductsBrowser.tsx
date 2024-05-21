@@ -34,12 +34,11 @@ function ProductsBrowser(props : Props)
     const [currentPage,setCurrentPage] = useState(1);
     const [sortingAlgorithm,setSortingAlgorithm] = useState(ProductSortingAlgorithm.Relevance);
     const [products,setProducts] = useState(props.products);
-    const[selectedModel,setSelectedModel] = useState('');
-    const[selectedStyle,setSelectedStyle] = useState('');
-    const[selectedColor,setSelectedColor] = useState(['']);
+    const[selectedModels,setSelectedModels] = useState(['']);
+    const[selectedStyles,setSelectedStyles] = useState(['']);
+    const[selectedColors,setSelectedColors] = useState<string[]>(['']);
     const[selectedSizes,setSelectedSizes] = useState(['']);
-    const[minimumPriceRange,setMinimumPrice] = useState(0);
-    const[maximumPriceRange,setMaximumPrice] = useState(0);
+    const[priceRange,setPriceRange] = useState<number[]>([]);
     const defaultFilterData : FiltersData = {
         minPrice: 0,
         maxPrice: 0,
@@ -50,26 +49,52 @@ function ProductsBrowser(props : Props)
     }
     const[filtersData,setFiltersData] = useState<FiltersData>(defaultFilterData);
 
-    const handleModelSelection = (model : string) => {
-        setSelectedModel(model);
-        const filteredProducts = props.products.filter((product) => product.model === model);
+    const handleModelSelection = (models : string[]) => {
+        setProducts(props.products);
+        setSelectedModels(models);
+        setSelectedColors(['']);
+        setSelectedStyles(['']);
+        setSelectedSizes(['']);
+        const filteredProducts = props.products.filter((product) => models.includes(product.model));
         setProducts(filteredProducts);
     }
 
-    const handleStyleSelection = (style : string) => {
-        setSelectedStyle(style);
-        const filteredProducts = props.products.filter((product) => product.style === style);
+    const handleStyleSelection = (styles : string[]) => {
+        setProducts(props.products);
+        setSelectedModels(['']);
+        setSelectedColors(['']);
+        setSelectedStyles(styles);
+        setSelectedSizes(['']);
+        const filteredProducts = props.products.filter((product) => styles.includes(product.style));
+        setProducts(filteredProducts);
+    }
+
+    const handleColorSelection = (colors : string[]) => {
+        setProducts(props.products);
+        setSelectedModels(['']);
+        setSelectedColors(colors);
+        setSelectedStyles(['']);
+        setSelectedSizes(['']);
+        const filteredProducts = products.filter((product) => selectedColors.includes(product.color));
         setProducts(filteredProducts);
     }
 
     const handleSizeSelection = (sizes : string[]) => {
+        setSelectedModels(['']);
+        setSelectedColors(['']);
+        setSelectedStyles(['']);
         setSelectedSizes(sizes);
         const filteredProducts = products.filter(function checkSize(product){
-            product.sizes.forEach((size) => sizes.includes(size))
+            product.sizes.forEach((size,index) => sizes.includes(size) && product.inventoryCount[index] > 0)
         });
         setProducts(filteredProducts);
     }
 
+    const handlePriceSelection = (newPriceRange : number[]) =>{
+        setPriceRange(newPriceRange);
+        const filteredProducts = products.filter((product) => product.price >= newPriceRange[0] && product.price <= newPriceRange[1]);
+        setProducts(filteredProducts);
+    }
 
     useEffect(() => {
         setProducts(props.products);
@@ -131,7 +156,6 @@ function ProductsBrowser(props : Props)
         const value = parseInt(event.target.value);
         const enumValues = Object.values(ProductSortingAlgorithm);
         const enumValue = enumValues[value] as number;
-        console.log(enumValue,typeof(enumValue));
         setSortingAlgorithm(value);
         setNewSortingAlgorithm(value);
     }
@@ -152,8 +176,6 @@ function ProductsBrowser(props : Props)
             setProducts(filteredProducts)   
         }
     }
-
-    console.log(products.length,products.length / itemsPerPage);
 
     return (<div className={styles.container}>
         <div className={styles.controllerContainer}>
@@ -179,34 +201,37 @@ function ProductsBrowser(props : Props)
     </div>
     <div className={styles.mainSection}>
         <div className={styles.filtersContainer}>
-            <ModelFilter onModelSelect={handleModelSelection} modelDetails={filtersData.modelDetails} selectedModel={selectedModel}/>
-            <StyleFilter styles={filtersData.styles} onStyleSelect={handleStyleSelection} />
-            <ColorFilter colors={filtersData.colors} onColorSelect={setSelectedColor} />
-            <SizeFilter sizes={filtersData.productSizes} onSizeSelect={setSelectedSizes} selectedSizes={selectedSizes}/>
+            <ModelFilter onModelSelect={handleModelSelection} modelDetails={filtersData.modelDetails} selectedModels={selectedModels}/>
+            <StyleFilter styles={filtersData.styles} onStyleSelect={handleStyleSelection} selectedStyles={selectedStyles}/>
+            <ColorFilter colors={filtersData.colors} onColorSelect={handleColorSelection} selectedColors={selectedColors}/>
+            <SizeFilter sizes={filtersData.productSizes} onSizeSelect={handleSizeSelection} selectedSizes={selectedSizes}/>
             <PriceFilter minimumPrice={filtersData.minPrice} maximumPrice={filtersData.maxPrice} />
         </div>
         <div className={styles.productsContainer}>
             <div>
                 <Pagination products={products} itemsPerPage={itemsPerPage} currentPage={currentPage}/>
             </div>
-            <div className={styles.paginationControlContainer}>
-                <button className={styles.paginationMainButton} onClick={() => {
+            {products.length > 0 && <div className={styles.paginationControlContainer}>
+                <a className={styles.paginationMainButton} onClick={() => {
                     const newPageIndex = Math.min(currentPage + 1,Math.floor(products.length / itemsPerPage) );
                     setCurrentPage(newPageIndex);
-                }}>
-                <img className={styles.btnImage} src="/images/product/left-arrow.png"/>
-                </button>
+                }} href="#">
+                <img className={styles.btnImage} src="/images/product/left-arrow.png"/>Previous
+                </a>
                 {products.map((item,index) => (
-                    (index % itemsPerPage === 0) && <button key={'aasd'+index} 
-                    className={styles.paginationButton} onClick={() => setCurrentPage(index)}>{(index / itemsPerPage) + 1}</button>
-                )) }
-                <button className={styles.paginationMainButton} onClick={() => {
+                    (index % itemsPerPage === 0 && (index / itemsPerPage) < currentPage + 2) && <a key={'aasd'+index} href="#"
+                    className={styles.paginationButton} onClick={() => setCurrentPage(index)}>{(index / itemsPerPage) + 1}</a>
+                ))}
+                {
+                    (products.length / itemsPerPage > currentPage + 2) && <p className={styles.extraButtonsArea}>...</p> 
+                }
+                <a className={styles.paginationMainButton} href="#" onClick={() => {
                     const newPageIndex = Math.max(currentPage - 1,1 );
                     setCurrentPage(newPageIndex);
-                }}>
+                }}>Next
                 <img className={styles.btnImage} src="/images/product/right-arrow.png"/>
-                </button>
-            </div>
+                </a>
+            </div>}
         </div>
     </div>
     </div>);

@@ -13,10 +13,12 @@
     align-items: center;
     padding: 1% 2%;
     box-sizing: border-box;
+    margin-block: 4%;
 }
 
 .buttonActive{
     border: 2px solid grey;
+    border-radius: 12px;
 }
 
 .button{

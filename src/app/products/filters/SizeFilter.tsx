@@ -10,21 +10,22 @@ interface Props {
 
 function SizeFilter(props : Props) {
 
-
-
+    const handleModelSelection = (size: string) => {
+        if (props.selectedSizes.includes(size)){
+            const filteredModels = props.selectedSizes.filter((item) => item !== size);
+            props.onSizeSelect(filteredModels);
+        }
+        else{
+            const filteredModels = props.selectedSizes;
+            filteredModels.push(size);
+            props.onSizeSelect(filteredModels);
+        }
+    }
 
     return (<div className={styles.container}>
         <FilterHeading headingText={"SIZES"}/>
         <div className={styles.contentContainer}>
-            {props.sizes.map((item) => (<div className={styles.sizeTag} key={item} onClick={() => {
-                let sizes = props.selectedSizes;
-                if (sizes.includes(item))
-                    sizes = sizes.filter((size) => size !== item);
-                else
-                    sizes.push(item);
-
-                props.onSizeSelect(sizes);
-            }}><p>{item}</p></div>))}
+            {props.sizes.map((item) => (<div className={`${styles.sizeTag} ${props.selectedSizes.includes(item) && styles.selectedTag}`} key={item} onClick={() => {handleModelSelection(item)}}><p className={styles.tagText}>{item}</p></div>))}
         </div>
     </div>);
 }

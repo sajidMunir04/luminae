@@ -1,6 +1,6 @@
 import FilterHeading from "./FilterHeading";
 import styles from "./PriceFilter.module.css";
-import ReactSlider from "react-slider";
+import * as Slider from '@radix-ui/react-slider';
 
 
 interface Props {
@@ -22,10 +22,16 @@ function PriceFilter(props : Props) {
                 <div>
 
                 </div>
-                <input className={styles.inputField} type='number' placeholder={`$ ${props.maximumPrice}`} value={'$'} />
+                <input className={styles.inputField} type='number' placeholder={`$ ${props.maximumPrice}`} />
             </div>
-            <div className={styles.rangeContainer}>
-                <ReactSlider/>
+            <div className={styles.priceRangeContainer}>
+            <Slider.Root min={10} max={100} asChild={false} step={1}>
+                <Slider.Track>
+                <Slider.Range />
+                </Slider.Track>
+                <Slider.Thumb />
+
+            </Slider.Root>
             </div>
             <div className={styles.priceInfoContainer}>
                 <p className={styles.priceInfo}>Minimum:${props.minimumPrice}</p>

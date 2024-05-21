@@ -59,3 +59,8 @@
     transform: rotateY(180deg);
     z-index: 1%;
 }
+
+.priceRangeContainer{
+    height: 30px;
+    width: 100%;
+}

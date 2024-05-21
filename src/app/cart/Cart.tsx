@@ -55,15 +55,7 @@ function Cart() {
                 unitPrice: orderData.cartProducts[i].product.price
             }
             productDetailsForOrder.push(productDetail);
-            console.log(productDetail);
         }
-        
-        //To set order date
-
-        let date_time = new Date();
-        let date = ("0" + date_time.getDate()).slice(-2);
-        let month = ("0" + (date_time.getMonth() + 1)).slice(-2);
-        let year = date_time.getFullYear();
 
         const orderFormData : OrderFormData = {
             products: productDetailsForOrder,
@@ -78,7 +70,7 @@ function Cart() {
             orderTaxes: taxes,
             shippingService: orderData.shippingServiceInfo,
             paymentMethod: orderData.paymentServiceInfo,
-            orderDate: year + "-" + month + "-" + date
+            orderDate: useGetCurrentDate()
         }
 
         const order = await fetch('api/postOrder',{
@@ -120,11 +112,6 @@ function Cart() {
 
         getShippingChargesAndTaxes();
     }
-
-    
-    useEffect(() => {
-        calculatePricing(products);
-    },products)
 
     const defaultOrderData : OrderData = {
         cartProducts: products,
@@ -213,10 +200,11 @@ function Cart() {
                 cartProducts.push(cartProduct);
             });
 
-                setProducts(cartProducts);
-                const newOrderData : OrderData = orderData;
-                newOrderData.cartProducts = cartProducts;
-                setOrderData(newOrderData);
+            calculatePricing(cartProducts);
+            setProducts(cartProducts);
+            const newOrderData : OrderData = orderData;
+            newOrderData.cartProducts = cartProducts;
+            setOrderData(newOrderData);
             }
             catch (error) {
                 console.log(error);
