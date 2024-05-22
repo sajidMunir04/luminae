@@ -5,7 +5,7 @@ import styles from "./Cart.module.css";
 import { Product } from "../utils/Product";
 import CustomerInformation from "./CustomerInformation";
 import PaymentAndShipping from "./PaymentAndShipping";
-import { OrderData } from "./OrderData";
+import { OrderData, defaultOrderData} from "./OrderData";
 import { CartProduct } from "./CartProduct";
 import OrderConfirmation from "./OrderConfirmation";
 import axios from "axios";
@@ -31,7 +31,6 @@ function Cart() {
     const removeProduct = useCartStore(state => state.removeFromCart);
 
     function checkOrderForm() {
-        console.log(orderData);
         if (orderData.address !== "" && orderData.country !== "" && orderData.region !== ""
         && orderData.firstName !== "" && orderData.email !== "" && orderData.phoneNumber !== "" &&
            orderData.cartProducts.length > 0) {
@@ -77,6 +76,12 @@ function Cart() {
             method: "POST",
             body: JSON.stringify(orderFormData)
         });
+
+        const result = await fetch('api/updateProductsDatabase',{
+            method: "POST",
+            body : JSON.stringify(productDetailsForOrder)
+        })
+
         const data = await order.json();
         await setOrderData(defaultOrderData);
         await clearCart();
@@ -111,29 +116,6 @@ function Cart() {
         }
 
         getShippingChargesAndTaxes();
-    }
-
-    const defaultOrderData : OrderData = {
-        cartProducts: products,
-        paymentServiceInfo: {
-            paymentService: "",
-            paymentServiceImageLink: "",
-            info: ""
-        },
-        shippingServiceInfo: {
-            shippingService: "",
-            shippingServiceImageLink: "",
-            deliveryTime: "",
-            shippingCost: 0,
-            hasInsurancePolicy: false
-        },
-        email: "",
-        firstName: "",
-        lastName: "",
-        country: "",
-        region: "",
-        address: "",
-        phoneNumber: ""
     }
 
     const [orderData,setOrderData] = useState(defaultOrderData);

@@ -15,3 +15,27 @@ export interface OrderData{
     address: string;
     phoneNumber: string;
 }
+
+
+export const defaultOrderData : OrderData = {
+    cartProducts: [],
+    paymentServiceInfo: {
+        paymentService: "",
+        paymentServiceImageLink: "",
+        info: ""
+    },
+    shippingServiceInfo: {
+        shippingService: "",
+        shippingServiceImageLink: "",
+        deliveryTime: "",
+        shippingCost: 0,
+        hasInsurancePolicy: false
+    },
+    email: "",
+    firstName: "",
+    lastName: "",
+    country: "",
+    region: "",
+    address: "",
+    phoneNumber: ""
+}
