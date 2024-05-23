@@ -50,3 +50,23 @@
     max-width: 100%;
     transform: scale(1.1);
 }
+
+@media (max-width: 700px) {
+
+    .headingText{
+        font-size: 24px;
+    }
+
+.detailText{
+    font-size: 18px;
+}
+
+    .container{
+        width: 100%;
+        margin-bottom: 4%;
+    }
+
+    .link{
+        font-size: 14px;
+    }
+}

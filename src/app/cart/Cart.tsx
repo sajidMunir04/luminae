@@ -51,7 +51,8 @@ function Cart() {
                 _id: orderData.cartProducts[i].product._id,
                 name: orderData.cartProducts[i].product.name,
                 quantity: orderData.cartProducts[i].quantity,
-                unitPrice: orderData.cartProducts[i].product.price
+                unitPrice: orderData.cartProducts[i].product.price,
+                size: ""
             }
             productDetailsForOrder.push(productDetail);
         }
@@ -177,8 +178,9 @@ function Cart() {
                 products.map((item,index) => {
                     const cartProduct : CartProduct = {
                         product: item,
-                        quantity: cartData.productsInfo[index].quantity > 0 ? cartData.productsInfo[index].quantity : 1
-                }
+                        quantity: cartData.productsInfo[index].quantity > 0 ? cartData.productsInfo[index].quantity : 1,
+                        size: cartData.productsInfo[index].size
+                    }
                 cartProducts.push(cartProduct);
             });
 
@@ -213,7 +215,7 @@ function Cart() {
                     </p>
                     <div>
                         {products?.map((item) => <CartItem product={item.product} quantity={item.quantity}
-                        onProductRemove={() => removeProductFromCart(item.product)} onProductQuantityChange={onProductQuantityChange}/>)}
+                        onProductRemove={() => removeProductFromCart(item.product)} onProductQuantityChange={onProductQuantityChange} size={item.size}/>)}
                     </div>
             </div>
             </>}

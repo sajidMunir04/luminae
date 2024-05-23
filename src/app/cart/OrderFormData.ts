@@ -4,6 +4,7 @@ import { ShippingServiceInfo } from "./ShippingServiceInfo"
 export interface ProductOrderDetail{
     _id: string,
     name: string,
+    size: string,
     quantity: number,
     unitPrice: number
 }

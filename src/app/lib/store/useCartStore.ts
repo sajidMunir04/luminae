@@ -9,7 +9,7 @@ interface State {
 
 interface Actions {
     fetchData: () => CartData
-    addToCart: (product : Product) => void
+    addToCart: (product : Product,productSize : string) => void
     removeFromCart: (product : Product) => void
     getProductCount: () => number,
     clearCart: () => void
@@ -22,7 +22,8 @@ export interface CartData {
 
 interface ProductInfo{
     id: string,
-    quantity: number
+    quantity: number,
+    size: string
 }
 
 const initialState : State = {
@@ -72,7 +73,7 @@ export const useCartStore = create<State & Actions>((set,get) => ({
         return 0;
     },
 
-    addToCart : (product: Product) => {
+    addToCart : (product: Product,productSize : string) => {
         let storedProducts : CartData = {
             productsInfo: [],
             totalItems: 0
@@ -93,7 +94,8 @@ export const useCartStore = create<State & Actions>((set,get) => ({
         else{
             const newProduct : ProductInfo = {
                 id: product._id,
-                quantity: 1
+                quantity: 1,
+                size: productSize
             }
 
             storedProducts.productsInfo.push(newProduct);

@@ -318,3 +318,15 @@
 .reviewInfoContainer{
     width: 34%;
 }
+
+@media (max-width: 700px) {
+    .container{
+        padding: 0%;
+        flex-direction: column;
+    }
+
+    .productInfo{
+        flex-direction: column;
+        width: 100%;
+    }
+}

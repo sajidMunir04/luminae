@@ -8,6 +8,7 @@ import { CartProduct } from './CartProduct';
 interface Props {
     product: Product,
     quantity: number,
+    size: string,
     onProductQuantityChange: (product: Product,quantity: number) => void,
     onProductRemove: (product: Product) => void
 }
@@ -38,6 +39,10 @@ function CartItem(props : Props)
                     <p>Color: </p>
                     <div className={styles.colorMarker} style={{color : `${props.product.color}`}}>
                     </div>
+                </div>
+                <div className={styles.colorContainer}>
+                    <p>Size: </p>
+                    <p>{props.size}</p>
                 </div>
             </div>
         </div>

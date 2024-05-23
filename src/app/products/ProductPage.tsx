@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Product } from "../utils/Product";
+import { Product, ProductInventoryCategory } from "../utils/Product";
 import styles from "./ProductPage.module.css";
 import { useDraggable } from "react-use-draggable-scroll";
 import { useCartStore } from "../lib/store/useCartStore";
@@ -27,6 +27,18 @@ interface ReviewData {
 
 function ProductPage(props : Props) {
     const [activeImageLink,setActiveImageLink] = useState<string>(props.product.images[0]);
+    const [selectedSizeIndex,setSelectedSizeIndex] = useState(0);
+
+    const productInventoryCategories : ProductInventoryCategory[] = [];
+
+
+    props.product.sizes.map((size,index) =>{
+        if (props.product.inventoryCount[index] > 0)
+            productInventoryCategories.push({
+                size: size,
+                stock: props.product.inventoryCount[index]
+            })    
+    })
 
     const imageClicked = (imageLink : string) => {
         setActiveImageLink(imageLink);
@@ -110,22 +122,22 @@ function ProductPage(props : Props) {
                 <div className={styles.detailContainer}>
                     <p className={styles.infoText}>Size</p>
                     <div className={styles.sizesContainer}>
-                        {props.product.sizes.map((item) => (
-                            <p className={styles.sizeTag}>{item}</p>
+                        {productInventoryCategories.map((item,index) => (
+                            <p onClick={() => setSelectedSizeIndex(index)} className={styles.sizeTag}>{item.size}</p>
                         ))}
                     </div>
                 </div>
                 <div className={styles.detailContainer}>
                     <p className={styles.infoText}>Color</p>
                     <div>
-                        {<div className={styles.colorMarker} style={{backgroundColor: `${props.product.color}`}}></div>}
+                        <div className={styles.colorMarker} style={{backgroundColor: `${props.product.color}`}}></div>
                     </div>
                 </div>
                 <div className={styles.detailContainer}>
-                    <p className={styles.infoText}>Quantity</p>
+                    <p className={styles.infoText}>In Stock</p>
                     <div className={styles.detailContainerContent}>
                         <div className={styles.quantityContainer}>
-                            <QuantityManagingCard quantity={1} setQuantity={function (quantity: number): void {} }/>
+                            <p>0</p>
                         </div>
                         <div>
 
@@ -134,7 +146,7 @@ function ProductPage(props : Props) {
                 </div>
                 <div className={styles.buttonContainer}>
                     <button className={styles.shopButton} type='button'>Shop Now</button>
-                    <button className={styles.addToCartButton} onClick={() => addProductToCart(props.product)} type='button'>
+                    <button className={styles.addToCartButton} onClick={() => addProductToCart(props.product,productInventoryCategories[selectedSizeIndex].size)} type='button'>
                         <img className={styles.cartBtnImage} src="/images/product/tocart.svg"/> Add to Cart</button>
                 </div>
             </div>

@@ -14,7 +14,12 @@ export type Product = {
     color:          string,
     style:          string,
     model:          string,    
-    reviews?:       ProductReview[];
+    reviews?:       ProductReview[],
+}
+
+export interface ProductInventoryCategory{
+    size: string,
+    stock: number 
 }
 
 interface ProductReview {
