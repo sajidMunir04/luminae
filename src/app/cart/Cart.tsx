@@ -12,6 +12,8 @@ import axios from "axios";
 import { OrderFormData, ProductOrderDetail } from "./OrderFormData";
 import { error } from "console";
 import { useRouter } from "next/router";
+import { OrderedProduct } from "./OrderedProduct";
+import { useGetCurrentDate } from "../lib/hooks/useGetCurrentDate";
 
 
 function Cart() {
@@ -78,11 +80,23 @@ function Cart() {
             body: JSON.stringify(orderFormData)
         });
 
-        const result = await fetch('api/updateProductsDatabase',{
-            method: "POST",
-            body : JSON.stringify(productDetailsForOrder)
-        })
+        const orderedProducts : OrderedProduct[] = orderData.cartProducts.map(function mapData(item) {
+            const orderedProduct : OrderedProduct ={
+                _id: item.product._id,
+                size: item.size,
+                quantity: item.quantity
+            }
+            return orderedProduct;
+        });
 
+        await orderedProducts;
+
+        const result = await fetch('/api/updateProductsDatabase',{
+            method: "POST",
+            body : JSON.stringify(orderedProducts)
+        })
+        const updatedData = await result.json();
+        console.log(updatedData);
         const data = await order.json();
         await setOrderData(defaultOrderData);
         await clearCart();
@@ -130,6 +144,7 @@ function Cart() {
         const filteredProducts = (products as CartProduct[]).filter((item) => item.product._id !== product._id);
         setProducts(filteredProducts);
         removeProduct(product);
+        calculatePricing(filteredProducts);
     }
 
     const onProductQuantityChange = (product: Product,quantity: number) => {

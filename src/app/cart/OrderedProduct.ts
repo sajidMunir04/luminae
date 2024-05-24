@@ -1,10 +1,7 @@
-export interface OrderedProduct {
-    _id:            string;
-    productId:      string;
-    name:           string;
-    description:    string;
-    price:          number;
-    image:          string;
-    brandName:      string;
-    sizes:          string
+import { Product } from "../utils/Product";
+
+export class OrderedProduct {
+    _id: string;
+    size: string;
+    quantity: number
 }

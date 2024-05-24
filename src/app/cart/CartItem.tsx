@@ -36,13 +36,13 @@ function CartItem(props : Props)
             <div className={styles.productSpecificInfo}>
                 <p className={styles.productNameText}>{props.product.name}</p>
                 <div className={styles.colorContainer}>
-                    <p>Color: </p>
+                    <p className={styles.infoText}>Color: </p>
                     <div className={styles.colorMarker} style={{color : `${props.product.color}`}}>
                     </div>
                 </div>
                 <div className={styles.colorContainer}>
-                    <p>Size: </p>
-                    <p>{props.size}</p>
+                    <p className={styles.infoText}>Size: </p>
+                    <p className={styles.infoText}>{props.size}</p>
                 </div>
             </div>
         </div>
