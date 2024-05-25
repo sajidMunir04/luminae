@@ -5,6 +5,7 @@ import ProductPage from "@/app/products/ProductPage";
 import HeaderTemplate from "@/app/shared/HeaderTemplate";
 import FooterTemplate from "@/app/shared/FooterTemplate";
 import ProductCategoriesManager from "@/app/shared/ProductCategoriesManager";
+import OrderComplete from "@/app/cart/OrderComplete";
 
 
 export default function orderProcessed() {
@@ -14,10 +15,7 @@ export default function orderProcessed() {
     return (<>
     <HeaderTemplate/>
     <ProductCategoriesManager/>
-    <div>
-        <h1>Thank you for your order!</h1>
-        <p>Your order Id is: {orderProcessed}</p>
-    </div>
+    <OrderComplete orderId={orderProcessed as string}/>
     <FooterTemplate/>
     </>);
 }

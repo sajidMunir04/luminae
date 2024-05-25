@@ -1,0 +1,49 @@
+.table{
+    width: 100%;
+    height: max-content;
+    padding: 2%;
+}
+
+.tableHead{
+    width: 100%;
+    height: max-content;
+}
+
+.tableBody{
+    width: 100%;
+    height: max-content;
+}
+
+.tableRow{
+    height: 55px;
+}
+
+.orderDateSection{
+    width: 10%;
+    text-align: justify;
+}
+
+.customerNameSection{
+    width: 22%;
+    text-align: justify;
+}
+
+.totalAmountSection{
+    width: 6%;
+    text-align: justify;
+}
+
+.totalProductsSection{
+    width: 8%;
+    text-align: justify;
+}
+
+.contactNumberSection{
+    width: 20%;
+    text-align: justify;
+}
+
+.emailSection{
+    width: 22%;
+    text-align: justify;
+}

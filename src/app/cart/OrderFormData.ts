@@ -23,6 +23,7 @@ export interface OrderFormData {
     orderTaxes: number,
     shippingService: ShippingServiceInfo,
     paymentMethod: PaymentServiceInfo,
-    orderDate: string
+    orderDate: string,
+    customerId : string
 }
 

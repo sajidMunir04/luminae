@@ -70,6 +70,10 @@ function HeaderTemplate()
                 <img className={styles.btnImage} src="/IconSign in.png"/>
                 <p>Sign in</p>
                 </a>*/}
+                {
+                <Link className={styles.button} href={'/favorites'}>
+                    <p>My Orders</p>
+                </Link>}
                 <Link className={styles.button} href={'/favorites'}>
                     <img className={styles.btnImage} src="/Favorides.png"/>
                     <p>Favorites</p>

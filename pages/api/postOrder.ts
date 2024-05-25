@@ -5,15 +5,13 @@ import {Order} from "@/model/orderModel.mjs";
 
 
 export default async function handler(req : NextApiRequest,res) {
-    console.log(req.body);
-    const data : OrderFormData = req.body;
+    const data : OrderFormData = JSON.parse(req.body);
     const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {
     await client.connect();
     const db : Db = client.db('Orders');
     const collection = db.collection('pendingOrders');
-    const result = await collection.insertOne(data);
-    console.log(result.insertedId);
+    const result = (await collection.insertOne(data)).insertedId;
     res.status(200).json(result);
     await client.close();
   } catch (error) {

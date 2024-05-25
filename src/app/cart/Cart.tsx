@@ -14,6 +14,8 @@ import { error } from "console";
 import { useRouter } from "next/router";
 import { OrderedProduct } from "./OrderedProduct";
 import { useGetCurrentDate } from "../lib/hooks/useGetCurrentDate";
+import { setCookie } from "cookies-next";
+import { auth } from "@clerk/nextjs/dist/types/server";
 
 
 function Cart() {
@@ -26,7 +28,7 @@ function Cart() {
     const [totalPrice,setTotalPrice] = useState<number>(0);
     const [products,setProducts] = useState<CartProduct[]>([]);
     const [cartState,setCartState] = useState(CartState.Cart);
-
+    const {userId} = auth();
     const router = useRouter();
 
     const clearCart = useCartStore(state => state.clearCart);
@@ -72,8 +74,11 @@ function Cart() {
             orderTaxes: taxes,
             shippingService: orderData.shippingServiceInfo,
             paymentMethod: orderData.paymentServiceInfo,
-            orderDate: useGetCurrentDate()
+            orderDate: useGetCurrentDate(),
+            customerId: userId as string
         }
+
+        setCookie('order',orderFormData);
 
         const order = await fetch('api/postOrder',{
             method: "POST",
@@ -89,19 +94,19 @@ function Cart() {
             return orderedProduct;
         });
 
-        await orderedProducts;
-
         const result = await fetch('/api/updateProductsDatabase',{
             method: "POST",
             body : JSON.stringify(orderedProducts)
         })
+        
+
+
         const updatedData = await result.json();
         console.log(updatedData);
         const data = await order.json();
         await setOrderData(defaultOrderData);
         await clearCart();
-        const {_id} = data;
-        router.replace('/orderComplete/' + _id);
+        router.replace('/orderComplete/' + data);
     }
 
     const calculatePricing = (cartProducts : CartProduct[]) => {

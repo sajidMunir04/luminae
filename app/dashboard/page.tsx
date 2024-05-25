@@ -10,7 +10,7 @@ function dashboard()
     }
     
     return (<>
-        <Dashboard orders={[]}/>
+        <Dashboard/>
     </>);   
 }
 
