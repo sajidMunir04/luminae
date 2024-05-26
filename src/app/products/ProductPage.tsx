@@ -5,6 +5,7 @@ import { useDraggable } from "react-use-draggable-scroll";
 import { useCartStore } from "../lib/store/useCartStore";
 import QuantityManagingCard from "./QuantityManagingCard";
 import ProductReviewCard from "./ProductReviewCard";
+import ProductReviewForm from "./ProductReviewForm";
 
 interface Props {
     product: Product
@@ -28,13 +29,12 @@ interface ReviewData {
 function ProductPage(props : Props) {
     const [activeImageLink,setActiveImageLink] = useState<string>(props.product.images[0]);
     const [selectedSizeIndex,setSelectedSizeIndex] = useState(0);
+    const [showReviewForm,setReviewFormStatus] = useState(false);
 
-    const productInventoryCategories : ProductInventoryCategory[] = [];
-
-
+    const productSizesInventory : ProductInventoryCategory[] = [];
     props.product.sizes.map((size,index) =>{
         if (props.product.inventoryCount[index] > 0)
-            productInventoryCategories.push({
+            productSizesInventory.push({
                 size: size,
                 stock: props.product.inventoryCount[index]
             })    
@@ -43,6 +43,15 @@ function ProductPage(props : Props) {
     const imageClicked = (imageLink : string) => {
         setActiveImageLink(imageLink);
     }
+
+    const handleSizeSelect = (size : string) => {
+        productSizesInventory.forEach((item,index) => {
+            if (item.size === size) {
+                setSelectedSizeIndex(index);
+            }
+        })
+    }
+
     const [infoSection,setInfoSection] = useState<InfoSection>(InfoSection.Description);
 
     useEffect(() => {
@@ -122,8 +131,8 @@ function ProductPage(props : Props) {
                 <div className={styles.detailContainer}>
                     <p className={styles.infoText}>Size</p>
                     <div className={styles.sizesContainer}>
-                        {productInventoryCategories.map((item,index) => (
-                            <p onClick={() => setSelectedSizeIndex(index)} className={styles.sizeTag}>{item.size}</p>
+                        {productSizesInventory.map((item,index) => (
+                            <p onClick={() => setSelectedSizeIndex(index)} className={`${styles.sizeTag} ${selectedSizeIndex === index && styles.selectedTag}`}>{item.size}</p>
                         ))}
                     </div>
                 </div>
@@ -137,7 +146,7 @@ function ProductPage(props : Props) {
                     <p className={styles.infoText}>In Stock</p>
                     <div className={styles.detailContainerContent}>
                         <div className={styles.quantityContainer}>
-                            <p>0</p>
+                            {selectedSizeIndex < productSizesInventory.length && <p>{productSizesInventory[selectedSizeIndex].stock}</p>}
                         </div>
                         <div>
 
@@ -146,7 +155,7 @@ function ProductPage(props : Props) {
                 </div>
                 <div className={styles.buttonContainer}>
                     <button className={styles.shopButton} type='button'>Shop Now</button>
-                    <button className={styles.addToCartButton} onClick={() => addProductToCart(props.product,productInventoryCategories[selectedSizeIndex].size)} type='button'>
+                    <button className={styles.addToCartButton} onClick={() => addProductToCart(props.product,productSizesInventory[selectedSizeIndex].size)} type='button'>
                         <img className={styles.cartBtnImage} src="/images/product/tocart.svg"/> Add to Cart</button>
                 </div>
             </div>
@@ -234,7 +243,7 @@ function ProductPage(props : Props) {
                         <div className={styles.reviewMajorInfoContainer}>
                             <p>Total Reviews</p>
                             <p>{reviewData.totalRating}</p>
-                            <button>Write a Review</button>
+                            <button className={styles.writeReviewButton} onClick={() => {setReviewFormStatus(!showReviewForm)}}>Write a Review</button>
                         </div>
                         <div className={styles.reviewInfoContainer}>
                             <div className={styles.reviewRatingStat}>
@@ -264,6 +273,7 @@ function ProductPage(props : Props) {
                             </div>
                         </div>
                     </div>
+                    {showReviewForm && <ProductReviewForm productId={props.product._id}/>}
                     <div className={styles.reviewCardSection}>
                         <div className={styles.reviewCardsContainer}>
                             {props.product.reviews?.map((review) => <ProductReviewCard reviewHeading={review.headingText} 

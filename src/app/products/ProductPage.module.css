@@ -109,10 +109,11 @@
 }
 
 .sizeTag{
+    text-align: center;
     margin-right: 14%;
-    padding: 4% 5%;
-    border: 2px solid #555555;
-    border-radius: 3px;
+    padding: 4% 10%;
+    border: 2px solid #D9D9D9;
+    border-radius: 8px;
 }
 
 .detailTextContainer{
@@ -260,6 +261,10 @@
     border: 3px solid #434343;
 }
 
+.selectedTag{
+    background-color: #D1E2EB;
+}
+
 .cartBtnImage{
     color: #555555;
     margin-right: 2%;
@@ -317,6 +322,15 @@
 
 .reviewInfoContainer{
     width: 34%;
+}
+
+
+.writeReviewButton {
+    border: none;
+    background: none;
+    border: 2px solid #D9D9D9;
+    padding: 6% 2%;
+    border-radius: 10px;
 }
 
 @media (max-width: 700px) {

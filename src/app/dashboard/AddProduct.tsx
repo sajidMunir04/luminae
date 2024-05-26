@@ -2,16 +2,22 @@
 
 import { ChangeEvent, useState } from "react";
 import styles from "./AddProduct.module.css";
-import {Cloudinary} from "@cloudinary/url-gen";
-import { CldUploadWidget } from 'next-cloudinary';
+import { CldUploadWidget, CldUploadWidgetProps } from 'next-cloudinary';
+import config from '../utils/cloudinary'; // Import from config file
+import { Cloudinary } from '@cloudinary/url-gen';
 
 function AddProduct() {
     
-    const [images,setImages] = useState<string[]>();
-    const cld = new Cloudinary({cloud: {cloudName: 'df4tv1tjs'}});
+    const [images,setImages] = useState<string[]>([]);
 
     const onSubmit = (e : ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
+    }
+    
+    const handleUpload = (newImage : string) => {
+        const newImages = images;
+        newImages.push(newImage);
+        setImages(newImages);
     }
 
     return (<form className={styles.form} onSubmit={onSubmit}>
@@ -36,15 +42,17 @@ function AddProduct() {
         <div>
             {images?.map((image) => <img src={image}/>)}
         </div>
-        <CldUploadWidget uploadPreset="<Your Upload Preset>">
-  {({ open }) => {
-    return (
-      <button onClick={() => open()}>
-        Upload an Image
-      </button>
-    );
-  }}
-</CldUploadWidget>
+        <div>
+        <CldUploadWidget uploadPreset=""> 
+            {({ open }) => {
+                return (
+                <button onClick={() => open()}>
+                    Upload an Image
+                </button>
+                );
+            }}
+        </CldUploadWidget>
+        </div>
         <button type='submit'>Add Product</button>
     </form>);
 }

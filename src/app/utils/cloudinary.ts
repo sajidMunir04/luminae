@@ -1,15 +1,9 @@
 import { CloudConfig } from "@cloudinary/url-gen";
 
-CloudConfig({
-    
+const config = new CloudConfig({
+  cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  apiKey: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
+  apiSecret: process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET
 })
 
-config({
-  cloud: {
-    cloud_name: yourCloudName,
-    api_key: yourApiKey,
-    api_secret: yourApiSecret,
-  },
-});
-
-export default config; 
+export default config;
