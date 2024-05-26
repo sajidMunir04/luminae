@@ -119,3 +119,9 @@
     font-size: 14px;
     color: #FF2E00;
 }
+
+@media (max-width: 700px) {
+    .container{
+        width: 100%;
+    }
+}

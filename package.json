@@ -21,6 +21,7 @@
     "bcrypt": "^5.1.1",
     "cookies-next": "^4.1.1",
     "csv-parser": "^3.0.0",
+    "framer-motion": "^11.2.6",
     "immer": "^10.1.1",
     "mongodb": "^6.6.1",
     "mongoose": "^8.3.1",

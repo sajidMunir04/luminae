@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     const { totalPrice } = req.body;
     const amount : number = parseFloat(totalPrice);
     const tax = amount * 0.2;
-    res.status(200).json(tax);
+    res.status(200).json({'tax': tax});
   }
   
   

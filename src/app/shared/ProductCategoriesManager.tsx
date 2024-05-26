@@ -66,9 +66,6 @@ function ProductCategoriesManager()
 
     return (<div className={styles.container}>
             <div className={styles.categoriesButton}>
-                <div>
-                    
-                </div>
                 <p>All Categories</p>
             </div>
             <div className={styles.catergoriesSection}>

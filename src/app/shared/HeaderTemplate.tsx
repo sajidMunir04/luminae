@@ -84,7 +84,7 @@ function HeaderTemplate()
                     {cartItemsCount > 0 && <p className={styles.cartItemsText}>{cartItemsCount}</p>}
                 </Link>
         </div>
-        <div>
+        <div className={styles.accountButton}>
         <SignedOut>
           <SignInButton />
         </SignedOut>

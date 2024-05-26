@@ -70,19 +70,12 @@ function ProductsBrowser(props : Props)
     }
 
     const handleColorSelection = (colors : string[]) => {
-        setProducts(props.products);
-        setSelectedModels(['']);
         setSelectedColors(colors);
-        setSelectedStyles(['']);
-        setSelectedSizes(['']);
         const filteredProducts = products.filter((product) => selectedColors.includes(product.color));
         setProducts(filteredProducts);
     }
 
     const handleSizeSelection = (sizes : string[]) => {
-        setSelectedModels(['']);
-        setSelectedColors(['']);
-        setSelectedStyles(['']);
         setSelectedSizes(sizes);
         const filteredProducts = products.filter(function checkSize(product){
             product.sizes.forEach((size,index) => sizes.includes(size) && product.inventoryCount[index] > 0)
@@ -146,6 +139,7 @@ function ProductsBrowser(props : Props)
                 newFiltersData.styles.push(item.style);
         })    
         setFiltersData(newFiltersData);
+        console.log(props.products.length,products.length);
     }, [props.products.length]);
 
     const handleItemsChange = (event : ChangeEvent<HTMLSelectElement>) => {

@@ -50,7 +50,7 @@ function CartItem(props : Props)
         <div className={styles.quantityContainer}>
             <QuantityManagingCard quantity={quantity} setQuantity={setTheQuantity}/>
         </div>
-        <p className={styles.priceText}>${props.product.price * quantity}</p>
+        <p className={styles.priceText}>${(props.product.price * quantity).toFixed(2)}</p>
         <div>
             <div onClick={removeProduct}>
                 <img src="/images/product/delete.svg"/>

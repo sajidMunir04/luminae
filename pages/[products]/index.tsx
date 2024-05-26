@@ -17,8 +17,6 @@ function index() {
     const { products } = router.query;
     let filteredProducts : Product[] = [];
     const [allProducts,setProducts] = useState(filteredProducts);
-    const [selectedProduct,setSelectedProduct] = useState(filteredProducts[0]);
-    const [isProductSelected,setProductSelectStatus] = useState(false);
     let allProductSections : ProductSection[] = [];
     let resultFinalized : boolean = false;
     useEffect(
@@ -85,17 +83,10 @@ function index() {
           setTimeout(fetchData,1);       
     },[products])
 
-    const handleClick = (product = filteredProducts[0]) => {
-      setSelectedProduct(product);
-      setProductSelectStatus(true);
-    }
-
     return (<>
       <HeaderTemplate/>
       <StoreInteractionContainer/>
-      {!isProductSelected && <ProductsBrowser onClick={handleClick} products={allProducts} onBack={() => {}}/>}
-      {isProductSelected && <ProductPage product={selectedProduct}/>}
-      {(resultFinalized  && filteredProducts.length == 0) && <NoProductFound searchTerm={products as string} />}
+      <ProductsBrowser products={allProducts}/>
       <FooterTemplate/>
     </>);
 }

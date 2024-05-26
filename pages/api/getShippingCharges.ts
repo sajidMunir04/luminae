@@ -5,6 +5,6 @@ export default async function handler(req, res) {
   const { totalPrice } = req.body;
   const amount : number = parseFloat(totalPrice);
   const shippingCharges = amount * 0.05;
-  res.status(200).json(shippingCharges);
+  res.status(200).json({'shippingCharges': shippingCharges});
 }
 

@@ -19,7 +19,7 @@ import { setCookie } from "cookies-next";
 
 function Cart() {
     const cartData = useCartStore(state => state.fetchData());
-    const [totalAmount,setTotalAmount] = useState(0);
+    const [orderTotal,setOrderTotal] = useState(0);
     const [isOrderInfoComplete,setOrderCompleteStatus] = useState(false);
     const [shippingCharges,setShippingCharges] = useState<number>(0);   
     const [taxes,setTaxes] = useState<number>(0);
@@ -97,8 +97,6 @@ function Cart() {
             body : JSON.stringify(orderedProducts)
         })
         
-
-
         const updatedData = await result.json();
         console.log(updatedData);
         const data = await order.json();
@@ -107,33 +105,20 @@ function Cart() {
         router.replace('/orderComplete/' + data);
     }
 
-    const calculatePricing = (cartProducts : CartProduct[]) => {
-        const totalPrices = cartProducts.map((item) => item.product.price * item.quantity);
-        const totalPrice = totalPrices.reduce((acc,el) => (acc + el),0);
-        setTotalAmount(totalPrice);
+    const calculatePricing = async () => {
+        const totalPrices = await orderData.cartProducts.map((item) => item.product.price * item.quantity);
+        const totalPrice = await totalPrices.reduce((acc,el) => (acc + el),0);
+        setOrderTotal(totalPrice);
 
-        async function getShippingChargesAndTaxes() {
-            try {
-                const response = await axios.post('api/getShippingCharges',{totalPrice});
-                const data = await response.data;
-                setShippingCharges(data);
-            } catch (error) {
-                console.error(error);
-            }
+        const shippingChargesResponse = await axios.post('api/getShippingCharges',{totalPrice});
+        const shippingChargesData = await shippingChargesResponse.data;
+        await setShippingCharges(shippingChargesData.shippingCharges);
 
-            try {
-                const response = await axios.post('api/getTaxes',{totalPrice});
-                const data = await response.data;
-                setTaxes(data);
-            }
-            catch (error){
-                console.error(error);
-            }
+        const taxesResponse = await axios.post('api/getTaxes',{totalPrice});
+        const taxesData = await taxesResponse.data;
+        await setTaxes(taxesData.tax);
 
-            setTotalPrice(totalAmount + shippingCharges + taxes);
-        }
-
-        getShippingChargesAndTaxes();
+        setTotalPrice(totalPrice + taxesData.tax + shippingChargesData.shippingCharges);
     }
 
     const [orderData,setOrderData] = useState(defaultOrderData);
@@ -141,13 +126,14 @@ function Cart() {
     const setNewOrderData = (orderData : OrderData) => {
         checkOrderForm();
         setOrderData(orderData);
+        calculatePricing();
     }
 
     const removeProductFromCart = (product: Product) => {
         const filteredProducts = (products as CartProduct[]).filter((item) => item.product._id !== product._id);
         setProducts(filteredProducts);
         removeProduct(product);
-        calculatePricing(filteredProducts);
+        calculatePricing();
     }
 
     const onProductQuantityChange = (product: Product,quantity: number) => {
@@ -161,9 +147,8 @@ function Cart() {
         setProducts(modifiedProducts);
         const newOrderData : OrderData = orderData;
         orderData.cartProducts = products;
-        setOrderData(newOrderData); 
-
-        calculatePricing(modifiedProducts);
+        setOrderData(newOrderData);
+        calculatePricing(); 
     }
 
 
@@ -201,8 +186,6 @@ function Cart() {
                     }
                 cartProducts.push(cartProduct);
             });
-
-            calculatePricing(cartProducts);
             setProducts(cartProducts);
             const newOrderData : OrderData = orderData;
             newOrderData.cartProducts = cartProducts;
@@ -214,7 +197,7 @@ function Cart() {
         }
 
         fetchData();
-
+        calculatePricing();
     },[orderData.cartProducts.length])
 
     return (<div className={styles.container}>
@@ -252,7 +235,7 @@ function Cart() {
                     <p className={styles.orderBoxHeading}>Order Summary</p>
                     <div className={styles.orderFigureInfoContainer}>
                         <p className={styles.orderInfoText}>Price</p>
-                        <p className={styles.orderFigureText}>${parseFloat(totalAmount.toFixed(2))}</p>
+                        <p className={styles.orderFigureText}>${parseFloat(orderTotal.toFixed(2))}</p>
                     </div>
                     <div className={styles.orderFigureInfoContainer}>
                         <p className={styles.orderInfoText}>Shipping</p>
