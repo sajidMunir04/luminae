@@ -8,9 +8,12 @@ import SizeFilter from "./filters/SizeFilter";
 import ColorFilter from "./filters/ColorFilter";
 import PriceFilter from "./filters/PriceFilter";
 import { ModelDetail } from "./filters/ModelFilter";
+import { useRouter } from "next/router";
 
 interface Props {
-    products : Product[]
+    products : Product[],
+    productSection: string,
+    productCategory: string
 }
 
 interface FiltersData {
@@ -30,6 +33,8 @@ enum ProductSortingAlgorithm {
 
 function ProductsBrowser(props : Props)
 {
+    const router = useRouter();
+
     const [itemsPerPage,setItemPerPage] = useState(12);
     const [currentPage,setCurrentPage] = useState(1);
     const [sortingAlgorithm,setSortingAlgorithm] = useState(ProductSortingAlgorithm.Relevance);
@@ -87,6 +92,11 @@ function ProductsBrowser(props : Props)
         setPriceRange(newPriceRange);
         const filteredProducts = products.filter((product) => product.price >= newPriceRange[0] && product.price <= newPriceRange[1]);
         setProducts(filteredProducts);
+    }
+
+    const handlePageChange = (pageNumber : number) => {
+        setCurrentPage(pageNumber);
+        router.replace(`${router.basePath}/${props.productSection}/${props.productCategory}?page=${pageNumber}&itemsOnPage=${itemsPerPage}&sortingMode=${sortingAlgorithm}`);
     }
 
     useEffect(() => {
@@ -208,13 +218,13 @@ function ProductsBrowser(props : Props)
             {products.length > 0 && <div className={styles.paginationControlContainer}>
                 <a className={styles.paginationMainButton} onClick={() => {
                     const newPageIndex = Math.min(currentPage + 1,Math.floor(products.length / itemsPerPage) );
-                    setCurrentPage(newPageIndex);
+                    handlePageChange(newPageIndex);
                 }} href="#">
                 <img className={styles.btnImage} src="/images/product/left-arrow.png"/>Previous
                 </a>
                 {products.map((item,index) => (
                     (index % itemsPerPage === 0 && (index / itemsPerPage) < currentPage + 2) && <a key={'aasd'+index} href="#"
-                    className={styles.paginationButton} onClick={() => setCurrentPage(index)}>{(index / itemsPerPage) + 1}</a>
+                    className={styles.paginationButton} onClick={() => handlePageChange(index)}>{(index / itemsPerPage) + 1}</a>
                 ))}
                 {
                     (products.length / itemsPerPage > currentPage + 2) && <p className={styles.extraButtonsArea}>...</p> 

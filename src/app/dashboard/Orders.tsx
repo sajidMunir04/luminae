@@ -3,11 +3,17 @@
 import { useEffect, useState } from "react";
 import { OrderFormData } from "../cart/OrderFormData";
 import styles from "./Orders.module.css";
+import { string } from "zod";
 
 
 function Orders() {
 
     const [ordersData,setOrdersData] = useState<OrderFormData[]>([]);
+    const [orderIds,setorderIds] = useState<string[]>([]);
+
+    const handleViewOrder = () => {
+
+    }
 
     useEffect(() => {
         const fetchOrdersData = async() => {
@@ -16,7 +22,8 @@ function Orders() {
             console.log(data);
             const {orders} = data;
             console.log(orders);
-            const formattedData : OrderFormData[] = orders.map((item : OrderFormData) => {
+            const orderIdList : string[] = [];
+            const formattedData : OrderFormData[] = orders.map((item) => {
                 const orderForm : OrderFormData = {
                     products: item.products,
                     customerEmail: item.customerEmail,
@@ -34,9 +41,12 @@ function Orders() {
                     customerId: item.customerId
                 }
 
+                orderIdList.push(item._id);
+
                 return orderForm;
             })
 
+            setorderIds(orderIdList);
             setOrdersData(formattedData);
         }
 
@@ -52,7 +62,8 @@ function Orders() {
                 <th className={styles.totalAmountSection}>Total Amount</th>
                 <th className={styles.totalProductsSection}>Total Products</th>
                 <th className={styles.contactNumberSection}>Contact Number</th>
-                <th className={styles.emailSection}>Customer Email</th>    
+                <th className={styles.emailSection}>Customer Email</th>
+                <th className={''}>View Order</th>
             </tr>
             </thead>
             <tbody className={styles.tableBody}>
@@ -65,6 +76,7 @@ function Orders() {
                         <td className={styles.totalProductsSection}>{item.products?.length}</td>
                         <td className={styles.contactNumberSection}>{item.customerPhone}</td>
                         <td className={styles.emailSection}>{item.customerEmail}</td>
+                        <td className={''}>View Order</td>
                     </tr>
                 ))
             }

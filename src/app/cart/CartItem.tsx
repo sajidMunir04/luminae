@@ -42,7 +42,7 @@ function CartItem(props : Props)
                 </div>
                 <div className={styles.colorContainer}>
                     <p className={styles.infoText}>Size: </p>
-                    <p className={styles.infoText}>{props.size}</p>
+                    <p className={styles.sizeText}>{props.size}</p>
                 </div>
             </div>
         </div>

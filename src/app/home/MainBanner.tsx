@@ -11,7 +11,6 @@ function MainBanner()
                 <h2 className={styles.heading}>Premium Collections</h2>
                 <p className={styles.headingContent}>Designer wear starting from $100</p>
                 <div className={styles.button}>
-                    <img src="/Icon(1).png"/>
                     <a className={styles.buttonText} href="WOMAN/dresses">SHOP NOW</a>
                 </div>
         </div>

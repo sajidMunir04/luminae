@@ -23,7 +23,8 @@ function productCategory(){
                 const fetchQuery = `/api/fetchProducts/${products}/${productCategory}`;
                 const response = await fetch(fetchQuery);
                 const data = await response.json();
-                filteredProducts = data.map((item: Product) => ({
+                filteredProducts = data.map((item: Product) => {
+                  const product : Product = {
                     _id: item._id,
                     name: item.name,
                     description: item.description,
@@ -40,7 +41,10 @@ function productCategory(){
                     style: item.style,
                     model: item.model,
                     reviews: item.reviews
-                }));
+                }
+                console.log(item);
+                return product;            
+            });
 
               filteredProducts.map((item) => {
                         let containsSection = false;
@@ -75,7 +79,7 @@ function productCategory(){
     return (<>
       <HeaderTemplate/>
       <StoreInteractionContainer/>
-      <ProductsBrowser products={allProducts}/>
+      <ProductsBrowser products={allProducts} productSection={products as string} productCategory={productCategory as string}/>
       <FooterTemplate/>
     </>);
 }

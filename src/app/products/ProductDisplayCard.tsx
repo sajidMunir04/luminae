@@ -64,10 +64,10 @@ function ProductDisplayCard(props : Props)
                         <div>
                             <p className={styles.price}>${Math.round(props.product.price)}</p>
                         </div>
-                        {props.product.previousPrice != 0 && <div>
+                        {props.product.previousPrice > props.product.price + 0.2 && <div>
                             <p className={styles.previousPrice}>${props.product.previousPrice}</p>
                         </div>}
-                        {(props.product.discount != 0) && 
+                        {(props.product.previousPrice > props.product.price + 0.2) && 
                         <div>
                             <p className={styles.discountText}>-{props.product.discount.toFixed(0)}%</p>
                         </div>

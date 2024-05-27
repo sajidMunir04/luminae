@@ -15,7 +15,7 @@ function TrendingProductDisplayCard(props : Props)
             </div>
             <div className={styles.tagSection}>
                 <div className={styles.tagArea}>
-                    <img className={styles.tagSectionImage} src='/IconNew arivals(1).png'/>
+                    <img className={styles.tagSectionImage} src='/images/common/newArrivals.png'/>
                     <p className={styles.tagText}>New Arrivals</p>
                 </div>
             </div>

@@ -4,14 +4,14 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    height: 100px;
+    height: 120px;
     align-items: center;
     margin-bottom: 3%;
 }
 
 
 .productInfoContainer{
-    width: 36%;
+    width: 40%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -46,12 +46,14 @@
 
 .quantityContainer{
     width: 15%;
-    height: 48%;
+    height: 38%;
 }
 
 .productNameText{
     text-transform: capitalize;
     margin: 0%;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
 }
 
 .colorContainer{
@@ -81,4 +83,11 @@
 .infoText{
     margin: 0%;
     margin-top: 2%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+}
+
+.sizeText{
+    font-size: 16px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }

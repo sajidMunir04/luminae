@@ -15,8 +15,9 @@
     width: 100%;
     height: 100%;
     justify-content: center;
-    background-color: #D1E2EB;
+    background-color: var(--background-color);
     padding-top: 2%;
+    color: white;
 }
 
 .linksSection{
@@ -33,6 +34,10 @@
 
 .infoContent{
     width: 100%;
+    height: 20%;
+    background-color: var(--background-color);
+    text-align: center;
+    color: white;
 }
 
 
@@ -44,7 +49,7 @@
 }
 
 .externalLink{
-    color: #555555;
+    color: white;
     font-family: Lato-Regular;
     font-size: 16px;
     text-decoration: none;

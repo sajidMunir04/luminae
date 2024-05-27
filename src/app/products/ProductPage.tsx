@@ -111,7 +111,7 @@ function ProductPage(props : Props) {
             <div className={styles.imageSection}>
                 <div className={styles.imagesContainer} {...events} ref={ref}>
                         {props.product.images.map((image) => (<div draggable={false} className={styles.smallImageParent}>
-                            <img className={styles.smallImage} onClick={imageClicked.bind(null,image)} src={image}/>
+                            <img className={`${styles.smallImage} ${activeImageLink === image && styles.smallImageSelected}`} onClick={imageClicked.bind(null,image)} src={image}/>
                         </div>))}
                 </div>
                 <div className={styles.mainImageContainer}>
@@ -129,17 +129,17 @@ function ProductPage(props : Props) {
                      </div>
                 </div>
                 <div className={styles.detailContainer}>
-                    <p className={styles.infoText}>Size</p>
+                    <p className={styles.infoText}>Select Color</p>
+                    <div>
+                        <div className={styles.colorMarker} style={{backgroundColor: `${props.product.color}`}}></div>
+                    </div>
+                </div>
+                <div className={styles.detailContainer}>
+                    <p className={styles.infoText}>Choose Size</p>
                     <div className={styles.sizesContainer}>
                         {productSizesInventory.map((item,index) => (
                             <p onClick={() => setSelectedSizeIndex(index)} className={`${styles.sizeTag} ${selectedSizeIndex === index && styles.selectedTag}`}>{item.size}</p>
                         ))}
-                    </div>
-                </div>
-                <div className={styles.detailContainer}>
-                    <p className={styles.infoText}>Color</p>
-                    <div>
-                        <div className={styles.colorMarker} style={{backgroundColor: `${props.product.color}`}}></div>
                     </div>
                 </div>
                 <div className={styles.detailContainer}>
@@ -154,9 +154,9 @@ function ProductPage(props : Props) {
                     </div>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <button className={styles.shopButton} type='button'>Shop Now</button>
-                    <button className={styles.addToCartButton} onClick={() => addProductToCart(props.product,productSizesInventory[selectedSizeIndex].size)} type='button'>
-                        <img className={styles.cartBtnImage} src="/images/product/tocart.svg"/> Add to Cart</button>
+                    <button className={styles.shopButton} onClick={() => addProductToCart(props.product,productSizesInventory[selectedSizeIndex].size)} type='button'>
+                        <img className={styles.cartBtnImage} src="/images/common/shopping cart.svg"/> Add to Cart</button>
+                    <button className={styles.addToCartButton} type='button'>Add to Favorites</button>
                 </div>
             </div>
         </div>

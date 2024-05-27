@@ -40,12 +40,12 @@ function HeaderTemplate()
 
     return (<div className={styles.container}>
         <div className={styles.logoContainer}>
-            <Link href='/'><img src={'/Group1.png'}/>
+            <Link href='/'><img src={'/images/common/logo.png'}/>
             </Link>
         </div>
         <form className={styles.form} onSubmit={onSeachButtonClick}>
                 <input className={styles.searchInput} type="search" placeholder='Search Products' onChange={handleInputChange}/>
-                <select className={styles.categorySelector}>
+                {/*<select className={styles.categorySelector}>
                     <option className={styles.categoriesTextOption}>
                         All Categories
                     </option>
@@ -61,8 +61,8 @@ function HeaderTemplate()
                     <option className={styles.categoriesTextOption}>
                         Home Decor
                     </option>
-                </select>
-                <button className={styles.searchButton} type="submit"><img src={'/images/magnifier.svg'}/></button>
+                </select>*/}
+                <button className={styles.searchButton} type="submit"><img src={'/images/common/magnifier.svg'}/></button>
         </form>
         <div className={styles.buttons}>
                 {/*
@@ -71,7 +71,7 @@ function HeaderTemplate()
                 <p>Sign in</p>
                 </a>*/}
                 {
-                <Link className={styles.button} href={'/favorites'}>
+                <Link className={styles.button} href={'/ordersDetail'}>
                     <p>My Orders</p>
                 </Link>}
                 <Link className={styles.button} href={'/favorites'}>

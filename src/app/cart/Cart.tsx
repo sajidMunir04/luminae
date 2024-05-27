@@ -14,7 +14,8 @@ import { error } from "console";
 import { useRouter } from "next/router";
 import { OrderedProduct } from "./OrderedProduct";
 import { useGetCurrentDate } from "../lib/hooks/useGetCurrentDate";
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
+import { ordersCookie } from "../lib/constants";
 
 
 function Cart() {
@@ -100,6 +101,9 @@ function Cart() {
         const updatedData = await result.json();
         console.log(updatedData);
         const data = await order.json();
+        let orders : string = getCookie(ordersCookie) as string;
+        orders = orders + ',' + data.id;
+        setCookie(ordersCookie,orders);
         await setOrderData(defaultOrderData);
         await clearCart();
         router.replace('/orderComplete/' + data);
@@ -214,13 +218,10 @@ function Cart() {
             <div className={styles.contentContainer}>
             {cartState === CartState.Cart && <>
             <div className={styles.productsContainer}>
-                    <p>
-                        Cart
-                    </p>
-                    <div>
-                        {orderData.cartProducts.map((item) => <CartItem product={item.product} quantity={item.quantity}
-                        onProductRemove={() => removeProductFromCart(item.product)} onProductQuantityChange={onProductQuantityChange} size={item.size}/>)}
-                    </div>
+            <div>
+                {orderData.cartProducts.map((item) => <CartItem product={item.product} quantity={item.quantity}
+                onProductRemove={() => removeProductFromCart(item.product)} onProductQuantityChange={onProductQuantityChange} size={item.size}/>)}
+            </div>
             </div>
             </>}
             {cartState === CartState.CustomerInfo && <>

@@ -5,11 +5,11 @@ import ProductPage from "@/app/products/ProductPage";
 import HeaderTemplate from "@/app/shared/HeaderTemplate";
 import FooterTemplate from "@/app/shared/FooterTemplate";
 import ProductCategoriesManager from "@/app/shared/ProductCategoriesManager";
+import { getCookie, setCookie } from "cookies-next";
 
 
 export default function productPage() {
     const router = useRouter();
-    const { productPage } = router.query;
     const defaultProduct : Product = {
         _id: "",
         name: "",
@@ -30,6 +30,13 @@ export default function productPage() {
     const [product,setProduct] = useState<Product>(defaultProduct);
     
     useEffect(() => {
+        let { productPage } = router.query;
+        console.log(productPage);
+        console.log(router);
+
+        if (productPage === undefined)
+            productPage = getCookie('productPageId');
+        
         const fetchData = async() => {
             try {
                 const response = await fetch('/api/getProductPage',{
@@ -62,7 +69,8 @@ export default function productPage() {
             }
         }
 
-        setTimeout(fetchData,500);
+        setCookie('productPageId',productPage);
+        fetchData();
 
     },[]);
 

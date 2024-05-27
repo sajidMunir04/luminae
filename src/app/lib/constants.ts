@@ -1,0 +1,1 @@
+export const ordersCookie = "Order-Cookie";
