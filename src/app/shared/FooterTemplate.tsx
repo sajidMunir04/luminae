@@ -39,7 +39,7 @@ function FooterTemplate()
                 </div>
             </div>
         </div>
-        <div className={styles.infoContent}>
+        {/*<div className={styles.infoContent}>
             <div className={styles.infoSection}>
                 <p>165-179 Forster Road City of Monash, Melbourne, Australia</p>
                 <p className={styles.infoText}>©2023 Copyright in reserved for lumine shop</p>
@@ -49,7 +49,7 @@ function FooterTemplate()
                     <a className={styles.socialLinkButton} href='#'><img className={styles.socialLinkImage} src='/images/social/telegram.svg'/></a>
                 </div>
             </div>
-        </div>
+    </div>*/}
     </div>);
 }
 

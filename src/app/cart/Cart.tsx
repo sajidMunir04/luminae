@@ -218,7 +218,7 @@ function Cart() {
                         Cart
                     </p>
                     <div>
-                        {products?.map((item) => <CartItem product={item.product} quantity={item.quantity}
+                        {orderData.cartProducts.map((item) => <CartItem product={item.product} quantity={item.quantity}
                         onProductRemove={() => removeProductFromCart(item.product)} onProductQuantityChange={onProductQuantityChange} size={item.size}/>)}
                     </div>
             </div>
