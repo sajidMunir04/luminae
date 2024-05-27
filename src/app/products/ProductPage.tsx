@@ -6,6 +6,7 @@ import { useCartStore } from "../lib/store/useCartStore";
 import QuantityManagingCard from "./QuantityManagingCard";
 import ProductReviewCard from "./ProductReviewCard";
 import ProductReviewForm from "./ProductReviewForm";
+import { useFavoritesStore } from "../lib/store/useFavoritesStore";
 
 interface Props {
     product: Product
@@ -106,6 +107,30 @@ function ProductPage(props : Props) {
         applyRubberBandEffect: false
     }); 
 
+    const addToFavorites = useFavoritesStore(state => state.addToFavorites);
+    const removeFromFavorites = useFavoritesStore(state => state.removeFromFavorites);
+    const isAddedToFavorites = useFavoritesStore(state => state.isAddedToFavorites);
+
+    const[favoriteStatus,setFavoriteStatus] = useState(false);
+
+    useEffect (() => {
+        if (isAddedToFavorites(props.product._id)){
+            setFavoriteStatus(true);
+        }
+    },[])
+
+    const handleProductFavorite = () => {
+        if (favoriteStatus === false)
+        {
+            addToFavorites(props.product);
+            setFavoriteStatus(true);
+        }
+        else{
+            setFavoriteStatus(false);
+            removeFromFavorites(props.product);
+        }
+    }
+
     return (<div className={styles.container}>
         <div className={styles.productInfo}>
             <div className={styles.imageSection}>
@@ -124,8 +149,8 @@ function ProductPage(props : Props) {
                         <h2 className={styles.productName}>{props.product.name}</h2>
                         <p className={styles.productPrice}>${props.product.price}</p>
                      </div>
-                     <div className={styles.productFavoriteButton}>
-                        <img src="/images/product/emptyHeart.svg"/>
+                     <div className={styles.productFavoriteButton} onClick={handleProductFavorite}>
+                        <img src={favoriteStatus ? "/images/product/redHeart.svg" : "/images/product/emptyHeart.svg"}/>
                      </div>
                 </div>
                 <div className={styles.detailContainer}>
@@ -156,7 +181,7 @@ function ProductPage(props : Props) {
                 <div className={styles.buttonContainer}>
                     <button className={styles.shopButton} onClick={() => addProductToCart(props.product,productSizesInventory[selectedSizeIndex].size)} type='button'>
                         <img className={styles.cartBtnImage} src="/images/common/shopping cart.svg"/> Add to Cart</button>
-                    <button className={styles.addToCartButton} type='button'>Add to Favorites</button>
+                    {/*<button className={styles.addToCartButton} type='button'>Add to Favorites</button>*/}
                 </div>
             </div>
         </div>

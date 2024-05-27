@@ -99,6 +99,16 @@ function ProductsBrowser(props : Props)
         router.replace(`${router.basePath}/${props.productSection}/${props.productCategory}?page=${pageNumber}&itemsOnPage=${itemsPerPage}&sortingMode=${sortingAlgorithm}`);
     }
 
+    const setNewPage = () => {
+        const newPageIndex = Math.max(currentPage - 1,1);
+        handlePageChange(newPageIndex);
+    }
+
+    const setPreviousPage = () => {
+        const newPageIndex = Math.min(currentPage + 1,Math.floor(products.length / itemsPerPage) );
+        handlePageChange(newPageIndex);
+    }
+
     useEffect(() => {
         setProducts(props.products);
         const newFiltersData : FiltersData = {
@@ -216,24 +226,18 @@ function ProductsBrowser(props : Props)
                 <Pagination products={products} itemsPerPage={itemsPerPage} currentPage={currentPage}/>
             </div>
             {products.length > 0 && <div className={styles.paginationControlContainer}>
-                <a className={styles.paginationMainButton} onClick={() => {
-                    const newPageIndex = Math.min(currentPage + 1,Math.floor(products.length / itemsPerPage) );
-                    handlePageChange(newPageIndex);
-                }} href="#">
-                <img className={styles.btnImage} src="/images/product/left-arrow.png"/>Previous
+                <a className={styles.paginationMainButton} onClick={setPreviousPage} href="#">
+                &#10132;Previous
                 </a>
+                <div className={styles.buttonsContainer}>
                 {products.map((item,index) => (
-                    (index % itemsPerPage === 0 && (index / itemsPerPage) < currentPage + 2) && <a key={'aasd'+index} href="#"
-                    className={styles.paginationButton} onClick={() => handlePageChange(index)}>{(index / itemsPerPage) + 1}</a>
-                ))}
-                {
-                    (products.length / itemsPerPage > currentPage + 2) && <p className={styles.extraButtonsArea}>...</p> 
-                }
-                <a className={styles.paginationMainButton} href="#" onClick={() => {
-                    const newPageIndex = Math.max(currentPage - 1,1 );
-                    setCurrentPage(newPageIndex);
-                }}>Next
-                <img className={styles.btnImage} src="/images/product/right-arrow.png"/>
+                    (index % itemsPerPage === 0 && <a key={'aasd'+index} href="#"
+                    className={styles.paginationButton} onClick={() => {
+                        handlePageChange((index / itemsPerPage) + 1);
+                    }}>{(index / itemsPerPage) + 1}</a>
+                )))}
+                </div>
+                <a className={styles.paginationMainButton} href="#" onClick={setNewPage}>Next &#10140;
                 </a>
             </div>}
         </div>

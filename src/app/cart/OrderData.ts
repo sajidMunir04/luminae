@@ -1,3 +1,4 @@
+import { useGetCustomer } from "../lib/hooks/useGetCustomer";
 import { Product } from "../utils/Product";
 import { CartProduct } from "./CartProduct";
 import { PaymentServiceInfo } from "./PaymentServiceInfo";
@@ -16,26 +17,32 @@ export interface OrderData{
     phoneNumber: string;
 }
 
+export const getDefaultOrderData = () => {
 
-export const defaultOrderData : OrderData = {
-    cartProducts: [],
-    paymentServiceInfo: {
-        paymentService: "",
-        paymentServiceImageLink: "",
-        info: ""
-    },
-    shippingServiceInfo: {
-        shippingService: "",
-        shippingServiceImageLink: "",
-        deliveryTime: "",
-        shippingCost: 0,
-        hasInsurancePolicy: false
-    },
-    email: "",
-    firstName: "",
-    lastName: "",
-    country: "",
-    region: "",
-    address: "",
-    phoneNumber: ""
-}
+    const customerInfo = useGetCustomer();
+
+    const defaultOrderData : OrderData = {
+        cartProducts: [],
+        paymentServiceInfo: {
+            paymentService: "",
+            paymentServiceImageLink: "",
+            info: ""
+        },
+        shippingServiceInfo: {
+            shippingService: "",
+            shippingServiceImageLink: "",
+            deliveryTime: "",
+            shippingCost: 0,
+            hasInsurancePolicy: false
+        },
+        email: customerInfo.customerEmail,
+        firstName: customerInfo.customerFirstName,
+        lastName: customerInfo.customerLastName,
+        country: customerInfo.customerCountry,
+        region: customerInfo.customerRegion,
+        address: customerInfo.customerAddress,
+        phoneNumber: customerInfo.customerPhone
+    }
+
+    return defaultOrderData;
+} 

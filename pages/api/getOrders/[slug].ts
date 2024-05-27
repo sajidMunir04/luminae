@@ -1,10 +1,8 @@
-import { OrderedProduct } from '@/app/cart/OrderedProduct';
-import { Db, MongoClient, ObjectId, WithId } from 'mongodb';
-import mongoose from 'mongoose';
+import { Db, MongoClient, ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
+  console.log(req.query);
   const { slug } = req.query;
-  console.log('Query is',req.query);
   const productsId = slug;
   let allProductsId : ObjectId[] = productsId.split(',');
   const filteredIds = allProductsId.filter((item) => item !== null);

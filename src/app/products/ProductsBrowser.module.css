@@ -46,8 +46,15 @@
     align-items: center;
     list-style: none;
     text-decoration: none;
-    width: 40%;
+    width: 100%;
     margin: auto;
+}
+
+.buttonsContainer{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .paginationMainButton{
@@ -56,6 +63,11 @@
     display: flex;
     font-family: Lato-Bold;
     font-size: 16px;
+    border: 2px solid #9A9A9A;
+    border-radius: 12px;
+    padding: 1% 2%;
+    box-sizing: border-box;
+    height: 20%;
 }
 
 .paginationButton {
@@ -63,6 +75,7 @@
     font-family: Lato-Bold;
     font-size: 18px;
     color: black;
+    margin-inline: 2%;
 }
 
 .extraButtonsArea{

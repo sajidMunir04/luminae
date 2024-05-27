@@ -1,22 +1,11 @@
-"use client";
+import { useState, useEffect } from "react";
+import { ProductClassifcation, ProductSection } from "../shared/ProductCategoriesManager";
+import { Product } from "../utils/Product";
+import ProductSubCatergories from "../products/ProductSubCategories";
 
-import Link from 'next/link';
-import styles from './ProductCategoriesManager.module.css';
-import { useEffect, useState } from 'react';
-import ProductSubCatergories from '../products/ProductSubCategories';
 
-export interface ProductClassifcation {
-    section: string,
-    category: string
-}
+function ProductsManager() {
 
-export type ProductSection = {
-    productSection : string,
-    subCategories: string[]
-}
-
-function ProductCategoriesManager()
-{
     let allProductSections : ProductSection[] = [];
     const empty : ProductSection[] = [{
         productSection: '',
@@ -64,15 +53,16 @@ function ProductCategoriesManager()
           
     },[])
 
-    return (<div className={styles.container}>
-            <div className={styles.categoriesButton}>
-                <p>All Categories</p>
-            </div>
-            <div className={styles.catergoriesSection}>
-                {productSections.map((categorySection) => (
-                <ProductSubCatergories key={categorySection.productSection} mainCategory={categorySection.productSection} categories={categorySection.subCategories}/>))}
-            </div>
-        </div>);
+    const openProductBrowser = (section: string,category : string) => {
+        
+    }
+
+    return (<div>
+            {productSections.map((productSection) => <div>
+                <h3>{productSection.productSection}</h3>
+                {productSection.subCategories.map((category) => (<button onClick={() => {}}>{category}</button>))}
+            </div>)}       
+    </div>);
 }
 
-export default ProductCategoriesManager;
+export default ProductsManager;

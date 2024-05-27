@@ -11,7 +11,7 @@ interface Props {
 
 
 function Pagination(props : Props) {
-    const startIndex =  ((props.currentPage - 1) + props.itemsPerPage);
+    const startIndex =  props.products.length / props.currentPage * props.itemsPerPage;
     const endIndex = startIndex + props.itemsPerPage;
 
     const router = useRouter();
@@ -19,7 +19,7 @@ function Pagination(props : Props) {
     const handleClick = (product : Product) => {
         const productId = product._id;
           router.replace('http://localhost:3000' + '/item/' + productId);
-      }
+    }
 
     return (<div className={styles.container}>
             {props.products.map((product,index) => ((index >= startIndex && index < endIndex) && 

@@ -5,7 +5,7 @@ import styles from "./Cart.module.css";
 import { Product } from "../utils/Product";
 import CustomerInformation from "./CustomerInformation";
 import PaymentAndShipping from "./PaymentAndShipping";
-import { OrderData, defaultOrderData} from "./OrderData";
+import { OrderData, getDefaultOrderData} from "./OrderData";
 import { CartProduct } from "./CartProduct";
 import OrderConfirmation from "./OrderConfirmation";
 import axios from "axios";
@@ -16,6 +16,7 @@ import { OrderedProduct } from "./OrderedProduct";
 import { useGetCurrentDate } from "../lib/hooks/useGetCurrentDate";
 import { getCookie, setCookie } from "cookies-next";
 import { ordersCookie } from "../lib/constants";
+import { useStoreCustomer } from "../lib/hooks/useStoreCustomer";
 
 
 function Cart() {
@@ -97,16 +98,22 @@ function Cart() {
             method: "POST",
             body : JSON.stringify(orderedProducts)
         })
-        
+
+        useStoreCustomer(orderFormData);
+
         const updatedData = await result.json();
         console.log(updatedData);
         const data = await order.json();
         let orders : string = getCookie(ordersCookie) as string;
-        orders = orders + ',' + data.id;
+        if (orders !== undefined || orders !== null)
+            orders = orders + ',' + data.id;
+        else
+            orders = data.id;
+
         setCookie(ordersCookie,orders);
-        await setOrderData(defaultOrderData);
+        await setOrderData(getDefaultOrderData());
         await clearCart();
-        router.replace('/orderComplete/' + data);
+        router.replace('/orderComplete/' + data.id);
     }
 
     const calculatePricing = async () => {
@@ -125,7 +132,7 @@ function Cart() {
         setTotalPrice(totalPrice + taxesData.tax + shippingChargesData.shippingCharges);
     }
 
-    const [orderData,setOrderData] = useState(defaultOrderData);
+    const [orderData,setOrderData] = useState(getDefaultOrderData());
 
     const setNewOrderData = (orderData : OrderData) => {
         checkOrderForm();

@@ -1,40 +1,39 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useCartStore } from "../lib/store/useCartStore";
 import { Product } from "../utils/Product";
 import styles from "./FavoritesSection.module.css";
 import ProductDisplayCard from "../products/ProductDisplayCard";
 import { useFavoritesStore } from "../lib/store/useFavoritesStore";
 import Pagination from "../products/Pagination";
 import ProductPage from "../products/ProductPage";
+import { useRouter } from "next/navigation";
 
 function FavoritesSection() {
     const favoritesProductData = useFavoritesStore(state => state.fetchData());
     const [products,setProducts] = useState<Product[]>();
-    const [isProductSelected,setProductSelectStatus] = useState(false);
-    const [selectedProduct,setSelectedProduct] = useState<Product>();
+
+    const router = useRouter();
 
     const removeProductFromFavorites = (product : Product) => {
         const filteredProducts = products?.filter((item) => item._id !== product._id);
         setProducts(filteredProducts);
     }
 
-    const selectProduct = (product: Product) => {
-        setProductSelectStatus(true);
-        setSelectedProduct(product);
+    const handleClick = (product : Product) => {
+        const productId = product._id;
+          router.replace('http://localhost:3000' + '/item/' + productId);
     }
-
-    let productsId : string[] = [];
 
     useEffect(() => {
         const productsId : string[] = [];
         favoritesProductData.map((item) => productsId.push(item));
         const fetchData =  async() => {
             try {
-                const response = await fetch('api/fetchSpecificProducts/' + productsId);
+                const response = await fetch('api/fetchProducts/' + productsId);
                 const data = await response.json();
-                const products : Product[] = data.map((item: Product) => ({
+                const products : Product[] = data.map((item: Product) => {
+                const product: Product = {
                     _id: item._id,
                     name: item.name,
                     description: item.description,
@@ -49,8 +48,12 @@ function FavoritesSection() {
                     color: item.color,
                     style: item.style,
                     model: item.model,
-                    reviews: item.reviews
-                }));
+                    reviews: item.reviews,
+                    previousPrice: item.previousPrice
+                }
+
+                return product;
+            });
 
                 setProducts(products);
             }
@@ -61,15 +64,15 @@ function FavoritesSection() {
 
         fetchData();
 
-    },products)
+    },[products?.length])
 
     return (<div className={styles.container}>
             <div className={styles.filtersContainer}>
 
             </div>
             <div className={styles.contentContainer}>
-                {!isProductSelected && products?.map((item) => <ProductDisplayCard product={item} onClick={() => selectProduct(item)} onRemoveFromFavorites={() => removeProductFromFavorites(item)}/>)}
-                {isProductSelected && <ProductPage product={selectedProduct as Product} />}
+                {products?.map((item) => <ProductDisplayCard product={item} onClick={() => handleClick(item)} 
+                onRemoveFromFavorites={() => removeProductFromFavorites(item)}/>)}
             </div>
     </div>);
 }

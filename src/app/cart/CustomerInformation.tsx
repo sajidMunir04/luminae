@@ -3,11 +3,9 @@ import FormInputField from "../account/FormInputField"
 import styles from "./CustomerInformation.module.css";
 import { OrderData } from "./OrderData";
 import { Props } from "./Props";
+import { emailRegex } from "../lib/definitions";
 
 function CustomerInformation(props : Props) {
-
-    const regex : RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-
     const [email,setEmail] = useState<string>(props.orderData.email);
     const [firstName,setFirstName] = useState<string>(props.orderData.firstName);
     const [lastName,setLastName] = useState<string>(props.orderData.lastName);
@@ -17,7 +15,7 @@ function CustomerInformation(props : Props) {
     const [phoneNumber,setPhoneNumber] = useState<string>(props.orderData.phoneNumber);
 
     const handleEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
-        if (regex.test(e.target.value)) {
+        if (emailRegex.test(e.target.value)) {
             const newOrderData : OrderData = props.orderData;
             newOrderData.email = e.target.value;
             props.setOrderData(newOrderData);
