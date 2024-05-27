@@ -130,9 +130,12 @@ function Cart() {
     }
 
     const removeProductFromCart = (product: Product) => {
+        removeProduct(product);
         const filteredProducts = (products as CartProduct[]).filter((item) => item.product._id !== product._id);
         setProducts(filteredProducts);
-        removeProduct(product);
+        const newOrderData : OrderData = orderData;
+        newOrderData.cartProducts = filteredProducts;
+        setNewOrderData(newOrderData);
         calculatePricing();
     }
 
