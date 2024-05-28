@@ -18,7 +18,7 @@ function Pagination(props : Props) {
 
     const handleClick = (product : Product) => {
         const productId = product._id;
-          router.replace('http://localhost:3000' + '/item/' + productId);
+          router.push('http://localhost:3000' + '/item/' + productId);
     }
 
     return (<div className={styles.container}>

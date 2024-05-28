@@ -17,8 +17,7 @@
 }
 
 .buttonActive{
-    border: 2px solid grey;
-    border-radius: 12px;
+    border-inline: 2px solid black;
 }
 
 .button{

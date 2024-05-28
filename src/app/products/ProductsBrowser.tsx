@@ -60,29 +60,30 @@ function ProductsBrowser(props : Props)
     const[filtersData,setFiltersData] = useState<FiltersData>(defaultFilterData);
 
     const handleModelSelection = (models : string[]) => {
-        setProducts(props.products);
         setSelectedModels(models);
         setSelectedColors(['']);
         setSelectedStyles(['']);
         setSelectedSizes(['']);
         const filteredProducts = props.products.filter((product) => models.includes(product.model));
-        setProducts(filteredProducts);
+        console.log(models);
+        setProducts(models.length > 1 ? filteredProducts : props.products);
     }
 
     const handleStyleSelection = (styles : string[]) => {
-        setProducts(props.products);
         setSelectedModels(['']);
         setSelectedColors(['']);
         setSelectedStyles(styles);
         setSelectedSizes(['']);
         const filteredProducts = props.products.filter((product) => styles.includes(product.style));
-        setProducts(filteredProducts);
+        setProducts(styles.length > 1 ? filteredProducts : props.products);
     }
 
     const handleColorSelection = (colors : string[]) => {
+        setSelectedModels(['']);
+        setSelectedStyles(['']);
         setSelectedColors(colors);
-        const filteredProducts = products.filter((product) => selectedColors.includes(product.color));
-        setProducts(filteredProducts);
+        const filteredProducts = products.filter((product) => colors.includes(product.color));
+        setProducts(colors.length > 1 ? filteredProducts: props.products);
     }
 
     const handleSizeSelection = (sizes : string[]) => {
@@ -90,7 +91,7 @@ function ProductsBrowser(props : Props)
         const filteredProducts = products.filter(function checkSize(product){
             product.sizes.forEach((size,index) => sizes.includes(size) && product.inventoryCount[index] > 0)
         });
-        setProducts(filteredProducts);
+        setProducts(sizes.length > 1 ? filteredProducts : products);
     }
 
     const handlePriceSelection = (newPriceRange : number[]) =>{
@@ -100,9 +101,6 @@ function ProductsBrowser(props : Props)
     }
 
     useEffect(() => {
-
-        console.log(paginationParams);
-
         const setData = () => {
             if (paginationParams !== undefined && typeof(paginationParams.page) === 'number') {
                 const value = paginationParams.sortingMode as number;

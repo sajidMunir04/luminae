@@ -103,8 +103,8 @@
 
 
 .infoText{
-    width: 14%;
-    font-family: Lato-Regular;
+    width: max-content;
+    font-family: RobotoSlab-Medium;
     font-size: 16px;    
 }
 
@@ -120,6 +120,8 @@
     padding: 4% 10%;
     border: 2px solid #D9D9D9;
     border-radius: 8px;
+    font-family: RobotoSlab-Medium;
+    font-size: 16px;    
 }
 
 .detailTextContainer{
@@ -153,14 +155,16 @@
 .detailSectionButton{
     border: none;
     background: none;
-    font-family: Lato-Bold;
-    font-size: 14px;
+    font-family: RobotoSlab-Bold;
+    font-size: 24px;
     margin-inline: 3%;
     color: #9D9D9D;
+    padding: 1% 6%;
 }
 
 .detailSectionButtonActive{
     color: black;
+    border-bottom: 2px solid black;
 }
 
 .productInfoSection{
@@ -182,8 +186,8 @@
 }
 
 .descriptionHeading{
-    font-family: Lato-Bold;
-    font-size: 16px;
+    font-family: RobotoSlab-SemiBold;
+    font-size: 18px;    
 }
 
 .descriptionText{
