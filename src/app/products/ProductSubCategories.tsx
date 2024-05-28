@@ -23,7 +23,7 @@ function ProductSubCatergories(props : Props)
     
     const [isHovered,setHoverState] = useState<boolean>(false);
 
-    return (<div onMouseEnter={() => setHoverState(true)} className={styles.container}><p onMouseLeave={() => setHoverState(false)} className={styles.categoryButton}>{props.mainCategory}</p>
+    return (<div onMouseEnter={() => setHoverState(true)} className={styles.container}><p className={styles.categoryButton}>{props.mainCategory}</p>
         {isHovered && <div onMouseEnter={() => setHoverState(true)} onMouseLeave={() => setHoverState(false)} className={styles.subCategoriescontainer}>
             {props.categories.map((item) => (
                 <Link className={styles.categoryLink} onClick={()=>{handleCategoryClick('http://localhost:3000/' + props.mainCategory + '/' + item)}} 

@@ -24,6 +24,7 @@ function ProductDisplayCard(props : Props)
         }
     },[])
 
+
     const handleProductFavorite = () => {
         if (favoriteStatus === false)
         {
@@ -36,6 +37,8 @@ function ProductDisplayCard(props : Props)
             removeFromFavorites(props.product);
         }
     }
+
+    const productRating = props.product.reviews?.map((item) => item.rating).reduce((acc,el) => acc + el,0) as number;
 
     return (<div className={styles.container}>
         <div onClick={() => props.onClick(props.product)} className={styles.imageContainer}>
@@ -50,11 +53,11 @@ function ProductDisplayCard(props : Props)
                     <div className={styles.productDetailContainer}>
                     <div className={styles.productRatingSection}>
                         <div className={styles.starsContainer}>
-                            {<img src="/star(1).png"/>}
-                            {<img src="/star(1).png"/>}
-                            {<img src="/star(1).png"/>}
-                            {<img src="/star(1).png"/>}
-                            {<img src="/star(1).png"/>}
+                            {productRating >= 1 && <img src="/images/product/Star.svg"/>}
+                            {productRating >= 2 && <img src="/images/product/Star.svg"/>}
+                            {productRating >= 3 && <img src="/images/product/Star.svg"/>}
+                            {productRating >= 4 && <img src="/images/product/Star.svg"/>}
+                            {productRating === 5 && <img src="/images/product/Star.svg"/>}
                         </div>
                         <div className={styles.reviewCountContainer}>
                             <p className={styles.reviewCountText}>({props.product.reviews?.length})</p>
@@ -64,10 +67,10 @@ function ProductDisplayCard(props : Props)
                         <div>
                             <p className={styles.price}>${Math.round(props.product.price)}</p>
                         </div>
-                        {props.product.previousPrice > props.product.price + 0.2 && <div>
+                        {props.product.discount > 0 && <div>
                             <p className={styles.previousPrice}>${props.product.previousPrice}</p>
                         </div>}
-                        {(props.product.previousPrice > props.product.price + 0.2) && 
+                        {(props.product.discount > 0) && 
                         <div>
                             <p className={styles.discountText}>-{props.product.discount.toFixed(0)}%</p>
                         </div>

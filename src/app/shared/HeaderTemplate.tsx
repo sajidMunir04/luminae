@@ -40,7 +40,7 @@ function HeaderTemplate()
 
     return (<div className={styles.container}>
         <div className={styles.logoContainer}>
-            <Link href='/'><img src={'/images/common/logo2.png'}/>
+            <Link className={styles.logoLink} href='/'><img className={styles.logoImage} src={'/images/common/logo2.png'}/>
             </Link>
         </div>
         <div className={styles.categoriesContainer}>

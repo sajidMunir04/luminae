@@ -228,7 +228,7 @@ function Cart() {
             {cartState === CartState.Cart && <>
             <div className={styles.productsContainer}>
             <div>
-                {orderData.cartProducts.map((item) => <CartItem product={item.product} quantity={item.quantity}
+                {orderData.cartProducts.map((item) => <CartItem key={item.product._id} product={item.product} quantity={item.quantity}
                 onProductRemove={() => removeProductFromCart(item.product)} onProductQuantityChange={onProductQuantityChange} size={item.size}/>)}
             </div>
             </div>

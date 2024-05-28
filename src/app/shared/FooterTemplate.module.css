@@ -18,6 +18,7 @@
     background-color: var(--background-color);
     padding-top: 2%;
     color: white;
+    flex-wrap: wrap;
 }
 
 .linksSection{
@@ -81,4 +82,10 @@
 
 .infoText{
     margin-inline: 20%;
+}
+
+@media (max-width: 700px) {
+    .linksSection{
+        width: 48%;
+    }   
 }

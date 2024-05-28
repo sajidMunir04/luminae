@@ -76,7 +76,6 @@ export default function productPage() {
 
     return (<>
     <HeaderTemplate/>
-    <ProductCategoriesManager/>
     <ProductPage product={product}/>
     <FooterTemplate/>
     </>);

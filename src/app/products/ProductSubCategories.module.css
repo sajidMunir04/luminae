@@ -31,3 +31,14 @@
     text-transform: capitalize;
     margin-bottom: 10px;
 }
+
+@media (max-width: 700px) {
+
+    .container{
+        position: static;
+    }
+
+    .subCategoriescontainer{
+        left: 0%;
+    }
+}

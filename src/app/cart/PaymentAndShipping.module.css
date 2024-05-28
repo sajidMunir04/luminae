@@ -8,3 +8,13 @@
 .section {
     width: 48%;
 }
+
+@media (max-width: 700px) {
+    .container{
+        flex-direction: column;
+    }
+
+    .section{
+        width: 100%;
+    }
+}

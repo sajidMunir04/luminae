@@ -29,7 +29,7 @@
 }
 
 .priceText{
-    font-family: Lato-Regular;
+    font-family:RobotoSlab-Medium;
     font-size: 14px;
 }
 
@@ -52,7 +52,7 @@
 .productNameText{
     text-transform: capitalize;
     margin: 0%;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family:RobotoSlab-SemiBold;
     font-size: 18px;
 }
 
@@ -83,11 +83,11 @@
 .infoText{
     margin: 0%;
     margin-top: 2%;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family:RobotoSlab-Regular;
     font-size: 14px;
 }
 
 .sizeText{
     font-size: 16px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family:RobotoSlab-Regular;
 }

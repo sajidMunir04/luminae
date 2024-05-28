@@ -14,7 +14,6 @@ export default function orderProcessed() {
 
     return (<>
     <HeaderTemplate/>
-    <ProductCategoriesManager/>
     <OrderComplete orderId={orderProcessed as string}/>
     <FooterTemplate/>
     </>);
