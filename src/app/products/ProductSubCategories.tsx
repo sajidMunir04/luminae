@@ -1,11 +1,9 @@
-
-
-import { useHover } from "react-use";
 import styles from "./ProductSubCategories.module.css";
-import { use, useRef, useState } from "react";
+import { useState } from "react";
 import router from "next/router";
 import Link from "next/link";
 import { useClearRouterQuery } from "../lib/hooks/useClearRouterQuery";
+import {motion} from "framer-motion";
 
 
 interface Props{
@@ -23,13 +21,13 @@ function ProductSubCatergories(props : Props)
     
     const [isHovered,setHoverState] = useState<boolean>(false);
 
-    return (<div onMouseEnter={() => setHoverState(true)} className={styles.container}><p className={styles.categoryButton}>{props.mainCategory}</p>
-        {isHovered && <div onMouseEnter={() => setHoverState(true)} onMouseLeave={() => setHoverState(false)} className={styles.subCategoriescontainer}>
+    return (<div onMouseEnter={() => setHoverState(true)} className={styles.container}><motion.p className={styles.categoryButton} whileHover={{scale: 1.5}}>{props.mainCategory}</motion.p>
+        {isHovered && <motion.div  initial={{scaleX: 0}} whileInView={{scaleX: 1}} onMouseEnter={() => setHoverState(true)} onMouseLeave={() => setHoverState(false)} className={styles.subCategoriescontainer}>
             {props.categories.map((item) => (
-                <Link className={styles.categoryLink} onClick={()=>{handleCategoryClick('http://localhost:3000/' + props.mainCategory + '/' + item)}} 
-                key={item} href={'http://localhost:3000/' + props.mainCategory + '/' + item}>{item}</Link>
+                <motion.a className={styles.categoryLink} whileHover={{scale: 1.05}} onClick={()=>{handleCategoryClick('http://localhost:3000/' + props.mainCategory + '/' + item)}} 
+                key={item} href={'http://localhost:3000/' + props.mainCategory + '/' + item}>{item}</motion.a>
             ))}
-        </div>}
+        </motion.div>}
     </div>);
 }
 

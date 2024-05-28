@@ -3,6 +3,7 @@ import { Product } from '../utils/Product';
 import styles from './ProductDisplayCard.module.css';
 import { useFavoritesStore } from '../lib/store/useFavoritesStore';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface Props{
     product: Product,
@@ -40,14 +41,14 @@ function ProductDisplayCard(props : Props)
 
     const productRating = props.product.reviews?.map((item) => item.rating).reduce((acc,el) => acc + el,0) as number;
 
-    return (<div className={styles.container}>
+    return (<motion.div className={styles.container} initial={{scale: 0}} whileInView={{scale: 1}}>
         <div onClick={() => props.onClick(props.product)} className={styles.imageContainer}>
             <img className={styles.image} src={props.product.images[0]} alt='product image'/>
         </div>
         <div className={styles.textContainer}>
             <div onClick={() => props.onClick(props.product)} className={styles.contentSection}>
                     <div className={styles.productTextContainer}>
-                        <p className={styles.brandName}>{props.product.brandName}</p>
+                        {/*<p className={styles.brandName}>{props.product.brandName}</p>*/}
                         <p className={styles.productName}>{props.product.name}</p>
                     </div>
                     <div className={styles.productDetailContainer}>
@@ -64,17 +65,9 @@ function ProductDisplayCard(props : Props)
                         </div>
                     </div>
                     <div className={styles.priceSection}>
-                        <div>
-                            <p className={styles.price}>${Math.round(props.product.price)}</p>
-                        </div>
-                        {props.product.discount > 0 && <div>
-                            <p className={styles.previousPrice}>${props.product.previousPrice}</p>
-                        </div>}
-                        {(props.product.discount > 0) && 
-                        <div>
-                            <p className={styles.discountText}>-{props.product.discount.toFixed(0)}%</p>
-                        </div>
-                        }
+                        <p className={styles.price}>${Math.round(props.product.price)}</p>
+                        {props.product.discount > 0 && <p className={styles.previousPrice}>${props.product.previousPrice}</p>}
+                        {(props.product.discount > 0) && <p className={styles.discountText}>-{props.product.discount.toFixed(0)}%</p>}
                     </div>
                     </div>
             </div>
@@ -85,7 +78,7 @@ function ProductDisplayCard(props : Props)
                 </div>
             </div>
         </div>
-    </div>);
+    </motion.div>);
 }
 
 export default ProductDisplayCard;

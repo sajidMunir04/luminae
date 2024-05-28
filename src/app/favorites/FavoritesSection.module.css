@@ -2,12 +2,13 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    padding: 0% var(--side-padding);
     justify-content: space-between;
     margin-top: 4%;
 }
 
 .contentContainer{
-    width: 70%;
+    width: 87%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

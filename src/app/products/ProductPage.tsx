@@ -3,10 +3,10 @@ import { Product, ProductInventoryCategory } from "../utils/Product";
 import styles from "./ProductPage.module.css";
 import { useDraggable } from "react-use-draggable-scroll";
 import { useCartStore } from "../lib/store/useCartStore";
-import QuantityManagingCard from "./QuantityManagingCard";
 import ProductReviewCard from "./ProductReviewCard";
 import ProductReviewForm from "./ProductReviewForm";
 import { useFavoritesStore } from "../lib/store/useFavoritesStore";
+import {motion} from "framer-motion";
 
 interface Props {
     product: Product
@@ -136,7 +136,7 @@ function ProductPage(props : Props) {
             <div className={styles.imageSection}>
                 <div className={styles.imagesContainer} {...events} ref={ref}>
                         {props.product.images.map((image) => (<div draggable={false} className={styles.smallImageParent}>
-                            <img className={`${styles.smallImage} ${activeImageLink === image && styles.smallImageSelected}`} onClick={imageClicked.bind(null,image)} src={image}/>
+                            <motion.img whileHover={{skewX:2}} className={`${styles.smallImage} ${false && styles.smallImageSelected}`} onClick={imageClicked.bind(null,image)} src={image}/>
                         </div>))}
                 </div>
                 <div className={styles.mainImageContainer}>
@@ -163,8 +163,7 @@ function ProductPage(props : Props) {
                     <p className={styles.infoText}>Choose Size</p>
                     <div className={styles.sizesContainer}>
                         {productSizesInventory.map((item,index) => (
-                            <p onClick={() => setSelectedSizeIndex(index)} className={`${styles.sizeTag} ${selectedSizeIndex === index && styles.selectedTag}`}>{item.size}</p>
-                        ))}
+                            <motion.p whileTap={{scale: 1.5}} onClick={() => setSelectedSizeIndex(index)} className={`${styles.sizeTag} ${selectedSizeIndex === index && styles.selectedTag}`}>{item.size}</motion.p>                        ))}
                     </div>
                 </div>
                 <div className={styles.detailContainer}>
@@ -179,8 +178,8 @@ function ProductPage(props : Props) {
                     </div>
                 </div>
                 <div className={styles.buttonContainer}>
-                    <button className={styles.shopButton} onClick={() => addProductToCart(props.product,productSizesInventory[selectedSizeIndex].size)} type='button'>
-                        <img className={styles.cartBtnImage} src="/images/common/shopping cart.svg"/> Add to Cart</button>
+                    <motion.button whileHover={{scale: 1.1}} className={styles.shopButton} onClick={() => addProductToCart(props.product,productSizesInventory[selectedSizeIndex].size)} type='button'>
+                        <img className={styles.cartBtnImage} src="/images/common/shopping cart.svg"/> Add to Cart</motion.button>
                     {/*<button className={styles.addToCartButton} type='button'>Add to Favorites</button>*/}
                 </div>
             </div>

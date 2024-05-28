@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import styles from "./ProductReviewCard.module.css";
 
 interface Props{
@@ -10,6 +11,16 @@ interface Props{
 }
 
 function ProductReviewCard(props : Props) {
+
+    const router = useRouter();
+
+    const handleLike = () => {
+
+    }
+
+    const handleDisLike = () => {
+        
+    }
 
     return (<div className={styles.container}>
         <div className={styles.header}>

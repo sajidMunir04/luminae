@@ -39,8 +39,6 @@ function ProductsBrowser(props : Props)
     const router = useRouter();
     const paginationParams = useExtractQueryParams(useGetRouterQuery() !== undefined ? useGetRouterQuery() as string : router.asPath);
 
-    console.log(useGetRouterQuery());
-
     const [itemsPerPage,setItemPerPage] = useState(12);
     const [currentPage,setCurrentPage] = useState(1);
     const [sortingAlgorithm,setSortingAlgorithm] = useState(ProductSortingAlgorithm.Relevance);
@@ -108,7 +106,6 @@ function ProductsBrowser(props : Props)
         const setData = () => {
             if (paginationParams !== undefined && typeof(paginationParams.page) === 'number') {
                 const value = paginationParams.sortingMode as number;
-                setSortingAlgorithm(value);
                 setItemPerPage(paginationParams.itemsOnPage as number);
                 setCurrentPage(paginationParams.page);  
             }
@@ -257,7 +254,7 @@ function ProductsBrowser(props : Props)
             </div>
             {products.length > 0 && <div className={styles.paginationControlContainer}>
                 <a className={styles.paginationMainButton} onClick={setPreviousPage} href="#">
-                &#10132;Previous
+                <span className={styles.paginationButtonInvertedArrow}>&#10132;</span>Previous
                 </a>
                 <div className={styles.buttonsContainer}>
                 {products.map((item,index) => (

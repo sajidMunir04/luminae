@@ -124,6 +124,10 @@
 }
 
 
+.paginationButtonInvertedArrow{
+    transform: rotate(180deg);
+}
+
 .sortSelectOption{
     font-family: RobotoSlab-Bold;
     font-size: 14px;

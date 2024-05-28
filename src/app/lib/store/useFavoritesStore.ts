@@ -67,13 +67,13 @@ export const useFavoritesStore = create<State & Actions>((set,get) => ({
                 products: storedProducts
             }))
 
-            setCookie(dataStoreKey, JSON.stringify(get().products));
+            setCookie(dataStoreKey, JSON.stringify(storedProducts));
         }
     },
 
     removeFromFavorites: (product: Product) => {
         let existingProducts : string[] = [];
-        const storedProductData = localStorage.getItem(dataStoreKey);
+        const storedProductData = getCookie(dataStoreKey);
         if (storedProductData) {
             const cartProducts : string[] = JSON.parse(storedProductData);
             existingProducts = cartProducts;
@@ -85,7 +85,7 @@ export const useFavoritesStore = create<State & Actions>((set,get) => ({
             set(state => ({
                 products: existingProducts
             }));
-            setCookie(dataStoreKey, JSON.stringify(get().products));
+            setCookie(dataStoreKey, JSON.stringify(existingProducts));
         }
     },
 }))

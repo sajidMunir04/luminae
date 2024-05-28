@@ -1,18 +1,14 @@
 "use client";
 
-import React, { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './HeaderTemplate.module.css';
-import ProductsBrowser from '../products/ProductsBrowser';
 import router from 'next/router';
 import { useStore } from 'zustand';
 import { useCartStore } from '../lib/store/useCartStore';
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
-import { auth, currentUser, getAuth } from "@clerk/nextjs/server";
-import { request } from 'https';
-import { RequestLike } from '@clerk/nextjs/dist/types/server/types';
 import Link from 'next/link';
 import ProductCategoriesManager from './ProductCategoriesManager';
-
+import { motion } from 'framer-motion';
 
 
 function HeaderTemplate()
@@ -38,7 +34,7 @@ function HeaderTemplate()
         router.replace('http://localhost:3000/search/' + searchQuery);
     }
 
-    return (<div className={styles.container}>
+    return (<motion.div className={styles.container} initial={{scaleY : 0}} whileInView={{scaleY:1}}>
         <div className={styles.logoContainer}>
             <Link className={styles.logoLink} href='/'><img className={styles.logoImage} src={'/images/common/logo2.png'}/>
             </Link>
@@ -87,7 +83,7 @@ function HeaderTemplate()
                     </SignedIn>
                 </div>
         </div>
-    </div>);
+    </motion.div>);
 }
 
 export default HeaderTemplate;

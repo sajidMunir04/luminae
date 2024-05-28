@@ -63,6 +63,7 @@
     align-items: center;
     line-height: 14px;
     width: 100%;
+    margin-top: 3%;
 }
 
 .colorMarker{
@@ -70,8 +71,7 @@
     height: 18px;
     background-color: brown;
     border-radius: 50px;
-    margin-top: 3%;
-    margin-left: 4%;
+    margin-left: 3%;
 }
 
 .productImage{
@@ -82,7 +82,6 @@
 
 .infoText{
     margin: 0%;
-    margin-top: 2%;
     font-family:RobotoSlab-Regular;
     font-size: 14px;
 }

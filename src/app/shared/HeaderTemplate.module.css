@@ -144,7 +144,8 @@
     text-align: center;
     margin-left: 4%;
     position: absolute;
-    right: -76%;
+    right: 15%;
+    top: -110%;
 }
 
 .accountButton{

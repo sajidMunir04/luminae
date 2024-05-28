@@ -139,13 +139,13 @@
 }
 
 .productName{
-    font-family: Lato-ExtraBold;
-    font-size: 22px;
+    font-family: RobotoSlab-Bold;
+    font-size: 26px;
     margin-bottom: 0%;
 }
 
 .productPrice{
-    font-family: Lato-Regular;
+    font-family: RobotoSlab-SemiBold;
     font-size: 20px;
     margin-top: 2%;
 }

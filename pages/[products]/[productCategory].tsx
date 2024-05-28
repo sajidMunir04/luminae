@@ -23,7 +23,7 @@ function productCategory(){
                 const fetchQuery = `/api/fetchProducts/${products}/${productCategory}`;
                 const response = await fetch(fetchQuery);
                 const data = await response.json();
-                filteredProducts = data.map((item: Product) => {
+                filteredProducts = data.data.map((item: Product) => {
                   const product : Product = {
                     _id: item._id,
                     name: item.name,
@@ -42,6 +42,8 @@ function productCategory(){
                     model: item.model,
                     reviews: item.reviews
                 }
+
+                console.log(product.previousPrice);
 
                 return product;            
             });

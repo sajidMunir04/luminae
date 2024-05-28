@@ -1,6 +1,7 @@
 import { ChangeEvent, SyntheticEvent, useState } from "react";
 import styles from "./ProductReviewForm.module.css";
 import { ProductReviewData } from "./ProductReviewData";
+import { useRouter } from "next/router";
 
 interface Props {
     productId: string
@@ -8,6 +9,7 @@ interface Props {
 
 
 function ProductReviewForm(props: Props) {
+    const router = useRouter();
 
     const [reviewHeading,setReviewHeading] = useState('');
     const [reviewDetail,setReviewDetail] = useState('');
@@ -49,6 +51,7 @@ function ProductReviewForm(props: Props) {
 
             if (status) {
                 alert("Review Submitted Successfuly");
+                router.reload();
             }
         }
 
@@ -57,7 +60,7 @@ function ProductReviewForm(props: Props) {
 
     return (<form className={styles.reviewForm} onSubmit={addProductReview}>
         <label className={styles.reviewLabel}>Your Name
-            <input type='text' placeholder='Enter Name Here' onChange={handleNameInput}/>
+            <input className={styles.inputField} type='text' placeholder='Enter Name Here' onChange={handleNameInput}/>
         </label>
         <label className={styles.reviewLabel}>How would you rate the product?
             <div>
@@ -69,13 +72,13 @@ function ProductReviewForm(props: Props) {
             </div>
         </label>
         <label className={styles.reviewLabel}>Review Highlight
-            <input type='text' onChange={handleReviewHeading}/>
+            <input className={styles.inputField} type='text' onChange={handleReviewHeading}/>
         </label>
         <label className={styles.reviewLabel}>Review Detail
-            <textarea onChange={handleReviewDetail} placeholder='Review Detail'>
+            <textarea className={styles.textArea} onChange={handleReviewDetail} placeholder='Review Detail'>
             </textarea>
         </label>
-        <button type='submit'>Submit Review</button>
+        <button className={styles.submitButton} type='submit'>Submit Review</button>
     </form>);
 }
 
