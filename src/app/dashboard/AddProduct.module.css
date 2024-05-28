@@ -1,4 +1,25 @@
 .form{
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+
+.label {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1%;
+}
+
+.inputField {
+    width: 100%;
+    height: 30px;
+    padding: 1% 3%;
+    box-sizing: border-box;
+}
+
+.productImagesContainer{
+    width: 100%;
+    height: 50px;
 }

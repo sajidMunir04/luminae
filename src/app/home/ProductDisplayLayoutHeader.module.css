@@ -3,12 +3,25 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    height: min-content;
+    margin-bottom: 3%;
 }
 
+.headingContainer{
+    height: min-content;
+    width: 40%;
+    border-left: 6px solid blueviolet;
+}
+
+.headingText{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0%;
+    margin-left: 2%;
+}
 
 .link {
     color: #262626;
-    font-family: Lato-Regular;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 16px;
     text-decoration: none;
 }

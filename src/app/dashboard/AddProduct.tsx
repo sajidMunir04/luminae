@@ -21,25 +21,25 @@ function AddProduct() {
     }
 
     return (<form className={styles.form} onSubmit={onSubmit}>
-        <label>
-            <input type='text' placeholder="Product Name"/>
+        <label className={styles.label}>Product Name
+            <input className={styles.inputField} type='text' placeholder="Product Name"/>
         </label>
-        <label>
-            <input type='text' placeholder="Product Section"/>
+        <label className={styles.label}>Product Section
+            <input className={styles.inputField} type='text' placeholder="Product Section"/>
         </label>
-        <label>
-            <input type='text' placeholder="Product Category"/>
+        <label className={styles.label}>Product Category
+            <input className={styles.inputField} type='text' placeholder="Product Category"/>
         </label>
-        <label>
-            <input type='text' placeholder="Brand Name"/>
+        <label className={styles.label}>Product's Brand Name
+            <input className={styles.inputField} type='text' placeholder="Brand Name"/>
         </label>
-        <label>
-            <input type='number' placeholder="price"/>
+        <label className={styles.label}>$
+            <input className={styles.inputField} type='number' placeholder="price"/>
         </label>
-        <label>
+        <label className={styles.label}>
             Images
         </label>
-        <div>
+        <div className={styles.productImagesContainer}>
             {images?.map((image) => <img src={image}/>)}
         </div>
         <div>

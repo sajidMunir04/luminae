@@ -8,7 +8,6 @@ function Cart()
 {
     return (<>
         <HeaderTemplate/>
-        <StoreInteractionContainer/>
         <ProductsCart/>
         <FooterTemplate/>
     </>);

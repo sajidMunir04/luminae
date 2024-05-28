@@ -3,6 +3,8 @@
     flex-direction: row;
     color: white;
     width: 48%;
+    border-radius: 18px;
+    overflow: hidden;
 }
 
 .contentSection{

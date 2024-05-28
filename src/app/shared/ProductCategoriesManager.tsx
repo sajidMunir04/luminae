@@ -65,13 +65,8 @@ function ProductCategoriesManager()
     },[])
 
     return (<div className={styles.container}>
-            <div className={styles.categoriesButton}>
-                <p>All Categories</p>
-            </div>
-            <div className={styles.catergoriesSection}>
-                {productSections.map((categorySection) => (
+                            {productSections.map((categorySection) => (
                 <ProductSubCatergories key={categorySection.productSection} mainCategory={categorySection.productSection} categories={categorySection.subCategories}/>))}
-            </div>
         </div>);
 }
 

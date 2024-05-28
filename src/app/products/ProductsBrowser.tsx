@@ -9,6 +9,9 @@ import ColorFilter from "./filters/ColorFilter";
 import PriceFilter from "./filters/PriceFilter";
 import { ModelDetail } from "./filters/ModelFilter";
 import { useRouter } from "next/router";
+import { useExtractQueryParams } from "../lib/hooks/useExtractRouterQuery";
+import { useStoreRouterQuery } from "../lib/hooks/useStoreRouterQuery";
+import { useGetRouterQuery } from "../lib/hooks/useGetRouterQuery";
 
 interface Props {
     products : Product[],
@@ -34,6 +37,9 @@ enum ProductSortingAlgorithm {
 function ProductsBrowser(props : Props)
 {
     const router = useRouter();
+    const paginationParams = useExtractQueryParams(useGetRouterQuery() !== undefined ? useGetRouterQuery() as string : router.asPath);
+
+    console.log(useGetRouterQuery());
 
     const [itemsPerPage,setItemPerPage] = useState(12);
     const [currentPage,setCurrentPage] = useState(1);
@@ -44,6 +50,7 @@ function ProductsBrowser(props : Props)
     const[selectedColors,setSelectedColors] = useState<string[]>(['']);
     const[selectedSizes,setSelectedSizes] = useState(['']);
     const[priceRange,setPriceRange] = useState<number[]>([]);
+
     const defaultFilterData : FiltersData = {
         minPrice: 0,
         maxPrice: 0,
@@ -94,18 +101,37 @@ function ProductsBrowser(props : Props)
         setProducts(filteredProducts);
     }
 
+    useEffect(() => {
+
+        console.log(paginationParams);
+
+        const setData = () => {
+            if (paginationParams !== undefined && typeof(paginationParams.page) === 'number') {
+                const value = paginationParams.sortingMode as number;
+                setSortingAlgorithm(value);
+                setItemPerPage(paginationParams.itemsOnPage as number);
+                setCurrentPage(paginationParams.page);  
+            }
+        }
+
+        setTimeout(setData,800);
+
+    },[]);
+
     const handlePageChange = (pageNumber : number) => {
         setCurrentPage(pageNumber);
-        router.replace(`${router.basePath}/${props.productSection}/${props.productCategory}?page=${pageNumber}&itemsOnPage=${itemsPerPage}&sortingMode=${sortingAlgorithm}`);
+        const urlQuery : string = `${router.basePath}/${props.productSection}/${props.productCategory}?page=${pageNumber}&itemsOnPage=${itemsPerPage}&sortingMode=${sortingAlgorithm}`;
+        useStoreRouterQuery(urlQuery);
+        router.replace(urlQuery);
     }
 
     const setNewPage = () => {
-        const newPageIndex = Math.max(currentPage - 1,1);
+        const newPageIndex = Math.min(currentPage + 1,Math.floor(products.length / itemsPerPage) );
         handlePageChange(newPageIndex);
     }
 
     const setPreviousPage = () => {
-        const newPageIndex = Math.min(currentPage + 1,Math.floor(products.length / itemsPerPage) );
+        const newPageIndex = Math.max(currentPage - 1,1);
         handlePageChange(newPageIndex);
     }
 
@@ -159,11 +185,11 @@ function ProductsBrowser(props : Props)
                 newFiltersData.styles.push(item.style);
         })    
         setFiltersData(newFiltersData);
-        console.log(props.products.length,products.length);
     }, [props.products.length]);
 
     const handleItemsChange = (event : ChangeEvent<HTMLSelectElement>) => {
         setItemPerPage(parseInt(event.target.value));
+        handlePageChange(1);
     }
 
     const handleSortAlgorithmChange = (event : ChangeEvent<HTMLSelectElement>) => {
@@ -189,6 +215,8 @@ function ProductsBrowser(props : Props)
             const filteredProducts = products.sort((a,b) => (b.price - a.price));
             setProducts(filteredProducts)   
         }
+
+        handlePageChange(1);
     }
 
     return (<div className={styles.container}>
@@ -231,7 +259,7 @@ function ProductsBrowser(props : Props)
                 </a>
                 <div className={styles.buttonsContainer}>
                 {products.map((item,index) => (
-                    (index % itemsPerPage === 0 && <a key={'aasd'+index} href="#"
+                    ((index % itemsPerPage === 0 && index < props.products.length - itemsPerPage) && <a key={'aasd'+index} href="#"
                     className={styles.paginationButton} onClick={() => {
                         handlePageChange((index / itemsPerPage) + 1);
                     }}>{(index / itemsPerPage) + 1}</a>

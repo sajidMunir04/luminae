@@ -11,6 +11,7 @@ import { auth, currentUser, getAuth } from "@clerk/nextjs/server";
 import { request } from 'https';
 import { RequestLike } from '@clerk/nextjs/dist/types/server/types';
 import Link from 'next/link';
+import ProductCategoriesManager from './ProductCategoriesManager';
 
 
 
@@ -25,7 +26,6 @@ function HeaderTemplate()
 
     useEffect(() => {
         setCartItemCount(useCartStore.getState().getProductCount());
-        console.log(useCartStore.getState().getProductCount());
     },[cartItemsCount]);
 
 
@@ -40,8 +40,11 @@ function HeaderTemplate()
 
     return (<div className={styles.container}>
         <div className={styles.logoContainer}>
-            <Link href='/'><img src={'/images/common/logo.png'}/>
+            <Link href='/'><img src={'/images/common/logo2.png'}/>
             </Link>
+        </div>
+        <div className={styles.categoriesContainer}>
+            <ProductCategoriesManager/>
         </div>
         <form className={styles.form} onSubmit={onSeachButtonClick}>
                 <input className={styles.searchInput} type="search" placeholder='Search Products' onChange={handleInputChange}/>
@@ -65,32 +68,24 @@ function HeaderTemplate()
                 <button className={styles.searchButton} type="submit"><img src={'/images/common/magnifier.svg'}/></button>
         </form>
         <div className={styles.buttons}>
-                {/*
-                <a className={styles.button} href={'http://localhost:3000/auth/signIn'}>
-                <img className={styles.btnImage} src="/IconSign in.png"/>
-                <p>Sign in</p>
-                </a>*/}
-                {
                 <Link className={styles.button} href={'/ordersDetail'}>
-                    <p>My Orders</p>
-                </Link>}
+                    <img className={styles.btnImage} src="/images/common/myOrders.svg"/>
+                </Link>
                 <Link className={styles.button} href={'/favorites'}>
-                    <img className={styles.btnImage} src="/Favorides.png"/>
-                    <p>Favorites</p>
+                    <img className={styles.btnImage} src="/images/common/favorites.svg"/>
                 </Link>
                 <Link className={styles.button} href='/cart'>
-                    <img className={styles.btnImage} src="/card.png"/>
-                    <p>Cart</p>
+                    <img className={styles.btnImage} src="/images/common/cart.svg"/>
                     {cartItemsCount > 0 && <p className={styles.cartItemsText}>{cartItemsCount}</p>}
                 </Link>
-        </div>
-        <div className={styles.accountButton}>
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton/>
-        </SignedIn>
+                <div className={styles.accountButton}>
+                    <SignedOut>
+                    <SignInButton />
+                    </SignedOut>
+                    <SignedIn>
+                    <UserButton/>
+                    </SignedIn>
+                </div>
         </div>
     </div>);
 }

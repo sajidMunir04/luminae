@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import ProductPage from "../../src/app/products/ProductPage";
 import ProductsBrowser from "../../src/app/products/ProductsBrowser";
 import FooterTemplate from "../../src/app/shared/FooterTemplate";
 import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
@@ -60,7 +59,7 @@ function search() {
     return (<>
       <HeaderTemplate/>
       <StoreInteractionContainer/>
-      {products.length > 0 && <ProductsBrowser onClick={handleClick} products={products} onBack={() => {}}/>}
+      {products.length > 0 && <ProductsBrowser products={products} productSection={""} productCategory={""}/>}
       {(resultFinalized  && products.length == 0) && <NoProductFound searchTerm={search as string} />}
       <FooterTemplate/>
     </>);

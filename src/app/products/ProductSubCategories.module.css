@@ -1,5 +1,6 @@
 .container{
     position: relative;
+    margin-inline: 8%;
 }
 
 .subCategoriescontainer{
@@ -10,11 +11,16 @@
     flex-wrap: wrap;
     width: 360px;
     height: 280px;
-    background-color: white;
+    background-color: rgb(217, 217, 217);
     border-radius: 8px;
     padding: 6% 8%;
     top: 100%;
     left: 0%;
+}
+
+.categoryButton{
+    font-family: RobotoSlab-SemiBold;
+    color: black;
 }
 
 .categoryLink{

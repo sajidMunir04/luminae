@@ -27,3 +27,34 @@
     font-family: Lato-Medium;
     src: url(../../public/fonts/Lato/Lato-Light.ttf);
 }
+
+
+@font-face {
+    font-family: RobotoSlab-Black;
+    src: url(../../public/fonts/roboto-slab/RobotoSlab-Black.ttf);
+}
+
+@font-face {
+    font-family: RobotoSlab-Bold;
+    src: url(../../public/fonts/roboto-slab/RobotoSlab-Bold.ttf);
+}
+
+@font-face {
+    font-family: RobotoSlab-ExtraBold;
+    src: url(../../public/fonts/roboto-slab/RobotoSlab-ExtraBold.ttf);
+}
+
+@font-face {
+    font-family: RobotoSlab-Medium;
+    src: url(../../public/fonts/roboto-slab/RobotoSlab-Medium.ttf);
+}
+
+@font-face {
+    font-family: RobotoSlab-Regular;
+    src: url(../../public/fonts/roboto-slab/RobotoSlab-Regular.ttf);
+}
+
+@font-face {
+    font-family: RobotoSlab-SemiBold;
+    src: url(../../public/fonts/roboto-slab/RobotoSlab-SemiBold.ttf);
+}

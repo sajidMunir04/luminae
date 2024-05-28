@@ -56,7 +56,9 @@ function Cart() {
                 name: orderData.cartProducts[i].product.name,
                 quantity: orderData.cartProducts[i].quantity,
                 unitPrice: orderData.cartProducts[i].product.price,
-                size: ""
+                size: orderData.cartProducts[i].size,
+                imageLink: orderData.cartProducts[i].product.images[0],
+                color: orderData.cartProducts[i].product.color
             }
             productDetailsForOrder.push(productDetail);
         }

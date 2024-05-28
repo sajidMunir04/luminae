@@ -3,10 +3,12 @@ import { ShippingServiceInfo } from "./ShippingServiceInfo"
 
 export interface ProductOrderDetail{
     _id: string,
+    imageLink: string,
     name: string,
     size: string,
     quantity: number,
-    unitPrice: number
+    unitPrice: number,
+    color: string
 }
 
 

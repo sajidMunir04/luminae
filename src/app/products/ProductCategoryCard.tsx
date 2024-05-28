@@ -4,14 +4,15 @@ interface Props {
     categoryInfo: string,
     itemsDetail: string,
     link: string,
-    imageLink: string
+    imageLink: string,
+    color: string
 }
 
 
 function ProductCategoryCard(props : Props)
 {
     return (<div className={styles.container}>
-        <div className={styles.contentSection}>
+        <div className={styles.contentSection} style={{ backgroundColor: `${props.color}` }}>
             <p className={styles.headingText}>
                 {props.categoryInfo}
             </p>

@@ -48,7 +48,7 @@ function TrendingProductsLayout()
             <ProductDisplayLayoutHeader heading="Trending Products" link="/WOMAN/jackets" linkText="View All"/>
         </div>
         <div className={styles.content}>
-            {products.map((product) => <TrendingProductDisplayCard product={product} />)}
+            {products.map((product) => <TrendingProductDisplayCard key={product._id} product={product} />)}
         </div>
     </div>);
 }

@@ -2,9 +2,13 @@ import { useState, useEffect } from "react";
 import { ProductClassifcation, ProductSection } from "../shared/ProductCategoriesManager";
 import { Product } from "../utils/Product";
 import ProductSubCatergories from "../products/ProductSubCategories";
+import ProductBrowser from "./ProductBrowser";
 
 
 function ProductsManager() {
+
+    const [isCategorySelected,setCategorySelectStatus] = useState(true);
+    const [selectedSection, setSelectedSection] = useState<string[]>([]);
 
     let allProductSections : ProductSection[] = [];
     const empty : ProductSection[] = [{
@@ -54,13 +58,18 @@ function ProductsManager() {
     },[])
 
     const openProductBrowser = (section: string,category : string) => {
-        
+        const prodSection : string[] = [];
+        prodSection.push(section);
+        prodSection.push(category);
+        setSelectedSection(prodSection);
+        setCategorySelectStatus(true);
     }
 
     return (<div>
             {productSections.map((productSection) => <div>
                 <h3>{productSection.productSection}</h3>
-                {productSection.subCategories.map((category) => (<button onClick={() => {}}>{category}</button>))}
+                {productSection.subCategories.map((category) => (<button onClick={() => {openProductBrowser(productSection.productSection,category)}}>{category}</button>))}
+            {isCategorySelected && <ProductBrowser products={selectedSection[0]} productCategory={selectedSection[1]}/>}
             </div>)}       
     </div>);
 }

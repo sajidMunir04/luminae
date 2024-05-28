@@ -85,8 +85,7 @@ function index() {
 
     return (<>
       <HeaderTemplate/>
-      <StoreInteractionContainer/>
-      <ProductsBrowser products={allProducts}/>
+      <ProductsBrowser products={allProducts} productSection={""} productCategory={""}/>
       <FooterTemplate/>
     </>);
 }

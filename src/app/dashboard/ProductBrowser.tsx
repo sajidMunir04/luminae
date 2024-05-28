@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { ProductSection } from "../shared/ProductCategoriesManager";
 import { Product } from "../utils/Product";
+import ProductCard from "./ProductCard";
+import axios from "axios";
+import styles from "./ProductBrowser.module.css";
 
 interface Props {
     products: string,
@@ -11,6 +14,17 @@ function ProductBrowser(props : Props) {
     let filteredProducts : Product[] = [];
     const [allProducts,setProducts] = useState(filteredProducts);
     let allProductSections : ProductSection[] = [];
+
+
+    const deleteProductFromDatabase = async(product : Product) => {
+        const response = fetch('/api/removeProductFromDatabase',{
+            method: "POST",
+            body: product._id
+        });
+        const result = (await response).json();
+        console.log(result);
+    }
+
     useEffect(
         () => {
         const fetchData = async () => {
@@ -37,7 +51,7 @@ function ProductBrowser(props : Props) {
                     model: item.model,
                     reviews: item.reviews
                 }
-                console.log(item);
+
                 return product;            
             });
 
@@ -71,7 +85,11 @@ function ProductBrowser(props : Props) {
           setTimeout(fetchData,250);       
     },[props.products, props.productCategory])
 
-    return (<div>
-        
+    return (<div className={styles.container}>
+        {allProducts.map((product) => (
+            <ProductCard product={product} onRemoveClick={deleteProductFromDatabase}/>
+        ))}
     </div>);
 }
+
+export default ProductBrowser;

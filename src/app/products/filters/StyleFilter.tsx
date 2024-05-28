@@ -26,7 +26,7 @@ function StyleFilter(props : Props) {
         <FilterHeading headingText={"STYLE"}/>
         <div className={styles.contentContainer}>
             {props.styles.map((item) => (<label className={styles.label} key={item} htmlFor="stylebox" onClick={() => handleStyleSelection(item)}> 
-                <input className={styles.checkBox} name="stylebox" type='checkbox' checked={props.selectedStyles.includes(item)}/>
+                <input className={styles.checkBox} name="stylebox" type='checkbox' defaultChecked={props.selectedStyles.includes(item)}/>
                 <span className={styles.labelText}>{item}</span>
             </label>))}
         </div>

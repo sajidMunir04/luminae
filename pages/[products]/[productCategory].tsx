@@ -42,7 +42,7 @@ function productCategory(){
                     model: item.model,
                     reviews: item.reviews
                 }
-                console.log(item);
+
                 return product;            
             });
 
@@ -78,7 +78,6 @@ function productCategory(){
 
     return (<>
       <HeaderTemplate/>
-      <StoreInteractionContainer/>
       <ProductsBrowser products={allProducts} productSection={products as string} productCategory={productCategory as string}/>
       <FooterTemplate/>
     </>);
