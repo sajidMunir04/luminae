@@ -1,0 +1,23 @@
+.container{
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.categoriesContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.navSection{
+    width: 30%;
+    height: max-content;
+}
+
+.dataSection{
+    width: 68%;
+    height: max-content;
+}

@@ -1,0 +1,38 @@
+.container{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+}
+
+.closeButton{
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    background-color: red;
+}
+
+.subContainer{
+    margin: auto;
+    width: 50%;
+    height: max-content;
+    text-align: center;
+}
+
+.inventoryUpdateContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sizeText{
+
+}
+
+.inputText{
+
+}

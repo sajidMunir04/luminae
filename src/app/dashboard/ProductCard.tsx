@@ -9,15 +9,16 @@ interface Props {
 
 function ProductCard(props : Props) {
     return (<div className={styles.container}>
-        <div className={styles.deleteButton}>
-            <p>X</p>
-        </div>
         <div className={styles.imageContainer}>
             <img className={styles.image} src={props.product.images[0]}/>
         </div>
         <div className={styles.textContainer}>
             <p>{props.product.name}</p>
-            <p>{props.product.price}</p>
+            <p>$ {props.product.price}</p>
+        </div>
+        <div className={styles.buttonsContainer}>
+            <button onClick={() => props.onRemoveClick(props.product)}>Delete Product</button>
+            <button>Update Inventory</button>
         </div>
     </div>)
 }

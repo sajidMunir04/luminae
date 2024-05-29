@@ -3,10 +3,12 @@ import { ordersCookie } from "../lib/constants"
 import { getCookie } from "cookies-next"
 import { OrderFormData } from "../cart/OrderFormData";
 import styles from "./OrdersList.module.css";
+import { useRouter } from "next/navigation";
 
 function OrdersList() {
-
+    const router = useRouter();
     const [orders,setOrders] = useState<OrderFormData[]>([]);
+    const [orderIds,setOrderIds] = useState<string[]>([]);
     const [hasOrders,setOrderStatus] = useState(true);
 
     useEffect(() => {
@@ -18,7 +20,8 @@ function OrdersList() {
                 const data = await response.json();
     
                 if (Array.isArray(data.data)) {
-                    const customerOrders : OrderFormData[] = await data.data.map((item : OrderFormData) => {
+                    const orders : string[] = [];
+                    const customerOrders : OrderFormData[] = await data.data.map((item,index) => {
                         const orderForm : OrderFormData = {
                             products: item.products,
                             customerEmail: item.customerEmail,
@@ -35,10 +38,11 @@ function OrdersList() {
                             orderDate: item.orderDate,
                             customerId: item.customerId
                         }
-        
+                        orders.push(item._id);
                         return orderForm;
                     })
                     setOrders(customerOrders);
+                    setOrderIds(orders);
                 }
             }
     
@@ -49,6 +53,10 @@ function OrdersList() {
         }
     },[])
 
+    const handleClick = (index : number) => {
+        console.log(orderIds[index]);
+        router.push(`/viewOrder/${orderIds[index]}`);
+    }
 
     return (<div className={styles.container}>
         <h1 className={styles.sectionHeading}>Your Orders</h1>
@@ -66,7 +74,7 @@ function OrdersList() {
                             <p>${order.orderPriceTotal.toFixed(0)}</p>
                             <p>No. of Products: {order.products.length}</p>
                         </div>
-                        <a className={styles.viewOrderButton}>View Order &#10140;</a>
+                        <p className={styles.viewOrderButton} onClick={() => handleClick(index)}>View Order &#10140;</p>
                     </div>))
         }
         {!hasOrders &&

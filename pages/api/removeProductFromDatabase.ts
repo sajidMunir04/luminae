@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 export default async function handler(req, res) {
   console.log(req.body);
-  const productId : string = await JSON.parse(req.body);
+  const productId : string = req.body;
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {
     await client.connect();

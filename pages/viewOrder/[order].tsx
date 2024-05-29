@@ -1,4 +1,7 @@
-import { Product } from "@/app/utils/Product";
+import { OrderFormData } from "@/app/cart/OrderFormData";
+import CustomerOrder from "@/app/order/CustomerOrder";
+import FooterTemplate from "@/app/shared/FooterTemplate";
+import HeaderTemplate from "@/app/shared/HeaderTemplate";
 import { getCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -6,8 +9,9 @@ import { useEffect, useState } from "react";
 
 function order() {
     const router = useRouter();
-
-    const [product,setProduct] = useState<Product>();
+    const {order} = router.query;
+    console.log(order);
+    const [orderForm,setOrderForm] = useState<OrderFormData>();
     
     useEffect(() => {
         let { productPage } = router.query;
@@ -16,40 +20,42 @@ function order() {
         
         const fetchData = async() => {
             try {
-                const response = await fetch('/api/getProductPage',{
-                    method: "POST",
-                    body: productPage as string
-                });
+                const response = await fetch('/api/getOrders/' + order);
                 const data = await response.json();
-                const product : Product = {
-                    _id: data._id,
-                    name: data.name,
-                    description: data.description,
-                    price: data.price,
-                    images: data.images,
-                    discount: data.discount,
-                    inventoryCount: data.inventoryCount,
-                    brandName: data.brandName,
-                    category: data.category,
-                    section: data.section,
-                    sizes: data.sizes,
-                    color: data.color,
-                    style: data.style,
-                    model: data.model,
-                    reviews: data.reviews,
-                    previousPrice: 0
+                const orderFormData : OrderFormData = data.data[0];
+                console.log(data,orderFormData);
+                const orderForm : OrderFormData = {
+                    products: orderFormData.products,
+                    customerEmail: orderFormData.customerEmail,
+                    customerName: orderFormData.customerName,
+                    customerPhone: orderFormData.customerPhone,
+                    customerAddress: orderFormData.customerAddress,
+                    customerRegion: orderFormData.customerRegion,
+                    customerCountry: orderFormData.customerCountry,
+                    orderPriceTotal: orderFormData.orderPriceTotal,
+                    orderShippingCharges: orderFormData.orderShippingCharges,
+                    orderTaxes: orderFormData.orderTaxes,
+                    shippingService: orderFormData.shippingService,
+                    paymentMethod: orderFormData.paymentMethod,
+                    orderDate: orderFormData.orderDate,
+                    customerId: orderFormData.customerId
                 };
-                setProduct(product);
+                setOrderForm(orderForm);
             }
             catch (error) {
                 console.log(error);
             }
         }
 
-        setCookie('productPageId',productPage);
-        fetchData();
+        setTimeout(fetchData,150);
 
-    },[]);
+    },[order?.length]);
+
+    return (<>
+    <HeaderTemplate/>
+    <CustomerOrder orderform={orderForm as OrderFormData}/>
+    <FooterTemplate/>
+    </>);
 }
 
 export default order;

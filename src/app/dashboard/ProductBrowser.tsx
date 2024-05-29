@@ -13,16 +13,20 @@ interface Props {
 function ProductBrowser(props : Props) {
     let filteredProducts : Product[] = [];
     const [allProducts,setProducts] = useState(filteredProducts);
-    let allProductSections : ProductSection[] = [];
-
+    const [isInventoryUpdating,setInventoryUpdateStatus] = useState(true);
 
     const deleteProductFromDatabase = async(product : Product) => {
-        const response = fetch('/api/removeProductFromDatabase',{
+        const filteredProducts = allProducts.filter((item) => item._id !== product._id);
+        setProducts(filteredProducts);
+        const response = await fetch('/api/removeProductFromDatabase',{
             method: "POST",
-            body: product._id
+            body: product._id as string
         });
-        const result = (await response).json();
-        console.log(result);
+        const result = await response.json();
+        const { status } = result;
+        if (status) {
+            alert('Item Deleted From Database');
+        }
     }
 
     useEffect(
@@ -32,7 +36,7 @@ function ProductBrowser(props : Props) {
                 const fetchQuery = `/api/fetchProducts/${props.products}/${props.productCategory}`;
                 const response = await fetch(fetchQuery);
                 const data = await response.json();
-                filteredProducts = data.map((item: Product) => {
+                filteredProducts = data.data.map((item: Product) => {
                   const product : Product = {
                     _id: item._id,
                     name: item.name,
@@ -54,40 +58,19 @@ function ProductBrowser(props : Props) {
 
                 return product;            
             });
-
-              filteredProducts.map((item) => {
-                        let containsSection = false;
-                        allProductSections.forEach((prodSec,index) => {
-                            if (prodSec.productSection == item.section)
-                                {
-                                    containsSection = true;
-
-                                    if (!prodSec.subCategories.includes(item.category))
-                                        prodSec.subCategories.push(item.category as string)    
-                                }
-                        })
-                        if (!containsSection)
-                        {
-                                let newProductSection : ProductSection = {
-                                    productSection : item.section as string,
-                                    subCategories: [item.category as string]
-                                }
-                                allProductSections.push(newProductSection);
-                        }
-              })
-
-              setProducts(filteredProducts);
+            setProducts(filteredProducts);
             } catch (error) {
               console.error('Error fetching data:', error);
             }
           };
 
-          setTimeout(fetchData,250);       
-    },[props.products, props.productCategory])
+          setTimeout(fetchData,100);       
+    },[props.productCategory])
 
     return (<div className={styles.container}>
+        {isInventoryUpdating}
         {allProducts.map((product) => (
-            <ProductCard product={product} onRemoveClick={deleteProductFromDatabase}/>
+            <ProductCard key={product._id} product={product} onRemoveClick={deleteProductFromDatabase}/>
         ))}
     </div>);
 }

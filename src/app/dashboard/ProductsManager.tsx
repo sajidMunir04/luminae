@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { ProductClassifcation, ProductSection } from "../shared/ProductCategoriesManager";
-import { Product } from "../utils/Product";
-import ProductSubCatergories from "../products/ProductSubCategories";
 import ProductBrowser from "./ProductBrowser";
-
+import styles from "./ProductManager.module.css";
+import InventoryUpdater from "./InventoryUpdater";
+import { Product } from "../utils/Product";
 
 function ProductsManager() {
 
     const [isCategorySelected,setCategorySelectStatus] = useState(true);
     const [selectedSection, setSelectedSection] = useState<string[]>([]);
+    const [isUpdatingInventory,setInventoryUpdateStatus] = useState(true);
+    const [inventoryProduct,setInventoryProduct] = useState<Product | undefined>();
 
     let allProductSections : ProductSection[] = [];
     const empty : ProductSection[] = [{
@@ -65,12 +67,30 @@ function ProductsManager() {
         setCategorySelectStatus(true);
     }
 
-    return (<div>
-            {productSections.map((productSection) => <div>
+    const openInventoryManagement = (product: Product) => {
+        setInventoryUpdateStatus(true);
+        setInventoryProduct(product);
+    }
+
+    const closeInventoryManagement = () => {
+        setInventoryUpdateStatus(false);
+        setInventoryProduct(undefined);
+    }
+
+    return (<div className={styles.container}>
+            <div className={styles.navSection}>
+                {productSections.map((productSection) => <div key={productSection.productSection+ ' asdasd'}>
                 <h3>{productSection.productSection}</h3>
-                {productSection.subCategories.map((category) => (<button onClick={() => {openProductBrowser(productSection.productSection,category)}}>{category}</button>))}
+                <div className={styles.categoriesContainer}>
+                {productSection.subCategories.map((category) => (<button key={productSection.productSection + category + '1231'} onClick={() => {openProductBrowser(productSection.productSection,category)}}>{category}</button>))}
+                   
+                </div>
+            </div>)}
+            </div>
+            <div className={styles.dataSection}>
             {isCategorySelected && <ProductBrowser products={selectedSection[0]} productCategory={selectedSection[1]}/>}
-            </div>)}       
+            </div> 
+            {(isUpdatingInventory && inventoryProduct !== undefined) && <InventoryUpdater product={inventoryProduct!} onCloseButton={closeInventoryManagement}/>}      
     </div>);
 }
 

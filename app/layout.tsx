@@ -21,9 +21,7 @@ export default function RootLayout({
       <ClerkProvider>   
       <body>
       <Theme>
-      <HeaderTemplate/>
       {children}
-      <FooterTemplate/>
       </Theme>
       </body>     
       </ClerkProvider>

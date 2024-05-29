@@ -12,7 +12,7 @@ export interface ProductOrderDetail{
 }
 
 
-interface OrderFormData {
+export interface OrderFormData {
     products : ProductOrderDetail[],
     customerEmail: string,
     customerName: string,

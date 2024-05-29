@@ -1,25 +1,37 @@
 .container{
     width: 180px;
-    height: 240px;
+    height: 340px;
     position: relative;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
 }
 
 .imageContainer{
     width: 100%;
     height: 64%;
+    overflow: hidden;
 }
 
 .image{
     max-width: 100%;
+    object-fit: contain;
 }
 
 .textContainer{
     width: 100%;
-    height: 30%;
+    height: 22%;
 }
 
-.deleteButton{
-    position: absolute;
-    top: 0%;
-    right: 100%;
+
+.buttonsContainer{
+    height: 8%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

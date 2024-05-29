@@ -2,9 +2,10 @@
 
 import { ChangeEvent, useState } from "react";
 import styles from "./AddProduct.module.css";
-import { CldUploadWidget, CldUploadWidgetProps } from 'next-cloudinary';
+import { CldUploadWidget, CldUploadWidgetProps , CloudinaryUploadWidgetResults, CloudinaryUploadWidgetInfo } from 'next-cloudinary';
 import config from '../utils/cloudinary'; // Import from config file
 import { Cloudinary } from '@cloudinary/url-gen';
+import cloudinary from "../utils/cloudinary";
 
 function AddProduct() {
     
@@ -19,6 +20,7 @@ function AddProduct() {
         newImages.push(newImage);
         setImages(newImages);
     }
+
 
     return (<form className={styles.form} onSubmit={onSubmit}>
         <label className={styles.label}>Product Name
@@ -43,8 +45,13 @@ function AddProduct() {
             {images?.map((image) => <img src={image}/>)}
         </div>
         <div>
-        <CldUploadWidget uploadPreset=""> 
-            {({ open }) => {
+        <CldUploadWidget uploadPreset={'unsigned_uploads'}> 
+            {({ open, results }) => {
+                const info = results?.info as CloudinaryUploadWidgetInfo;
+                if (info) {
+                    const newImages = [...images,info.url];
+                    setImages(newImages);
+                } 
                 return (
                 <button onClick={() => open()}>
                     Upload an Image

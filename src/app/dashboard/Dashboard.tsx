@@ -33,7 +33,7 @@ export default function Dashboard() {
 
   return (<div className={styles.container}>
     <div className={styles.topBar}>
-
+      <a className={styles.goToStoreLink} href="/">Go to Store</a>
     </div>
     <div className={styles.contentSection}>
       <div className={styles.buttonsContainer}>
