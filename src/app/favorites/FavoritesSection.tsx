@@ -5,26 +5,22 @@ import { Product } from "../utils/Product";
 import styles from "./FavoritesSection.module.css";
 import ProductDisplayCard from "../products/ProductDisplayCard";
 import { useFavoritesStore } from "../lib/store/useFavoritesStore";
-import Pagination from "../products/Pagination";
-import ProductPage from "../products/ProductPage";
 import { useRouter } from "next/navigation";
 
 function FavoritesSection() {
     const favoritesProductData = useFavoritesStore(state => state.fetchData());
-    const removeFromFavorites = useFavoritesStore(state => state.removeFromFavorites);
     const [products,setProducts] = useState<Product[]>();
 
     const router = useRouter();
 
     const removeProductFromFavorites = (product : Product) => {
-        removeFromFavorites(product);
         const filteredProducts = products?.filter((item) => item._id !== product._id);
         setProducts(filteredProducts);
     }
 
     const handleClick = (product : Product) => {
         const productId = product._id;
-          router.replace('http://localhost:3000' + '/item/' + productId);
+          router.push('http://localhost:3000' + '/item/' + productId);
     }
 
     useEffect(() => {
@@ -66,7 +62,7 @@ function FavoritesSection() {
 
         fetchData();
 
-    },[products?.length])
+    },[])
 
     return (<div className={styles.container}>
             <div className={styles.contentContainer}>

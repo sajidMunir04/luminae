@@ -12,20 +12,13 @@ import { useRouter } from "next/router";
 import { useExtractQueryParams } from "../lib/hooks/useExtractRouterQuery";
 import { useStoreRouterQuery } from "../lib/hooks/useStoreRouterQuery";
 import { useGetRouterQuery } from "../lib/hooks/useGetRouterQuery";
+import { FiltersData } from "./FiltersData";
+import { getFiltersData } from "../utils/getFiltersData";
 
 interface Props {
     products : Product[],
     productSection: string,
     productCategory: string
-}
-
-interface FiltersData {
-    minPrice: number,
-    maxPrice: number,
-    colors: string[],
-    productSizes: string[],
-    modelDetails: ModelDetail[],
-    styles: string[]
 }
 
 enum ProductSortingAlgorithm {
@@ -64,9 +57,15 @@ function ProductsBrowser(props : Props)
         setSelectedColors(['']);
         setSelectedStyles(['']);
         setSelectedSizes(['']);
-        const filteredProducts = props.products.filter((product) => models.includes(product.model));
-        console.log(models);
-        setProducts(models.length > 1 ? filteredProducts : props.products);
+        if (models.length > 1 ) {
+            const filteredProducts = props.products.filter((product) => models.includes(product.model));
+            setProducts(filteredProducts);
+            console.log(filteredProducts);
+        }
+        else {
+            setProducts(props.products);
+        }
+        handlePageChange(1);
     }
 
     const handleStyleSelection = (styles : string[]) => {
@@ -74,30 +73,63 @@ function ProductsBrowser(props : Props)
         setSelectedColors(['']);
         setSelectedStyles(styles);
         setSelectedSizes(['']);
-        const filteredProducts = props.products.filter((product) => styles.includes(product.style));
-        setProducts(styles.length > 1 ? filteredProducts : props.products);
+        if (styles.length > 1) {    
+            const filteredProducts = props.products.filter((product) => styles.includes(product.style));
+            setProducts(filteredProducts);
+        }
+        else {
+            setProducts(props.products);   
+        }
+        handlePageChange(1);
     }
 
     const handleColorSelection = (colors : string[]) => {
         setSelectedModels(['']);
         setSelectedStyles(['']);
         setSelectedColors(colors);
-        const filteredProducts = products.filter((product) => colors.includes(product.color));
-        setProducts(colors.length > 1 ? filteredProducts: props.products);
+        if (colors.length > 1) {
+            const filteredProducts = products.filter((product) => colors.includes(product.color));
+            setProducts(filteredProducts);   
+        }
+        else {
+            setProducts(props.products);   
+        }
+        handlePageChange(1);
     }
 
     const handleSizeSelection = (sizes : string[]) => {
         setSelectedSizes(sizes);
-        const filteredProducts = products.filter(function checkSize(product){
-            product.sizes.forEach((size,index) => sizes.includes(size) && product.inventoryCount[index] > 0)
-        });
-        setProducts(sizes.length > 1 ? filteredProducts : products);
+        if (sizes.length > 1) {
+            const filteredProducts = products.filter(function checkSize(product){
+                product.sizes.forEach((size,index) => sizes.includes(size) && product.inventoryCount[index] > 0)
+            });
+            setProducts(filteredProducts);
+        }
+        handlePageChange(1);
     }
 
     const handlePriceSelection = (newPriceRange : number[]) =>{
+        const allProducts = props.products.filter(function filterProduct(product) {
+
+            if (selectedModels.length > 1 && selectedModels.includes(product.model)) {
+                return false;
+            }
+
+            if (selectedStyles.length > 1 && selectedStyles.includes(product.style)) {
+                return  false;
+            }
+
+            if (selectedColors.length > 1 && selectedColors.includes(product.color)) {
+                return false;
+            }
+
+            if (product.price >= newPriceRange[0] && product.price <= newPriceRange[1]) {
+                return true;
+            }
+        })
         setPriceRange(newPriceRange);
-        const filteredProducts = products.filter((product) => product.price >= newPriceRange[0] && product.price <= newPriceRange[1]);
-        setProducts(filteredProducts);
+        setProducts(allProducts);
+        handlePageChange(1);
     }
 
     useEffect(() => {
@@ -132,54 +164,8 @@ function ProductsBrowser(props : Props)
 
     useEffect(() => {
         setProducts(props.products);
-        const newFiltersData : FiltersData = {
-            minPrice: 0,
-            maxPrice: 0,
-            colors: [],
-            productSizes: [],
-            modelDetails: [],
-            styles: []
-        }
-        props.products.forEach((item) => {
-            if (item.price < newFiltersData.minPrice)
-                newFiltersData.minPrice = item.price;
-    
-            if (item.price > newFiltersData.maxPrice)
-                newFiltersData.maxPrice = item.price;
-    
-            if (!newFiltersData.colors.includes(item.color))
-                newFiltersData.colors.push(item.color);
-    
-            item.sizes.map(function tagChecker(tag){
-                if (!newFiltersData.productSizes.includes(tag)){
-                    newFiltersData.productSizes.push(tag);
-                }
-            })
-
-            {
-                let modelAdded = false;
-
-                newFiltersData.modelDetails.forEach((model,index) => {
-                    if (model.type == item.model)
-                    {
-                        model.quantity++;
-                        modelAdded = true;
-                    }
-                })
-        
-                if (!modelAdded) {
-                    const modelDetail : ModelDetail = {
-                        type: item.model,
-                        quantity: 1
-                    }
-                    newFiltersData.modelDetails.push(modelDetail);
-                }
-            }
-    
-            if (!newFiltersData.styles.includes(item.style))
-                newFiltersData.styles.push(item.style);
-        })    
-        setFiltersData(newFiltersData);
+        const filtersData : FiltersData = getFiltersData(props.products);
+        setFiltersData(filtersData);
     }, [props.products.length]);
 
     const handleItemsChange = (event : ChangeEvent<HTMLSelectElement>) => {
@@ -240,11 +226,15 @@ function ProductsBrowser(props : Props)
     </div>
     <div className={styles.mainSection}>
         <div className={styles.filtersContainer}>
+            <div className={styles.filterContainerHeader}>
+            <p className={styles.filterHeaderText}>Filters</p>
+            <img src="/images/product/filter.svg"/>
+            </div>
             <ModelFilter onModelSelect={handleModelSelection} modelDetails={filtersData.modelDetails} selectedModels={selectedModels}/>
             <StyleFilter styles={filtersData.styles} onStyleSelect={handleStyleSelection} selectedStyles={selectedStyles}/>
             <ColorFilter colors={filtersData.colors} onColorSelect={handleColorSelection} selectedColors={selectedColors}/>
             <SizeFilter sizes={filtersData.productSizes} onSizeSelect={handleSizeSelection} selectedSizes={selectedSizes}/>
-            <PriceFilter minimumPrice={filtersData.minPrice} maximumPrice={filtersData.maxPrice} />
+            <PriceFilter minimumPrice={filtersData.minPrice} maximumPrice={filtersData.maxPrice} onPriceChange={handlePriceSelection} />
         </div>
         <div className={styles.productsContainer}>
             <div>
@@ -257,7 +247,7 @@ function ProductsBrowser(props : Props)
                 <div className={styles.buttonsContainer}>
                 {products.map((item,index) => (
                     ((index % itemsPerPage === 0 && index < props.products.length - itemsPerPage) && <a key={'aasd'+index} href="#"
-                    className={styles.paginationButton} onClick={() => {
+                    className={`${styles.paginationButton} ${currentPage == ((index / itemsPerPage) + 1) && styles.paginationButtonActive}`} onClick={() => {
                         handlePageChange((index / itemsPerPage) + 1);
                     }}>{(index / itemsPerPage) + 1}</a>
                 )))}

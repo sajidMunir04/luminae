@@ -27,15 +27,17 @@ function ProductDisplayCard(props : Props)
 
 
     const handleProductFavorite = () => {
-        if (favoriteStatus === false)
+        if (!isAddedToFavorites(props.product._id))
         {
             addToFavorites(props.product);
             setFavoriteStatus(true);
         }
         else{
-            setFavoriteStatus(false);
-            props.onRemoveFromFavorites?.(props.product);
             removeFromFavorites(props.product);
+            setFavoriteStatus(false);
+            setTimeout(() => {
+                props.onRemoveFromFavorites?.(props.product);
+            },150);
         }
     }
 

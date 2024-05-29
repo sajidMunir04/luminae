@@ -9,6 +9,7 @@ import ProductPage from "../../src/app/products/ProductPage";
 import '../../src/app/fonts.css';
 import { Product } from "../../src/app/utils/Product";
 import '../../src/app/globals.css';
+import Head from "next/head";
 
 function productCategory(){
     const router = useRouter();
@@ -79,6 +80,9 @@ function productCategory(){
     },[products, productCategory])
 
     return (<>
+      <Head>
+        <title>{products} - {productCategory}</title>
+      </Head>
       <HeaderTemplate/>
       <ProductsBrowser products={allProducts} productSection={products as string} productCategory={productCategory as string}/>
       <FooterTemplate/>

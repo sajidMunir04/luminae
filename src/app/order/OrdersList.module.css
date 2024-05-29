@@ -4,6 +4,9 @@
     height: max-content;
     padding: 0% var(--side-padding);
     box-sizing: border-box;
+    margin-top: 8%;
+    font-family: RobotoSlab-Medium;
+    font-size: 16px;
 }
 
 
@@ -17,10 +20,22 @@
     background-color: #F6F6F6;
     padding: 3% 8%;
     box-sizing: border-box;
+    margin-bottom: 4%;
+    border-radius: 8px;
+    box-shadow: 1px 2px 4px gray;
 }
 
 .viewOrderButton{
     background: none;
     border: none;
-    background-color: aquamarine;
+    font-family: RobotoSlab-SemiBold;
+    font-size: 20px;
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+.sectionHeading{
+    text-align: center;
+    font-family: RobotoSlab-Bold;
+    font-size: 36px;
 }

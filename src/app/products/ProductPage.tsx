@@ -102,11 +102,6 @@ function ProductPage(props : Props) {
 
     const addProductToCart = useCartStore(state => state.addToCart);
 
-    const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
-    const { events } = useDraggable(ref, {
-        applyRubberBandEffect: false
-    }); 
-
     const addToFavorites = useFavoritesStore(state => state.addToFavorites);
     const removeFromFavorites = useFavoritesStore(state => state.removeFromFavorites);
     const isAddedToFavorites = useFavoritesStore(state => state.isAddedToFavorites);
@@ -126,17 +121,17 @@ function ProductPage(props : Props) {
             setFavoriteStatus(true);
         }
         else{
-            setFavoriteStatus(false);
             removeFromFavorites(props.product);
+            setFavoriteStatus(false);
         }
     }
 
     return (<div className={styles.container}>
         <div className={styles.productInfo}>
             <div className={styles.imageSection}>
-                <div className={styles.imagesContainer} {...events} ref={ref}>
+                <div className={styles.imagesContainer}>
                         {props.product.images.map((image) => (<div draggable={false} className={styles.smallImageParent}>
-                            <motion.img whileHover={{skewX:2}} className={`${styles.smallImage} ${false && styles.smallImageSelected}`} onClick={imageClicked.bind(null,image)} src={image}/>
+                            <img className={`${styles.smallImage} ${false && styles.smallImageSelected}`} onClick={() => imageClicked(image)} src={image}/>
                         </div>))}
                 </div>
                 <div className={styles.mainImageContainer}>
@@ -170,7 +165,7 @@ function ProductPage(props : Props) {
                     <p className={styles.infoText}>In Stock</p>
                     <div className={styles.detailContainerContent}>
                         <div className={styles.quantityContainer}>
-                            {selectedSizeIndex < productSizesInventory.length && <p>{productSizesInventory[selectedSizeIndex].stock}</p>}
+                            {selectedSizeIndex < productSizesInventory.length && <p className={styles.stockCountText}>{productSizesInventory[selectedSizeIndex].stock}</p>}
                         </div>
                         <div>
 
@@ -219,45 +214,27 @@ function ProductPage(props : Props) {
                         </ul>
                     </div>
                     <div>
-                        <h4 className={styles.descriptionHeading}>Composition</h4>
-                        <div>
-                            <div className={styles.careInfoPoint}>
-                                <div>
-                                    <img src="/laundryIcon.svg"/>
-                                </div>
+                        <h4 className={styles.descriptionHeading}>Instructions</h4>
+                        <ul className={styles.instructionsList}>
+                            <li className={styles.careInfoPoint}>
                                 <p className={styles.washInfoText}>Machine wash at max. 30ºC/86ºF with short spin cycle</p>
-                            </div>
-                            <div className={styles.careInfoPoint}>
-                            <div>
-                                <img src="/laundryIcon.svg"/>
-                            </div>
+                            </li>
+                            <li className={styles.careInfoPoint}>
                             <p className={styles.washInfoText}>Iron at a maximum of 110ºC/230ºF</p>
-                        </div>
-                        <div className={styles.careInfoPoint}>
-                            <div>
-                                <img src="/laundryIcon.svg"/>
-                            </div>
+                            </li>
+                            <li className={styles.careInfoPoint}>
                             <p className={styles.washInfoText}>Do not dry clean</p>
-                        </div>
-                        <div className={styles.careInfoPoint}>
-                            <div>
-                                <img src="/laundryIcon.svg"/>
-                            </div>
+                            </li>
+                            <li className={styles.careInfoPoint}>
                             <p className={styles.washInfoText}>Do not tumble dry</p>
-                        </div>
-                        <div className={styles.careInfoPoint}>
-                            <div>
-                                <img src="/laundryIcon.svg"/>
-                            </div>
+                            </li>
+                            <li className={styles.careInfoPoint}>
                             <p className={styles.washInfoText}>Wash inside out</p>
-                        </div>
-                        <div className={styles.careInfoPoint}>
-                            <div>
-                                <img src="/laundryIcon.svg"/>
-                            </div>
+                            </li>
+                            <li className={styles.careInfoPoint}>
                             <p className={styles.washInfoText}>Wash separately</p>
-                        </div>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 </div>

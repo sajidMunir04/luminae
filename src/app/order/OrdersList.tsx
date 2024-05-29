@@ -51,13 +51,22 @@ function OrdersList() {
 
 
     return (<div className={styles.container}>
-        <h1>Your Orders</h1>
+        <h1 className={styles.sectionHeading}>Your Orders</h1>
         { hasOrders && orders.map((order,index) => (<div className={styles.orderItem}>
                         <div>
-                            <p>{"Order No. " + index + 1}</p>
+                            <p>{"Order No. " + (index + 1)}</p>
                             <p>{order.orderDate}</p>
                         </div>
-                        <a className={styles.viewOrderButton}>View Order</a>
+                        <div>
+                            <p>{order.customerName}</p>
+                            <p>{order.customerEmail}</p>
+                            <p>{order.customerPhone}</p>
+                        </div>
+                        <div>
+                            <p>${order.orderPriceTotal.toFixed(0)}</p>
+                            <p>No. of Products: {order.products.length}</p>
+                        </div>
+                        <a className={styles.viewOrderButton}>View Order &#10140;</a>
                     </div>))
         }
         {!hasOrders &&

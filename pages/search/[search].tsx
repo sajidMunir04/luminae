@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import ProductsBrowser from "../../src/app/products/ProductsBrowser";
@@ -6,6 +8,7 @@ import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
 import StoreInteractionContainer, { ProductSection } from "../../src/app/shared/ProductCategoriesManager";
 import NoProductFound from "../../src/app/products/NoProductFound";
 import { Product } from "../../src/app/utils/Product";
+import Head from "next/head";
 
 
 
@@ -57,6 +60,9 @@ function search() {
     }
 
     return (<>
+      <Head>
+        <title>Search "{search}"</title>
+      </Head>
       <HeaderTemplate/>
       <StoreInteractionContainer/>
       {products.length > 0 && <ProductsBrowser products={products} productSection={""} productCategory={""}/>}

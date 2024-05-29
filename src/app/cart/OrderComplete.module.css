@@ -1,5 +1,18 @@
 .container{
     width: 100%;
-    height: max-content;
+    height: 520px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.allOrderInfoContainer{
+    margin-top: 4%;
+}
+
+.orderPageLink{
+    font-size: 20px;
 }

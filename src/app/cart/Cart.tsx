@@ -17,6 +17,7 @@ import { useGetCurrentDate } from "../lib/hooks/useGetCurrentDate";
 import { getCookie, setCookie } from "cookies-next";
 import { ordersCookie } from "../lib/constants";
 import { useStoreCustomer } from "../lib/hooks/useStoreCustomer";
+import { Spinner } from "@radix-ui/themes";
 
 
 function Cart() {
@@ -217,6 +218,7 @@ function Cart() {
     },[orderData.cartProducts.length])
 
     return (<div className={styles.container}>
+        {orderPlaced && <Spinner/>}
         <div className={styles.navigationSection}>
             <p onClick={() => setCartState(CartState.Cart)} className={`${styles.navElement} ${cartState === CartState.Cart && styles.navElementSelected}`}>Cart</p>
             <p onClick={() => setCartState(CartState.CustomerInfo)} className={`${styles.navElement} ${cartState === CartState.CustomerInfo && styles.navElementSelected}`}>Customer Info</p>

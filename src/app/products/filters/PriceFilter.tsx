@@ -1,42 +1,63 @@
+import { Flex, Grid, Slider} from "@radix-ui/themes";
 import FilterHeading from "./FilterHeading";
 import styles from "./PriceFilter.module.css";
-import * as Slider from '@radix-ui/react-slider';
+import { ChangeEvent, useRef, useState } from "react";
 
 
 interface Props {
     minimumPrice: number,
-    maximumPrice: number
+    maximumPrice: number,
+    onPriceChange: (range: number[]) => void
 }
 
 function PriceFilter(props : Props) {
 
-    const handleInput = (e) => {
+    const [minRange,setMinRange] = useState(props.minimumPrice);
+    const [maxRange,setMaxRange] = useState(props.maximumPrice);
+    const minFieldRef = useRef<HTMLInputElement>(null);
+    const maxFieldRef = useRef<HTMLInputElement>(null);
 
+    const handleMinRangeInput = (e : ChangeEvent<HTMLInputElement>) => {
+        const value = parseInt(e.target.value.substring(1));
+        if (typeof(value) === 'number' && value < maxRange) {
+            setMinRange(value);
+        }
     };    
+
+    const applyFilter = () => {
+        props.onPriceChange([minRange,maxRange]);
+    }
+
+    const handleMaxRangeInput = (e : ChangeEvent<HTMLInputElement>) => {
+        const value = parseInt(e.target.value.substring(1));
+        if (typeof(value) === 'number' && value > minRange) {
+            setMaxRange(value);
+        }
+    }
+
+    const handleMinFieldFocus = () => {
+
+        if (minFieldRef.current) {
+            minFieldRef.current.value = '$';
+        }
+    }
+
+    const handleMaxFieldFocus = () => {
+        if (maxFieldRef.current) {
+            maxFieldRef.current.value = '$';
+        }
+    }
 
     return (<div className={styles.container}>
         <FilterHeading headingText="PRICE"/>
-        <div className={styles.contentContainer}>
-            <div className={styles.pricefieldsContainer}>
-                <input className={styles.inputField} type='number' placeholder={`$ ${props.minimumPrice}`} />
+        <div className={styles.pricefieldsContainer}>
+                <input className={styles.inputField} ref={minFieldRef} onFocus={handleMinFieldFocus} type='text' placeholder={`$ ${props.minimumPrice}`} onChange={handleMinRangeInput}/>
                 <div>
 
                 </div>
-                <input className={styles.inputField} type='number' placeholder={`$ ${props.maximumPrice}`} />
-            </div>
-            <form className={styles.priceRangeContainer}>
-                <Slider.Root className="SliderRoot" defaultValue={[50]} max={100} step={1}>
-                <Slider.Track className="SliderTrack">
-                    <Slider.Range className="SliderRange" />
-                </Slider.Track>
-                <Slider.Thumb className="SliderThumb" aria-label="Volume" />
-                </Slider.Root>
-            </form>
-            <div className={styles.priceInfoContainer}>
-                <p className={styles.priceInfo}>Minimum:${props.minimumPrice}</p>
-                <p className={styles.priceInfo}>Maximum:${props.maximumPrice}</p>
-            </div>
+                <input className={styles.inputField} ref={maxFieldRef} onFocus={handleMaxFieldFocus} type='text' placeholder={`$ ${props.maximumPrice}`} onChange={handleMaxRangeInput} />
         </div>
+        <button className={styles.applyButton} onClick={applyFilter}>Apply</button>
     </div>);
 }
 

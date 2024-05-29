@@ -75,7 +75,16 @@
     font-family: Lato-Bold;
     font-size: 18px;
     color: black;
+    width: 28px;
+    height: 28px;
     margin-inline: 2%;
+    padding: 2%;
+    text-align: center;
+}
+
+.paginationButtonActive{
+    border:  2px solid black;
+    border-radius: 3px;
 }
 
 .extraButtonsArea{
@@ -136,6 +145,18 @@
 
 .itemSelectOption{
     
+}
+
+.filterContainerHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filterHeaderText{
+    font-family: RobotoSlab-SemiBold;
+    font-size: 24px;
 }
 
 @media (max-width: 700px) {

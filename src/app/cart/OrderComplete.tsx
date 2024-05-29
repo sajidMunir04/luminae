@@ -18,6 +18,10 @@ function OrderComplete(props : Props) {
             <p>Order Total:      {orderData.orderPriceTotal}</p>
             <p>Delivered To:     {orderData.customerName}</p>
         </div>
+        <div className={styles.allOrderInfoContainer}>
+            <p>You can view all your orders here:</p>
+            <a className={styles.orderPageLink} href="/ordersDetail">My Orders</a>
+        </div>
     </div>);
 }
 

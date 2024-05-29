@@ -1,34 +1,13 @@
 import { Product } from "@/app/utils/Product";
+import { getCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import ProductPage from "@/app/products/ProductPage";
-import HeaderTemplate from "@/app/shared/HeaderTemplate";
-import FooterTemplate from "@/app/shared/FooterTemplate";
-import ProductCategoriesManager from "@/app/shared/ProductCategoriesManager";
-import { getCookie, setCookie } from "cookies-next";
-import Head from "next/head";
 
 
-export default function productPage() {
+function order() {
     const router = useRouter();
-    const defaultProduct : Product = {
-        _id: "",
-        name: "",
-        description: "",
-        price: 0,
-        images: [],
-        brandName: "",
-        category: "",
-        section: "",
-        sizes: [],
-        color: "",
-        style: "",
-        model: "",
-        previousPrice: 0,
-        discount: 0,
-        inventoryCount: []
-    }
-    const [product,setProduct] = useState<Product>(defaultProduct);
+
+    const [product,setProduct] = useState<Product>();
     
     useEffect(() => {
         let { productPage } = router.query;
@@ -71,13 +50,6 @@ export default function productPage() {
         fetchData();
 
     },[]);
-
-    return (<>
-    <Head>
-        <title>{product.name}</title>
-    </Head>
-    <HeaderTemplate/>
-    <ProductPage product={product}/>
-    <FooterTemplate/>
-    </>);
 }
+
+export default order;
