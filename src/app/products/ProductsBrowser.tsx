@@ -58,7 +58,7 @@ function ProductsBrowser(props : Props)
         setSelectedStyles(['']);
         setSelectedSizes(['']);
         if (models.length > 1 ) {
-            const filteredProducts = props.products.filter((product) => models.includes(product.model));
+            const filteredProducts = props.products.filter((product) => models.includes(product.productModel));
             setProducts(filteredProducts);
             console.log(filteredProducts);
         }
@@ -111,7 +111,7 @@ function ProductsBrowser(props : Props)
     const handlePriceSelection = (newPriceRange : number[]) =>{
         const allProducts = props.products.filter(function filterProduct(product) {
 
-            if (selectedModels.length > 1 && selectedModels.includes(product.model)) {
+            if (selectedModels.length > 1 && selectedModels.includes(product.productModel)) {
                 return false;
             }
 

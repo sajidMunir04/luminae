@@ -23,7 +23,7 @@ function order() {
             try {
                 const response = await fetch('/api/getOrders/' + order);
                 const data = await response.json();
-                const orderFormData : OrderFormData = data.data[0];
+                const orderFormData = data.data[0];
                 console.log(data,orderFormData);
                 const orderForm : OrderFormData = {
                     products: orderFormData.products,
@@ -39,7 +39,8 @@ function order() {
                     shippingService: orderFormData.shippingService,
                     paymentMethod: orderFormData.paymentMethod,
                     orderDate: orderFormData.orderDate,
-                    customerId: orderFormData.customerId
+                    customerId: orderFormData.customerId,
+                    orderId: orderFormData._id
                 };
                 setOrderForm(orderForm);
             }

@@ -2,6 +2,7 @@ import { OrderedProduct } from '@/app/cart/OrderedProduct';
 import { ProductReviewData } from '@/app/products/ProductReviewData';
 import { Db, MongoClient, ObjectId, WithId } from 'mongodb';
 import mongoose from 'mongoose';
+import {ProductReview} from "../../src/model/ProductReview.mjs"
 
 export default async function handler(req, res) {
   console.log(req.body);
@@ -9,19 +10,21 @@ export default async function handler(req, res) {
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {
     await client.connect();
-    const db : Db = client.db('Products');
-    const collection = db.collection('products');
-    const data = await collection.findOne({_id : new ObjectId(productReview.productId)});
-    const updatedData = [{
-        headingText: productReview.reviewHeading,
-        reviewText: productReview.reviewDetail,
-        reviewLikes: 0,
-        reviewDislikes: 0,
-        reviewerName: productReview.reviewerName,
-        rating: productReview.rating
-    },...data?.reviews];
-    await collection.updateOne({_id : new ObjectId(productReview.productId)},{$set: {reviews : updatedData}});
-    res.status(200).json({"status": true});
+    const db : Db = client.db('Reviews');
+    const collection = db.collection('productReviews');
+
+    const reviewData = new ProductReview({
+      headingText: productReview.reviewHeading,
+      reviewText: productReview.reviewDetail,
+      reviewLikes: productReview.reviewLikes,
+      reviewDislikes: productReview.reviewDislikes,
+      reviewerName: productReview.reviewerName,
+      rating: productReview.rating,
+      productId: productReview.productId
+    })
+
+    const data = await collection.insertOne(reviewData);
+    res.status(200).json({"status": data});
     await client.close();
   } catch (error) {
     res.status(500).send(error);

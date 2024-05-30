@@ -40,8 +40,7 @@ function productCategory(){
                     sizes: item.sizes,
                     color: item.color,
                     style: item.style,
-                    model: item.model,
-                    reviews: item.reviews
+                    productModel: item.productModel
                 }
 
                 return product;            

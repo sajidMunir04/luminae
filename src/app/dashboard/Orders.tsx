@@ -9,19 +9,12 @@ import { string } from "zod";
 function Orders() {
 
     const [ordersData,setOrdersData] = useState<OrderFormData[]>([]);
-    const [orderIds,setorderIds] = useState<string[]>([]);
-
-    const handleViewOrder = () => {
-
-    }
 
     useEffect(() => {
         const fetchOrdersData = async() => {
             const response = await fetch('/api/getRecentOrders');
             const data = await response.json();
-            console.log(data);
             const {orders} = data;
-            console.log(orders);
             const orderIdList : string[] = [];
             const formattedData : OrderFormData[] = orders.map((item) => {
                 const orderForm : OrderFormData = {
@@ -38,7 +31,8 @@ function Orders() {
                     shippingService: item.shippingService,
                     paymentMethod: item.paymentMethod,
                     orderDate: item.orderDate,
-                    customerId: item.customerId
+                    customerId: item.customerId,
+                    orderId: item._id
                 }
 
                 orderIdList.push(item._id);
@@ -46,7 +40,6 @@ function Orders() {
                 return orderForm;
             })
 
-            setorderIds(orderIdList);
             setOrdersData(formattedData);
         }
 
@@ -69,14 +62,14 @@ function Orders() {
             <tbody className={styles.tableBody}>
             {
                 ordersData.map((item,index) => (
-                    <tr className={styles.tableRow}>
+                    <tr key={item.orderId} className={styles.tableRow}>
                         <td className={styles.orderDateSection}>{item.orderDate}</td>
                         <td className={styles.customerNameSection}>{item.customerName}</td>
                         <td className={styles.totalAmountSection}>${item.orderPriceTotal}</td>
                         <td className={styles.totalProductsSection}>{item.products?.length}</td>
                         <td className={styles.contactNumberSection}>{item.customerPhone}</td>
                         <td className={styles.emailSection}>{item.customerEmail}</td>
-                        <td className={styles.viewOrderSection}><a href={`admin/viewOrder/${orderIds[index]}`}>View Order</a></td>
+                        <td className={styles.viewOrderSection}><a href={`admin/viewOrder/${item.orderId}`}>View Order</a></td>
                     </tr>
                 ))
             }

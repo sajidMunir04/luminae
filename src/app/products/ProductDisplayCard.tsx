@@ -41,7 +41,7 @@ function ProductDisplayCard(props : Props)
         }
     }
 
-    const productRating = props.product.reviews?.map((item) => item.rating).reduce((acc,el) => acc + el,0) as number;
+    const productRating = 5;
 
     return (<motion.div className={styles.container} initial={{scale: 0}} whileInView={{scale: 1}}>
         <div onClick={() => props.onClick(props.product)} className={styles.imageContainer}>
@@ -63,12 +63,12 @@ function ProductDisplayCard(props : Props)
                             {productRating === 5 && <img src="/images/product/Star.svg"/>}
                         </div>
                         <div className={styles.reviewCountContainer}>
-                            <p className={styles.reviewCountText}>({props.product.reviews?.length})</p>
+                            <p className={styles.reviewCountText}>({Math.floor(Math.random() * 50)}{/*props.product.reviews?.length*/})</p>
                         </div>
                     </div>
                     <div className={styles.priceSection}>
                         <p className={styles.price}>${Math.round(props.product.price)}</p>
-                        {props.product.discount > 0 && <p className={styles.previousPrice}>${props.product.previousPrice}</p>}
+                        {true && <p className={styles.previousPrice}>${props.product.previousPrice}</p>}
                         {(props.product.discount > 0) && <p className={styles.discountText}>-{props.product.discount.toFixed(0)}%</p>}
                     </div>
                     </div>

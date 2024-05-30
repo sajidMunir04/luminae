@@ -40,8 +40,7 @@ function index() {
                     sizes: item.sizes,
                     style: item.style,
                     color: item.color,
-                    model: item.model,
-                    reviews: item.reviews
+                    productModel: item.productModel
                 }));
 
               filteredProducts.map((item) => {

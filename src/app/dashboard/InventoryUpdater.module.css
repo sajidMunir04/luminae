@@ -3,7 +3,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: white;
     display: flex;
 }
 
@@ -13,12 +13,12 @@
     height: 40px;
     top: 0%;
     right: 0%;
-    background-color: red;
     border-radius: 50px;
     display: flex;
 }
 
 .closeBtnText{
+    cursor: pointer;
     margin: auto;
     font-size: 28;
 }

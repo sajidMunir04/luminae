@@ -4,7 +4,8 @@ import { ProductReviewData } from "./ProductReviewData";
 import { useRouter } from "next/router";
 
 interface Props {
-    productId: string
+    productId: string,
+    onBackButton: () => void
 }
 
 
@@ -36,7 +37,9 @@ function ProductReviewForm(props: Props) {
             rating: rating,
             reviewHeading: reviewHeading,
             reviewDetail: reviewDetail,
-            productId: props.productId
+            productId: props.productId,
+            reviewLikes: 0,
+            reviewDislikes: 0
         }
 
         const submitReview = async() => {
@@ -79,6 +82,7 @@ function ProductReviewForm(props: Props) {
             </textarea>
         </label>
         <button className={styles.submitButton} type='submit'>Submit Review</button>
+        <button onClick={props.onBackButton} type='button'>Cancel</button>
     </form>);
 }
 

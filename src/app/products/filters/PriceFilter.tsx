@@ -1,4 +1,3 @@
-import { Flex, Grid, Slider} from "@radix-ui/themes";
 import FilterHeading from "./FilterHeading";
 import styles from "./PriceFilter.module.css";
 import { ChangeEvent, useRef, useState } from "react";

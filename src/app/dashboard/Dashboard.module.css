@@ -39,7 +39,7 @@
     height: 600px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
     background-color: #F7F7F7;
 }
@@ -62,6 +62,6 @@
 }
 
 .infoContainer{
-    width: 88%;
+    width: 100%;
     height: max-content;
 }

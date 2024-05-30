@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 function OrdersList() {
     const router = useRouter();
     const [orders,setOrders] = useState<OrderFormData[]>([]);
-    const [orderIds,setOrderIds] = useState<string[]>([]);
     const [hasOrders,setOrderStatus] = useState(true);
 
     useEffect(() => {
@@ -36,13 +35,13 @@ function OrdersList() {
                             shippingService: item.shippingService,
                             paymentMethod: item.paymentMethod,
                             orderDate: item.orderDate,
-                            customerId: item.customerId
+                            customerId: item.customerId,
+                            orderId: item._id
                         }
                         orders.push(item._id);
                         return orderForm;
                     })
                     setOrders(customerOrders);
-                    setOrderIds(orders);
                 }
             }
     
@@ -54,8 +53,8 @@ function OrdersList() {
     },[])
 
     const handleClick = (index : number) => {
-        console.log(orderIds[index]);
-        router.push(`/viewOrder/${orderIds[index]}`);
+        console.log(orders[index].orderId);
+        router.push(`/viewOrder/${orders[index].orderId}`);
     }
 
     return (<div className={styles.container}>

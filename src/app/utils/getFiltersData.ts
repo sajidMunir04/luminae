@@ -32,7 +32,7 @@ export function getFiltersData(products : Product[]) {
             let modelAdded = false;
 
             newFiltersData.modelDetails.forEach((model,index) => {
-                if (model.type == item.model)
+                if (model.type == item.productModel)
                 {
                     model.quantity++;
                     modelAdded = true;
@@ -41,7 +41,7 @@ export function getFiltersData(products : Product[]) {
     
             if (!modelAdded) {
                 const modelDetail : ModelDetail = {
-                    type: item.model,
+                    type: item.productModel,
                     quantity: 1
                 }
                 newFiltersData.modelDetails.push(modelDetail);

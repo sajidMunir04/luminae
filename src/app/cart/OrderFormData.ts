@@ -26,6 +26,7 @@ export interface OrderFormData {
     shippingService: ShippingServiceInfo,
     paymentMethod: PaymentServiceInfo,
     orderDate: string,
-    customerId : string
+    customerId : string,
+    orderId?: string
 }
 

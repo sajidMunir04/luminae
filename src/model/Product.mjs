@@ -57,17 +57,10 @@ const product = new Schema({
         type: String,
         required: true
     },
-    model: {
+    productModel: {
         type: String,
         required: true
-    },   
-    reviews: [{headingText: String,
-        reviewText: String,
-        reviewLikes: Number,
-        reviewDislikes: Number,
-        reviewerName: String,
-        rating: Number
-    }]
+    }
 });
 
 

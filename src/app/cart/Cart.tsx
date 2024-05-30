@@ -17,7 +17,6 @@ import { useGetCurrentDate } from "../lib/hooks/useGetCurrentDate";
 import { getCookie, setCookie } from "cookies-next";
 import { ordersCookie } from "../lib/constants";
 import { useStoreCustomer } from "../lib/hooks/useStoreCustomer";
-import { Spinner } from "@radix-ui/themes";
 
 
 function Cart() {
@@ -189,8 +188,7 @@ function Cart() {
                     sizes: item.sizes,
                     color: item.color,
                     style: item.style,
-                    model: item.model,
-                    reviews: item.reviews
+                    productModel: item.productModel
                 }));
                 
                 const cartProducts : CartProduct[] = []; 
@@ -217,7 +215,8 @@ function Cart() {
     },[orderData.cartProducts.length])
 
     return (<div className={styles.container}>
-        {orderPlaced && <Spinner/>}
+        {orderPlaced && <div className={styles.progressContainer}>
+        </div>}
         <div className={styles.navigationSection}>
             <p onClick={() => setCartState(CartState.Cart)} className={`${styles.navElement} ${cartState === CartState.Cart && styles.navElementSelected}`}>Cart</p>
             <p onClick={() => setCartState(CartState.CustomerInfo)} className={`${styles.navElement} ${cartState === CartState.CustomerInfo && styles.navElementSelected}`}>Customer Info</p>
@@ -264,7 +263,7 @@ function Cart() {
                     <p>Total Price: </p>
                     <p>${parseFloat(totalPrice.toFixed(2))}</p>
                 </div>
-                <button onClick={isOrderInfoComplete ? placeOrder : () => {}} aria-disabled={orderPlaced} className={`${styles.checkoutButton} ${isOrderInfoComplete && styles.checkoutButtonActive}`}><img className={styles.btnImage} src="/images/product/checkOut.svg"/>CHECKOUT</button>
+                <button onClick={isOrderInfoComplete ? placeOrder : () => {}} aria-disabled={orderPlaced} className={`${styles.checkoutButton} ${isOrderInfoComplete && styles.checkoutButtonActive}`}>{!isOrderInfoComplete && <img className={styles.btnImage} src="/images/product/checkOut.svg"/>}CHECKOUT</button>
             </div>
         </div>
     </div>);
