@@ -14,14 +14,9 @@ function AddProduct() {
     const onSubmit = (e : ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
     }
+
+    console.log(images);
     
-    const handleUpload = (newImage : string) => {
-        const newImages = images;
-        newImages.push(newImage);
-        setImages(newImages);
-    }
-
-
     return (<form className={styles.form} onSubmit={onSubmit}>
         <label className={styles.label}>Product Name
             <input className={styles.inputField} type='text' placeholder="Product Name"/>
@@ -42,16 +37,20 @@ function AddProduct() {
             Images
         </label>
         <div className={styles.productImagesContainer}>
-            {images?.map((image) => <img src={image}/>)}
+            {images?.map((image) => <img className={styles.productImage} src={image}/>)}
         </div>
         <div>
-        <CldUploadWidget uploadPreset={'unsigned_uploads'}> 
-            {({ open, results }) => {
-                const info = results?.info as CloudinaryUploadWidgetInfo;
-                if (info) {
-                    const newImages = [...images,info.url];
-                    setImages(newImages);
-                } 
+        <CldUploadWidget uploadPreset={'unsigned_uploads'}
+          onSuccess={(results, { widget }) => {
+            const info = results?.info as CloudinaryUploadWidgetInfo;
+            if (info) {
+                const newImages = images;
+                images.push(info.url);
+                setImages(newImages);
+            } 
+            widget.close();
+          }}> 
+            {({ open }) => {
                 return (
                 <button onClick={() => open()}>
                     Upload an Image

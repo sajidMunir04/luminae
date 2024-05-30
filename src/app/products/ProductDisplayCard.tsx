@@ -23,21 +23,21 @@ function ProductDisplayCard(props : Props)
         if (isAddedToFavorites(props.product._id)){
             setFavoriteStatus(true);
         }
-    },[])
+    },[props.product])
 
 
     const handleProductFavorite = () => {
+        console.log(props.product._id);
         if (!isAddedToFavorites(props.product._id))
         {
             addToFavorites(props.product);
             setFavoriteStatus(true);
         }
         else{
+            console.log(props.product._id);
             removeFromFavorites(props.product);
             setFavoriteStatus(false);
-            setTimeout(() => {
-                props.onRemoveFromFavorites?.(props.product);
-            },150);
+            props.onRemoveFromFavorites?.(props.product);
         }
     }
 

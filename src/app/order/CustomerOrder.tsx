@@ -20,11 +20,12 @@ function CustomerOrder(props : Props) {
             </div>
         </div>
         <div>
-            <p className={styles.priceText}>${product.unitPrice}</p>
-            <p>x{product.quantity}</p>
+            <p>Price: ${product.unitPrice}</p>
+            <p>Size: {product.size}</p>
+            <p>Quantity: {product.quantity}</p>
         </div>
         <div>
-            <p className={styles.priceText}>${product.unitPrice * product.quantity}</p>
+            <p>Total: ${product.unitPrice * product.quantity}</p>
         </div>
         </div>))}
         </div>

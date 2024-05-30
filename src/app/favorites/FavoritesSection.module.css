@@ -18,3 +18,9 @@
 .filtersContainer{
     width: 28%;
 }
+
+.emptySection{
+    height: 600px;
+    width: 100%;
+    text-align: center;
+}

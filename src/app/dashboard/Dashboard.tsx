@@ -32,14 +32,18 @@ export default function Dashboard() {
   },[])
 
   return (<div className={styles.container}>
-    <div className={styles.topBar}>
-      <a className={styles.goToStoreLink} href="/">Go to Store</a>
+    <div className={styles.navSection}>
+        <div>
+          <a className={styles.goToStoreLink} href="/"><img src="/images/common/logo2.png"/></a>
+        </div>
+        <div className={styles.buttonsContainer}>
+          <p className={styles.button} onClick={() => {handleDashboardViewChange(DashboardView.Orders)}}>Orders</p>
+          <p className={styles.button} onClick={() => {handleDashboardViewChange(DashboardView.Products)}}>Products</p>
+          <p className={styles.button} onClick={() => {handleDashboardViewChange(DashboardView.AddProdut)}}>Add Product</p>
+        </div>
     </div>
     <div className={styles.contentSection}>
-      <div className={styles.buttonsContainer}>
-        <p className={styles.button} onClick={() => {handleDashboardViewChange(DashboardView.Orders)}}>Orders</p>
-        <p className={styles.button} onClick={() => {handleDashboardViewChange(DashboardView.Products)}}>Products</p>
-        <p className={styles.button} onClick={() => {handleDashboardViewChange(DashboardView.AddProdut)}}>Add Product</p>
+      <div className={styles.topBar}>
       </div>
       <div className={styles.infoContainer}>
         {dashboardView === DashboardView.Orders && <Orders/>}

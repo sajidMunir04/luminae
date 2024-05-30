@@ -9,7 +9,9 @@ import { useRouter } from "next/navigation";
 
 function FavoritesSection() {
     const favoritesProductData = useFavoritesStore(state => state.fetchData());
+
     const [products,setProducts] = useState<Product[]>();
+    const [productsLoadStatus,setProductsLoadStatus] = useState(false);
 
     const router = useRouter();
 
@@ -52,8 +54,9 @@ function FavoritesSection() {
 
                 return product;
             });
-
+                console.log(products);
                 setProducts(products);
+                setProductsLoadStatus(true);
             }
             catch (error) {
                 console.log(error);
@@ -67,8 +70,11 @@ function FavoritesSection() {
     return (<div className={styles.container}>
             <div className={styles.contentContainer}>
                 {products?.map((item) => <ProductDisplayCard product={item} onClick={() => handleClick(item)} 
-                onRemoveFromFavorites={() => removeProductFromFavorites(item)}/>)}
+                onRemoveFromFavorites={removeProductFromFavorites}/>)}
             </div>
+            {(productsLoadStatus && products === null) && <div className={styles.emptySection}>
+                <h3>You didn't add any products to favorites.</h3>
+            </div>}
     </div>);
 }
 

@@ -2,10 +2,10 @@ import { OrderFormData } from "@/app/cart/OrderFormData";
 import CustomerOrder from "@/app/order/CustomerOrder";
 import FooterTemplate from "@/app/shared/FooterTemplate";
 import HeaderTemplate from "@/app/shared/HeaderTemplate";
-import { getCookie, setCookie } from "cookies-next";
-import Head from "next/head";
+import { getCookie } from "cookies-next";
+import { Head } from "next/document";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 
 function order() {
@@ -53,9 +53,6 @@ function order() {
     },[order?.length]);
 
     return (<>
-    <Head>
-        <title>Viewing Order Dated: {orderForm?.orderDate}</title>
-    </Head>
     <HeaderTemplate/>
     <CustomerOrder orderform={orderForm as OrderFormData}/>
     <FooterTemplate/>

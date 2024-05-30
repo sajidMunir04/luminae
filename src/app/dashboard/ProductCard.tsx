@@ -3,7 +3,8 @@ import styles from "./ProductCard.module.css";
 
 interface Props {
     product : Product,
-    onRemoveClick: (product : Product) => void
+    onRemoveClick: (product : Product) => void,
+    onOpenInventory: (arg: Product | undefined) => void
 }
 
 
@@ -13,12 +14,13 @@ function ProductCard(props : Props) {
             <img className={styles.image} src={props.product.images[0]}/>
         </div>
         <div className={styles.textContainer}>
-            <p>{props.product.name}</p>
-            <p>$ {props.product.price}</p>
+            <p className={styles.productNameText}>{props.product.name.substring(0,24)}{props.product.name.length > 24 && '...'}</p>
+            <p className={styles.priceText}>$ {props.product.price}</p>
         </div>
         <div className={styles.buttonsContainer}>
             <button onClick={() => props.onRemoveClick(props.product)}>Delete Product</button>
-            <button>Update Inventory</button>
+            <button onClick={() => props.onOpenInventory(props.product)}>Update Inventory</button>
+            <button>Update Prices</button>
         </div>
     </div>)
 }

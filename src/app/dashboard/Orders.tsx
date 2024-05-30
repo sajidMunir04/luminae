@@ -60,23 +60,23 @@ function Orders() {
                 <th className={styles.orderDateSection}>Order Date</th>
                 <th className={styles.customerNameSection}>Customer Name</th>
                 <th className={styles.totalAmountSection}>Total Amount</th>
-                <th className={styles.totalProductsSection}>Total Products</th>
+                <th className={styles.totalProductsSection}>Products</th>
                 <th className={styles.contactNumberSection}>Contact Number</th>
                 <th className={styles.emailSection}>Customer Email</th>
-                <th className={''}>View Order</th>
+                <th className={styles.viewOrderSection}>View Order</th>
             </tr>
             </thead>
             <tbody className={styles.tableBody}>
             {
-                ordersData.map((item) => (
+                ordersData.map((item,index) => (
                     <tr className={styles.tableRow}>
                         <td className={styles.orderDateSection}>{item.orderDate}</td>
                         <td className={styles.customerNameSection}>{item.customerName}</td>
-                        <td className={styles.totalAmountSection}>{item.orderPriceTotal}</td>
+                        <td className={styles.totalAmountSection}>${item.orderPriceTotal}</td>
                         <td className={styles.totalProductsSection}>{item.products?.length}</td>
                         <td className={styles.contactNumberSection}>{item.customerPhone}</td>
                         <td className={styles.emailSection}>{item.customerEmail}</td>
-                        <td className={''}>View Order</td>
+                        <td className={styles.viewOrderSection}><a href={`admin/viewOrder/${orderIds[index]}`}>View Order</a></td>
                     </tr>
                 ))
             }
@@ -84,4 +84,4 @@ function Orders() {
         </table>);
 }
 
-export default Orders;
+export default Orders;[]

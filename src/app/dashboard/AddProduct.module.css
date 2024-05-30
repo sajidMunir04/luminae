@@ -23,3 +23,9 @@
     width: 100%;
     height: 50px;
 }
+
+.productImage{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}

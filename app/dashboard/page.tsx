@@ -1,8 +1,6 @@
 import Dashboard from '@/app/dashboard/Dashboard';
 import { redirect } from 'next/navigation';
 import { checkRole } from '../../utils/roles';
-import { OrderFormData } from '@/app/cart/OrderFormData';
-import Head from 'next/head';
 
 function dashboard()
 {
@@ -11,9 +9,6 @@ function dashboard()
     }
     
     return (<>
-        <Head>
-            <title>Admin Dashboard</title>
-        </Head>
         <Dashboard/>
     </>);   
 }

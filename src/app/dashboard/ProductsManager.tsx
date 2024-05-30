@@ -88,7 +88,8 @@ function ProductsManager() {
             </div>)}
             </div>
             <div className={styles.dataSection}>
-            {isCategorySelected && <ProductBrowser products={selectedSection[0]} productCategory={selectedSection[1]}/>}
+            {isCategorySelected && <ProductBrowser products={selectedSection[0]} 
+            productCategory={selectedSection[1]} openInventory={openInventoryManagement}/>}
             </div> 
             {(isUpdatingInventory && inventoryProduct !== undefined) && <InventoryUpdater product={inventoryProduct!} onCloseButton={closeInventoryManagement}/>}      
     </div>);

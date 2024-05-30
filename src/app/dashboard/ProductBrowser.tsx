@@ -7,7 +7,8 @@ import styles from "./ProductBrowser.module.css";
 
 interface Props {
     products: string,
-    productCategory: string
+    productCategory: string,
+    openInventory: (arg : Product | undefined) => void
 }
 
 function ProductBrowser(props : Props) {
@@ -16,6 +17,11 @@ function ProductBrowser(props : Props) {
     const [isInventoryUpdating,setInventoryUpdateStatus] = useState(true);
 
     const deleteProductFromDatabase = async(product : Product) => {
+        const userResult = confirm(`Are you sure you want to delete ${product.name} `);
+        if (!userResult) {
+            return;
+        }
+
         const filteredProducts = allProducts.filter((item) => item._id !== product._id);
         setProducts(filteredProducts);
         const response = await fetch('/api/removeProductFromDatabase',{
@@ -70,7 +76,7 @@ function ProductBrowser(props : Props) {
     return (<div className={styles.container}>
         {isInventoryUpdating}
         {allProducts.map((product) => (
-            <ProductCard key={product._id} product={product} onRemoveClick={deleteProductFromDatabase}/>
+            <ProductCard key={product._id} product={product} onRemoveClick={deleteProductFromDatabase} onOpenInventory={props.openInventory}/>
         ))}
     </div>);
 }

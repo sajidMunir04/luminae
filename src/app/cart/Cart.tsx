@@ -72,9 +72,9 @@ function Cart() {
             customerAddress: orderData.address,
             customerRegion: orderData.region,
             customerCountry: orderData.country,
-            orderPriceTotal: totalPrice,
-            orderShippingCharges: shippingCharges,
-            orderTaxes: taxes,
+            orderPriceTotal: parseFloat(totalPrice.toFixed(2)),
+            orderShippingCharges: parseFloat(shippingCharges.toFixed(2)),
+            orderTaxes: parseFloat(taxes.toFixed(2)),
             shippingService: orderData.shippingServiceInfo,
             paymentMethod: orderData.paymentServiceInfo,
             orderDate: useGetCurrentDate(),
@@ -105,18 +105,17 @@ function Cart() {
         useStoreCustomer(orderFormData);
 
         const updatedData = await result.json();
-        console.log(updatedData);
         const data = await order.json();
         let orders : string = getCookie(ordersCookie) as string;
-        if (orders !== undefined || orders !== null)
+        if (orders !== undefined && orders !== null && orders !== '')
             orders = orders + ',' + data.id;
         else
-            orders = data.id;
-
+            orders = data.id as string;
         setCookie(ordersCookie,orders);
+
         await setOrderData(getDefaultOrderData());
         await clearCart();
-        router.replace('/orderComplete/' + data.id);
+        router.push('/orderComplete/' + data.id);
     }
 
     const calculatePricing = async () => {

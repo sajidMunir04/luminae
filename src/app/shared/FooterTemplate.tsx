@@ -40,7 +40,7 @@ function FooterTemplate()
             </div>
         </div>
         {<div className={styles.infoContent}>
-            <p className={styles.infoText}>©2023 Copyright in reserved for luminae shop</p>
+            <p className={styles.infoText}>©2024 Luminae</p>
     </div>}
     </div>);
 }

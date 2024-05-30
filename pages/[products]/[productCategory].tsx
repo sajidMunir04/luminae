@@ -44,8 +44,6 @@ function productCategory(){
                     reviews: item.reviews
                 }
 
-                console.log(product.previousPrice);
-
                 return product;            
             });
 

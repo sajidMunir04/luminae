@@ -20,30 +20,35 @@
 
 .orderDateSection{
     width: 10%;
-    text-align: justify;
+    text-align: center;
 }
 
 .customerNameSection{
-    width: 22%;
-    text-align: justify;
+    width: 15%;
+    text-align: center;
 }
 
 .totalAmountSection{
     width: 6%;
-    text-align: justify;
+    text-align: center;
 }
 
 .totalProductsSection{
-    width: 8%;
-    text-align: justify;
+    width: 6%;
+    text-align: center;
 }
 
 .contactNumberSection{
-    width: 20%;
-    text-align: justify;
+    width: 18%;
+    text-align: center;
 }
 
 .emailSection{
     width: 22%;
-    text-align: justify;
+    text-align: center;
+}
+
+.viewOrderSection{
+    width: 18%;
+    text-align: center;
 }

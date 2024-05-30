@@ -1,12 +1,12 @@
-import Head from "next/head";
+import HeaderTemplate from "@/app/shared/HeaderTemplate";
 import FavoritesSection from "../../src/app/favorites/FavoritesSection";
+import FooterTemplate from "@/app/shared/FooterTemplate";
 
 function favorites() {
     return (<>
-    <Head>
-        <title>My Favorites</title>
-    </Head>
+    <HeaderTemplate/>
     <FavoritesSection/>
+    <FooterTemplate/>
     </>);
 }
 
