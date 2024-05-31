@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductsBrowser from "../../src/app/products/ProductsBrowser";
 import FooterTemplate from "../../src/app/shared/FooterTemplate";
 import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
@@ -14,7 +14,7 @@ import Head from "next/head";
 
 function search() {
     const router = useRouter();
-    const { search } = router.query;
+    const { Search } = router.query;
     const [products,setProducts] = useState<Product[]>([]);
     let resultFinalized : boolean = false;
     useEffect(
@@ -23,7 +23,7 @@ function search() {
             try {
                 const response = await fetch('/api/searchProduct',{
                   method:"POST",
-                  body: search as string
+                  body: Search as string
                 });
                 const data = await response.json();
                 const fetchedProducts = data.map((item: Product) => ({
@@ -40,8 +40,7 @@ function search() {
                     sizes: item.sizes,
                     style: item.style,
                     color: item.color,
-                    model: item.model,
-                    reviews: item.reviews
+                    productModel: item.productModel
                 }));
 
               setProducts(fetchedProducts);
@@ -61,12 +60,12 @@ function search() {
 
     return (<>
       <Head>
-        <title>Search "{search}"</title>
+        <title>Search "{Search}"</title>
       </Head>
       <HeaderTemplate/>
       <StoreInteractionContainer/>
       {products.length > 0 && <ProductsBrowser products={products} productSection={""} productCategory={""}/>}
-      {(resultFinalized  && products.length == 0) && <NoProductFound searchTerm={search as string} />}
+      {(resultFinalized  && products.length == 0) && <NoProductFound searchTerm={Search as string} />}
       <FooterTemplate/>
     </>);
 }

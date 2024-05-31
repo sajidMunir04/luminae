@@ -11,7 +11,7 @@ import productCategory from "./[productCategory]";
 
 
 
-function index() {
+function Index() {
     const router = useRouter();
     console.log(router.query);
     const { products } = router.query;
@@ -90,4 +90,4 @@ function index() {
 }
 
 
-export default index;
+export default Index;

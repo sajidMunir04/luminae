@@ -8,10 +8,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 
-function order() {
+function Order() {
     const router = useRouter();
-    const {order} = router.query;
-    console.log(order);
+    const {Order} = router.query;
     const [orderForm,setOrderForm] = useState<OrderFormData>();
     
     useEffect(() => {
@@ -21,7 +20,7 @@ function order() {
         
         const fetchData = async() => {
             try {
-                const response = await fetch('/api/getOrders/' + order);
+                const response = await fetch('/api/getOrders/' + Order);
                 const data = await response.json();
                 const orderFormData = data.data[0];
                 console.log(data,orderFormData);
@@ -51,7 +50,7 @@ function order() {
 
         setTimeout(fetchData,150);
 
-    },[order?.length]);
+    },[Order?.length]);
 
     return (<>
     <Head>
@@ -63,4 +62,4 @@ function order() {
     </>);
 }
 
-export default order;
+export default Order;

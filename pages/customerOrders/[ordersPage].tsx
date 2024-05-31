@@ -2,11 +2,11 @@ import FooterTemplate from "@/app/shared/FooterTemplate";
 import HeaderTemplate from "@/app/shared/HeaderTemplate";
 
 
-function ordersPage() {
+function OrdersPage() {
     return (<>
             <HeaderTemplate/>
             <FooterTemplate/>
             </>);
 }
 
-export default ordersPage;
+export default OrdersPage;

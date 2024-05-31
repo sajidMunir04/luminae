@@ -1,7 +1,7 @@
 import { Product } from "@/app/utils/Product";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import ProductPage from "@/app/products/ProductPage";
+import ProductDisplayPage from "@/app/products/ProductPage";
 import HeaderTemplate from "@/app/shared/HeaderTemplate";
 import FooterTemplate from "@/app/shared/FooterTemplate";
 import ProductCategoriesManager from "@/app/shared/ProductCategoriesManager";
@@ -10,7 +10,7 @@ import Head from "next/head";
 import { ProductReview } from "@/app/products/ProductReview";
 
 
-export default function productPage() {
+function ProductPage() {
     const router = useRouter();
     const defaultProduct : Product = {
         _id: "",
@@ -77,7 +77,9 @@ export default function productPage() {
         <title>{product.name}</title>
     </Head>
     <HeaderTemplate/>
-    <ProductPage product={product}/>
+    <ProductDisplayPage product={product}/>
     <FooterTemplate/>
     </>);
 }
+
+export default ProductPage;

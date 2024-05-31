@@ -1,19 +1,17 @@
-
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import FooterTemplate from "../../src/app/shared/FooterTemplate";
 import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
-import StoreInteractionContainer, { ProductSection } from "../../src/app/shared/ProductCategoriesManager";
+import { ProductSection } from "../../src/app/shared/ProductCategoriesManager";
 import ProductsBrowser from "../../src/app/products/ProductsBrowser";
-import ProductPage from "../../src/app/products/ProductPage";
 import '../../src/app/fonts.css';
 import { Product } from "../../src/app/utils/Product";
 import '../../src/app/globals.css';
 import Head from "next/head";
 
-function productCategory(){
+function ProductCategory(){
     const router = useRouter();
-    const { products , productCategory } = router.query;
+    const { products , ProductCategory } = router.query;
     let filteredProducts : Product[] = [];
     const [allProducts,setProducts] = useState(filteredProducts);
     let allProductSections : ProductSection[] = [];
@@ -21,7 +19,7 @@ function productCategory(){
         () => {
         const fetchData = async () => {
             try {
-                const fetchQuery = `/api/fetchProducts/${products}/${productCategory}`;
+                const fetchQuery = `/api/fetchProducts/${products}/${ProductCategory}`;
                 const response = await fetch(fetchQuery);
                 const data = await response.json();
                 filteredProducts = data.data.map((item: Product) => {
@@ -74,16 +72,16 @@ function productCategory(){
           };
 
           setTimeout(fetchData,250);       
-    },[products, productCategory])
+    },[products, ProductCategory])
 
     return (<>
       <Head>
-        <title>{products} - {productCategory}</title>
+        <title>{products} - {ProductCategory}</title>
       </Head>
       <HeaderTemplate/>
-      <ProductsBrowser products={allProducts} productSection={products as string} productCategory={productCategory as string}/>
+      <ProductsBrowser products={allProducts} productSection={products as string} productCategory={ProductCategory as string}/>
       <FooterTemplate/>
     </>);
 }
 
-export default productCategory;
+export default ProductCategory;
