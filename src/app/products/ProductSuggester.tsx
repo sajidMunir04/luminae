@@ -9,7 +9,7 @@ function ProductSuggester(props : Props) {
     return (<div>
         <h4>YOU MIGHT ALSO LIKE</h4>
         <div>
-            {props.products.map((product) => <ProductSuggestCard product={product}/>)}
+            {props.products.map((product) => <ProductSuggestCard key={product._id} product={product}/>)}
         </div>    
     </div>);
 }

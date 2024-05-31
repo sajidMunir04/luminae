@@ -1,6 +1,7 @@
 import { getCookie } from "cookies-next";
 import { OrderFormData } from "./OrderFormData";
 import styles from "./OrderComplete.module.css";
+import Link from "next/link";
 
 interface Props {
     orderId : string
@@ -20,7 +21,7 @@ function OrderComplete(props : Props) {
         </div>
         <div className={styles.allOrderInfoContainer}>
             <p>You can view all your orders here:</p>
-            <a className={styles.orderPageLink} href="/ordersDetail">My Orders</a>
+            <Link className={styles.orderPageLink} href="/ordersDetail">My Orders</Link>
         </div>
     </div>);
 }

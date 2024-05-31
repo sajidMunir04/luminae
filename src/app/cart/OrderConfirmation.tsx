@@ -10,7 +10,7 @@ function OrderConfirmation(props: Props) {
             <p>Cart Items</p>
             <div className={styles.orderProductsContainerParent}>
                 <div className={styles.orderProductsContainer}>
-                    {props.orderData.cartProducts.map((product) => <OrderItem cartProduct={product}/>)}
+                    {props.orderData.cartProducts.map((product) => <OrderItem key={product.product._id} cartProduct={product}/>)}
                 </div>
             </div>
         </div>

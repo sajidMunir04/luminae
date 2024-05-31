@@ -167,7 +167,7 @@ function ProductPage(props : Props) {
         <div className={styles.productInfo}>
             <div className={styles.imageSection}>
                 <div className={styles.imagesContainer}>
-                        {props.product.images.map((image) => (<div draggable={false} className={styles.smallImageParent}>
+                        {props.product.images.map((image) => (<div draggable={false} key={image} className={styles.smallImageParent}>
                             <img className={`${styles.smallImage} ${false && styles.smallImageSelected}`} onClick={() => imageClicked(image)} src={image}/>
                         </div>))}
                 </div>
@@ -195,7 +195,7 @@ function ProductPage(props : Props) {
                     <p className={styles.infoText}>Choose Size</p>
                     <div className={styles.sizesContainer}>
                         {productSizesInventory.map((item,index) => (
-                            <motion.p whileTap={{scale: 1.5}} onClick={() => setSelectedSizeIndex(index)} className={`${styles.sizeTag} ${selectedSizeIndex === index && styles.selectedTag}`}>{item.size}</motion.p>                        ))}
+                            <motion.p key={item + 'asd'} whileTap={{scale: 1.5}} onClick={() => setSelectedSizeIndex(index)} className={`${styles.sizeTag} ${selectedSizeIndex === index && styles.selectedTag}`}>{item.size}</motion.p>                        ))}
                     </div>
                 </div>
                 <div className={styles.detailContainer}>
