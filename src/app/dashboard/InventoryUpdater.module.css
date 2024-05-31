@@ -17,6 +17,12 @@
     display: flex;
 }
 
+.setStockInputLabel{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
 .closeBtnText{
     cursor: pointer;
     margin: auto;

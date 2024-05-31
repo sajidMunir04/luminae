@@ -1,8 +1,5 @@
-import { DatabaseUser } from 'lucia';
 import { Db, MongoClient } from 'mongodb';
-import { lucia } from '../../../lib/auth';
 import { SignUpCredentials } from '@/app/lib/definitions';
-import {SignUp} from "../../../src/model/signUpModel.mjs";
 
 export default async function handler(req, res) {
     console.log(req);
@@ -11,11 +8,11 @@ export default async function handler(req, res) {
   await client.connect();
   const db : Db = client.db('Users');
   const collection = db.collection('users');
-  const newUser = new SignUp({
+  const newUser = {
     email : body.email,
     name: body.name,
     password: body.password
-  })
+  }
     const data = await collection.insertOne(newUser);
 
 	if (data.acknowledged) {

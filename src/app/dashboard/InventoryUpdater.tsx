@@ -69,38 +69,52 @@ function InventoryUpdater(props : Props) {
             <h3>Update Inventory for {props.product.name}</h3>
             <div className={styles.inventoryUpdateContainer}>
                 <p className={styles.sizeText}>XXS</p>
-                <input ref={xxsInputRef} className={styles.inputText} type='number' placeholder="0"/>
-                <p>Availale In stock {props.product.inventoryCount[0]}</p>
+                <label className={styles.setStockInputLabel}>Set New Stock
+                    <input ref={xxsInputRef} className={styles.inputText} type='number' placeholder="0"/>
+                </label>
+                <p>Current stock {props.product.inventoryCount[0]}</p>
             </div>
             <div className={styles.inventoryUpdateContainer}>
                 <p className={styles.sizeText}>XS </p>
+                <label className={styles.setStockInputLabel}>Set New Stock
                 <input ref={xsInputRef} className={styles.inputText} type='number' placeholder="0"/>
-                <p>Available In stock {props.product.inventoryCount[1]}</p>
+                </label>
+                <p>Current stock {props.product.inventoryCount[1]}</p>
             </div>
             <div className={styles.inventoryUpdateContainer}>
                 <p className={styles.sizeText}>S  </p>
-                <input ref={sInputRef} className={styles.inputText} type='number' placeholder="0"/>
-                <p>Available In stock {props.product.inventoryCount[2]}</p>
+                <label className={styles.setStockInputLabel}>Set New Stock
+                    <input ref={sInputRef} className={styles.inputText} type='number' placeholder="0"/>
+                </label>
+                <p>Current stock {props.product.inventoryCount[2]}</p>
             </div>
             <div className={styles.inventoryUpdateContainer}>
                 <p className={styles.sizeText}>M  </p>
-                <input ref={mInputRef} className={styles.inputText} type='number' placeholder="0"/>
-                <p>Available In stock {props.product.inventoryCount[3]}</p>
+                <label className={styles.setStockInputLabel}>Set New Stock
+                    <input ref={mInputRef} className={styles.inputText} type='number' placeholder="0"/>
+                </label>
+                <p>Current stock {props.product.inventoryCount[3]}</p>
             </div>
             <div className={styles.inventoryUpdateContainer}>
                 <p className={styles.sizeText}>L  </p>
-                <input ref={lInputRef} className={styles.inputText} type='number' placeholder="0"/>
-                <p>Available In stock {props.product.inventoryCount[4]}</p>
+                <label className={styles.setStockInputLabel}>Set New Stock
+                    <input ref={lInputRef} className={styles.inputText} type='number' placeholder="0"/>
+                </label>
+                <p>Current stock {props.product.inventoryCount[4]}</p>
             </div>
             <div className={styles.inventoryUpdateContainer}>
                 <p className={styles.sizeText}>XL </p>
-                <input ref={xlInputRef} className={styles.inputText} type='number' placeholder="0"/>
-                <p>Available In stock {props.product.inventoryCount[5]}</p>
+                <label className={styles.setStockInputLabel}>Set New Stock
+                    <input ref={xlInputRef} className={styles.inputText} type='number' placeholder="0"/>
+                </label>
+                <p>Current stock {props.product.inventoryCount[5]}</p>
             </div>
             <div className={styles.inventoryUpdateContainer}>
                 <p className={styles.sizeText}>XXL</p>
-                <input ref={xxlInputRef} className={styles.inputText} type='number' placeholder="0"/>
-                <p>Available In stock {props.product.inventoryCount[6]}</p>
+                <label className={styles.setStockInputLabel}>Set New Stock
+                    <input ref={xxlInputRef} className={styles.inputText} type='number' placeholder="0"/>
+                </label>
+                <p>Current stock {props.product.inventoryCount[6]}</p>
             </div>        
             <button onClick={props.product !== undefined ? updateProductInventory : () => {}}>Update Inventory</button>
         </div>

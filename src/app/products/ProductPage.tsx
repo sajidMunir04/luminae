@@ -8,6 +8,7 @@ import ProductReviewForm from "./ProductReviewForm";
 import { useFavoritesStore } from "../lib/store/useFavoritesStore";
 import {motion} from "framer-motion";
 import { ProductReviewData } from "./ProductReviewData";
+import { ProductReview } from "./ProductReview";
 
 interface Props {
     product: Product
@@ -32,17 +33,56 @@ function ProductPage(props : Props) {
     const [activeImageLink,setActiveImageLink] = useState<string>(props.product.images[0]);
     const [selectedSizeIndex,setSelectedSizeIndex] = useState(0);
     const [showReviewForm,setReviewFormStatus] = useState(false);
-    const [productReviews,setProductReviews] = useState<ProductReviewData[]>([]);
+    const [productReviews,setProductReviews] = useState<ProductReview[]>([]);
 
-    if (props.product !== undefined){
-        const fetchProductReviews = async() => {
-            const response = await fetch('/api/getProductReviews/' + props.product._id);
-            const data = await response.json();
-            console.log(data);
-        }    
+    useEffect(() => {
+        if (typeof(props.product._id) === 'string' && props.product._id.length > 0){
+            const fetchProductReviews = async() => {
+                const response = await fetch('/api/getProductReviews/' + props.product._id);
+                const data = await response.json();
+                console.log(data);
+    
+                if (Array.isArray(data.data)) {
+                    const productReviews : ProductReview[] = data.data.map((item : ProductReview) => {
+                        const review : ProductReview = {
+                            _id: item._id,
+                            reviewerName: item.reviewerName,
+                            rating: item.rating,
+                            reviewText: item.reviewText,
+                            reviewLikes: item.reviewLikes,
+                            reviewDislikes: item.reviewDislikes,
+                            productId: item._id,
+                            headingText: item.headingText
+                        }
+        
+                        return review;
+                    })
+                    
+                    setProductReviews(productReviews);
+    
+                    productReviews.forEach((item) => {
+                    if (item.rating === 5){
+                        reviewData.fiveStarReviews++;
+                    }
+                    else if (item.rating === 4){
+                        reviewData.fourStarReviews++;
+                    }
+                    else if (item.rating === 3){
+                        reviewData.threeStarReviews++;
+                    }
+                    else if (item.rating === 2){
+                        reviewData.twoStarReviews++;
+                    }
+                    else if (item.rating === 1){
+                        reviewData.oneStarReviews++;
+                    }})
+                }
+            }    
+    
+            fetchProductReviews();
+        } 
+    },[props.product._id]);
 
-        fetchProductReviews();
-    } 
     const productSizesInventory : ProductInventoryCategory[] = [];
     props.product.sizes.map((size,index) =>{
         if (props.product.inventoryCount[index] > 0)
@@ -88,25 +128,7 @@ function ProductPage(props : Props) {
     const setReviewsSectionInfo = () => {
         setInfoSection(InfoSection.Reviews);
     }
-    /*
-    props.product.reviews?.forEach((item) => {
-        if (item.rating === 5){
-            reviewData.fiveStarReviews++;
-        }
-        else if (item.rating === 4){
-            reviewData.fourStarReviews++;
-        }
-        else if (item.rating === 3){
-            reviewData.threeStarReviews++;
-        }
-        else if (item.rating === 2){
-            reviewData.twoStarReviews++;
-        }
-        else if (item.rating === 1){
-            reviewData.oneStarReviews++;
-        }
-    })
-1   */
+
     reviewData.totalRating = reviewData.fiveStarReviews + reviewData.fourStarReviews + reviewData.threeStarReviews 
     + reviewData.twoStarReviews + reviewData.oneStarReviews;
     reviewData.totalRating /= 5;
@@ -292,9 +314,9 @@ function ProductPage(props : Props) {
                     {showReviewForm && <ProductReviewForm productId={props.product._id} onBackButton={onReviewFormBackButton}/>}
                     <div className={styles.reviewCardSection}>
                         <div className={styles.reviewCardsContainer}>
-                            {/*props.product.reviews?.map((review) => <ProductReviewCard reviewHeading={review.headingText} 
-                            reviewText={review.reviewText} reviewerName={review.reviewerName} likeCount={review.reviewLikes} 
-            dislikeCount={review.reviewDislikes} rating={review.rating}/>)*/}
+                            {productReviews?.map((review) => <ProductReviewCard key={review._id} reviewHeading={review.headingText}
+                            reviewText={review.reviewText} reviewerName={review.reviewerName} likeCount={review.reviewLikes}
+                            dislikeCount={review.reviewDislikes} rating={review.rating} reviewId={review._id}/>)}
                         </div>
                     </div>
             </div>}

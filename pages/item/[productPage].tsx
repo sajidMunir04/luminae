@@ -7,6 +7,7 @@ import FooterTemplate from "@/app/shared/FooterTemplate";
 import ProductCategoriesManager from "@/app/shared/ProductCategoriesManager";
 import { getCookie, setCookie } from "cookies-next";
 import Head from "next/head";
+import { ProductReview } from "@/app/products/ProductReview";
 
 
 export default function productPage() {
@@ -23,7 +24,7 @@ export default function productPage() {
         sizes: [],
         color: "",
         style: "",
-        model: "",
+        productModel: "",
         previousPrice: 0,
         discount: 0,
         inventoryCount: []
@@ -56,8 +57,7 @@ export default function productPage() {
                     sizes: data.sizes,
                     color: data.color,
                     style: data.style,
-                    model: data.model,
-                    reviews: data.reviews,
+                    productModel: data.model,
                     previousPrice: 0
                 };
                 setProduct(product);

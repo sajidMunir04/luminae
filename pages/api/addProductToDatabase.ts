@@ -1,12 +1,9 @@
-import { OrderedProduct } from '@/app/cart/OrderedProduct';
 import { Db, MongoClient, ObjectId, WithId } from 'mongodb';
-import { inventoryData } from '../../databaseutilities/producttypes.mjs';
 import { Product } from '@/model/Product.mjs';
-import { Product as StoreProduct} from '@/app/utils/Product';
+import { ProductToAdd } from '@/app/dashboard/AddProduct';
 
 export default async function handler(req, res) {
-  console.log(req.body);
-  const product: StoreProduct = await JSON.parse(req.body);
+  const product: ProductToAdd = await JSON.parse(req.body);
   const article = new Product({
     name: product.name,
     description: product.description,
@@ -29,9 +26,8 @@ export default async function handler(req, res) {
     await client.connect();
     const db : Db = client.db('Products');
     const collection = db.collection('products');
-    const result = collection.insertOne(article);
+    const result = await collection.insertOne(article);
     res.status(200).json({"data": result});
-    await client.close();
   } catch (error) {
     res.status(500).send(error);
   } finally {

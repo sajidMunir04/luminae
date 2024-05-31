@@ -1,7 +1,5 @@
-import { OrderedProduct } from '@/app/cart/OrderedProduct';
 import { ProductReviewData } from '@/app/products/ProductReviewData';
 import { Db, MongoClient, ObjectId, WithId } from 'mongodb';
-import mongoose from 'mongoose';
 import {ProductReview} from "../../src/model/ProductReview.mjs"
 
 export default async function handler(req, res) {

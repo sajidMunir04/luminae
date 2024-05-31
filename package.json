@@ -29,6 +29,7 @@
     "next-cloudinary": "^6.6.2",
     "pg": "^8.11.5",
     "react": "^18",
+    "react-colorful": "^5.6.1",
     "react-dom": "^18",
     "react-flag-kit": "^1.1.1",
     "react-select": "^5.8.0",

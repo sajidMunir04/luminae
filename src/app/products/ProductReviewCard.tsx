@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import styles from "./ProductReviewCard.module.css";
+import { useState } from "react";
 
 interface Props{
     reviewHeading: string,
@@ -7,20 +8,41 @@ interface Props{
     reviewerName: string,
     likeCount: number,
     dislikeCount: number,
-    rating: number
+    rating: number,
+    reviewId: string
 }
 
 function ProductReviewCard(props : Props) {
 
-    const router = useRouter();
+    const [likesCount,setLikesCount] = useState(props.likeCount);
+    const [dislikesCount,setDislikesCount] = useState(props.dislikeCount);
 
     const handleLike = () => {
-
+        setLikesCount(likesCount + 1);
+        updateDatabase();
     }
 
     const handleDisLike = () => {
-        
+        setDislikesCount(dislikesCount + 1);
+        updateDatabase();
     }
+
+
+    const updateDatabase = async() => {
+        const updateData : Record< string, string | number> = {
+            reviewId: props.reviewId,
+            likes: likesCount,
+            dislikes: dislikesCount
+        }
+
+        const response = await fetch('/api/updateProductReviewStats',{
+            method: "POST",
+            body: JSON.stringify(updateData) 
+        })
+        const data = await response.json();
+        console.log(data);
+    }
+    
 
     return (<div className={styles.container}>
         <div className={styles.header}>
@@ -38,14 +60,14 @@ function ProductReviewCard(props : Props) {
                 </div>
             </div>
             <div className={styles.reviewStatsContainer}>
-                <div className={styles.reviewStatInfo}>
+                <div className={styles.reviewStatInfo} onClick={handleLike}>
                     <img className={styles.reviewStatImage} src="/images/product/like.svg"/>
-                    <p className={styles.reviewStatText}>{props.likeCount}</p>
+                    <p className={styles.reviewStatText}>{likesCount}</p>
                 </div>
                 <div className={styles.middleBorder}></div>
-                <div className={styles.reviewStatInfo}>
+                <div className={styles.reviewStatInfo} onClick={handleDisLike}>
                     <img className={styles.reviewStatImage} src="/images/product/dislike.svg"/>
-                    <p className={styles.reviewStatText}>{props.dislikeCount}</p>
+                    <p className={styles.reviewStatText}>{dislikesCount}</p>
                 </div>
             </div>
         </div>
