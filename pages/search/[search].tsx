@@ -5,14 +5,13 @@ import { useEffect, useState } from "react";
 import ProductsBrowser from "../../src/app/products/ProductsBrowser";
 import FooterTemplate from "../../src/app/shared/FooterTemplate";
 import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
-import StoreInteractionContainer, { ProductSection } from "../../src/app/shared/ProductCategoriesManager";
 import NoProductFound from "../../src/app/products/NoProductFound";
 import { Product } from "../../src/app/utils/Product";
 import Head from "next/head";
 
 
 
-function search() {
+function Search() {
     const router = useRouter();
     const { Search } = router.query;
     const [products,setProducts] = useState<Product[]>([]);
@@ -52,7 +51,7 @@ function search() {
           };
 
           setTimeout(fetchData,1);       
-    },[search])
+    },[Search])
 
     const handleClick = (product : Product) => {
 
@@ -63,7 +62,6 @@ function search() {
         <title>Search "{Search}"</title>
       </Head>
       <HeaderTemplate/>
-      <StoreInteractionContainer/>
       {products.length > 0 && <ProductsBrowser products={products} productSection={""} productCategory={""}/>}
       {(resultFinalized  && products.length == 0) && <NoProductFound searchTerm={Search as string} />}
       <FooterTemplate/>
@@ -71,4 +69,4 @@ function search() {
 }
 
 
-export default search;
+export default Search;

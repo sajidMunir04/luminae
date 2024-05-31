@@ -5,7 +5,7 @@ import styles from "./Cart.module.css";
 import { Product } from "../utils/Product";
 import CustomerInformation from "./CustomerInformation";
 import PaymentAndShipping from "./PaymentAndShipping";
-import { OrderData, getDefaultOrderData} from "./OrderData";
+import { OrderData, useGetDefaultOrderData} from "./OrderData";
 import { CartProduct } from "./CartProduct";
 import OrderConfirmation from "./OrderConfirmation";
 import axios from "axios";
@@ -45,7 +45,7 @@ function Cart() {
         }
     }
 
-    async function placeOrder() {
+    async function usePlaceOrder() {
         setOrderPlaceStatus(true);
 
         const productDetailsForOrder : ProductOrderDetail[] = [];
@@ -112,7 +112,7 @@ function Cart() {
             orders = data.id as string;
         setCookie(ordersCookie,orders);
 
-        await setOrderData(getDefaultOrderData());
+        await setOrderData(useGetDefaultOrderData());
         await clearCart();
         router.push('/orderComplete/' + data.id);
     }
@@ -133,7 +133,7 @@ function Cart() {
         setTotalPrice(totalPrice + taxesData.tax + shippingChargesData.shippingCharges);
     }
 
-    const [orderData,setOrderData] = useState(getDefaultOrderData());
+    const [orderData,setOrderData] = useState(useGetDefaultOrderData());
 
     const setNewOrderData = (orderData : OrderData) => {
         checkOrderForm();
@@ -263,7 +263,7 @@ function Cart() {
                     <p>Total Price: </p>
                     <p>${parseFloat(totalPrice.toFixed(2))}</p>
                 </div>
-                <button onClick={isOrderInfoComplete ? placeOrder : () => {}} aria-disabled={orderPlaced} className={`${styles.checkoutButton} ${isOrderInfoComplete && styles.checkoutButtonActive}`}>{!isOrderInfoComplete && <img className={styles.btnImage} src="/images/product/checkOut.svg"/>}CHECKOUT</button>
+                <button onClick={isOrderInfoComplete ? usePlaceOrder : () => {}} aria-disabled={orderPlaced} className={`${styles.checkoutButton} ${isOrderInfoComplete && styles.checkoutButtonActive}`}>{!isOrderInfoComplete && <img className={styles.btnImage} src="/images/product/checkOut.svg"/>}CHECKOUT</button>
             </div>
         </div>
     </div>);

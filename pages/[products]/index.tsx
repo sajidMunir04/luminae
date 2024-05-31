@@ -7,7 +7,6 @@ import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
 import StoreInteractionContainer, { ProductSection } from "../../src/app/shared/ProductCategoriesManager";
 import NoProductFound from "../../src/app/products/NoProductFound";
 import { Product } from "../../src/app/utils/Product";
-import productCategory from "./[productCategory]";
 
 
 

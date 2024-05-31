@@ -3,7 +3,6 @@ import CustomerOrder from "@/app/order/CustomerOrder";
 import FooterTemplate from "@/app/shared/FooterTemplate";
 import HeaderTemplate from "@/app/shared/HeaderTemplate";
 import { getCookie } from "cookies-next";
-import { Head } from "next/document";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 

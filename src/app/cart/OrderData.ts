@@ -17,7 +17,7 @@ export interface OrderData{
     phoneNumber: string;
 }
 
-export const getDefaultOrderData = () => {
+export const useGetDefaultOrderData = () => {
 
     const customerInfo = useGetCustomer();
 

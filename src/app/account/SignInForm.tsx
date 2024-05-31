@@ -7,8 +7,7 @@ import FormOrSection from "./FormOrSection";
 import styles from './SignInForm.module.css';
 import { SignInCredentials, emailRegex } from "../lib/definitions";
 import router from "next/router";
-import { headers } from "next/headers";
-import { z } from "zod";
+import Link from "next/link";
 
 enum EmailState {
     Unchecked,
@@ -87,7 +86,7 @@ function SignInForm()
               <label>Remember for 30 days</label>
           </div>
           <div>
-              <a className={styles.forgotPasswordLink} href="auth/account">Forgot password?</a>
+              <Link className={styles.forgotPasswordLink} href="auth/account">Forgot password?</Link>
           </div>
       </div>
       <div className={styles.formButton}>
@@ -95,7 +94,7 @@ function SignInForm()
       </div>
       <div className={styles.noAccountContainer}>
           <p>Don't have an account?</p>
-          <a className={styles.signUpButton} href="signup">Sign Up</a>
+          <Link className={styles.signUpButton} href="signup">Sign Up</Link>
       </div>
       </form>);
 }

@@ -4,7 +4,7 @@ import { OrderedProduct } from "./OrderedProduct";
 import { OrderData } from "./OrderData";
 import { useGetCurrentDate } from "../lib/hooks/useGetCurrentDate";
 
-export default async function placeOrder(orderData : OrderData,totalPrice : number,shippingCharges :number,taxes: number) {
+export default async function usePlaceOrder(orderData : OrderData,totalPrice : number,shippingCharges :number,taxes: number) {
     const productDetailsForOrder : ProductOrderDetail[] = [];
     for (let i = 0; i < orderData.cartProducts.length; i++)
     {
@@ -13,7 +13,9 @@ export default async function placeOrder(orderData : OrderData,totalPrice : numb
             name: orderData.cartProducts[i].product.name,
             quantity: orderData.cartProducts[i].quantity,
             unitPrice: orderData.cartProducts[i].product.price,
-            size: ""
+            size: "",
+            imageLink: "",
+            color: ""
         }
         productDetailsForOrder.push(productDetail);
     }
