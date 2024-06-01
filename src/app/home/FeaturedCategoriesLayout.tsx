@@ -5,9 +5,7 @@ import ProductDisplayLayoutHeader from "./ProductDisplayLayoutHeader";
 function FeaturedCategoriesLayout()
 {
     return (<div className={styles.container}>
-        <div>
-            <ProductDisplayLayoutHeader heading="Trending Categories" link="#" linkText="View All"/>
-        </div>
+        <ProductDisplayLayoutHeader heading="Trending Categories" link="#" linkText="View All"/>
         <div className={styles.contentContainer}>
         <ProductCategoryCard categoryInfo="Never-Ending Summer"
             itemsDetail="Super Comfort Dress" link={"/WOMAN/dresses"} imageLink={"/images/product/categories/girl1.jpg"} color={"#dd00dd"}/>

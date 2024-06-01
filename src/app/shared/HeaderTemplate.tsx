@@ -56,7 +56,10 @@ function HeaderTemplate()
         }
 
         if (event.target.value.length > 3 && event.target.value.length <= 6)
-            fetchSearchResult()
+            fetchSearchResult();
+        else{
+            setSearchResults([]);
+        }
     };
     
     const onSeachButtonClick = (event : React.ChangeEvent<HTMLFormElement>) => {

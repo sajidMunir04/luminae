@@ -3,6 +3,7 @@
     flex-direction: column;
     padding: 0% var(--horizontal-padding);
     margin-top: 4%;
+    box-sizing: border-box;
 }
 
 .content{

@@ -43,9 +43,7 @@ function TrendingProductsLayout()
     },[])
 
     return (<div className={styles.container}>
-        <div>
-            <ProductDisplayLayoutHeader heading="Trending Products" link="/WOMAN/jackets" linkText="View All"/>
-        </div>
+        <ProductDisplayLayoutHeader heading="Trending Products" link="/WOMAN/jackets" linkText="View All"/>
         <div className={styles.content}>
             {products.map((product) => <TrendingProductDisplayCard key={product._id} product={product} />)}
         </div>

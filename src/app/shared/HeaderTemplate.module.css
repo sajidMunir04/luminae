@@ -5,6 +5,7 @@
     justify-content: space-between;
     height: 70px;
     padding: 1% var(--horizontal-padding) 0 var(--horizontal-padding);
+    box-sizing: border-box;
 }
 
 .navArea{
@@ -184,8 +185,8 @@
 
     .form{
         order: 4;
-        width: 88%;
-        height: 50px;
+        width: 96%;
+        height: 52px;
         margin-top: 3%;
         box-sizing: border-box;
     }
@@ -196,17 +197,14 @@
 
     .categoriesContainer{
         order: 5;
+        margin-top: 10px;
     }
 
     .logoContainer{
-        width: 30%;
+        width: 100%;
     }
 
     .buttons{
-        width: 70%;
-    }
-
-    .accountButton{
-        width: 28%;
+        width: 60%;
     }
 }

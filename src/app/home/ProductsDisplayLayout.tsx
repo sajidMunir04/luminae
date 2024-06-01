@@ -6,9 +6,7 @@ import ProductCategoryCard from "../products/ProductCategoryCard";
 function ProductsDisplayLayout()
 {
     return (<div className={styles.container}>
-        <div>
-            <ProductDisplayLayoutHeader heading="Popular Categories" link="#" linkText="View All"/>
-        </div>
+        <ProductDisplayLayoutHeader heading="Popular Categories" link="#" linkText="View All"/>
         <div className={styles.content}>
         <ProductCategoryCard categoryInfo="Be your own"
             itemsDetail="All types of shirts" link={"/WOMAN/tops"} imageLink={"/images/product/categories/girl2.jpg"} color={"#Da4456"}/>
