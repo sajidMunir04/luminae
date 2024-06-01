@@ -1,5 +1,3 @@
-"use client";
-
 import { Product } from "@/app/utils/Product";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -74,6 +72,7 @@ function Page() {
     return (<>
     <Head>
         <title>{product.name}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     </Head>
     <HeaderTemplate/>
     <ProductPage product={product}/>

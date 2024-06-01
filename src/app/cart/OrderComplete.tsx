@@ -1,3 +1,5 @@
+"use client";
+
 import { getCookie } from "cookies-next";
 import { OrderFormData } from "./OrderFormData";
 import styles from "./OrderComplete.module.css";
