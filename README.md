@@ -1,18 +1,18 @@
-What is the project ? 
+# What is the project ? 
 
 This is a full stack ecommerce website, developed using Next.js utilizing its frontend and also its serverless backend. This website uses MongoDB as its database.
 
 
-Why Next.js ?
+# Why Next.js ?
 
 The main goal was to gain exposure in the full stack development and what's better than developing and using solutions. So it was the main deciding factor and I saw few teams using it as a full stack solution, although their scale was rather scoped. 
 
 
-What is the main goal ?
+# What is the main goal ?
 This project's goal is to demonstrate my problem solving and work skills, and my understanding of the modern tech stacks being adopted by the industry.
 
 
-How did you plan out the whole project ?
+# How did you plan out the whole project ?
 
 The main systems I considered were: 
 
@@ -21,7 +21,7 @@ The main systems I considered were:
 -Database
 -Media CDN service (Cloudinary)
 
-As I had choosed Next.js so it would mean that the backend would also live with the frontend, and considering the dynamic nature of data for an ecommerce website, I chose MongoDB without any confusion. Because it offers BASE transactions which were crucial for this specific project, unlike the ACID transactions of the Relational databases like PostgreSQL.
+As I had choosen Next.js so it would mean that the backend would also live with the frontend, and considering the dynamic nature of data for an ecommerce website, I chose MongoDB without any confusion. Because it offers BASE transactions which were crucial for this specific project, unlike the ACID transactions of the Relational databases like PostgreSQL.
 
 I planned to start developing the front-end first, so I browsed some figma designs and eventually finalized one which had design screens for all pages which I had initially planned. Although later I found that it has many UX issues, and few things didn't make sense at all according to design. Like it had placed too much or too litte info for users.
 
@@ -36,7 +36,7 @@ I developed some of my tools to cleanup that data and upload it into the databas
 
 Then I started consuming that data, and started working on adding backend logic to start front-end interaction with the database eventually. 
 
-What are the features of this project ? What works in it and what does not ?
+# What are the features of this project ? What works in it and what does not ?
 
 The whole websites works as you would expect any ecommerce website(though this website does not have a good designer :) ), so I would like you to go to this link and check some of its features . <>link</link>
 
@@ -64,21 +64,21 @@ The main features are:
 3- Can manage the current products on the website, like delete existing products, update the inventory, and update the prices as well.
 
 
-What could be improved in this project ?
+# What could be improved in this project ?
 
 1- The design and user experience could be improved for sure. 
 2- There are no unit tests as of now, so everything is manually tested by me, so it would be beneficial to use unit tests. Which I have plans for.
 3- The mobile responsiveness for mobiles is bit shaky for users, and for admins there is no screen responsiveness at all on phones, as I am still figuring out how to fit that much information in one place.
 
-How did you manage this whole project ? 
+# How did you manage this whole project ? 
 
 Well, I categorized the tasks according to my development plan (Frontend -> Database -> Backend), so I managed the tasks on my own, and I use JIRA for managment of this whole project.
 
-What is the potential scalability of this project ? 
+# What is the potential scalability of this project ? 
 
 1- The backend is serverless, so it's definitely scalable. The database design is versatile for expansion, however on the front-end, it would be a bottle-neck if I try to expand this, like for example the current two main product sections are MAN and WOMAN, which are included in the header component for now, so if I wanted to add Kids product section,then maybe it would be fine and I can include that, however,if I was to include more sections like Kitchen, Home, and Electronices then I would have to redo the whole design for the header component and categories display component.
 
-How did the overall progress go, any references ?![Screenshot 2024-05-26 204710](https://github.com/stuckrabbit/luminae/assets/165798996/17685113-b098-46bb-865f-54d786e491ca)
+# How did the overall progress go, any references ?![Screenshot 2024-05-26 204710](https://github.com/stuckrabbit/luminae/assets/165798996/17685113-b098-46bb-865f-54d786e491ca)
 ![Screenshot 2024-05-28 163821](https://github.com/stuckrabbit/luminae/assets/165798996/24f2f748-3389-44b5-8bb1-f9cc8e165042)
 ![Screenshot 2024-05-27 085110](https://github.com/stuckrabbit/luminae/assets/165798996/a7ee0ed2-b50a-48b9-a319-6c9370a0d5e3)
 ![Screenshot 2024-05-27 081229](https://github.com/stuckrabbit/luminae/assets/165798996/b7836179-57af-4081-8793-4cf190505f05)
