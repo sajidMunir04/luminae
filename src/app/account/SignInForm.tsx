@@ -93,7 +93,7 @@ function SignInForm()
           <FormButton text="SIGN IN"/>
       </div>
       <div className={styles.noAccountContainer}>
-          <p>Don't have an account?</p>
+          <p>Don&quot;t have an account?</p>
           <Link className={styles.signUpButton} href="signup">Sign Up</Link>
       </div>
       </form>);

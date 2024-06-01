@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./SearchResults.module.css";
-import { useStoreProductPageId } from "../lib/hooks/useStoreProductPageId";
+import { setCookie } from "cookies-next";
 
 export interface SearchResult {
     _id: string,
@@ -15,13 +15,13 @@ interface Props {
 
 function SearchResults(props : Props) {
 
-    const useHandleClick = (productId : string) => {
-        useStoreProductPageId(productId);
+    const handleClick = (productId : string) => {
+        setCookie('productPageId',productId);
     }
 
     return (<div className={styles.container}>
         {props?.searchResults.map((item) => (
-            <a className={styles.searchResult} onClick={() => useHandleClick(item._id)} key={item.productName + Math.random()} href={`/item/${item._id}`}>
+            <a className={styles.searchResult} onClick={() => handleClick(item._id)} key={item.productName + Math.random()} href={`/item/${item._id}`}>
                 <div className={styles.imageContainer}>
                     <Image className={styles.image} src={item.images[0]} alt={"product image"} width={'60'} height={'100'}/>
                 </div>

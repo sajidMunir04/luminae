@@ -10,10 +10,10 @@ import PriceFilter from "./filters/PriceFilter";
 import { ModelDetail } from "./filters/ModelFilter";
 import { useRouter } from "next/router";
 import { useExtractQueryParams } from "../lib/hooks/useExtractRouterQuery";
-import { useStoreRouterQuery } from "../lib/hooks/useStoreRouterQuery";
-import { useGetRouterQuery } from "../lib/hooks/useGetRouterQuery";
 import { FiltersData } from "./FiltersData";
 import { getFiltersData } from "../utils/getFiltersData";
+import { getCookie, setCookie } from "cookies-next";
+import { routerQueryForProductPagination } from "../lib/constants";
 
 interface Props {
     products : Product[],
@@ -30,7 +30,7 @@ enum ProductSortingAlgorithm {
 function ProductsBrowser(props : Props)
 {
     const router = useRouter();
-    const paginationParams = useExtractQueryParams(useGetRouterQuery() !== undefined ? useGetRouterQuery() as string : router.asPath);
+    const paginationParams = useExtractQueryParams(getCookie(routerQueryForProductPagination) !== undefined ? getCookie(routerQueryForProductPagination) as string : router.asPath);
 
     const [itemsPerPage,setItemPerPage] = useState(12);
     const [currentPage,setCurrentPage] = useState(1);
@@ -148,7 +148,7 @@ function ProductsBrowser(props : Props)
     const handlePageChange = (pageNumber : number) => {
         setCurrentPage(pageNumber);
         const urlQuery : string = `${router.basePath}/${props.productSection}/${props.productCategory}?page=${pageNumber}&itemsOnPage=${itemsPerPage}&sortingMode=${sortingAlgorithm}`;
-        useStoreRouterQuery(urlQuery);
+        setCookie(routerQueryForProductPagination, urlQuery);
         router.replace(urlQuery);
     }
 

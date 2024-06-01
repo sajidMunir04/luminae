@@ -77,7 +77,7 @@ function OrdersList() {
         }
         {!hasOrders &&
             <div>
-                <p>You don't have any recent Orders!</p>
+                <p>You don&quot;t have any recent Orders!</p>
             </div>
         }
     </div>);

@@ -7,6 +7,7 @@ import FormOrSection from "./FormOrSection";
 import styles from './SignUpForm.module.css';
 import router from "next/router";
 import { SignUpCredentials } from "../lib/definitions";
+import Link from "next/link";
 
 
 function SignUpForm()
@@ -56,7 +57,7 @@ function SignUpForm()
             <div className={styles.checkboxWithText}>
                 <input className={styles.checkBox} type="checkbox"/>
                 <label>I accept the
-            <a href="/account">terms and conditions</a></label>
+            <Link href="/account">terms and conditions</Link></label>
             </div>
         </div>
         <div className={styles.formButton}>

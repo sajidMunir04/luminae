@@ -12,12 +12,13 @@ import Head from "next/head";
 function ProductCategory(){
     const router = useRouter();
     const { products , ProductCategory } = router.query;
-    let filteredProducts : Product[] = [];
-    const [allProducts,setProducts] = useState(filteredProducts);
+    const [allProducts,setProducts] = useState<Product[]>([]);
     let allProductSections : ProductSection[] = [];
     useEffect(
         () => {
+        let filteredProducts : Product[] = [];
         const fetchData = async () => {
+
             try {
                 const fetchQuery = `/api/fetchProducts/${products}/${ProductCategory}`;
                 const response = await fetch(fetchQuery);

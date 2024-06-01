@@ -2,7 +2,7 @@ import ProductDisplayCard from "./ProductDisplayCard";
 import { Product } from "../utils/Product";
 import styles from "./Pagination.module.css";
 import { useRouter } from "next/router";
-import { useStoreProductPageId } from "../lib/hooks/useStoreProductPageId";
+import { setCookie } from "cookies-next";
 
 interface Props {
     itemsPerPage: number,
@@ -17,15 +17,15 @@ function Pagination(props : Props) {
 
     const router = useRouter();
 
-    const useHandleClick = (product : Product) => {
-        useStoreProductPageId(product._id);
+    const handleClick = (product : Product) => {
+        setCookie('productPageId',product._id);
         const productId = product._id;
           router.push('http://localhost:3000' + '/item/' + productId);
     }
 
     return (<div className={styles.container}>
             {props.products.map((product,index) => ((index >= startIndex && index < endIndex) && 
-            <ProductDisplayCard onClick={() => useHandleClick(product)} key={product.images[0]} product={product}/>))}
+            <ProductDisplayCard onClick={() => handleClick(product)} key={product.images[0]} product={product}/>))}
     </div>);
 }
 
