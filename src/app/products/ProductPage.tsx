@@ -275,7 +275,7 @@ function ProductPage(props : Props) {
                     </div>
                 </div>
             </div>}
-            {infoSection === InfoSection.Reviews && <div>
+            {infoSection === InfoSection.Reviews && <div className={styles.reviewsSection}>
                     <div className={styles.reviewStatsContainer}>
                         <div className={styles.reviewMajorInfoContainer}>
                             <p>Total Reviews</p>

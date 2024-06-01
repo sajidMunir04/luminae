@@ -41,6 +41,7 @@ function ProductsBrowser(props : Props)
     const[selectedColors,setSelectedColors] = useState<string[]>(['']);
     const[selectedSizes,setSelectedSizes] = useState(['']);
     const[priceRange,setPriceRange] = useState<number[]>([]);
+    const [filtersOpen,setFilterStatus] = useState(false);
 
     const defaultFilterData : FiltersData = {
         minPrice: 0,
@@ -202,8 +203,8 @@ function ProductsBrowser(props : Props)
 
     return (<div className={styles.container}>
         <div className={styles.controllerContainer}>
-        <div>
-
+        <div className={styles.filtersButton} onClick={() => setFilterStatus(!filtersOpen)}>
+            <img src="/images/product/filter.svg"/>
         </div>
         <div className={styles.pageControls}>
             <label className={styles.sortItemSelectContainer}>Sort By 
@@ -225,10 +226,10 @@ function ProductsBrowser(props : Props)
         </div>
     </div>
     <div className={styles.mainSection}>
-        <div className={styles.filtersContainer}>
+        <div className={`${styles.filtersContainer} ${filtersOpen && styles.filtersOpen}`}>
             <div className={styles.filterContainerHeader}>
             <p className={styles.filterHeaderText}>Filters</p>
-            <img src="/images/product/filter.svg"/>
+            {!filtersOpen && <img src="/images/product/filter.svg"/>}
             </div>
             <ModelFilter onModelSelect={handleModelSelection} modelDetails={filtersData.modelDetails} selectedModels={selectedModels}/>
             <StyleFilter styles={filtersData.styles} onStyleSelect={handleStyleSelection} selectedStyles={selectedStyles}/>
