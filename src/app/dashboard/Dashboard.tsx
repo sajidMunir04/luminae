@@ -55,6 +55,7 @@ export default function Dashboard() {
 }
 
 enum DashboardView{
+  Dashboard,
   Orders,
   Products,
   AddProdut

@@ -12,7 +12,6 @@
     width: 12%;
     height: 100%;
     background-color: white;
-    border-right: 2px solid #D1D1D1;
     flex-grow: 1;
 }
 
@@ -31,12 +30,11 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    border-bottom: 2px solid #D1D1D1;
 }
 
 .contentSection{
     width: 88%;
-    height: 600px;
+    height: max-content;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -52,7 +50,6 @@
     width: 100%;
     height: 100%;
     background-color: white;
-    border-right: 2px solid #D1D1D1;
 }
 
 .button{
@@ -64,4 +61,5 @@
 .infoContainer{
     width: 100%;
     height: max-content;
+    background-color: rgb(232, 229, 229);
 }

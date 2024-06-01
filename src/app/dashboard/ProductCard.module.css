@@ -8,7 +8,8 @@
     align-items: flex-start;
     justify-content: center;
     text-align: center;
-    box-shadow: 1px 1px 4px 1px black;
+    margin: 2%;
+    background-color: white;
 }
 
 .imageContainer{
