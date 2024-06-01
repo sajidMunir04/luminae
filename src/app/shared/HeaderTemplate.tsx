@@ -17,6 +17,7 @@ function HeaderTemplate()
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [cartItemsCount,setCartItemCount] = useState<number>(0);
     const [searchResults,setSearchResults] = useState<SearchResult[]>([]);
+    const [searchBarFocusStatus,setSearchBarFocusStatus] = useState(false);
 
     //const router = useRouter();
 
@@ -76,8 +77,8 @@ function HeaderTemplate()
             <ProductCategoriesManager/>
         </div>
         <form className={styles.form} onSubmit={onSeachButtonClick}>
-                <input className={styles.searchInput} type="search" placeholder='Search Products' onChange={handleSearchInput}/>
-                <button className={styles.searchButton} type="submit"><img src={'/images/common/magnifier.svg'}/></button>
+                <input className={styles.searchInput} type="search" onFocus={() => setSearchBarFocusStatus(true)} onBlur={() => setSearchBarFocusStatus(false)} placeholder='Search Products' onChange={handleSearchInput}/>
+                {!searchBarFocusStatus && <button className={styles.searchButton} type="submit"><img src={'/images/common/magnifier.svg'}/></button>}
              {searchResults.length > 0 && <SearchResults searchResults={searchResults}/>}
         </form>
         <div className={styles.buttons}>

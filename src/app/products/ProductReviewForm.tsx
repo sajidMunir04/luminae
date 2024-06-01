@@ -67,11 +67,11 @@ function ProductReviewForm(props: Props) {
         </label>
         <label className={styles.reviewLabel}>How would you rate the product?
             <div>
-                {rating >= 1 ? <img src="/images/product/FillStar.svg"/> : <img onClick={() => {setRating(1)}} src="/images/product/EmptyStar.svg"/>}
-                {rating >= 2 ? <img src="/images/product/FillStar.svg"/> : <img onClick={() => setRating(2)} src="/images/product/EmptyStar.svg"/>}
-                {rating >= 3 ? <img src="/images/product/FillStar.svg"/> : <img onClick={() => setRating(3)} src="/images/product/EmptyStar.svg"/>}
-                {rating >= 4 ? <img src="/images/product/FillStar.svg"/> : <img onClick={() => setRating(4)} src="/images/product/EmptyStar.svg"/>}
-                {rating === 5 ? <img src="/images/product/FillStar.svg"/> : <img onClick={() => setRating(5)} src="/images/product/EmptyStar.svg"/>}
+                {rating >= 1 ? <img className={styles.starImage} onClick={() => setRating(1)} src="/images/product/FillStar.svg"/> : <img className={styles.starImage} onClick={() => {setRating(1)}} src="/images/product/EmptyStar.svg"/>}
+                {rating >= 2 ? <img className={styles.starImage} onClick={() => setRating(2)} src="/images/product/FillStar.svg"/> : <img className={styles.starImage} onClick={() => setRating(2)} src="/images/product/EmptyStar.svg"/>}
+                {rating >= 3 ? <img className={styles.starImage} onClick={() => setRating(3)} src="/images/product/FillStar.svg"/> : <img className={styles.starImage} onClick={() => setRating(3)} src="/images/product/EmptyStar.svg"/>}
+                {rating >= 4 ? <img className={styles.starImage} onClick={() => setRating(4)} src="/images/product/FillStar.svg"/> : <img className={styles.starImage} onClick={() => setRating(4)} src="/images/product/EmptyStar.svg"/>}
+                {rating === 5 ? <img className={styles.starImage} onClick={() => setRating(5)} src="/images/product/FillStar.svg"/> : <img className={styles.starImage} onClick={() => setRating(5)} src="/images/product/EmptyStar.svg"/>}
             </div>
         </label>
         <label className={styles.reviewLabel}>Review Highlight
@@ -81,8 +81,8 @@ function ProductReviewForm(props: Props) {
             <textarea className={styles.textArea} onChange={handleReviewDetail} placeholder='Review Detail'>
             </textarea>
         </label>
-        <button className={styles.submitButton} type='submit'>Submit Review</button>
-        <button onClick={props.onBackButton} type='button'>Cancel</button>
+        <button className={styles.button} type='submit'>Submit Review</button>
+        <button className={styles.button} onClick={props.onBackButton} type='button'>Cancel</button>
     </form>);
 }
 

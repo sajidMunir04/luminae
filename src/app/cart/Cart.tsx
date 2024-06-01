@@ -117,6 +117,8 @@ function Cart() {
         router.push('/orderComplete/' + data.id);
     }
 
+    let isProductDataFetched : boolean = false;
+
     const calculatePricing = async () => {
         const totalPrices = await orderData.cartProducts.map((item) => item.product.price * item.quantity);
         const totalPrice = await totalPrices.reduce((acc,el) => (acc + el),0);
@@ -201,6 +203,7 @@ function Cart() {
                 cartProducts.push(cartProduct);
             });
             setProducts(cartProducts);
+            isProductDataFetched = true;
             const newOrderData : OrderData = orderData;
             newOrderData.cartProducts = cartProducts;
             setOrderData(newOrderData);
@@ -230,6 +233,9 @@ function Cart() {
             <div>
                 {orderData.cartProducts.map((item) => <CartItem key={item.product._id} product={item.product} quantity={item.quantity}
                 onProductRemove={() => removeProductFromCart(item.product)} onProductQuantityChange={onProductQuantityChange} size={item.size}/>)}
+                {
+                    (orderData.cartProducts.length === 0) && <h2>You don{'\''}t have any products in the cart.</h2> 
+                }
             </div>
             </div>
             </>}
