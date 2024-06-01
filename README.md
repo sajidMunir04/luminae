@@ -70,6 +70,10 @@ What could be improved in this project ?
 2- There are no unit tests as of now, so everything is manually tested by me, so it would be beneficial to use unit tests. Which I have plans for.
 3- The mobile responsiveness for mobiles is bit shaky for users, and for admins there is no screen responsiveness at all on phones, as I am still figuring out how to fit that much information in one place.
 
+How did you manage this whole project ? 
+
+Well, I categorized the tasks according to my development plan (Frontend -> Database -> Backend), so I managed the tasks on my own, and I use JIRA for managment of this whole project.
+
 What is the potential scalability of this project ? 
 
 1- The backend is serverless, so it's definitely scalable. The database design is versatile for expansion, however on the front-end, it would be a bottle-neck if I try to expand this, like for example the current two main product sections are MAN and WOMAN, which are included in the header component for now, so if I wanted to add Kids product section,then maybe it would be fine and I can include that, however,if I was to include more sections like Kitchen, Home, and Electronices then I would have to redo the whole design for the header component and categories display component.
