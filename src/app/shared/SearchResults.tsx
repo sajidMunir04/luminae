@@ -1,7 +1,9 @@
 import Image from "next/image";
 import styles from "./SearchResults.module.css";
+import { useStoreProductPageId } from "../lib/hooks/useStoreProductPageId";
 
 export interface SearchResult {
+    _id: string,
     images: string[];
     productName: string,
     productPrie: number
@@ -12,9 +14,14 @@ interface Props {
 }
 
 function SearchResults(props : Props) {
+
+    const handleClick = (productId : string) => {
+        useStoreProductPageId(productId);
+    }
+
     return (<div className={styles.container}>
         {props?.searchResults.map((item) => (
-            <a className={styles.searchResult} key={item.productName + Math.random()} href="#">
+            <a className={styles.searchResult} onClick={() => handleClick(item._id)} key={item.productName + Math.random()} href={`/item/${item._id}`}>
                 <div className={styles.imageContainer}>
                     <Image className={styles.image} src={item.images[0]} alt={"product image"} width={'60'} height={'100'}/>
                 </div>

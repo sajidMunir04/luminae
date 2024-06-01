@@ -44,7 +44,8 @@ function HeaderTemplate()
                     const searchResult : SearchResult = {
                         productName: item.name,
                         productPrie: item.price,
-                        images: item.images
+                        images: item.images,
+                        _id: item._id
                     }
 
                     return searchResult;
@@ -74,7 +75,7 @@ function HeaderTemplate()
         <form className={styles.form} onSubmit={onSeachButtonClick}>
                 <input className={styles.searchInput} type="search" placeholder='Search Products' onChange={handleSearchInput}/>
                 <button className={styles.searchButton} type="submit"><img src={'/images/common/magnifier.svg'}/></button>
-             {true && <SearchResults searchResults={searchResults}/>}
+             {searchResults.length > 0 && <SearchResults searchResults={searchResults}/>}
         </form>
         <div className={styles.buttons}>
                 <Link className={styles.button} href={'/ordersDetail'}>

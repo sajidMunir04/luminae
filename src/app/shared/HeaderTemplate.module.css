@@ -82,10 +82,11 @@
     text-decoration: none;
     border: none;
     width: 100%;
-    font-family: Lato-Regular;
-    font-size: 14px;
+    font-family: RobotoSlab-Regular;
+    font-size: 17px;
     padding: 0% 4%;
     height: 100%;
+    border-radius: 22px;
 }
 
 .categorySelector{

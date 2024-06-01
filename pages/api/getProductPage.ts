@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     const db : Db = client.db('Products');
     const collection = db.collection('products');
     const data = await collection.findOne({ _id : requiedProductId});
-    res.status(200).json(data);
+    res.status(200).json({'data' : data});
     await client.close();
   } catch (error) {
     console.error('Error fetching data from MongoDB:', error);

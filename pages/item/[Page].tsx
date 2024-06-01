@@ -1,16 +1,14 @@
 import { Product } from "@/app/utils/Product";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import ProductDisplayPage from "@/app/products/ProductPage";
 import HeaderTemplate from "@/app/shared/HeaderTemplate";
 import FooterTemplate from "@/app/shared/FooterTemplate";
-import ProductCategoriesManager from "@/app/shared/ProductCategoriesManager";
 import { getCookie, setCookie } from "cookies-next";
 import Head from "next/head";
-import { ProductReview } from "@/app/products/ProductReview";
+import ProductPage from "@/app/products/ProductPage";
+import { useStoreProductPageId } from "@/app/lib/hooks/useStoreProductPageId";
 
-
-function ProductPage() {
+function Page() {
     const router = useRouter();
     const defaultProduct : Product = {
         _id: "",
@@ -32,17 +30,21 @@ function ProductPage() {
     const [product,setProduct] = useState<Product>(defaultProduct);
     
     useEffect(() => {
-        let { productPage } = router.query;
-        if (productPage === undefined)
-            productPage = getCookie('productPageId');
+        let { Page } = router.query;
+
+        console.log(Page);
+
+        if (Page === undefined)
+            Page = getCookie('productPageId');
         
         const fetchData = async() => {
             try {
                 const response = await fetch('/api/getProductPage',{
                     method: "POST",
-                    body: productPage as string
+                    body: Page as string
                 });
-                const data = await response.json();
+                const result = await response.json();
+                const data = result.data;
                 const product : Product = {
                     _id: data._id,
                     name: data.name,
@@ -67,9 +69,9 @@ function ProductPage() {
             }
         }
 
-        setCookie('productPageId',productPage);
-        fetchData();
+        useStoreProductPageId(Page as string);
 
+        fetchData();
     },[]);
 
     return (<>
@@ -77,9 +79,9 @@ function ProductPage() {
         <title>{product.name}</title>
     </Head>
     <HeaderTemplate/>
-    <ProductDisplayPage product={product}/>
+    <ProductPage product={product}/>
     <FooterTemplate/>
     </>);
 }
 
-export default ProductPage;
+export default Page;
