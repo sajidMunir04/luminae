@@ -2,7 +2,7 @@ import { getCookie } from "cookies-next";
 import { OrderFormData } from "./OrderFormData";
 import styles from "./OrderComplete.module.css";
 import Link from "next/link";
-import { ordersCookie } from "../lib/constants";
+import { orderFormCookie } from "../lib/constants";
 
 interface Props {
     orderId : string
@@ -10,7 +10,7 @@ interface Props {
 
 function OrderComplete(props : Props) {
 
-    const orderDataRaw = getCookie(ordersCookie);
+    const orderDataRaw = getCookie(orderFormCookie);
     const orderData : OrderFormData = JSON.parse(orderDataRaw as string);
 
     return (<div className={styles.container}>

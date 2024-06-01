@@ -52,6 +52,7 @@
 
 
     .container{
+        width: 100%;
         height: max-content;
         flex-direction: column;
     }

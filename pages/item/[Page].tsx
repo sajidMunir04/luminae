@@ -3,10 +3,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import HeaderTemplate from "@/app/shared/HeaderTemplate";
 import FooterTemplate from "@/app/shared/FooterTemplate";
-import { getCookie, setCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 import Head from "next/head";
 import ProductPage from "@/app/products/ProductPage";
-import { useStoreProductPageId } from "@/app/lib/hooks/useStoreProductPageId";
 
 function Page() {
     const router = useRouter();
@@ -31,8 +30,6 @@ function Page() {
     
     useEffect(() => {
         let { Page } = router.query;
-
-        console.log(Page);
 
         if (Page === undefined)
             Page = getCookie('productPageId');
@@ -68,8 +65,6 @@ function Page() {
                 console.log(error);
             }
         }
-
-        useStoreProductPageId(Page as string);
 
         fetchData();
     },[]);

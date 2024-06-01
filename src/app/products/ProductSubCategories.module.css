@@ -35,10 +35,17 @@
 @media (max-width: 700px) {
 
     .container{
-        position: static;
+        position: relative;
+        width: 100%;
     }
 
     .subCategoriescontainer{
+        position: relative;
         left: 0%;
+        width: 320px;
+    }
+
+    .categoryButton{
+        text-align: center;
     }
 }

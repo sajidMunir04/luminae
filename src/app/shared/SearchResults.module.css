@@ -58,3 +58,12 @@
 .image{
     object-fit: cover;
 }
+
+.viewText{
+    margin: 0%;
+    text-decoration: none;
+    color: black;
+    text-decoration: none;
+    font-family: RobotoSlab-Medium;
+    font-size: 14px;
+}

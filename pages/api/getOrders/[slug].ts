@@ -5,9 +5,9 @@ export default async function handler(req, res) {
   const { slug } = req.query;
   const productsId = slug;
   let allProductsId : ObjectId[] = productsId.split(',');
-  const filteredIds = allProductsId.filter((item) => item !== null);
+  const filteredIds = allProductsId.filter((item) => item !== null || item !== undefined);
   allProductsId = filteredIds;
-  allProductsId = allProductsId.map((el) => {return new ObjectId(el)._id });
+  allProductsId = allProductsId.map((el) => {return new ObjectId(el)});
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {
     await client.connect();
@@ -15,9 +15,7 @@ export default async function handler(req, res) {
     const collection = db.collection('pendingOrders');
     const data = await collection.aggregate([
       {
-        $match: {
-          _id: { $in: allProductsId }
-        }
+        $match: {_id: { $in: allProductsId }}
       }
     ]).toArray();
     res.status(200).json({'data': data});

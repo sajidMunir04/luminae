@@ -10,7 +10,7 @@ function CustomerOrder(props : Props) {
     return (<div className={styles.container}>
         <p className={styles.sectionHeading}>Ordered Products</p>
         <div className={styles.productSection}>
-        {props.orderform?.products?.map((product) => (<div className={styles.productContainer}>
+        {props.orderform?.products?.map((product) => (<div className={styles.productContainer} key={product._id}>
             <div className={styles.productInfoContainer}>
             <div className={styles.productImageContainer}>
                 <img className={styles.productImage} src={product.imageLink}/>

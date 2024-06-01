@@ -19,19 +19,19 @@
 }
 
 .headingText{
-    font-family: Lato-ExtraBold;
+    font-family: RobotoSlab-ExtraBold;
     font-size: 36px;
     margin-bottom: 0%;
 }
 
 .detailText{
     margin-top: 4%;
-    font-family: Lato-Regular;
+    font-family: RobotoSlab-Medium;
     font-size: 28px;
 }
 
 .link{
-    font-family: Lato-Regular;
+    font-family: RobotoSlab-Regular;
     font-size: 20px;
     line-height: 22px;  
     border-bottom: 2px solid white;

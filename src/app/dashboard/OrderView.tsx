@@ -13,7 +13,7 @@ function OrderView (props : Props) {
             <p>Cart Items</p>
             <div className={styles.orderProductsContainerParent}>
                 <div className={styles.orderProductsContainer}>
-                    {props.orderData.products.map((product) => <OrderItem cartProduct={product}/>)}
+                    {props.orderData.products.map((product) => <OrderItem key={product._id} cartProduct={product}/>)}
                 </div>
             </div>
         </div>

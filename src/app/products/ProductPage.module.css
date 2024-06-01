@@ -352,12 +352,44 @@
 
 @media (max-width: 700px) {
     .container{
+        width: 100%;
         padding: 0%;
         flex-direction: column;
     }
 
     .productInfo{
         flex-direction: column;
+        width: 100%;
+        height: max-content;
+    }
+
+    .imageSection{
+        width: 100%;
+        height: max-content;
+        flex-direction: column-reverse;
+    }
+
+    .imagesContainer{
+        margin-top: 30px;
+        height: 120px;
+        flex-direction: row;
+        width: max-content;
+        overflow-x: scroll;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .smallImageParent{
+        width: 20%;
+        height: 100%;
+    }
+
+    .productDetailSection{
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .detailSectionHalf{
         width: 100%;
     }
 }

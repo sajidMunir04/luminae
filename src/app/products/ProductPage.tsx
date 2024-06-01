@@ -221,7 +221,7 @@ function ProductPage(props : Props) {
                 <button className={`${styles.detailSectionButton} ${infoSection === InfoSection.Description && styles.detailSectionButtonActive}`} onClick={setDescriptionSectionInfo} type='button'>PRODUCT DETAILS</button>
                 <button className={`${styles.detailSectionButton} ${infoSection === InfoSection.Reviews && styles.detailSectionButtonActive}`} onClick={setReviewsSectionInfo} type='button'>REVIEWS</button>
             </div>
-            {infoSection === InfoSection.Description && <div>
+            {infoSection === InfoSection.Description &&
                 <div className={styles.productDetailSection}>
                 <div className={styles.detailSectionHalf}>
                     <div>
@@ -273,7 +273,6 @@ function ProductPage(props : Props) {
                             </li>
                         </ul>
                     </div>
-                </div>
                 </div>
             </div>}
             {infoSection === InfoSection.Reviews && <div>

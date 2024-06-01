@@ -170,13 +170,18 @@
 
 @media (max-width: 700px) {
     .container{
-        height: 240px;
+        height: max-content;
         width: 100%;
         align-items: center;
         position: relative;
         flex-direction: column;
         justify-content: center;
     }
+
+    .categoriesContainer{
+        width: 100%;
+    }
+
     .form{
         order: 4;
         width: 88%;

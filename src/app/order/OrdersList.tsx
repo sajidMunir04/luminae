@@ -53,13 +53,12 @@ function OrdersList() {
     },[])
 
     const handleClick = (index : number) => {
-        console.log(orders[index].orderId);
         router.push(`/viewOrder/${orders[index].orderId}`);
     }
 
     return (<div className={styles.container}>
         <h1 className={styles.sectionHeading}>Your Orders</h1>
-        { hasOrders && orders.map((order,index) => (<div className={styles.orderItem}>
+        { hasOrders && orders.map((order,index) => (<div className={styles.orderItem} key={order.orderId}>
                         <div>
                             <p>{"Order No. " + (index + 1)}</p>
                             <p>{order.orderDate}</p>

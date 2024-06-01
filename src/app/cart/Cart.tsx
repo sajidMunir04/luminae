@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { OrderedProduct } from "./OrderedProduct";
 import { useGetCurrentDate } from "../lib/hooks/useGetCurrentDate";
 import { getCookie, setCookie } from "cookies-next";
-import { ordersCookie } from "../lib/constants";
+import { orderFormCookie, ordersCookie } from "../lib/constants";
 import { useStoreCustomer } from "../lib/hooks/useStoreCustomer";
 
 
@@ -80,7 +80,7 @@ function Cart() {
             customerId: "userId as string"
         }
 
-        setCookie('order',orderFormData);
+        setCookie(orderFormCookie,orderFormData);
 
         const order = await fetch('api/postOrder',{
             method: "POST",
@@ -110,6 +110,7 @@ function Cart() {
             orders = orders + ',' + data.id;
         else
             orders = data.id as string;
+
         setCookie(ordersCookie,orders);
 
         await setOrderData(useGetDefaultOrderData());

@@ -23,12 +23,12 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-      const setView = () => {
+      const useSetView = () => {
           const viewData = useExtractQueryParams(getCookie('dashboardView') !== undefined ? getCookie('dashboardView') as string : pathName as string);
           handleDashboardViewChange(viewData.view as number);
       }
 
-      setTimeout(setView,500);
+      setTimeout(useSetView,500);
   },[])
 
   return (<div className={styles.container}>

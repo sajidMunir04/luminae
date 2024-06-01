@@ -59,7 +59,7 @@ function Search() {
 
     return (<>
       <Head>
-        <title>Search "{Search}"</title>
+        <title>Search {`"${Search}"`}</title>
       </Head>
       <HeaderTemplate/>
       {products.length > 0 && <ProductsBrowser products={products} productSection={""} productCategory={""}/>}

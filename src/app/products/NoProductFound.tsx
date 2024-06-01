@@ -10,7 +10,7 @@ function NoProductFound(props : Props) {
             <img src="/images/product/notfound.png"/>
         </div>
         <div>
-            <p>No results were found for searching "{props.searchTerm}".</p>
+            <p>No results were found for searching {props.searchTerm}.</p>
             <div>
                 <div>
                     <img src="/images/product/error.svg"/>

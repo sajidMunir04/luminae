@@ -64,15 +64,15 @@ function FavoritesSection() {
 
         fetchData();
 
-    },[])
+    },[favoritesProductData.length])
 
     return (<div className={styles.container}>
             <div className={styles.contentContainer}>
-                {products?.map((item) => <ProductDisplayCard product={item} onClick={() => handleClick(item)} 
+                {products?.map((item) => <ProductDisplayCard product={item} key={item._id} onClick={() => handleClick(item)} 
                 onRemoveFromFavorites={removeProductFromFavorites}/>)}
             </div>
             {(productsLoadStatus && products === null) && <div className={styles.emptySection}>
-                <h3>You didn't add any products to favorites.</h3>
+                <h3>You didnt add any products to favorites.</h3>
             </div>}
     </div>);
 }

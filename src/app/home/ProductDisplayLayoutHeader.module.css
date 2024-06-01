@@ -14,14 +14,15 @@
 }
 
 .headingText{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: max-content;
+    font-family: RobotoSlab-SemiBold;
     margin: 0%;
     margin-left: 2%;
 }
 
 .link {
     color: #262626;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: RobotoSlab-Medium;
     font-size: 16px;
     text-decoration: none;
 }

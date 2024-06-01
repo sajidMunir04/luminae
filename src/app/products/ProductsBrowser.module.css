@@ -163,4 +163,13 @@
         position: absolute;
         display: none;
     }
+
+    .pageControls{
+        width: 100%;
+    }
+
+    .productsContainer{
+        width: 100%;
+        flex-direction: column;
+    }
 }
