@@ -10,7 +10,6 @@ import { CartProduct } from "./CartProduct";
 import OrderConfirmation from "./OrderConfirmation";
 import axios from "axios";
 import { OrderFormData, ProductOrderDetail } from "./OrderFormData";
-import { error } from "console";
 import { useRouter } from "next/router";
 import { OrderedProduct } from "./OrderedProduct";
 import { useGetCurrentDate } from "../lib/hooks/useGetCurrentDate";

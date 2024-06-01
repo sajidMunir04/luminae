@@ -13,7 +13,7 @@ interface Props {
 function OrderComplete(props : Props) {
 
     const orderDataRaw = getCookie(orderFormCookie);
-    const orderData : OrderFormData = JSON.parse(orderDataRaw as string);
+    const orderData : OrderFormData = orderDataRaw !== undefined ? JSON.parse(orderDataRaw as string) : "";
 
     return (<div className={styles.container}>
         <h1>Thanks for your Order</h1>
