@@ -1,4 +1,4 @@
-import { Db, MongoClient, ObjectId, WithId } from 'mongodb';
+import { Db, MongoClient, ObjectId } from 'mongodb';
 import { ProductInventoryUpdate } from '@/app/dashboard/InventoryUpdater';
 
 export default async function handler(req, res) {

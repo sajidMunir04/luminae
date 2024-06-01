@@ -1,5 +1,4 @@
 import { Db, MongoClient, ObjectId } from 'mongodb';
-import { Product } from '../../src/app/utils/Product';
 import mongoose from 'mongoose';
 
 export default async function handler(req, res) {

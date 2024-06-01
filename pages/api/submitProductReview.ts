@@ -1,5 +1,5 @@
 import { ProductReviewData } from '@/app/products/ProductReviewData';
-import { Db, MongoClient, ObjectId, WithId } from 'mongodb';
+import { Db, MongoClient } from 'mongodb';
 import {ProductReview} from "../../src/model/ProductReview.mjs"
 
 export default async function handler(req, res) {

@@ -1,6 +1,5 @@
 import { OrderedProduct } from '@/app/cart/OrderedProduct';
 import { Db, MongoClient, ObjectId, WithId } from 'mongodb';
-import { inventoryData } from '../../databaseutilities/producttypes.mjs';
 
 export default async function handler(req, res) {
   console.log(req.body);

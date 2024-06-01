@@ -1,6 +1,4 @@
-import { Db, MongoClient, ObjectId, WithId } from 'mongodb';
-import mongoose from 'mongoose';
-
+import { Db, MongoClient, ObjectId  } from 'mongodb';
 export default async function handler(req, res) {
   console.log(req.body);
   const productId : string = req.body;

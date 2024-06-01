@@ -1,5 +1,4 @@
 import { Db, MongoClient } from 'mongodb';
-import { Product } from '../../../src/app/utils/Product';
 
 export default async function handler(req, res) {
   const { slug } = req.query;

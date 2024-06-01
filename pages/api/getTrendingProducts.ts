@@ -1,5 +1,4 @@
-import { Db, MongoClient, ObjectId } from 'mongodb';
-import mongoose from 'mongoose';
+import { Db, MongoClient } from 'mongodb';
 
 export default async function handler(req, res) {
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);

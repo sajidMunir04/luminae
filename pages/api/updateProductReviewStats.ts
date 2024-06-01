@@ -1,7 +1,5 @@
-import { OrderedProduct } from '@/app/cart/OrderedProduct';
-import { ProductReviewData } from '@/app/products/ProductReviewData';
-import { Db, MongoClient, ObjectId, WithId } from 'mongodb';
-import mongoose from 'mongoose';
+import { Db, MongoClient, ObjectId } from 'mongodb';
+
 
 export default async function handler(req, res) {
   const updateData : Record< string, string | number> = await JSON.parse(req.body);

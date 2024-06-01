@@ -7,11 +7,5 @@ export default async function handler(req, res) {
 	const collection = await db.collection('users');
 	const userId = await req.body;
 	const data = await collection.findOne({'_id' : userId});
-
-	if (data !== null) {
-        res.status(200).send({json: data});
-    }
-    else {
-        res.status(200).send(null);
-    }
+	res.status(200).send({'userData': data});
 }
