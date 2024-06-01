@@ -1,3 +1,5 @@
+"use client";
+
 import { Product } from "@/app/utils/Product";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
