@@ -74,4 +74,10 @@ What is the potential scalability of this project ?
 
 1- The backend is serverless, so it's definitely scalable. The database design is versatile for expansion, however on the front-end, it would be a bottle-neck if I try to expand this, like for example the current two main product sections are MAN and WOMAN, which are included in the header component for now, so if I wanted to add Kids product section,then maybe it would be fine and I can include that, however,if I was to include more sections like Kitchen, Home, and Electronices then I would have to redo the whole design for the header component and categories display component.
 
-How did the overall progress go, any references ?
+How did the overall progress go, any references ?![Screenshot 2024-05-26 204710](https://github.com/stuckrabbit/luminae/assets/165798996/17685113-b098-46bb-865f-54d786e491ca)
+![Screenshot 2024-05-28 163821](https://github.com/stuckrabbit/luminae/assets/165798996/24f2f748-3389-44b5-8bb1-f9cc8e165042)
+![Screenshot 2024-05-27 085110](https://github.com/stuckrabbit/luminae/assets/165798996/a7ee0ed2-b50a-48b9-a319-6c9370a0d5e3)
+![Screenshot 2024-05-27 081229](https://github.com/stuckrabbit/luminae/assets/165798996/b7836179-57af-4081-8793-4cf190505f05)
+![Screenshot 2024-05-26 204747](https://github.com/stuckrabbit/luminae/assets/165798996/b0735924-5cdd-40ec-bfc8-6a800277aa28)
+![Screenshot 2024-05-26 204732](https://github.com/stuckrabbit/luminae/assets/165798996/51c5a381-99b7-49e3-8494-cbe3b9e15c97)
+
