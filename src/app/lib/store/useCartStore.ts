@@ -87,7 +87,7 @@ export const useCartStore = create<State & Actions>((set,get) => ({
 
         const productInCart = storedProducts.productsInfo.find((item) => item.id  === product._id);
 
-        if (productInCart)
+        if (productInCart && productInCart.size === productSize)
         {
             productInCart.quantity = productInCart.quantity + 1;
         }

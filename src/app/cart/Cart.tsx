@@ -195,12 +195,18 @@ function Cart() {
                 
                 const cartProducts : CartProduct[] = []; 
                 products.map((item,index) => {
-                    const cartProduct : CartProduct = {
-                        product: item,
-                        quantity: cartData.productsInfo[index].quantity > 0 ? cartData.productsInfo[index].quantity : 1,
-                        size: cartData.productsInfo[index].size
+
+                    for (let i = 0; i < cartData.productsInfo.length; i++) {
+                        if (cartData.productsInfo[i].id === item._id) {
+                            const cartProduct : CartProduct = {
+                                product: item,
+                                quantity: cartData.productsInfo[i].quantity > 0 ? cartData.productsInfo[i].quantity : 1,
+                                size: cartData.productsInfo[i].size
+                            }
+        
+                            cartProducts.push(cartProduct);
+                        }
                     }
-                cartProducts.push(cartProduct);
             });
             setProducts(cartProducts);
             isProductDataFetched = true;

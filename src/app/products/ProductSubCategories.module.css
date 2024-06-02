@@ -11,11 +11,12 @@
     flex-wrap: wrap;
     width: 360px;
     height: 280px;
-    background-color: rgb(217, 217, 217);
+    background-color: rgb(235, 235, 235);
     border-radius: 8px;
     padding: 6% 8%;
     top: 100%;
     left: 0%;
+    z-index: 1;
 }
 
 .categoryButton{

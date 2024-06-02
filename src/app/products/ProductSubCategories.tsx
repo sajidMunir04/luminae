@@ -3,7 +3,7 @@ import { useState } from "react";
 import {motion} from "framer-motion";
 import { setCookie } from "cookies-next";
 import { baseURL, routerQueryForProductPagination } from "../lib/constants";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 
 interface Props{
@@ -14,8 +14,6 @@ interface Props{
 
 function ProductSubCatergories(props : Props)
 { 
-    const router = useRouter();
-
     const handleCategoryClick = (category) => {
         setCookie(routerQueryForProductPagination, undefined);
         //router.push(category);

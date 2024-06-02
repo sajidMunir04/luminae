@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     const db : Db = client.db('Products');
     const collection = db.collection('products');
     const data = await collection.aggregate([
-      {
+      { 
         $match: {
           _id: { $in: allProductsId }
         }
