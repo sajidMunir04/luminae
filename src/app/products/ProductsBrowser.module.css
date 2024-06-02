@@ -82,8 +82,7 @@
 }
 
 .paginationButtonActive{
-    border:  2px solid black;
-    border-radius: 50px;
+    color: gray;
 }
 
 .extraButtonsArea{

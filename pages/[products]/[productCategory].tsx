@@ -8,10 +8,23 @@ import '../../src/app/fonts.css';
 import { Product } from "../../src/app/utils/Product";
 import '../../src/app/globals.css';
 import Head from "next/head";
+import { getCookie } from "cookies-next";
+import { productCategoryCookie } from "@/app/lib/constants";
 
 function ProductCategory(){
     const router = useRouter();
-    const { products , ProductCategory } = router.query;
+    let { products , ProductCategory } = router.query;
+
+    if (router.query === undefined || products === undefined || ProductCategory === undefined){
+      const storedQuery = getCookie(productCategoryCookie);
+      
+      if (storedQuery !== undefined && storedQuery !== null) {
+          const queryParts = storedQuery.split('/');
+          products = queryParts[0];
+          ProductCategory = queryParts[1];
+      } 
+    }
+
     const [allProducts,setProducts] = useState<Product[]>([]);
     let allProductSections : ProductSection[] = [];
     useEffect(

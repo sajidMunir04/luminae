@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./SearchResults.module.css";
 import { setCookie } from "cookies-next";
+import { baseURL } from "../lib/constants";
 
 export interface SearchResult {
     _id: string,
@@ -21,7 +22,7 @@ function SearchResults(props : Props) {
 
     return (<div className={styles.container}>
         {props?.searchResults.map((item) => (
-            <a className={styles.searchResult} onClick={() => handleClick(item._id)} key={item.productName + Math.random()} href={`/item/${item._id}`}>
+            <a className={styles.searchResult} onClick={() => handleClick(item._id)} key={item.productName + Math.random()} href={`${baseURL}/item/${item._id}`}>
                 <div className={styles.imageContainer}>
                     <Image className={styles.image} src={item.images[0]} alt={"product image"} width={'60'} height={'100'}/>
                 </div>

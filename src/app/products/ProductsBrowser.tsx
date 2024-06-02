@@ -247,7 +247,7 @@ function ProductsBrowser(props : Props)
                 </a>
                 <div className={styles.buttonsContainer}>
                 {products.map((item,index) => (
-                    ((index % itemsPerPage === 0 && index < props.products.length - itemsPerPage) && <a key={'aasd'+index} href="#"
+                    ((index % itemsPerPage === 0 && index < props.products.length - itemsPerPage && (index / itemsPerPage) < 3 + currentPage && (index / itemsPerPage) > currentPage - 3) && <a key={'aasd'+index} href="#"
                     className={`${styles.paginationButton} ${currentPage == ((index / itemsPerPage) + 1) && styles.paginationButtonActive}`} onClick={() => {
                         handlePageChange((index / itemsPerPage) + 1);
                     }}>{(index / itemsPerPage) + 1}</a>

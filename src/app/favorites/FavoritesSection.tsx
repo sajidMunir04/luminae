@@ -6,6 +6,7 @@ import styles from "./FavoritesSection.module.css";
 import ProductDisplayCard from "../products/ProductDisplayCard";
 import { useFavoritesStore } from "../lib/store/useFavoritesStore";
 import { useRouter } from "next/navigation";
+import { baseURL } from "../lib/constants";
 
 function FavoritesSection() {
     const favoritesProductData = useFavoritesStore(state => state.fetchData());
@@ -22,7 +23,7 @@ function FavoritesSection() {
 
     const handleClick = (product : Product) => {
         const productId = product._id;
-          router.push('http://localhost:3000' + '/item/' + productId);
+          router.push(baseURL + '/item/' + productId);
     }
 
     useEffect(() => {
@@ -55,11 +56,12 @@ function FavoritesSection() {
             });
                 console.log(products);
                 setProducts(products);
-                setProductsLoadStatus(true);
             }
             catch (error) {
                 console.log(error);
             }
+
+            setProductsLoadStatus(true);
         }
 
         fetchData();
@@ -68,12 +70,15 @@ function FavoritesSection() {
 
     return (<div className={styles.container}>
             <div className={styles.contentContainer}>
+                {!productsLoadStatus && <div className={styles.emptySection}>
+                    <h3 className={styles.infoText}>Fetching Product...</h3>
+                </div>}
                 {products?.map((item) => <ProductDisplayCard product={item} key={item._id} onClick={() => handleClick(item)} 
                 onRemoveFromFavorites={removeProductFromFavorites}/>)}
-            </div>
-            {(productsLoadStatus && products === null) && <div className={styles.emptySection}>
-                <h3>You didnt add any products to favorites.</h3>
+                {(productsLoadStatus && products === undefined) && <div className={styles.emptySection}>
+                <h3 className={styles.infoText}>You didnt add any products to favorites.</h3>
             </div>}
+            </div>
     </div>);
 }
 

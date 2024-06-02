@@ -26,3 +26,9 @@
     width: 100%;
     text-align: center;
 }
+
+.infoText{
+    margin-top: 14%;
+    font-family: RobotoSlab-SemiBold;
+    font-size: 32px;
+}

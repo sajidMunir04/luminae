@@ -2,7 +2,7 @@ import styles from "./ProductSubCategories.module.css";
 import { useState } from "react";
 import {motion} from "framer-motion";
 import { setCookie } from "cookies-next";
-import { baseURL, routerQueryForProductPagination } from "../lib/constants";
+import { baseURL, productCategoryCookie, routerQueryForProductPagination } from "../lib/constants";
 import { usePathname, useRouter } from "next/navigation";
 
 
@@ -16,6 +16,7 @@ function ProductSubCatergories(props : Props)
 { 
     const handleCategoryClick = (category) => {
         setCookie(routerQueryForProductPagination, undefined);
+        setCookie(productCategoryCookie,category);
         //router.push(category);
       };
     
@@ -24,7 +25,7 @@ function ProductSubCatergories(props : Props)
     return (<div onMouseEnter={() => setHoverState(true)} onTouchStart={() => setHoverState(true)} className={styles.container}><motion.p className={styles.categoryButton} whileHover={{scale: 1.5}}>{props.mainCategory}</motion.p>
         {isHovered && <motion.div  initial={{scaleX: 0}} whileInView={{scaleX: 1}} onMouseEnter={() => setHoverState(true)} onTouchStart={() => setHoverState(true)} onMouseLeave={() => setHoverState(false)} onTouchCancel={() => setHoverState(false)} className={styles.subCategoriescontainer}>
             {props.categories.map((item) => (
-                <motion.a className={styles.categoryLink} whileHover={{scale: 1.05}} onClick={()=>{handleCategoryClick(baseURL + '/' + props.mainCategory + '/' + item)}} 
+                <motion.a className={styles.categoryLink} whileHover={{scale: 1.05}} onClick={()=>{handleCategoryClick(props.mainCategory + '/' + item)}} 
                 key={item} href={baseURL + '/' + props.mainCategory + '/' + item}>{item}</motion.a>
             ))}
         </motion.div>}
