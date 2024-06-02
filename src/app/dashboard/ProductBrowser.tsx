@@ -8,7 +8,8 @@ import styles from "./ProductBrowser.module.css";
 interface Props {
     products: string,
     productCategory: string,
-    openInventory: (arg : Product | undefined) => void
+    openInventory: (arg : Product | undefined) => void,
+    openPriceUpdate: (arg: Product | undefined) => void
 }
 
 function ProductBrowser(props : Props) {
@@ -75,7 +76,8 @@ function ProductBrowser(props : Props) {
     return (<div className={styles.container}>
         {isInventoryUpdating}
         {allProducts.map((product) => (
-            <ProductCard key={product._id} product={product} onRemoveClick={deleteProductFromDatabase} onOpenInventory={props.openInventory}/>
+            <ProductCard key={product._id} product={product} onRemoveClick={deleteProductFromDatabase} onOpenInventory={props.openInventory} 
+            onOpenPriceUpdate={props.openPriceUpdate}/>
         ))}
     </div>);
 }

@@ -1,0 +1,55 @@
+.container{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    background-color: white;
+    display: flex;
+}
+
+.closeButton{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0%;
+    right: 0%;
+    border-radius: 50px;
+    display: flex;
+}
+
+.setPriceInputLabel{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 6%;
+}
+
+.closeBtnText{
+    cursor: pointer;
+    margin: auto;
+    font-size: 28;
+}
+
+.subContainer{
+    margin: auto;
+    width: 80%;
+    height: max-content;
+    text-align: center;
+}
+
+.inventoryUpdateContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sizeText{
+
+}
+
+.inputText{
+
+}

@@ -4,13 +4,15 @@ import ProductBrowser from "./ProductBrowser";
 import styles from "./ProductManager.module.css";
 import InventoryUpdater from "./InventoryUpdater";
 import { Product } from "../utils/Product";
+import PriceUpdater from "./PriceUpdater";
 
 function ProductsManager() {
 
     const [isCategorySelected,setCategorySelectStatus] = useState(true);
     const [selectedSection, setSelectedSection] = useState<string[]>([]);
-    const [isUpdatingInventory,setInventoryUpdateStatus] = useState(true);
-    const [inventoryProduct,setInventoryProduct] = useState<Product | undefined>();
+    const [isUpdatingInventory,setInventoryUpdateStatus] = useState(false);
+    const [isUpdatingPrice, setPriceUpdateStatus] = useState(false);
+    const [selectedProduct,setSelectedProduct] = useState<Product | undefined>();
 
     let allProductSections : ProductSection[] = [];
     const empty : ProductSection[] = [{
@@ -69,12 +71,22 @@ function ProductsManager() {
 
     const openInventoryManagement = (product: Product) => {
         setInventoryUpdateStatus(true);
-        setInventoryProduct(product);
+        setSelectedProduct(product);
+    }
+
+    const openPriceUpdateSection = (product : Product) => {
+        setSelectedProduct(product);
+        setPriceUpdateStatus(true);
+    }
+
+    const closePriceUpdateSection = () => {
+        setPriceUpdateStatus(false);
+        setSelectedProduct(undefined);
     }
 
     const closeInventoryManagement = () => {
         setInventoryUpdateStatus(false);
-        setInventoryProduct(undefined);
+        setSelectedProduct(undefined);
     }
 
     return (<div className={styles.container}>
@@ -88,10 +100,11 @@ function ProductsManager() {
             </div>)}
             </div>
             <div className={styles.dataSection}>
-            {isCategorySelected && <ProductBrowser products={selectedSection[0]} 
-            productCategory={selectedSection[1]} openInventory={openInventoryManagement}/>}
+            {isCategorySelected && <ProductBrowser products={selectedSection[0]}
+            productCategory={selectedSection[1]} openInventory={openInventoryManagement} openPriceUpdate={openPriceUpdateSection}/>}
             </div> 
-            {(isUpdatingInventory && inventoryProduct !== undefined) && <InventoryUpdater product={inventoryProduct!} onCloseButton={closeInventoryManagement}/>}      
+            {(isUpdatingInventory && selectedProduct !== undefined) && <InventoryUpdater product={selectedProduct!} onCloseButton={closeInventoryManagement}/>}      
+            {(isUpdatingPrice && selectedProduct !== undefined) && <PriceUpdater product={selectedProduct} onCloseButton={closePriceUpdateSection}/>}
     </div>);
 }
 

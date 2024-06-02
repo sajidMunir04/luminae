@@ -58,6 +58,10 @@
     font-size: 18px;
 }
 
+.selectedButton{
+    background-color: blueviolet;
+}
+
 .infoContainer{
     width: 100%;
     height: max-content;

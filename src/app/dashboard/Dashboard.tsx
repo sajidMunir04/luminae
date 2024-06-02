@@ -37,9 +37,9 @@ export default function Dashboard() {
           <a className={styles.goToStoreLink} href="/"><img src="/images/common/logo2.png"/></a>
         </div>
         <div className={styles.buttonsContainer}>
-          <p className={styles.button} onClick={() => {handleDashboardViewChange(DashboardView.Orders)}}>Orders</p>
-          <p className={styles.button} onClick={() => {handleDashboardViewChange(DashboardView.Products)}}>Products</p>
-          <p className={styles.button} onClick={() => {handleDashboardViewChange(DashboardView.AddProdut)}}>Add Product</p>
+          <p className={`${styles.button} ${dashboardView === DashboardView.Orders && styles.selectedButton}`} onClick={() => {handleDashboardViewChange(DashboardView.Orders)}}>Orders</p>
+          <p className={`${styles.button} ${dashboardView === DashboardView.Products && styles.selectedButton }`} onClick={() => {handleDashboardViewChange(DashboardView.Products)}}>Products</p>
+          <p className={`${styles.button} ${dashboardView === DashboardView.AddProduct  && styles.selectedButton}`} onClick={() => {handleDashboardViewChange(DashboardView.AddProduct)}}>Add Product</p>
         </div>
     </div>
     <div className={styles.contentSection}>
@@ -47,7 +47,7 @@ export default function Dashboard() {
       </div>
       <div className={styles.infoContainer}>
         {dashboardView === DashboardView.Orders && <Orders/>}
-        {dashboardView === DashboardView.AddProdut && <AddProduct/>}
+        {dashboardView === DashboardView.AddProduct && <AddProduct/>}
         {dashboardView === DashboardView.Products && <ProductsManager/>}
       </div>
     </div>
@@ -58,5 +58,5 @@ enum DashboardView{
   Dashboard,
   Orders,
   Products,
-  AddProdut
+  AddProduct
 }
