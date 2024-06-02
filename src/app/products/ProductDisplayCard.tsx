@@ -34,7 +34,6 @@ function ProductDisplayCard(props : Props)
             setFavoriteStatus(true);
         }
         else{
-            console.log(props.product._id);
             removeFromFavorites(props.product);
             setFavoriteStatus(false);
             props.onRemoveFromFavorites?.(props.product);
@@ -68,7 +67,7 @@ function ProductDisplayCard(props : Props)
                     </div>
                     <div className={styles.priceSection}>
                         <p className={styles.price}>${Math.round(props.product.price)}</p>
-                        {true && <p className={styles.previousPrice}>${props.product.previousPrice}</p>}
+                        {props.product.discount > 0 && <p className={styles.previousPrice}>${props.product.previousPrice.toFixed(2)}</p>}
                         {(props.product.discount > 0) && <p className={styles.discountText}>-{props.product.discount.toFixed(0)}%</p>}
                     </div>
                     </div>

@@ -71,7 +71,6 @@ function FavoritesSection() {
     return (<div className={styles.container}>
             <div className={styles.contentContainer}>
                 {!productsLoadStatus && <div className={styles.emptySection}>
-                    <h3 className={styles.infoText}>Fetching Product...</h3>
                 </div>}
                 {products?.map((item) => <ProductDisplayCard product={item} key={item._id} onClick={() => handleClick(item)} 
                 onRemoveFromFavorites={removeProductFromFavorites}/>)}
