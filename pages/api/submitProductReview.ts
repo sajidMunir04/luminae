@@ -3,7 +3,6 @@ import { Db, MongoClient } from 'mongodb';
 import {ProductReview} from "../../src/model/ProductReview.mjs"
 
 export default async function handler(req, res) {
-  console.log(req.body);
   const productReview: ProductReviewData = await JSON.parse(req.body);
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {

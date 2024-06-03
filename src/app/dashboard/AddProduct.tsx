@@ -87,10 +87,9 @@ function AddProduct() {
                 body: JSON.stringify(product)
             })
             const data = await response.json();
-            console.log(data);
 
             if (data.data.acknowledged) {
-                router.refresh();
+                alert(`Product Added with id${data.data.insertedId}`);
             }
         }
 

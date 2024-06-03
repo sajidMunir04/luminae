@@ -2,9 +2,7 @@ import { OrderedProduct } from '@/app/cart/OrderedProduct';
 import { Db, MongoClient, ObjectId, WithId } from 'mongodb';
 
 export default async function handler(req, res) {
-  console.log(req.body);
   const products: OrderedProduct[] = await JSON.parse(req.body);
-  console.log(products);
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {
     await client.connect();

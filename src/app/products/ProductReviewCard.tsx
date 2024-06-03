@@ -17,14 +17,16 @@ function ProductReviewCard(props : Props) {
     const [likesCount,setLikesCount] = useState(props.likeCount);
     const [dislikesCount,setDislikesCount] = useState(props.dislikeCount);
 
+    
+
     const handleLike = () => {
         setLikesCount(likesCount + 1);
-        updateDatabase();
+        setTimeout(updateDatabase,1100);
     }
 
     const handleDisLike = () => {
         setDislikesCount(dislikesCount + 1);
-        updateDatabase();
+        setTimeout(updateDatabase,1100);
     }
 
 

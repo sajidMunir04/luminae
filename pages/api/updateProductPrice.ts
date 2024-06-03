@@ -1,7 +1,6 @@
 import { Db, MongoClient, ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
-  console.log(req.body);
   const productUpdate : Record<string,string | number> = await JSON.parse(req.body);
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {

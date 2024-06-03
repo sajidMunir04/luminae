@@ -5,7 +5,6 @@ export default async function handler(req, res) {
   const productPage = req.body;
   const requiedProductId = new mongoose.Types.ObjectId(productPage)._id;
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
-  console.log(req.body);
   try {
     await client.connect();
     const db : Db = client.db('Products');

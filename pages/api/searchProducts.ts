@@ -2,7 +2,6 @@ import { Db, MongoClient } from 'mongodb';
 
 export default async function handler(req, res) {
   const search = req.body;
-  console.log(search);
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {
     await client.connect();

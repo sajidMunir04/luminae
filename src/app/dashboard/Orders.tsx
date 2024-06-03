@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { OrderFormData } from "../cart/OrderFormData";
 import styles from "./Orders.module.css";
 import { string } from "zod";
+import { baseURL } from "../lib/constants";
 
 
 function Orders() {
@@ -69,7 +70,7 @@ function Orders() {
                         <td className={styles.totalProductsSection}>{item.products?.length}</td>
                         <td className={styles.contactNumberSection}>{item.customerPhone}</td>
                         <td className={styles.emailSection}>{item.customerEmail}</td>
-                        <td className={styles.viewOrderSection}><a href={`admin/viewOrder/${item.orderId}`}>View Order</a></td>
+                        <td className={styles.viewOrderSection}><a href={baseURL + `admin/viewOrder/${item.orderId}`}>View Order</a></td>
                     </tr>
                 ))
             }

@@ -1,7 +1,6 @@
 import { Db, MongoClient, ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
-  console.log(req.query);
   const { slug } = req.query;
   const productsId = slug;
   let allProductsId : ObjectId[] = productsId.split(',');

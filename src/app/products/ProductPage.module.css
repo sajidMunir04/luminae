@@ -450,6 +450,7 @@
         flex-direction: column-reverse;
         padding: 0% 3%;
         box-sizing: border-box;
+        width: 30%;
     }
 
     .reviewMajorInfoContainer{

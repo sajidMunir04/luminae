@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 
 export default async function handler(req, res) {
   const { slug } = req.query;
-  console.log(req.query);
   const productsId = slug;
   let allProductsId : ObjectId[] = productsId.split(',');
   const filteredIds = allProductsId.filter((item) => item !== null);

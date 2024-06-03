@@ -1,6 +1,5 @@
 import { Db, MongoClient, ObjectId  } from 'mongodb';
 export default async function handler(req, res) {
-  console.log(req.body);
   const productId : string = req.body;
   const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
   try {

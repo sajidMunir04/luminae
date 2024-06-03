@@ -3,6 +3,7 @@ import { Product } from "../utils/Product";
 import styles from "./Pagination.module.css";
 import { useRouter } from "next/router";
 import { setCookie } from "cookies-next";
+import { baseURL } from "../lib/constants";
 
 interface Props {
     itemsPerPage: number,
@@ -20,7 +21,7 @@ function Pagination(props : Props) {
     const handleClick = (product : Product) => {
         setCookie('productPageId',product._id);
         const productId = product._id;
-          router.push('http://localhost:3000' + '/item/' + productId);
+          router.push(baseURL + '/item/' + productId);
     }
 
     return (<div className={styles.container}>
