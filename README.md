@@ -58,8 +58,8 @@ The main features are:
 ### - For Admins:
 
 (Please use these credentials to sign in as admin)
-###### admin@root.com
-###### root
+###### email:    admin@root.com
+###### password: root
 
 1- Can view specific recent orders.
 2- Can add a new product to database.
