@@ -5,9 +5,12 @@ import styles from "./ProductManager.module.css";
 import InventoryUpdater from "./InventoryUpdater";
 import { Product } from "../utils/Product";
 import PriceUpdater from "./PriceUpdater";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
 
 function ProductsManager() {
-
+    const [isProductBeingUpdated,setProductUpdateStatus] = useState(false);
     const [isCategorySelected,setCategorySelectStatus] = useState(true);
     const [selectedSection, setSelectedSection] = useState<string[]>([]);
     const [isUpdatingInventory,setInventoryUpdateStatus] = useState(false);
@@ -100,6 +103,12 @@ function ProductsManager() {
             </div>)}
             </div>
             <div className={styles.dataSection}>
+                {isProductBeingUpdated && <div className={styles.progressContainer}>
+            <p className={styles.progressText}>Adding Product to Database</p>
+                <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
+                    <CircularProgress color='secondary'/>
+                </Box>
+        </div>}
             {isCategorySelected && <ProductBrowser products={selectedSection[0]}
             productCategory={selectedSection[1]} openInventory={openInventoryManagement} openPriceUpdate={openPriceUpdateSection}/>}
             </div> 

@@ -4,7 +4,8 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import styles from "./AddProduct.module.css";
 import { CldUploadWidget, CloudinaryUploadWidgetInfo } from 'next-cloudinary';
 import { HexColorPicker } from "react-colorful";
-import { useRouter } from "next/navigation";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 
 export interface ProductToAdd {
@@ -27,8 +28,7 @@ export interface ProductToAdd {
 
 function AddProduct() {
     
-    const router = useRouter();
-
+    const [isProductAdded,setProductStatus] = useState(false);
     const [images,setImages] = useState<string[]>([]);
     const [imagesCount,setImagesCount] = useState(0);
 
@@ -78,6 +78,8 @@ function AddProduct() {
             productModel: productModel
         }
 
+        setProductStatus(true);
+
         const uploadProductToDatabase = async() => {
 
             setFormStatus(true);
@@ -90,6 +92,7 @@ function AddProduct() {
 
             if (data.data.acknowledged) {
                 alert(`Product Added with id${data.data.insertedId}`);
+                setProductStatus(false);
             }
         }
 
@@ -238,6 +241,14 @@ function AddProduct() {
         </div>
         <button className={styles.addProductButton} type='submit'>Add Product</button>
     </form>
+    {
+        isProductAdded && <div className={styles.progressContainer}>
+            <p className={styles.progressText}>Adding Product to Database</p>
+                <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
+                    <CircularProgress color='secondary'/>
+                </Box>
+        </div>
+    }
     </>);
 }
 

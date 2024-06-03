@@ -16,9 +16,13 @@ import { useGetCurrentDate } from "../lib/hooks/useGetCurrentDate";
 import { getCookie, setCookie } from "cookies-next";
 import { orderFormCookie, ordersCookie } from "../lib/constants";
 import { useStoreCustomer } from "../lib/hooks/useStoreCustomer";
+import * as React from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 
 function Cart() {
+    const [productsFetched,setProductFetchStatus] = useState(false);
     const cartData = useCartStore(state => state.fetchData());
     const [orderTotal,setOrderTotal] = useState(0);
     const [isOrderInfoComplete,setOrderCompleteStatus] = useState(false);
@@ -117,8 +121,6 @@ function Cart() {
         router.push('/orderComplete/' + data.id);
     }
 
-    let isProductDataFetched : boolean = false;
-
     const calculatePricing = async () => {
         const totalPrices = await orderData.cartProducts.map((item) => item.product.price * item.quantity);
         const totalPrice = await totalPrices.reduce((acc,el) => (acc + el),0);
@@ -209,7 +211,6 @@ function Cart() {
                     }
             });
             setProducts(cartProducts);
-            isProductDataFetched = true;
             const newOrderData : OrderData = orderData;
             newOrderData.cartProducts = cartProducts;
             setOrderData(newOrderData);
@@ -217,6 +218,8 @@ function Cart() {
             catch (error) {
                 console.log(error);
             }
+
+            setProductFetchStatus(true);
         }
 
         fetchData();
@@ -225,6 +228,10 @@ function Cart() {
 
     return (<div className={styles.container}>
         {orderPlaced && <div className={styles.progressContainer}>
+            <p className={styles.progressText}>We are processing your order</p>
+        <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
+            <CircularProgress />
+        </Box>
         </div>}
         <div className={styles.navigationSection}>
             <p onClick={() => setCartState(CartState.Cart)} className={`${styles.navElement} ${cartState === CartState.Cart && styles.navElementSelected}`}>Cart</p>
@@ -237,11 +244,14 @@ function Cart() {
             {cartState === CartState.Cart && <>
             <div className={styles.productsContainer}>
             <div>
+            {!productsFetched  && <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
+            <CircularProgress color='secondary'/>
+        </Box>}
+                {
+                    (productsFetched && orderData.cartProducts.length === 0) && <h2>You don{'\''}t have any products in the cart.</h2> 
+                }
                 {orderData.cartProducts.map((item) => <CartItem key={item.product._id} product={item.product} quantity={item.quantity}
                 onProductRemove={() => removeProductFromCart(item.product)} onProductQuantityChange={onProductQuantityChange} size={item.size}/>)}
-                {
-                    (orderData.cartProducts.length === 0) && <h2>You don{'\''}t have any products in the cart.</h2> 
-                }
             </div>
             </div>
             </>}
@@ -278,7 +288,8 @@ function Cart() {
                 <button onClick={isOrderInfoComplete ? usePlaceOrder : () => {}} aria-disabled={orderPlaced} className={`${styles.checkoutButton} ${isOrderInfoComplete && styles.checkoutButtonActive}`}>{!isOrderInfoComplete && <img className={styles.btnImage} src="/images/product/checkOut.svg"/>}CHECKOUT</button>
             </div>
         </div>
-    </div>);
+    </div>
+    );
 }
 
 enum CartState{
