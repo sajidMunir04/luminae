@@ -4,11 +4,15 @@ import { getCookie } from "cookies-next"
 import { OrderFormData } from "../cart/OrderFormData";
 import styles from "./OrdersList.module.css";
 import { useRouter } from "next/navigation";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
 
 function OrdersList() {
     const router = useRouter();
     const [orders,setOrders] = useState<OrderFormData[]>([]);
     const [hasOrders,setOrderStatus] = useState(true);
+    const [dataFetched,setDataStatus] = useState(false);
 
     useEffect(() => {
         const orderIds = getCookie(ordersCookie);
@@ -50,6 +54,9 @@ function OrdersList() {
         else {
             setOrderStatus(false);
         }
+
+
+        setDataStatus(true);
     },[])
 
     const handleClick = (index : number) => {
@@ -58,6 +65,11 @@ function OrdersList() {
 
     return (<div className={styles.container}>
         <h1 className={styles.sectionHeading}>Your Orders</h1>
+        {
+            !dataFetched && <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
+            <CircularProgress />
+        </Box>
+        }
         { hasOrders && orders.map((order,index) => (<div className={styles.orderItem} key={order.orderId}>
                         <div>
                             <p>{"Order No. " + (index + 1)}</p>

@@ -7,6 +7,8 @@ import ProductDisplayCard from "../products/ProductDisplayCard";
 import { useFavoritesStore } from "../lib/store/useFavoritesStore";
 import { useRouter } from "next/navigation";
 import { baseURL } from "../lib/constants";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 function FavoritesSection() {
     const favoritesProductData = useFavoritesStore(state => state.fetchData());
@@ -71,6 +73,9 @@ function FavoritesSection() {
     return (<div className={styles.container}>
             <div className={styles.contentContainer}>
                 {!productsLoadStatus && <div className={styles.emptySection}>
+                <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
+            <CircularProgress />
+        </Box>
                 </div>}
                 {products?.map((item) => <ProductDisplayCard product={item} key={item._id} onClick={() => handleClick(item)} 
                 onRemoveFromFavorites={removeProductFromFavorites}/>)}
