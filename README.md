@@ -59,7 +59,7 @@ The main features are:
 
 (Please use these credentials to sign in as admin)
 ###### email:    admin@root.com
-###### password: root
+###### password: admin
 
 1- Can view specific recent orders.
 2- Can add a new product to database.
