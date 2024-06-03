@@ -42,7 +42,7 @@ The whole websites works as you would expect any ecommerce website(though this w
 
 The main features are:
 
-- For users/customers:
+### - For users/customers:
 
 1- Search Products.
 2- Add Products to cart.
@@ -52,12 +52,14 @@ The main features are:
 6- Get a list of all previous orders.
 7- View any previous order with complete details, like the quantity of products, their picture, and all the billing and shipping details.
 8- User profile creation using Clerk authentication.
+9- Can Add a Product Review.
+10- Can like/dislike a product review.
 
-- For Admins:
+### - For Admins:
 
 (Please use these credentials to sign in as admin)
---
---
+###### admin@root.com
+###### root
 
 1- Can view specific recent orders.
 2- Can add a new product to database.
