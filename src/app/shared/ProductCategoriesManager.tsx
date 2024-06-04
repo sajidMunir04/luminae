@@ -71,9 +71,11 @@ function ProductCategoriesManager()
     },[])
 
     return (<div className={styles.container}>
-                {!dataFetched && <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
+                {!dataFetched && <div className={styles.progressContainer}>
+                <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
                                     <CircularProgress />
-                                </Box>}
+                                </Box>
+                                </div>}
                             {productSections.map((categorySection) => (
                 <ProductSubCatergories key={categorySection.productSection} mainCategory={categorySection.productSection} categories={categorySection.subCategories}/>))}
         </div>);
