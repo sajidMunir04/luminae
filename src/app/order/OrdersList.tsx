@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { ordersCookie } from "../lib/constants"
-import { getCookie } from "cookies-next"
+import { orderIdCookie, ordersCookie } from "../lib/constants"
+import { getCookie, setCookie } from "cookies-next"
 import { OrderFormData } from "../cart/OrderFormData";
 import styles from "./OrdersList.module.css";
 import { useRouter } from "next/navigation";
@@ -60,6 +60,7 @@ function OrdersList() {
     },[])
 
     const handleClick = (index : number) => {
+        setCookie(orderIdCookie,`${orders[index].orderId}`);
         router.push(`/viewOrder/${orders[index].orderId}`);
     }
 

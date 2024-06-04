@@ -1,4 +1,5 @@
 import { OrderFormData } from "@/app/cart/OrderFormData";
+import { orderIdCookie } from "@/app/lib/constants";
 import CustomerOrder from "@/app/order/CustomerOrder";
 import FooterTemplate from "@/app/shared/FooterTemplate";
 import HeaderTemplate from "@/app/shared/HeaderTemplate";
@@ -10,13 +11,12 @@ import { useEffect, useState } from "react";
 
 function Order() {
     const router = useRouter();
-    const {Order} = router.query;
+    let {Order} = router.query;
     const [orderForm,setOrderForm] = useState<OrderFormData>();
     
     useEffect(() => {
-        let { productPage } = router.query;
-        if (productPage === undefined)
-            productPage = getCookie('productPageId');
+        if (Order === undefined)
+            Order = getCookie(orderIdCookie);
         
         const fetchData = async() => {
             try {
