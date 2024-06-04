@@ -90,3 +90,20 @@
     font-size: 16px;
     font-family:RobotoSlab-Regular;
 }
+
+@media screen and (max-width: 1100px) {
+    .container{
+        flex-wrap: wrap;
+        height: max-content;
+        border-bottom: 2px solid rgb(239, 239, 239);
+    }
+
+    .productInfoContainer{
+        width: 100%;
+    }
+
+    .quantityContainer{
+        width: 28%;
+        height: 38px;
+    }
+}

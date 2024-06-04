@@ -19,7 +19,7 @@ function OrderComplete(props : Props) {
         <h1>Thanks for your Order</h1>
         <p>Your order id is {props.orderId}</p>
         <div>
-            <p>Order Total:      {orderData.orderPriceTotal}</p>
+            <p>Order Total:     ${orderData.orderPriceTotal}</p>
             <p>Delivered To:     {orderData.customerName}</p>
         </div>
         <div className={styles.allOrderInfoContainer}>

@@ -31,12 +31,12 @@ function CustomerOrder(props : Props) {
         </div>
         <p className={styles.sectionHeading}>Customer Details</p>
         <div className={styles.customerInfoSection}>
-            <div>
+            <div className={styles.customerInfoPart}>
                 <p>Customer Name : {props.orderform?.customerName}</p>
                 <p>Customer Email: {props.orderform?.customerEmail}</p>
                 <p>Customer Phone: {props.orderform?.customerPhone}</p>
             </div>
-            <div>
+            <div className={styles.customerInfoPart}>
                 <p>Customer Address: {props.orderform?.customerAddress}</p>
                 <p>Customer Country: {props.orderform?.customerCountry}</p>
             </div>

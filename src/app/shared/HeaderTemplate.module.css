@@ -169,7 +169,7 @@
     margin: auto;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1100px) {
     .container{
         height: max-content;
         width: 100%;

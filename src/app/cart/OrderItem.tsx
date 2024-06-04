@@ -21,12 +21,12 @@ function OrderItem(props : Props) {
                 </div>
             </div>
         </div>
-        <div>
-            <p className={styles.priceText}>${props.cartProduct.product.price}</p>
+        <div className={styles.textContainerLeft}>
+            <p>${props.cartProduct.product.price}</p>
             <p>x{props.cartProduct.quantity}</p>
         </div>
-        <div>
-            <p className={styles.priceText}>${props.cartProduct.product.price * props.cartProduct.quantity}</p>
+        <div className={styles.textContainerLeft}>
+            <p>${props.cartProduct.product.price * props.cartProduct.quantity}</p>
         </div>
     </div>);
 }
