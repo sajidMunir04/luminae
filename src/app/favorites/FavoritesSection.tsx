@@ -10,6 +10,7 @@ import { baseURL } from "../lib/constants";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
+
 function FavoritesSection() {
     const favoritesProductData = useFavoritesStore(state => state.fetchData());
 

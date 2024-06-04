@@ -14,6 +14,8 @@ import { FiltersData } from "./FiltersData";
 import { getFiltersData } from "../utils/getFiltersData";
 import { getCookie, setCookie } from "cookies-next";
 import { routerQueryForProductPagination } from "../lib/constants";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 interface Props {
     products : Product[],
@@ -36,11 +38,11 @@ function ProductsBrowser(props : Props)
     const [currentPage,setCurrentPage] = useState(1);
     const [sortingAlgorithm,setSortingAlgorithm] = useState(ProductSortingAlgorithm.Relevance);
     const [products,setProducts] = useState(props.products);
-    const[selectedModels,setSelectedModels] = useState(['']);
-    const[selectedStyles,setSelectedStyles] = useState(['']);
-    const[selectedColors,setSelectedColors] = useState<string[]>(['']);
-    const[selectedSizes,setSelectedSizes] = useState(['']);
-    const[priceRange,setPriceRange] = useState<number[]>([]);
+    const [selectedModels,setSelectedModels] = useState(['']);
+    const [selectedStyles,setSelectedStyles] = useState(['']);
+    const [selectedColors,setSelectedColors] = useState<string[]>(['']);
+    const [selectedSizes,setSelectedSizes] = useState(['']);
+    const [priceRange,setPriceRange] = useState<number[]>([]);
     const [filtersOpen,setFilterStatus] = useState(false);
 
     const defaultFilterData : FiltersData = {
@@ -202,6 +204,11 @@ function ProductsBrowser(props : Props)
     }
 
     return (<div className={styles.container}>
+        {(props.products === undefined || props.products.length === 0 || props.products === null) && <div className={styles.progressContainer}>
+        <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
+            <CircularProgress />
+        </Box>
+        </div>}
         <div className={styles.controllerContainer}>
         <div className={styles.filtersButton} onClick={() => setFilterStatus(!filtersOpen)}>
             <img src="/images/product/filter.svg"/>

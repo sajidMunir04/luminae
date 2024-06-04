@@ -9,6 +9,8 @@ import { useFavoritesStore } from "../lib/store/useFavoritesStore";
 import {motion} from "framer-motion";
 import { ProductReviewData } from "./ProductReviewData";
 import { ProductReview } from "./ProductReview";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 interface Props {
     product: Product
@@ -164,6 +166,11 @@ function ProductPage(props : Props) {
     }
 
     return (<div className={styles.container}>
+        {props.product === undefined || props.product === null && <div className={styles.progressContainer}>
+        <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
+            <CircularProgress />
+        </Box>
+        </div>}
         <div className={styles.productInfo}>
             <div className={styles.imageSection}>
                 <div className={styles.imagesContainer}>

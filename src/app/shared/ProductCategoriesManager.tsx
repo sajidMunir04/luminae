@@ -4,6 +4,8 @@ import Link from 'next/link';
 import styles from './ProductCategoriesManager.module.css';
 import { useEffect, useState } from 'react';
 import ProductSubCatergories from '../products/ProductSubCategories';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 export interface ProductClassifcation {
     section: string,
@@ -17,6 +19,8 @@ export type ProductSection = {
 
 function ProductCategoriesManager()
 {
+    const [dataFetched,setDataStatus] = useState(false);
+
     let allProductSections : ProductSection[] = [];
     const empty : ProductSection[] = [{
         productSection: '',
@@ -58,6 +62,8 @@ function ProductCategoriesManager()
             } catch (error) {
               console.error('Error fetching data:', error);
             }
+
+            setDataStatus(true);
           };
 
           fetchData();
@@ -65,6 +71,9 @@ function ProductCategoriesManager()
     },[])
 
     return (<div className={styles.container}>
+                {!dataFetched && <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
+                                    <CircularProgress />
+                                </Box>}
                             {productSections.map((categorySection) => (
                 <ProductSubCatergories key={categorySection.productSection} mainCategory={categorySection.productSection} categories={categorySection.subCategories}/>))}
         </div>);
