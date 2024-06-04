@@ -66,9 +66,11 @@ function OrdersList() {
     return (<div className={styles.container}>
         <h1 className={styles.sectionHeading}>Your Orders</h1>
         {
-            !dataFetched && <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
+            !dataFetched && <div className={styles.progressContainer}>
+                <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
             <CircularProgress />
         </Box>
+        </div>
         }
         { hasOrders && orders.map((order,index) => (<div className={styles.orderItem} key={order.orderId}>
                         <div>
