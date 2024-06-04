@@ -16,7 +16,7 @@ function Order() {
     
     useEffect(() => {
         if (Order === undefined)
-            Order = getCookie(orderIdCookie);
+            Order = getCookie(orderIdCookie) as string;
         
         const fetchData = async() => {
             try {

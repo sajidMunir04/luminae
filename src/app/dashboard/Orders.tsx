@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { OrderFormData } from "../cart/OrderFormData";
 import styles from "./Orders.module.css";
 import { string } from "zod";
-import { baseURL } from "../lib/constants";
+import { adminOrderCookie, baseURL } from "../lib/constants";
+import { setCookie } from "cookies-next";
 
 
 function Orders() {
@@ -47,6 +48,10 @@ function Orders() {
         fetchOrdersData();
     },[])
 
+    const handleOrderClick = (orderId : string) => {
+        setCookie(adminOrderCookie,orderId);
+    }
+
 
     return (<table className={styles.table}>
             <thead className={styles.tableHead}>
@@ -70,7 +75,7 @@ function Orders() {
                         <td className={styles.totalProductsSection}>{item.products?.length}</td>
                         <td className={styles.contactNumberSection}>{item.customerPhone}</td>
                         <td className={styles.emailSection}>{item.customerEmail}</td>
-                        <td className={styles.viewOrderSection}><a href={baseURL + `admin/viewOrder/${item.orderId}`}>View Order</a></td>
+                        <td className={styles.viewOrderSection}><a onClick={() => handleOrderClick(item.orderId!)} href={baseURL + `admin/viewOrder/${item.orderId}`}>View Order</a></td>
                     </tr>
                 ))
             }
