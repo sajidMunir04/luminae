@@ -1,5 +1,5 @@
 import { Db, MongoClient } from 'mongodb';
-import { SignInCredentials } from '@/app/lib/definitions';
+import { SignInCredentials } from '@/components/lib/definitions';
 
 export default async function handler(req , res) {	
 	const client : MongoClient = new MongoClient(process.env.MONGODB_URI as string);
