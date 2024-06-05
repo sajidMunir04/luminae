@@ -1,6 +1,6 @@
 import { Db, MongoClient, ObjectId, WithId } from 'mongodb';
-import { Product } from '@/model/Product.mjs';
-import { ProductToAdd } from '@/app/dashboard/AddProduct';
+import { Product } from '@/models/Product.mjs';
+import { ProductToAdd } from '@/components/dashboard/AddProduct';
 
 export default async function handler(req, res) {
   const product: ProductToAdd = await JSON.parse(req.body);

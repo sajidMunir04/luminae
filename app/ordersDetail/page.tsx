@@ -1,8 +1,8 @@
 "use client";
 
-import OrdersList from "@/app/order/OrdersList";
-import FooterTemplate from "@/app/shared/FooterTemplate";
-import HeaderTemplate from "@/app/shared/HeaderTemplate";
+import OrdersList from "@/components/order/OrdersList";
+import FooterTemplate from "@/components/shared/FooterTemplate";
+import HeaderTemplate from "@/components/shared/HeaderTemplate";
 import Head from "next/head";
 
 function ordersDetail() {

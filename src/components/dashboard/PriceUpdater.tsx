@@ -4,7 +4,9 @@ import styles from "./PriceUpdater.module.css";
 
 interface Props {
     product: Product,
-    onCloseButton: () => void
+    onCloseButton: () => void,
+    onStartUpdate : () => void,
+    onFinishUpdate: () => void
 }
 
 
@@ -13,7 +15,7 @@ function PriceUpdater(props : Props) {
     const [price,setPrice] = useState(props.product.price);
 
     const updateProductPrice = async() => {
-
+        props.onStartUpdate();
         const updateData : Record<string,string | number> = {
             productId: props.product._id,
             newPrice: price
@@ -27,6 +29,8 @@ function PriceUpdater(props : Props) {
         const data = await result.json();
         console.log(data);
 
+        props.onFinishUpdate();
+        props.onCloseButton();
         if (data.data.acknowledged) {
             alert('Product Price Updated');
         }
@@ -50,7 +54,7 @@ function PriceUpdater(props : Props) {
                 <p>${props.product.price}</p>
             </div>
             <label className={styles.setPriceInputLabel}>New Price $
-                <input type='number' onChange={handleInput}/>
+                <input required={true} type='number' onChange={handleInput}/>
             </label>
             <button type='submit' onClick={props.product !== undefined ? updateProductPrice : () => {}}>Update Price</button>
         </form>

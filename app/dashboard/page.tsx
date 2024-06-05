@@ -1,4 +1,4 @@
-import Dashboard from '@/app/dashboard/Dashboard';
+import Dashboard from '@/components/dashboard/Dashboard';
 import { redirect } from 'next/navigation';
 import { checkRole } from '../../utils/roles';
 

@@ -1,8 +1,8 @@
-import { OrderFormData } from "@/app/cart/OrderFormData";
-import { adminOrderCookie } from "@/app/lib/constants";
-import CustomerOrder from "@/app/order/CustomerOrder";
-import FooterTemplate from "@/app/shared/FooterTemplate";
-import HeaderTemplate from "@/app/shared/HeaderTemplate";
+import { OrderFormData } from "@/components/cart/OrderFormData";
+import { adminOrderCookie } from "@/components/lib/constants";
+import CustomerOrder from "@/components/order/CustomerOrder";
+import FooterTemplate from "@/components/shared/FooterTemplate";
+import HeaderTemplate from "@/components/shared/HeaderTemplate";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";

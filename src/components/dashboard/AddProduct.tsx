@@ -153,7 +153,7 @@ function AddProduct() {
     <h2 className={styles.headerText}>Add Product To Database</h2>
     <form className={styles.form} onSubmit={onSubmit}>
         <label className={styles.label}>Name
-            <input className={styles.inputField} type='text' onChange={handleName} placeholder="Product Name"/>
+            <input required={true} className={styles.inputField} type='text' onChange={handleName} placeholder="Product Name"/>
         </label>
         <label className={styles.label}>Section
             <select onChange={handleSection}>
@@ -162,42 +162,42 @@ function AddProduct() {
             </select>
         </label>
         <label className={styles.label}>Category
-            <input className={styles.inputField} onChange={handleCategory} type='text' placeholder="Product Category"/>
+            <input required={true} className={styles.inputField} onChange={handleCategory} type='text' placeholder="Product Category"/>
         </label>
         <label className={styles.label}>Brand Name
-            <input className={styles.inputField} type='text' onChange={handleBrandName} placeholder="Brand Name"/>
+            <input required={true} className={styles.inputField} type='text' onChange={handleBrandName} placeholder="Brand Name"/>
         </label>
         <label className={styles.label}>Description
-            <input className={styles.inputField} type='text' onChange={handleDescription} placeholder="Brand Name"/>
+            <input required={true} className={styles.inputField} type='text' onChange={handleDescription} placeholder="Brand Name"/>
         </label>
         <label className={styles.label}>Price ($)
-            <input className={styles.inputField} type='number' onChange={handlePrice} placeholder="0.99"/>
+            <input required={true} className={styles.inputField} type='number' onChange={handlePrice} placeholder="0.99"/>
         </label>
         <label className={styles.label}>Discount (%)
-            <input className={styles.inputField} type='number' onChange={handleDiscount} placeholder="25%"/>
+            <input required={true} className={styles.inputField} type='number' onChange={handleDiscount} placeholder="25%"/>
         </label>
         <p>Inventory</p>
         <div className={styles.sizesInputContainer}>
             <label className={styles.sizeInputLabel}>XXS
-                <input ref={xxsInventoryRef} className={styles.sizeInput} type='number'/>
+                <input required={true} ref={xxsInventoryRef} className={styles.sizeInput} type='number'/>
             </label>
             <label className={styles.sizeInputLabel}>XS
-                <input ref={xsInventoryRef} className={styles.sizeInput} type='number'/>
+                <input required={true} ref={xsInventoryRef} className={styles.sizeInput} type='number'/>
             </label>
             <label className={styles.sizeInputLabel}>S
-                <input ref={sInventoryRef} className={styles.sizeInput} type='number'/>
+                <input required={true} ref={sInventoryRef} className={styles.sizeInput} type='number'/>
             </label>
             <label className={styles.sizeInputLabel}>M
-                <input ref={mInventoryRef} className={styles.sizeInput} type='number'/>
+                <input required={true} ref={mInventoryRef} className={styles.sizeInput} type='number'/>
             </label>
             <label className={styles.sizeInputLabel}>L
-                <input ref={lInventoryRef} className={styles.sizeInput} type='number'/>
+                <input required={true} ref={lInventoryRef} className={styles.sizeInput} type='number'/>
             </label>
             <label className={styles.sizeInputLabel}>XL
-                <input ref={xlInventoryRef} className={styles.sizeInput} type='number'/>
+                <input required={true} ref={xlInventoryRef} className={styles.sizeInput} type='number'/>
             </label>
             <label className={styles.sizeInputLabel}>XXL
-                <input ref={xxlInventoryRef} className={styles.sizeInput} type='number'/>
+                <input required={true} ref={xxlInventoryRef} className={styles.sizeInput} type='number'/>
             </label>
         </div>
         <div className={styles.colorSelectContainer}>
@@ -208,10 +208,10 @@ function AddProduct() {
                 <HexColorPicker color={color} onChange={setColor} />
         </div>
         <label className={styles.label}>Style
-            <input className={styles.inputField} type='text' onChange={handleStyle} placeholder="Product Style"/>
+            <input required={true} className={styles.inputField} type='text' onChange={handleStyle} placeholder="Product Style"/>
         </label>
         <label className={styles.label}>Product Model
-            <input className={styles.inputField} type='text' onChange={handleProductModel} placeholder="Product Model"/>
+            <input required={true} className={styles.inputField} type='text' onChange={handleProductModel} placeholder="Product Model"/>
         </label>
         <label className={styles.label}>
             Images

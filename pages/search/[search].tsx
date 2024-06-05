@@ -2,11 +2,11 @@
 
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import ProductsBrowser from "../../src/app/products/ProductsBrowser";
-import FooterTemplate from "../../src/app/shared/FooterTemplate";
-import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
-import NoProductFound from "../../src/app/products/NoProductFound";
-import { Product } from "../../src/app/utils/Product";
+import ProductsBrowser from "../../src/components/products/ProductsBrowser";
+import FooterTemplate from "../../src/components/shared/FooterTemplate";
+import HeaderTemplate from "../../src/components/shared/HeaderTemplate";
+import NoProductFound from "../../src/components/products/NoProductFound";
+import { Product } from "../../src/components/utils/Product";
 import Head from "next/head";
 
 

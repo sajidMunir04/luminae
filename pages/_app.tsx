@@ -1,5 +1,5 @@
-import '../src/app/globals.css';
-import '../src/app/fonts.css';
+import '../src/components/globals.css';
+import '../src/components/fonts.css';
 import { ClerkProvider} from '@clerk/nextjs'
 import Head from 'next/head';
 export default function App({

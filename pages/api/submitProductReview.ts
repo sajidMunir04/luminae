@@ -1,6 +1,6 @@
-import { ProductReviewData } from '@/app/products/ProductReviewData';
+import { ProductReviewData } from '@/components/products/ProductReviewData';
 import { Db, MongoClient } from 'mongodb';
-import {ProductReview} from "../../src/model/ProductReview.mjs"
+import {ProductReview} from "../../src/models/ProductReview.mjs"
 
 export default async function handler(req, res) {
   const productReview: ProductReviewData = await JSON.parse(req.body);

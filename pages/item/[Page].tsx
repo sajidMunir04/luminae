@@ -1,11 +1,11 @@
-import { Product } from "@/app/utils/Product";
+import { Product } from "@/components/utils/Product";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import HeaderTemplate from "@/app/shared/HeaderTemplate";
-import FooterTemplate from "@/app/shared/FooterTemplate";
+import HeaderTemplate from "@/components/shared/HeaderTemplate";
+import FooterTemplate from "@/components/shared/FooterTemplate";
 import { getCookie } from "cookies-next";
 import Head from "next/head";
-import ProductPage from "@/app/products/ProductPage";
+import ProductPage from "@/components/products/ProductPage";
 
 function Page() {
     const router = useRouter();

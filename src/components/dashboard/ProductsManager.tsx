@@ -92,6 +92,14 @@ function ProductsManager() {
         setSelectedProduct(undefined);
     }
 
+    const handleStartUpdate = () => {
+        setProductUpdateStatus(true);
+    }
+
+    const handleFinishUpdate = () => {
+        setProductUpdateStatus(false);
+    }
+
     return (<div className={styles.container}>
             <div className={styles.navSection}>
                 {productSections.map((productSection) => <div key={productSection.productSection+ ' asdasd'}>
@@ -104,16 +112,18 @@ function ProductsManager() {
             </div>
             <div className={styles.dataSection}>
                 {isProductBeingUpdated && <div className={styles.progressContainer}>
-            <p className={styles.progressText}>Adding Product to Database</p>
                 <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
                     <CircularProgress color='secondary'/>
                 </Box>
         </div>}
             {isCategorySelected && <ProductBrowser products={selectedSection[0]}
-            productCategory={selectedSection[1]} openInventory={openInventoryManagement} openPriceUpdate={openPriceUpdateSection}/>}
+            productCategory={selectedSection[1]} openInventory={openInventoryManagement} openPriceUpdate={openPriceUpdateSection} 
+            onStartUpdate={handleStartUpdate} onFinishUpdate={handleFinishUpdate}/>}
             </div> 
-            {(isUpdatingInventory && selectedProduct !== undefined) && <InventoryUpdater product={selectedProduct!} onCloseButton={closeInventoryManagement}/>}      
-            {(isUpdatingPrice && selectedProduct !== undefined) && <PriceUpdater product={selectedProduct} onCloseButton={closePriceUpdateSection}/>}
+            {(isUpdatingInventory && selectedProduct !== undefined) && <InventoryUpdater product={selectedProduct!} 
+            onCloseButton={closeInventoryManagement} onStartUpdate={handleStartUpdate} onFinishUpdate={handleFinishUpdate}/>}      
+            {(isUpdatingPrice && selectedProduct !== undefined) && <PriceUpdater product={selectedProduct} 
+            onCloseButton={closePriceUpdateSection} onStartUpdate={handleStartUpdate} onFinishUpdate={handleFinishUpdate}/>}
     </div>);
 }
 

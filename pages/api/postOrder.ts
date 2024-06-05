@@ -1,4 +1,4 @@
-import { OrderFormData } from "@/app/cart/OrderFormData";
+import { OrderFormData } from "@/components/cart/OrderFormData";
 import { Db, MongoClient } from "mongodb";
 import { NextApiRequest } from "next";
 

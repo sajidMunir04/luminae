@@ -1,8 +1,6 @@
-import FooterTemplate from "@/app/shared/FooterTemplate";
-import HeaderTemplate from "@/app/shared/HeaderTemplate";
 import { ClerkProvider } from "@clerk/nextjs";
-import "../src/app/globals.css";
-import "../src/app/fonts.css";
+import "../src/components/globals.css";
+import "../src/components/fonts.css";
 
 export default function RootLayout({
   children,

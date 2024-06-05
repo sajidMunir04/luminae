@@ -1,4 +1,4 @@
-import { OrderedProduct } from '@/app/cart/OrderedProduct';
+import { OrderedProduct } from '@/components/cart/OrderedProduct';
 import { Db, MongoClient, ObjectId, WithId } from 'mongodb';
 
 export default async function handler(req, res) {

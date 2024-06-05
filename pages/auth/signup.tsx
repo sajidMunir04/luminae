@@ -1,6 +1,6 @@
-import SignUpForm from "../../src/app/account/SignUpForm";
-import FooterTemplate from "../../src/app/shared/FooterTemplate";
-import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
+import SignUpForm from "../../src/components/account/SignUpForm";
+import FooterTemplate from "../../src/components/shared/FooterTemplate";
+import HeaderTemplate from "../../src/components/shared/HeaderTemplate";
 
 
 function signup() {

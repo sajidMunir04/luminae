@@ -63,7 +63,7 @@ function ProductReviewForm(props: Props) {
 
     return (<form className={styles.reviewForm} onSubmit={addProductReview}>
         <label className={styles.reviewLabel}>Your Name
-            <input className={styles.inputField} type='text' placeholder='Enter Name Here' onChange={handleNameInput}/>
+            <input required={true} className={styles.inputField} type='text' placeholder='Enter Name Here' onChange={handleNameInput}/>
         </label>
         <label className={styles.reviewLabel}>How would you rate the product?
             <div>
@@ -75,10 +75,10 @@ function ProductReviewForm(props: Props) {
             </div>
         </label>
         <label className={styles.reviewLabel}>Review Highlight
-            <input className={styles.inputField} type='text' onChange={handleReviewHeading}/>
+            <input required={true} className={styles.inputField} type='text' onChange={handleReviewHeading}/>
         </label>
         <label className={styles.reviewLabel}>Review Detail
-            <textarea className={styles.textArea} onChange={handleReviewDetail} placeholder='Review Detail'>
+            <textarea required={true} className={styles.textArea} onChange={handleReviewDetail} placeholder='Review Detail'>
             </textarea>
         </label>
         <button className={styles.button} type='submit'>Submit Review</button>

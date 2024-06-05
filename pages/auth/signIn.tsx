@@ -1,7 +1,7 @@
-import '@/app/globals.css';
-import HeaderTemplate from '../../src/app/shared/HeaderTemplate';
-import FooterTemplate from "../../src/app/shared/FooterTemplate";
-import SignInForm from '../../src/app/account/SignInForm';
+import '@/components/globals.css';
+import HeaderTemplate from '../../src/components/shared/HeaderTemplate';
+import FooterTemplate from "../../src/components/shared/FooterTemplate";
+import SignInForm from '../../src/components/account/SignInForm';
 
 
 function login()

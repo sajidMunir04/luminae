@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import FooterTemplate from "../../src/app/shared/FooterTemplate";
-import HeaderTemplate from "../../src/app/shared/HeaderTemplate";
-import { ProductSection } from "../../src/app/shared/ProductCategoriesManager";
-import ProductsBrowser from "../../src/app/products/ProductsBrowser";
-import '../../src/app/fonts.css';
-import { Product } from "../../src/app/utils/Product";
-import '../../src/app/globals.css';
+import FooterTemplate from "../../src/components/shared/FooterTemplate";
+import HeaderTemplate from "../../src/components/shared/HeaderTemplate";
+import { ProductSection } from "../../src/components/shared/ProductCategoriesManager";
+import ProductsBrowser from "../../src/components/products/ProductsBrowser";
+import '../../src/components/fonts.css';
+import { Product } from "../../src/components/utils/Product";
+import '../../src/components/globals.css';
 import Head from "next/head";
 import { getCookie } from "cookies-next";
-import { productCategoryCookie } from "@/app/lib/constants";
+import { productCategoryCookie } from "@/components/lib/constants";
 
 function ProductCategory(){
     const router = useRouter();

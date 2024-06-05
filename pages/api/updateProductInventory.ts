@@ -1,5 +1,5 @@
 import { Db, MongoClient, ObjectId } from 'mongodb';
-import { ProductInventoryUpdate } from '@/app/dashboard/InventoryUpdater';
+import { ProductInventoryUpdate } from '@/components/dashboard/InventoryUpdater';
 
 export default async function handler(req, res) {
   const productInventory: ProductInventoryUpdate = await JSON.parse(req.body);

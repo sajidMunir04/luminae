@@ -9,7 +9,9 @@ interface Props {
     products: string,
     productCategory: string,
     openInventory: (arg : Product | undefined) => void,
-    openPriceUpdate: (arg: Product | undefined) => void
+    openPriceUpdate: (arg: Product | undefined) => void,
+    onStartUpdate : () => void,
+    onFinishUpdate: () => void
 }
 
 function ProductBrowser(props : Props) {
@@ -23,6 +25,8 @@ function ProductBrowser(props : Props) {
             return;
         }
 
+        props.onStartUpdate();
+
         const filteredProducts = allProducts.filter((item) => item._id !== product._id);
         setProducts(filteredProducts);
         const response = await fetch('/api/removeProductFromDatabase',{
@@ -31,6 +35,9 @@ function ProductBrowser(props : Props) {
         });
         const result = await response.json();
         const { status } = result;
+
+        props.onFinishUpdate();
+
         if (status) {
             alert('Item Deleted From Database');
         }

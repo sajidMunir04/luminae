@@ -4,7 +4,9 @@ import styles from "./InventoryUpdater.module.css";
 
 interface Props {
     product : Product,
-    onCloseButton : () => void
+    onCloseButton : () => void,
+    onStartUpdate : () => void,
+    onFinishUpdate: () => void
 }
 
 export interface ProductInventoryUpdate {
@@ -23,6 +25,8 @@ function InventoryUpdater(props : Props) {
     const xxlInputRef = useRef<HTMLInputElement>(null);
 
     const updateProductInventory = async() => {
+        props.onStartUpdate();
+
         const updatedInventory : number[] = props.product.inventoryCount;
 
         updatedInventory[0] = updatedInventory[0] + getValueFromField(xxsInputRef);
@@ -45,6 +49,10 @@ function InventoryUpdater(props : Props) {
 
         const data = await result.json();
         console.log(data);
+
+        props.onFinishUpdate();
+
+        props.onCloseButton();
 
         if (data.data.acknowledged) {
             alert('Product Inventory Updated');

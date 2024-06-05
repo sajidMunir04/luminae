@@ -1,6 +1,6 @@
-import HeaderTemplate from "@/app/shared/HeaderTemplate";
-import FavoritesSection from "../../src/app/favorites/FavoritesSection";
-import FooterTemplate from "@/app/shared/FooterTemplate";
+import HeaderTemplate from "@/components/shared/HeaderTemplate";
+import FavoritesSection from "../../src/components/favorites/FavoritesSection";
+import FooterTemplate from "@/components/shared/FooterTemplate";
 
 function favorites() {
     return (<>

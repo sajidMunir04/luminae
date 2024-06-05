@@ -61,8 +61,9 @@ function ProductPage(props : Props) {
                     })
                     
                     setProductReviews(productReviews);
-    
+                    let totalReviews = 0;
                     productReviews.forEach((item) => {
+                        totalReviews++;
                     if (item.rating === 5){
                         reviewData.fiveStarReviews++;
                     }
@@ -78,6 +79,8 @@ function ProductPage(props : Props) {
                     else if (item.rating === 1){
                         reviewData.oneStarReviews++;
                     }})
+
+                    
                 }
             }    
     
@@ -286,7 +289,7 @@ function ProductPage(props : Props) {
                     <div className={styles.reviewStatsContainer}>
                         <div className={styles.reviewMajorInfoContainer}>
                             <p>Total Reviews</p>
-                            <p>{reviewData.totalRating}</p>
+                            <p>{productReviews.length}</p>
                             <button className={styles.writeReviewButton} onClick={() => {setReviewFormStatus(!showReviewForm)}}>Write a Review</button>
                         </div>
                         <div className={styles.reviewInfoContainer}>
