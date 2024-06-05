@@ -1,5 +1,5 @@
 import { Db, MongoClient } from 'mongodb';
-import { SignUpCredentials } from '@/app/lib/definitions';
+import { SignUpCredentials } from '@/components/lib/definitions';
 
 export default async function handler(req, res) {
     console.log(req);
