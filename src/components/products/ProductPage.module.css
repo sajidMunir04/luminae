@@ -371,6 +371,7 @@
 .writeReviewButton {
     border: none;
     background: none;
+    background-color: whitesmoke;
     border: 2px solid #D9D9D9;
     padding: 6% 2%;
     border-radius: 10px;
@@ -590,5 +591,6 @@
 
     .reviewMajorInfoContainer{
         text-align: center;
+        width: 80%;
     }
 }
