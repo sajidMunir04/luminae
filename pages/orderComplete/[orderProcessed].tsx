@@ -17,7 +17,7 @@ function OrderProcessed() {
 
     return (<>
     <HeaderTemplate/>
-    <OrderComplete orderId={OrderProcessed as string}/>
+    <OrderComplete orderId={OrderProcessed !== undefined ? OrderProcessed as string : router.asPath.split('/')[2]}/>
     <FooterTemplate/>
     </>);
 }

@@ -72,7 +72,7 @@ function ProductCategoriesManager()
 
     return (<div className={styles.container}>
                 {!dataFetched && <div className={styles.progressContainer}>
-                <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
+                <Box sx={{ margin: 'auto', display: 'flex'}}>
                                     <CircularProgress />
                                 </Box>
                                 </div>}
