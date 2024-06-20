@@ -32,9 +32,9 @@ function ModelFilter(props : Props) {
             <FilterHeading headingText={"MODEL"}/>
         </div>
         <div className={styles.contentContainer}>
-            {props.modelDetails.map((item) => (<div onClick={() => handleModelSelection(item.type)} key={item.type} className={`${styles.buttonContainer} ${props.selectedModels.includes(item.type) && styles.buttonActive}`}>
-                <p key={item.type + 'a'} className={styles.button}>{item.type}</p>
-                <p key={item.type + 'b'} className={styles.button}>{item.quantity}</p>
+            {props.modelDetails.map((item) => (<div onClick={() => handleModelSelection(item.type)} key={item.type + 'a'} className={`${styles.buttonContainer} ${props.selectedModels.includes(item.type) && styles.buttonActive}`}>
+                <p className={styles.button}>{item.type}</p>
+                <p className={styles.button}>{item.quantity}</p>
             </div>))}
         </div>
     </div>);

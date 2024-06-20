@@ -25,6 +25,8 @@ function ProductCategory(){
       } 
     }
 
+    
+
     const [allProducts,setProducts] = useState<Product[]>([]);
     let allProductSections : ProductSection[] = [];
     useEffect(
@@ -88,9 +90,11 @@ function ProductCategory(){
           setTimeout(fetchData,250);       
     },[products, ProductCategory])
 
+    const [pageTitle,setPageTitle] = useState<string>(`${products} - ${ProductCategory}`);
+
     return (<>
       <Head>
-        <title>{products} - {ProductCategory}</title>
+        <title>{pageTitle}</title>
       </Head>
       <HeaderTemplate/>
       <ProductsBrowser products={allProducts} productSection={products as string} productCategory={ProductCategory as string}/>

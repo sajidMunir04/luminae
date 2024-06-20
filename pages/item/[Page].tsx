@@ -72,7 +72,6 @@ function Page() {
     return (<>
     <Head>
         <title>{product.name}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     </Head>
     <HeaderTemplate/>
     <ProductPage product={product}/>

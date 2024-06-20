@@ -169,7 +169,7 @@ function ProductPage(props : Props) {
     }
 
     return (<div className={styles.container}>
-        {props.product === undefined || props.product === null && <div className={styles.progressContainer}>
+        {props.product.price === 0 && <div className={styles.progressContainer}>
         <Box sx={{ margin: 'auto', display: 'flex', height: '100px', width : '100px' }}>
             <CircularProgress />
         </Box>
